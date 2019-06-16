@@ -122,7 +122,7 @@
 
 
 
-  <meta name="keywords" content="顺序表,C++,">
+  <meta name="keywords" content="C++,顺序表,">
 
 
 
@@ -134,7 +134,7 @@
 
 
 <meta name="description" content="写在前面 &amp;emsp;&amp;emsp;数据结构是一个数据对象，同时这个对象的实例以及构成实例的元素都存在着联系，而且这些联系是由相关函数来规定的。&amp;emsp;&amp;emsp;研究数据结构，关心的是数据对象（实际上是实例）的描述以及相关函数的具体实现。数据对象描述得好，函数的实现就会高效。&amp;emsp;&amp;emsp;最常用的数据对象以及操作都已经在C++中作为基本数据类型而实现，如整数对象，布尔对象等。其他数">
-<meta name="keywords" content="顺序表,C++">
+<meta name="keywords" content="C++,顺序表">
 <meta property="og:type" content="article">
 <meta property="og:title" content="顺序表的简单实现">
 <meta property="og:url" content="http://wanqbin.xyz/2019/03/27/顺序表的简单实现/index.html">
@@ -427,6 +427,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/27/顺序表的简单实现/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/27/顺序表的简单实现/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -548,9 +558,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/顺序表/" rel="tag"># 顺序表</a>
-          
             <a href="/tags/C/" rel="tag"># C++</a>
+          
+            <a href="/tags/顺序表/" rel="tag"># 顺序表</a>
           
         </div>
       
@@ -1009,6 +1019,28 @@ setInterval("createtime()",250);
 
 
 
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'FchdjiQuvA5nCoDFfF6er8UC-gzGzoHsz',
+        appKey: 'yuVPbmLhvyWyLCQYispfuF6u',
+        placeholder: 'ヾﾉ≧∀≦)o 来呀！吐槽一番吧',
+        avatar:'/uploads/avatar.jpg',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
 
 
 

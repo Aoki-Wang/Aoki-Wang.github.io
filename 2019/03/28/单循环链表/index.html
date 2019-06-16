@@ -122,7 +122,7 @@
 
 
 
-  <meta name="keywords" content="C++,单循环链表,">
+  <meta name="keywords" content="单循环链表,C++,">
 
 
 
@@ -134,7 +134,7 @@
 
 
 <meta name="description" content="写在前面&amp;emsp;&amp;emsp;单循环链表，简称循环链表（circular linked list)，是表的一种链式存储结构。&amp;emsp;&amp;emsp;设p是指向循环链表的指针，currPtr是当前指向对的循环链表的指针，head是指向循环链表的头指针，与链表判断是否到达链尾相比，循环链表中判断是否到达链表尾的条件是：p!=head或者是currPtr!=head。所以，循环链表类中成员函数的实现与">
-<meta name="keywords" content="C++,单循环链表">
+<meta name="keywords" content="单循环链表,C++">
 <meta property="og:type" content="article">
 <meta property="og:title" content="单循环链表">
 <meta property="og:url" content="http://wanqbin.xyz/2019/03/28/单循环链表/index.html">
@@ -427,6 +427,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/28/单循环链表/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/28/单循环链表/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -531,9 +541,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/C/" rel="tag"># C++</a>
-          
             <a href="/tags/单循环链表/" rel="tag"># 单循环链表</a>
+          
+            <a href="/tags/C/" rel="tag"># C++</a>
           
         </div>
       
@@ -992,6 +1002,28 @@ setInterval("createtime()",250);
 
 
 
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'FchdjiQuvA5nCoDFfF6er8UC-gzGzoHsz',
+        appKey: 'yuVPbmLhvyWyLCQYispfuF6u',
+        placeholder: 'ヾﾉ≧∀≦)o 来呀！吐槽一番吧',
+        avatar:'/uploads/avatar.jpg',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
 
 
 

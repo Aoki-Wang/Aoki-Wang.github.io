@@ -122,7 +122,7 @@
 
 
 
-  <meta name="keywords" content="引用,指针,复合类型,">
+  <meta name="keywords" content="指针,引用,复合类型,">
 
 
 
@@ -134,7 +134,7 @@
 
 
 <meta name="description" content="复合类型是指基于其他类型定义的类型。C++有几种复合类型，下面主要是引用和指针。   定义复合类型的变量复杂很多，通用的描述为：一条声明语句由一个基本数据类型和紧随其后的一个声明符列表组成。每个声明符命名了一个变量并指定该变量为与基本数据类型有关的某种类型。     引用  C++11中新增加了一种引用，为右值引用，主要用于内置类。这里，我们使用引用时，指的是左值引用。   引用为对象起了另外一个">
-<meta name="keywords" content="引用,指针,复合类型">
+<meta name="keywords" content="指针,引用,复合类型">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++复合类型">
 <meta property="og:url" content="http://wanqbin.xyz/2019/03/09/C-复合类型/index.html">
@@ -431,6 +431,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/09/C-复合类型/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/09/C-复合类型/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -606,9 +616,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/引用/" rel="tag"># 引用</a>
-          
             <a href="/tags/指针/" rel="tag"># 指针</a>
+          
+            <a href="/tags/引用/" rel="tag"># 引用</a>
           
             <a href="/tags/复合类型/" rel="tag"># 复合类型</a>
           
@@ -1069,6 +1079,28 @@ setInterval("createtime()",250);
 
 
 
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'FchdjiQuvA5nCoDFfF6er8UC-gzGzoHsz',
+        appKey: 'yuVPbmLhvyWyLCQYispfuF6u',
+        placeholder: 'ヾﾉ≧∀≦)o 来呀！吐槽一番吧',
+        avatar:'/uploads/avatar.jpg',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
 
 
 

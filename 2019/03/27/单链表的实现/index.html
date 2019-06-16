@@ -122,7 +122,7 @@
 
 
 
-  <meta name="keywords" content="单链表,数据结构,">
+  <meta name="keywords" content="数据结构,单链表,">
 
 
 
@@ -134,7 +134,7 @@
 
 
 <meta name="description" content="写在前面&amp;emsp;链式存储结构是计算机中另一种最基本和最主要的数据存储结构。和顺序存储结构不同，初始化时链式存储结构为空链，每当有新的元素需要存储时用户向系统动态申请所需的存储空间插入链中。所有高级程序设计语言都为用户提供了向系统动态申请和动态释放存储空间的办法。C++提供了new和delete运算符，分别用于向系统动态申请所需存储空间和动态释放用new申请的存储空间。new能自动计算要分配的类">
-<meta name="keywords" content="单链表,数据结构">
+<meta name="keywords" content="数据结构,单链表">
 <meta property="og:type" content="article">
 <meta property="og:title" content="单链表的实现">
 <meta property="og:url" content="http://wanqbin.xyz/2019/03/27/单链表的实现/index.html">
@@ -427,6 +427,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/27/单链表的实现/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/27/单链表的实现/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -541,9 +551,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/单链表/" rel="tag"># 单链表</a>
-          
             <a href="/tags/数据结构/" rel="tag"># 数据结构</a>
+          
+            <a href="/tags/单链表/" rel="tag"># 单链表</a>
           
         </div>
       
@@ -1002,6 +1012,28 @@ setInterval("createtime()",250);
 
 
 
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'FchdjiQuvA5nCoDFfF6er8UC-gzGzoHsz',
+        appKey: 'yuVPbmLhvyWyLCQYispfuF6u',
+        placeholder: 'ヾﾉ≧∀≦)o 来呀！吐槽一番吧',
+        avatar:'/uploads/avatar.jpg',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
 
 
 
