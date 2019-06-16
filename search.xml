@@ -110,8 +110,8 @@
         <category>C++</category>
       </categories>
       <tags>
-        <tag>C++</tag>
         <tag>指针</tag>
+        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
@@ -396,8 +396,8 @@
         <category>C++</category>
       </categories>
       <tags>
-        <tag>指针</tag>
         <tag>引用</tag>
+        <tag>指针</tag>
         <tag>复合类型</tag>
       </tags>
   </entry>
