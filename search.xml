@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[ASP.NET Core MVC控制器与视图传值]]></title>
+    <url>%2F2019%2F06%2F16%2FASP-NET-Core-MVC%E6%8E%A7%E5%88%B6%E5%99%A8%E4%B8%8E%E8%A7%86%E5%9B%BE%E4%BC%A0%E5%80%BC%2F</url>
+    <content type="text"><![CDATA[一、传值方式 弱类型参数传递数据 强类型参数传递数据 二、弱类型参数传递数据 ViewData1）派生自ViewDataDictionary，因此它有可用的字典属性，如，ContainsKey、Add、Remove、Clear &emsp; 2）字典中键是字符串，所以允许有空格 &emsp; 3）任何非string类型均须在试图中进行强制转换才能使用ViewData ViewBag1）派生自DynamicViewData，因此它可使用点表示法（ViewBag.name=name)创建动态属性，且无需强制转换 2) ViewBag的语法使控制器到视图的速度更快 3) ViewBag更易于检查NULL值 3. ViewData的使用1）创建Action：Index 123456public IActionResult Index() &#123; ViewData[&quot;name&quot;] = &quot;Aoki&quot;; ViewData[&quot;description&quot;] = &quot;试举头，一笑问青天、天无语&quot;; return View(); &#125; 2）创建视图：Index.cshtml 1234&lt;div class="text-center"&gt; &lt;h1&gt;@ViewData["name"]&lt;/h1&gt; &lt;p&gt;@ViewData["description"]&lt;/p&gt;&lt;/div&gt; 3）实现结果： 4. ViewBag的使用1）创建Action：Index 1234567public IActionResult Index() &#123; ViewBag.type = &quot;ViewBag&quot;; ViewBag.name = &quot;Aoki&quot;; ViewBag.description = &quot;试举头，一笑问青天、天无语&quot;; return View(); &#125; 2）创建视图：Index.cshtml 12345&lt;div class="text-center"&gt; &lt;h1&gt;@ViewBag.name&lt;/h1&gt; &lt;p&gt;@ViewBag.description&lt;/p&gt; &lt;h4&gt;Pass the value through @ViewBag.type&lt;/h4&gt;&lt;/div&gt; 3）实现结果 三、强类型参数传递数据 强类型参数说明&emsp;&emsp;视图强类型通常称为ViewModel，可以在return View();时指定参数/对象。并在视图文件（.cshtml）中通过@model语法来指定对应的类型。 强类型参数示例1）创建Aoki类 12345public class Aoki &#123; public string name &#123; get; set; &#125; public string description &#123; get; set; &#125; &#125; 2）创建Action：Index 123456789public IActionResult Index() &#123; var aoki = new Aoki &#123; name = "Aoki", description = "试举头，一笑问青天、天无语" &#125;; return View(aoki); &#125; 3）创建视图：Index.cshtml 1234&lt;div class="text-center"&gt; &lt;h1&gt;@Model.name&lt;/h1&gt; &lt;p&gt;@Model.description&lt;/p&gt;&lt;/div&gt; 4）实现结果]]></content>
+      <categories>
+        <category>ASP.NET Core MVC</category>
+      </categories>
+      <tags>
+        <tag>ASP.NET Core</tag>
+        <tag>MVC</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[软件管理]]></title>
     <url>%2F2019%2F06%2F16%2F%E7%AE%A1%E7%90%86%2F</url>
     <content type="text"><![CDATA[一、软件过程改进模型CMMI软件组织的产品质量和服务质量，来自组织内部的过程改进状态。而过程改进是要有模型的，模型是实践、理论、方法、经验和技术的结晶，是软件组织的一种企业文化、工作环境和管理理念；模型能够引导企业从杂乱无章的管理状态到有条不紊的管理状态。 目前为止，IT企业界的过程管理和过程改进模型共有三个类型： ISO 9001 模型 CMMI模型 软件企业文化模型 微软企业文化 IBM企业文化 敏捷文化现象 CMMI是什么软件能力成熟度模型CMMI是由美国卡内基-梅隆大学软件工程研究所推出的评估软件能力与成熟度等级的一套标准。 CMMI的作用是什么 软件组织，用它来不断改进自身的软件过程管理能力 评估机构，用它来评估某软件组织当前软件能力成熟度级别 客户，用它来评估某承包商的软件能力 CMMI的实质 以“过程”为核心，抓软件组织的管理，即软件“组织”的过程改进 以“项目”为手段，抓团队开发过程的“活动”，即落实过程改进的措施 以“活动”记录为基础，抓软件过程的“度量”，即“度量”软件组织改进的情况 CMMI阶段模型的成熟度等级 CMMI等级 PA数目 管理特点 ML1:初始级 0 过程不可预测且缺乏控制 ML2：已管理级 7 过程为项目服务，即项目级管理 ML3：已定义级 11 过程为组织服务，即组织级管理 ML4：定量管理级 2 过程已度量和控制，即定量级管理 ML5：优化级 2 集中于过程改进，即优化管理级 ISO 9001与CMMI的联系和区别&emsp;&emsp;与ISO 9001标准相比，CMMI更为软件产业所看好。原因是CMMI专门针对软件工程控制而设置。它不仅进行软件企业工程能力的评估，更致力于软件开发过程的管理，强调对软件开发过程进行持续改进，引导软件开发过程走向成熟。 &emsp;&emsp;两者的相同点是：CMMI和ISO 9001标准都致力于质量和过程管理，都是为了解决同样的问题。 &emsp;&emsp;两者的不同点是：CMMI是动态的、开放的和持续改进的，它强调“没有最好，只有更好”，强调不断改进，强调人在软件开发方面的主动性，非常适用于软件过程改进；ISO 9001是静态的质量控制，只要达到20个关键指标或过程，就能完成质量控制，它更适用于硬件制造行业和第三产业的质量控制。CMMI与IO 9001的设计思路有差异：CMMI是“专用的”，ISO 9001是“通用”的。ISO 9001不覆盖CMMI，CMMI也不覆盖ISO 9001. 二、软件配置管理软件配置管理SCM是对软件开发过程中配置项的一组追踪和控制活动，它开始于软件开发之初，结束于软件淘汰之时。 三、软件质量保证软件质量保证SQA是一个过程，是CMMI和ISO 9001的重要议题，同样也是项目管理的重要议题。 软件质量，是供方提供的软件产品满足用户明确或隐含需求的能力特性的总和。 质量管理的三大支柱 质量标准 配置管理 测试测量 质量管理的三大要素 SQA计划 SQA进度 SQA评审和审计 四、软件项目管理 什么是项目项目，是一次性的多任务工作，它具有确定的开始日期，结束日期，工作范围，经费预算，质量标准，以及特定的功能、性能和接口要求。 什么是项目管理项目管理，是为了实现项目目标，运用相关知识、技能、方法与工具，对项目的计划、进度、质量、成本、资源进行管理和控制的活动。 项目经理的七项职责 抓需求获取与确认 抓计划制订与执行 抓团队分工与协作 抓后勤供应与保障 抓产品测试和交付 抓开发标准与规范 抓员工考核与奖励 项目经理对程序员的八项要求 团队协作精神的训练和要求 数据库和数据结构分析与设计能力的训练和要求 书写文档习惯的训练和要求 规范化代码编写能力的训练和要求 复用性能力与构件技术的训练和要求 测试习惯的训练和要求 学习和总结能力的训练和要求 引导程序员由“丑小鸭”变成“白天鹅”]]></content>
@@ -384,8 +396,8 @@
         <category>C++</category>
       </categories>
       <tags>
-        <tag>指针</tag>
         <tag>引用</tag>
+        <tag>指针</tag>
         <tag>复合类型</tag>
       </tags>
   </entry>
