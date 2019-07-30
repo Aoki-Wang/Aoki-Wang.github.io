@@ -125,7 +125,7 @@
 
 
 
-  <meta name="keywords" content="你好">
+  <meta name="keywords" content="数据链路层,差错检测,可靠传输,">
 
 
 
@@ -136,16 +136,18 @@
 
 
 
-<meta name="description" content="hitokoto()">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Aoki&#39;s Blog">
-<meta property="og:url" content="http://wanqbin.xyz/tags/软件建模/index.html">
+<meta name="description" content="一、数据链路层的功能 &amp;emsp;&amp;emsp;数据链路层在物理层提供服务的基础上向网络层提供服务，其主要作用是加强物理层传输原始比特流的功能，将物理层提供的可能出错的物理连接改造为逻辑上无差错的数据链路，使之对网络层表现为一条无差错的链路。  为网络层提供服务 对网络层而言，数据链路层的基本任务是将源机器中来自网络层的数据传输到目标其的网络层。数据链路层通常可为网络层提供如下服务： （1）无确认的">
+<meta name="keywords" content="数据链路层,差错检测,可靠传输">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用点对点信道的数据链路层">
+<meta property="og:url" content="http://wanqbin.xyz/2019/07/01/点对点信道的数据链路层/index.html">
 <meta property="og:site_name" content="Aoki&#39;s Blog">
-<meta property="og:description" content="hitokoto()">
+<meta property="og:description" content="一、数据链路层的功能 &amp;emsp;&amp;emsp;数据链路层在物理层提供服务的基础上向网络层提供服务，其主要作用是加强物理层传输原始比特流的功能，将物理层提供的可能出错的物理连接改造为逻辑上无差错的数据链路，使之对网络层表现为一条无差错的链路。  为网络层提供服务 对网络层而言，数据链路层的基本任务是将源机器中来自网络层的数据传输到目标其的网络层。数据链路层通常可为网络层提供如下服务： （1）无确认的">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-01T12:41:36.731Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Aoki&#39;s Blog">
-<meta name="twitter:description" content="hitokoto()">
+<meta name="twitter:title" content="使用点对点信道的数据链路层">
+<meta name="twitter:description" content="一、数据链路层的功能 &amp;emsp;&amp;emsp;数据链路层在物理层提供服务的基础上向网络层提供服务，其主要作用是加强物理层传输原始比特流的功能，将物理层提供的可能出错的物理连接改造为逻辑上无差错的数据链路，使之对网络层表现为一条无差错的链路。  为网络层提供服务 对网络层而言，数据链路层的基本任务是将源机器中来自网络层的数据传输到目标其的网络层。数据链路层通常可为网络层提供如下服务： （1）无确认的">
 
 
 
@@ -175,14 +177,14 @@
 
 
 
-  <link rel="canonical" href="http://wanqbin.xyz/tags/软件建模/">
+  <link rel="canonical" href="http://wanqbin.xyz/2019/07/01/点对点信道的数据链路层/">
 
 
 
 
 
 
-  <title>标签: 软件建模 | Aoki's Blog</title>
+  <title>使用点对点信道的数据链路层 | Aoki's Blog</title>
   
 
 
@@ -211,7 +213,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -347,52 +349,316 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>软件建模<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://wanqbin.xyz/2019/07/01/点对点信道的数据链路层/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Aoki">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aoki's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/06/15/软件建模/" itemprop="url">
-              
-                <span itemprop="name">软件建模</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">使用点对点信道的数据链路层</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-06-15T23:46:00+08:00" content="2019-06-15">
-          06-15
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-01T20:38:00+08:00">
+                2019-07-01
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机网络/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机网络</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/07/01/点对点信道的数据链路层/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/01/点对点信道的数据链路层/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/07/01/点对点信道的数据链路层/" class="leancloud_visitors" data-flag-title="使用点对点信道的数据链路层">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 阅读数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3.2k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>一、数据链路层的功能</p>
+<p>&emsp;&emsp;数据链路层在物理层提供服务的基础上向网络层提供服务，其主要作用是加强物理层传输原始比特流的功能，将物理层提供的可能出错的物理连接改造为逻辑上无差错的数据链路，使之对网络层表现为一条无差错的链路。</p>
+<ol>
+<li><p>为网络层提供服务</p>
+<p>对网络层而言，数据链路层的基本任务是将源机器中来自网络层的数据传输到目标其的网络层。数据链路层通常可为网络层提供如下服务：</p>
+<p>（1）无确认的无连接服务。员及其发送数据帧时不需先建立链路连接，目的机器收到数据帧时不需发回确认。对丢失的帧，数据链路层不负责重发而交给上层处理。适用于实时通信或误码率较低的通信信道，如以太网</p>
+<p>（2）有确认的无连接服务。源机器发送数据帧时不需先建立链路连接，但目的机器收到数据帧时必须发回确认。源机器在所规定的时间内未收到确定信号时，就重传丢失的帧，以提高传输的可靠性。该服务适用于误码率较高的通信信道，如无线通信</p>
+<p>（3）有确认的面向连接服务。帧传输过程分为三个阶段：建立数据链路，传输帧，释放数据链路。目的机器对收到的每一帧都要给出确认，源机器收到确认后才能发送下一帧，因而该服务的可靠性最高。该服务适用于通信要求较高的场合</p>
+</li>
+</ol>
+<p>二、使用点对点信道的数据链路层</p>
+<ol>
+<li><p>数据链路和帧</p>
+<ul>
+<li>链路，就是从一个结点到相邻结点的一段物理线路，而中间没有任何其他的交换结点。</li>
+<li>数据链路，当需要在一条线路上传送数据时，除了必须要有一条物理线路外，还必须要有一些必要的通信协议来控制这些数据的传输。若把实现这些协议的硬件和软件加到链路上，就构成了数据链路。这样的数据链路就不再是简单的物理链路而是个逻辑链路了。现在最常用的方法是使用网络适配器来实现这些协议的硬件和软件。一般的适配器都包括了数据链路层和物理层这两层功能。</li>
+<li>帧，数据链路层把网络层交下来的数据构成<strong>帧</strong>发送到链路上，以及把接收到的<strong>帧</strong>中的数据报取出并上交给网络层。在因特网中，网络层协议数据单元就是<strong>IP数据报</strong></li>
+<li>点对点信道的数据链路层在进行通信时的主要步骤：<ul>
+<li>结点A的数据链路层把网络层交下来的IP数据报添加首部和尾部封装成帧</li>
+<li>结点A把封装号的帧发送给结点B的数据链路层</li>
+<li>若结点B的数据链路层收到的帧无差错，则从收到的帧中提取出IP数据报上交给上面的网络层，否则就丢弃这个帧</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>封装成帧</p>
+<ul>
+<li>数据链路层以帧为单位传输和处理数据。网络层的IP数据报必须向下传送到数据链路层，成为帧的数据部分，同时它的前面和后面分别添加上首部和尾部，封装成一个完整的帧。帧的长度等于帧的数据部分的长度加上帧首部和帧尾部的长度。</li>
+<li>数据链路层的接收方为了能以帧为单位处理接收的数据，必须正确地识别每个帧的开始和结束，即进行<strong>帧定界</strong></li>
+<li>首部和尾部的作用之一就是进行帧定界，同时也包括其他必要的控制信息。</li>
+<li>每一种链路层协议都规定了帧的数据部分长度的上限，即<strong>最大传送单元(MTU)</strong></li>
+<li>PPP协议采用的<strong>零比特填充法</strong><ul>
+<li>在发送端，先扫描整个信息字段。只要发现有5个连续1，则立即填入一个0，经过这种零比特填充后的数据，就可以保证在信息字段中不会出现6个连续1.</li>
+<li>接收端在收到一个帧时，先找到帧定界标志“Flag”以确定一个帧的边界，接着再用硬件对其中的比特流进行扫描。每当发现5个连续的1时，就把5个连续1后面的一个0删除，以还原成原来的数据比特流。</li>
+<li>这样就保证了透明传输：在所传送的树比特流中可以包含任意组合的比特模式，而不会引起对帧定界的判断错误。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>差错检测</p>
+<ul>
+<li>现实的通信链路都不会是理想的，比特在传输过程中可能会产生差错：1可能会变为0,0可能会变为1，则就叫做<strong>比特差错</strong></li>
+<li>传输错误的比特占所传输比特总数的比率称为<strong>误码率</strong></li>
+<li>为了保证接收到的数据是正确的，在计算机网络传输数据时，必须采用某种差错检测措施。虽然各种差错检测技术的具体方法差别很大，但它们最基本的原理是一样的。</li>
+<li>在数据链路层，为了便于硬件检测差错，通常在帧的尾部设置一个差错检验字段存放整个帧的差错检测码，这个差错检验字段常称为<strong>帧检验序列（FCS）</strong>。因此，要在数据链路层进行差错检验，就必须把数据划分成帧，每一帧都加上差错检验码，一帧接一帧地传送，然后再接收方逐帧进行差错检验。</li>
+<li>在数据链路层通常使用<strong>循环冗余检验（CRC）</strong>技术进行差错检测。</li>
+<li>CRC编码额基本原理是，发送方和接收方首先必须协商一个r+1比特的生成式G。算法要求G的最高位和最低位的比特为1,。考虑d比特的数据D，发送方要选择一个合适的r比特<strong>冗余码R（即检错码）</strong>，并将它附加到D上，使得得到的d+r比特模式用模2算术恰好能被G整除。接收方进行差错检测时，用G去除接收到的d+r比特，如果余数非零则检测出差错，否则认为树正确。</li>
+<li>模2运算中，加法不进位，减法不错位，等价于按位异或，乘以和除以2等价于左/右移位。</li>
+</ul>
+</li>
+<li><p>可靠传输</p>
+<ul>
+<li>在某些情况下，我们需要数据链路层向上面的网络层提供“可靠传输”的服务。“可靠传输”就是要做到：发送端发送什么，在对应的接收端就收到什么。</li>
+<li>为了实现可靠的单向数据传输，可靠传输协议需要进行双向通信，因此底层的不可靠信道必须是双向的。</li>
+</ul>
+<p>（1）停止等待协议（SW）</p>
+<ul>
+<li>当正确接收到一个分组时，向发送方发送一个确认分组ACK，当接收到的分组出现比特差错时，丢弃该分组并发送一个否认分组NAK。发送方收到ACK则可以发送下一个分组，而收到NAK则要重传原来的分组，直到收到ACK为止。由于发送方每发送完一个分组必须停下来等接收到确认后才能发送下一个分组，该协议被称为<strong>停止等待协议（SW）</strong></li>
+<li>如果底层的信道会丢失分组，当数据分组或确认分组丢失时，发送方将会一直等待接收方的确认分组。为了解决给问题，可以在发送方发送完一个数据分组时，启动一个<strong>超时计数器</strong>。若到了超时计数器所设置的重传时间而发送方仍收不到接收方的任何确认分组，则重传原来的分组，这就是<strong>超时重传</strong>。</li>
+<li>当确认分组丢失时，接收方会收到两个同样的数据分组，即<strong>重复分组</strong>。若接收方不能识别重复分组，则会导致另一种差错——<strong>数据重复</strong>。为了解决该问题，必须使每个数据分组带上不同的发送序号。每发送一个新的数据分组就把它的发送序号加1.若接收方连续收到发送序号相同的数据分组，就表明出现了重复分组。这时应丢弃重复的分组，此时，接收方还必须向发送方补发一个确认分组ACK。</li>
+<li>停止等待协议的优点是简单，但缺点是信道利用率太低。</li>
+<li>假设存在发送方A，发送分组需要的时间是$T_D$,接收方B，发送确认分组需要时间$T_A$.如果A处理确认分组的时间可以忽略不计，那么A在经过时间（$T_D$+RTT+$T_A$)后就可以再发送下一个分组，这里的RTT是<strong>往返时间</strong>。因为仅仅是在时间$T_D$内采用来传送有用的数据，因此，信道的利用率U为：U=$\frac{TD}{TD+RTT+TA}$.</li>
+<li>当RTT远大于分组发送时间$T_D$时，信道的利用率就会非常低</li>
+<li>当RTT远小于发送时间$T_D$时，信道的利用率较高。</li>
+<li>流水线传输方式就是发送方可连续发送多个分组，不必每发完一个分组就停下来等待对方的确认。这样可使得信道上一直有数据不间断地在传送。显然，这种传输方式可以获得很高的信道利用率。</li>
+</ul>
+<p>（2）回退N帧协议（GBN）</p>
+<ul>
+<li>回退N帧协议在流水线传输的基础上利用<strong>发送窗口</strong>来限制发送方连续发送分组的个数，是一种连续<strong>ARQ</strong>协议。</li>
+<li>为此，在发送方要维持一个发送窗口。发送窗口时允许发送方已发送但还没有收到的分组序号的范围，窗口大小就是发送方已发送但还没有收到确认的最大分组数。</li>
+<li>在协议的工作过程中，发送窗口不断向前滑动，因此，这类协议又称为<strong>滑动窗口协议</strong>。</li>
+<li>GBN采用累积确认的方式。优点是容易实现，即使确认丢失也可能不必重传。但缺点是不能向发送方准确反映出接收方已经正确收到的所有分组的信息。</li>
+</ul>
+<p>（3）选择重传协议</p>
+<ul>
+<li>GBN协议存在一个缺点：一个分组的差错可能引起大量分组的重传，这些分组可能已经被接收方正确接收了，但由于未按序到达而被抛弃。显然对这些分组的重传是对通信资源的极大浪费。为进一步提高性能，可设法只重传出现差错的分组，但这时<strong>接收窗口不再为1</strong>，以便先收下失序到达但仍然处在接收窗口中的那些分组，等到所缺分组收齐后再一并送交上层，这就是选择重传（SR）协议。</li>
+<li>为了使发送方仅重传出现差错的分组，接收方不能再采用累积确认，而需要对每个正确接收到的分组进行逐一确认。</li>
+</ul>
+<p>（4）数据链路层的可靠传输</p>
+<ul>
+<li>不可靠的链路加上适当的协议就可以使链路层向上提供可靠传输服务。但付出的代价是数据的传输效率降低了，而且增加了协议的复杂性。因此，应当根据链路的具体情况来决定是否需要让链路层向上提供可靠传输服务。</li>
+<li>现在有线网络广泛使用的数据链路层协议一般都不使用确认和重传机制，即不要求数据链路层向上提供可靠传输服务。若数据链路层传输数据偶尔出现了差错，并且需要进行改正，则改正差错的任务就由上层协议来完成。实践证明，这样做可以提高通信效率，降低设备成本。</li>
+</ul>
+</li>
+</ol>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+  
+</div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据链路层/" rel="tag"># 数据链路层</a>
+          
+            <a href="/tags/差错检测/" rel="tag"># 差错检测</a>
+          
+            <a href="/tags/可靠传输/" rel="tag"># 可靠传输</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/01/list容器/" rel="next" title="list容器">
+                <i class="fa fa-chevron-left"></i> list容器
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/29/deque容器/" rel="prev" title="deque容器">
+                deque容器 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -400,6 +666,13 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -706,6 +979,10 @@ setInterval("createtime()",250);
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -1220,26 +1497,6 @@ setInterval("createtime()",250);
   
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 

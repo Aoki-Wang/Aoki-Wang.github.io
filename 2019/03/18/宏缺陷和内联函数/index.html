@@ -125,7 +125,7 @@
 
 
 
-  <meta name="keywords" content="你好">
+  <meta name="keywords" content="宏缺陷,内联函数,">
 
 
 
@@ -136,16 +136,22 @@
 
 
 
-<meta name="description" content="hitokoto()">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Aoki&#39;s Blog">
-<meta property="og:url" content="http://wanqbin.xyz/tags/软件建模/index.html">
+<meta name="description" content="写在前面 C++从C中继承的一个重要特征就是效率。   在C中我们经常把一些短并且执行频繁的计算写成宏，而不是函数，这样做的理由方式为了执行效率，宏可以避免函数调用的开销，这些都由预处理来完成。   但是在C++出现以后，使用宏处理会出现两个问题：    第一个在C中也会出现，宏看起来像是一个函数调用，但是会隐藏一些难以发现的错误。   第二个问题是C++特有的，预处理器不允许访问类的成员，也就">
+<meta name="keywords" content="宏缺陷,内联函数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="宏缺陷和内联函数">
+<meta property="og:url" content="http://wanqbin.xyz/2019/03/18/宏缺陷和内联函数/index.html">
 <meta property="og:site_name" content="Aoki&#39;s Blog">
-<meta property="og:description" content="hitokoto()">
+<meta property="og:description" content="写在前面 C++从C中继承的一个重要特征就是效率。   在C中我们经常把一些短并且执行频繁的计算写成宏，而不是函数，这样做的理由方式为了执行效率，宏可以避免函数调用的开销，这些都由预处理来完成。   但是在C++出现以后，使用宏处理会出现两个问题：    第一个在C中也会出现，宏看起来像是一个函数调用，但是会隐藏一些难以发现的错误。   第二个问题是C++特有的，预处理器不允许访问类的成员，也就">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.imgur.com/4R0ff3I.png">
+<meta property="og:image" content="https://i.imgur.com/pk7Yv4A.png">
+<meta property="og:image" content="https://i.imgur.com/sTiAySo.png">
+<meta property="og:updated_time" content="2019-06-13T16:20:08.373Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Aoki&#39;s Blog">
-<meta name="twitter:description" content="hitokoto()">
+<meta name="twitter:title" content="宏缺陷和内联函数">
+<meta name="twitter:description" content="写在前面 C++从C中继承的一个重要特征就是效率。   在C中我们经常把一些短并且执行频繁的计算写成宏，而不是函数，这样做的理由方式为了执行效率，宏可以避免函数调用的开销，这些都由预处理来完成。   但是在C++出现以后，使用宏处理会出现两个问题：    第一个在C中也会出现，宏看起来像是一个函数调用，但是会隐藏一些难以发现的错误。   第二个问题是C++特有的，预处理器不允许访问类的成员，也就">
+<meta name="twitter:image" content="https://i.imgur.com/4R0ff3I.png">
 
 
 
@@ -175,14 +181,14 @@
 
 
 
-  <link rel="canonical" href="http://wanqbin.xyz/tags/软件建模/">
+  <link rel="canonical" href="http://wanqbin.xyz/2019/03/18/宏缺陷和内联函数/">
 
 
 
 
 
 
-  <title>标签: 软件建模 | Aoki's Blog</title>
+  <title>宏缺陷和内联函数 | Aoki's Blog</title>
   
 
 
@@ -211,7 +217,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -347,52 +353,251 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>软件建模<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://wanqbin.xyz/2019/03/18/宏缺陷和内联函数/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Aoki">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aoki's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/06/15/软件建模/" itemprop="url">
-              
-                <span itemprop="name">软件建模</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">宏缺陷和内联函数</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-06-15T23:46:00+08:00" content="2019-06-15">
-          06-15
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-18T23:17:00+08:00">
+                2019-03-18
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/18/宏缺陷和内联函数/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/18/宏缺陷和内联函数/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/03/18/宏缺陷和内联函数/" class="leancloud_visitors" data-flag-title="宏缺陷和内联函数">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 阅读数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.2k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2></blockquote>
+<p>C++从C中继承的一个重要特征就是效率。  </p>
+<p>在C中我们经常把一些短并且执行频繁的计算写成宏，而不是函数，这样做的理由方式为了执行效率，宏可以避免函数调用的开销，这些都由预处理来完成。  </p>
+<p>但是在C++出现以后，使用宏处理会出现两个问题：  </p>
+<ul>
+<li>第一个在C中也会出现，宏看起来像是一个函数调用，但是会隐藏一些难以发现的错误。  </li>
+<li>第二个问题是C++特有的，预处理器不允许访问类的成员，也就是说预处理器宏不能用作类的成员的函数。  </li>
+</ul>
+<p>为了保持预处理宏的效率又增加安全性，而且能像一般成员函数那样在类里访问自如，C++引入了内联函数。  </p>
+<p>内联函数为了继承宏函数的效率，没有函数调用的开销，然后又可以像普通函数那样，可以进行参数、返回值类型的安全检查，又可以作为成员函数。  </p>
+<hr>
+<blockquote>
+<h1 id="1-预处理宏的缺陷"><a href="#1-预处理宏的缺陷" class="headerlink" title="1.预处理宏的缺陷"></a>1.预处理宏的缺陷</h1></blockquote>
+<hr>
+<p>预处理器宏存在问题的关键是我们可能认为预处理器的行为和编译器时一样的。当然也是由于宏函数调用和函数调用在外表看起来是一样的，因此也容易混淆。但是其中会有一些微妙的问题出现。  </p>
+<h3 id="例1"><a href="#例1" class="headerlink" title="例1"></a>例1</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ADD(x,y) x+y</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> ret = ADD(<span class="number">10</span>, <span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> ret0 = ADD(<span class="number">10</span>, <span class="number">10</span>) * <span class="number">10</span>;<span class="comment">//预期结果为200</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"ret="</span> &lt;&lt; ret &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"ret0="</span> &lt;&lt; ret0 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">    test();</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果如下：  </p>
+<p><img src="https://i.imgur.com/4R0ff3I.png" alt>  </p>
+<p>在输出结果里，我们可以看到，实际输出结果为110，并不是我们想要的结果。它实际进行运算时，运算式应该是：10+10*10。  </p>
+<p>对于这个微小的问题，我们可以通过加括号的方式来解决它。源代码和输出结果如下：  </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ADD(x,y) ((x)+(y))</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> ret = ADD(<span class="number">10</span>, <span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> ret0 = ADD(<span class="number">10</span>, <span class="number">10</span>) * <span class="number">10</span>;<span class="comment">//预期结果为200</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"ret="</span> &lt;&lt; ret &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"ret0="</span> &lt;&lt; ret0 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">    test();</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果如下：  </p>
+<p><img src="https://i.imgur.com/pk7Yv4A.png" alt>  </p>
+<p>我们可以看到，加括号之后，输出结果和预期相同。  </p>
+<h3 id="例2"><a href="#例2" class="headerlink" title="例2"></a>例2</h3><p>为了防止出现例1中的问题，这次，我特意对三目运算符加了括号。代码如下：  </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> compare(a,b) ((a)&lt;(b))?(a):(b)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> b = <span class="number">20</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> ret = compare(a, b);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"ret="</span> &lt;&lt; ret &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> ret0 = compare(++a, b);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"ret0="</span> &lt;&lt; ret0 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">    test();</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果如下:  </p>
+<p><img src="https://i.imgur.com/sTiAySo.png" alt>  </p>
+<p>这次出现的问题让人有点摸不到头脑，因此++运算符表示在进行运算之前加1，但是输出结果中，实际输出为12，相当于加了两次。  </p>
+<p>除此之外，我们还应当注意的是，预定义宏函数没有作用域概念，无法作为一个类的成员函数，也就是说，预定义宏没办法表示类的范围。  </p>
+<hr>
+<blockquote>
+<h1 id="2-内联函数"><a href="#2-内联函数" class="headerlink" title="2.内联函数"></a>2.内联函数</h1></blockquote>
+<hr>
+<p>在C++中，预定义宏额概念是用内联函数来实现的，而内联函数本身也是一个真正的函数。内联函数具有普通函数的所有行为。唯一不同之处在于内联函数会在适当得到地方像预定义宏一样展开，所以不需要函数调用的开销。因此应该不使用宏，使用内联函数。   </p>
+<p>普通函数（非成员函数）函数前面加上inline关键字使之成为内联函数。但是必须注意函数体和声明结合在一起，否则编译器会把它当成普通函数对待。  </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">int</span> a)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>上面的这种写法没有任何效果，仅仅是声明函数，应该像下面这样的方式来定义。   </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">int</span> a)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ++;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意：编译器将会检查函数参数列表使用是否正确，并返回值（进行必要的转换）。这些事预处理器是无法完成的。  </p>
+<p>内联函数的确占用空间，但是内联函数相对于普通函数的优势只是省去了函数调用是否的压栈、跳转、返回的开销。我们可以理解为内联函数是以空间换时间。  </p>
+<p>内联说明只是向编译器发出一个请求，编译器可以选择忽略这个请求。  </p>
+<p>一般来说，内联机制用于优化规模较小、流程直接、频繁调用的函数。很多编译器都不支持内联函数递归函数，而且一个75行的函数也不太可能在调用点内联地展开。  </p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+  
+</div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/宏缺陷/" rel="tag"># 宏缺陷</a>
+          
+            <a href="/tags/内联函数/" rel="tag"># 内联函数</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/18/函数默认参数及占位参数/" rel="next" title="函数默认参数及占位参数">
+                <i class="fa fa-chevron-left"></i> 函数默认参数及占位参数
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/19/C语言下的封装和C-语言封装的区别/" rel="prev" title="关于C语言下的封装和C++语言封装的区别">
+                关于C语言下的封装和C++语言封装的区别 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -400,6 +605,13 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -422,8 +634,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -511,6 +732,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#1-预处理宏的缺陷"><span class="nav-number"></span> <span class="nav-text">1.预处理宏的缺陷</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#例1"><span class="nav-number">0.1.</span> <span class="nav-text">例1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例2"><span class="nav-number">0.2.</span> <span class="nav-text">例2</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-内联函数"><span class="nav-number"></span> <span class="nav-text">2.内联函数</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -706,6 +943,10 @@ setInterval("createtime()",250);
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -1220,26 +1461,6 @@ setInterval("createtime()",250);
   
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 

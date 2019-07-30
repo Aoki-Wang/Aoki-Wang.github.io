@@ -125,7 +125,7 @@
 
 
 
-  <meta name="keywords" content="你好">
+  <meta name="keywords" content="友元函数,友元类,">
 
 
 
@@ -136,16 +136,23 @@
 
 
 
-<meta name="description" content="hitokoto()">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Aoki&#39;s Blog">
-<meta property="og:url" content="http://wanqbin.xyz/tags/软件建模/index.html">
+<meta name="description" content="写在前面 &amp;emsp;&amp;emsp;类的主要特点之一就是数据隐藏，即类的私有成员无法在类的外部（作用域之外）访问。但是，有时候需要在类的外部访问类的私有数据成员，怎么办呢？&amp;emsp;&amp;emsp;解决办法是使用友元函数，友元函数时一种特权函数c，C++允许这个特权函数访问私有成员。这一点我们可以用生活中的例子来看：&amp;emsp;&amp;emsp;比如你的家有客厅，有卧室，客厅是public的，所有来的客人">
+<meta name="keywords" content="友元函数,友元类">
+<meta property="og:type" content="article">
+<meta property="og:title" content="友元">
+<meta property="og:url" content="http://wanqbin.xyz/2019/03/23/友元/index.html">
 <meta property="og:site_name" content="Aoki&#39;s Blog">
-<meta property="og:description" content="hitokoto()">
+<meta property="og:description" content="写在前面 &amp;emsp;&amp;emsp;类的主要特点之一就是数据隐藏，即类的私有成员无法在类的外部（作用域之外）访问。但是，有时候需要在类的外部访问类的私有数据成员，怎么办呢？&amp;emsp;&amp;emsp;解决办法是使用友元函数，友元函数时一种特权函数c，C++允许这个特权函数访问私有成员。这一点我们可以用生活中的例子来看：&amp;emsp;&amp;emsp;比如你的家有客厅，有卧室，客厅是public的，所有来的客人">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.imgur.com/7zOVDCG.png">
+<meta property="og:image" content="https://i.imgur.com/qst1rZx.png">
+<meta property="og:image" content="https://i.imgur.com/MzXVr8v.png">
+<meta property="og:image" content="https://i.imgur.com/6PyL0Yq.png">
+<meta property="og:updated_time" content="2019-06-15T12:32:02.377Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Aoki&#39;s Blog">
-<meta name="twitter:description" content="hitokoto()">
+<meta name="twitter:title" content="友元">
+<meta name="twitter:description" content="写在前面 &amp;emsp;&amp;emsp;类的主要特点之一就是数据隐藏，即类的私有成员无法在类的外部（作用域之外）访问。但是，有时候需要在类的外部访问类的私有数据成员，怎么办呢？&amp;emsp;&amp;emsp;解决办法是使用友元函数，友元函数时一种特权函数c，C++允许这个特权函数访问私有成员。这一点我们可以用生活中的例子来看：&amp;emsp;&amp;emsp;比如你的家有客厅，有卧室，客厅是public的，所有来的客人">
+<meta name="twitter:image" content="https://i.imgur.com/7zOVDCG.png">
 
 
 
@@ -175,14 +182,14 @@
 
 
 
-  <link rel="canonical" href="http://wanqbin.xyz/tags/软件建模/">
+  <link rel="canonical" href="http://wanqbin.xyz/2019/03/23/友元/">
 
 
 
 
 
 
-  <title>标签: 软件建模 | Aoki's Blog</title>
+  <title>友元 | Aoki's Blog</title>
   
 
 
@@ -211,7 +218,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -347,52 +354,260 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>软件建模<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://wanqbin.xyz/2019/03/23/友元/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Aoki">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aoki's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/06/15/软件建模/" itemprop="url">
-              
-                <span itemprop="name">软件建模</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">友元</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-06-15T23:46:00+08:00" content="2019-06-15">
-          06-15
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-23T20:30:00+08:00">
+                2019-03-23
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/23/友元/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/23/友元/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/03/23/友元/" class="leancloud_visitors" data-flag-title="友元">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 阅读数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.2k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1></blockquote>
+<p>&emsp;&emsp;类的主要特点之一就是数据隐藏，即类的私有成员无法在类的外部（作用域之外）访问。但是，有时候需要在类的外部访问类的私有数据成员，怎么办呢？<br>&emsp;&emsp;解决办法是使用友元函数，友元函数时一种特权函数c，C++允许这个特权函数访问私有成员。这一点我们可以用生活中的例子来看：<br>&emsp;&emsp;比如你的家有客厅，有卧室，客厅是public的，所有来的客人都可以进去，但是你的卧室是私有的，也就是说只有你能进去，但是，你可以允许你的好朋友进去。<br>&emsp;&emsp;程序员可以把一个全局函数、某个类中的成员函数、甚至整个类声明为友元。  </p>
+<blockquote>
+<h1 id="1-全局函数做友元函数"><a href="#1-全局函数做友元函数" class="headerlink" title="1.全局函数做友元函数"></a>1.全局函数做友元函数</h1></blockquote>
+<p><strong>友元语法</strong>  </p>
+<ul>
+<li><code>friend</code>关键字只出现在声明处</li>
+<li>其他类、类成员函数、全局函数都可以声明为友元</li>
+<li>友元函数不是类的成员，不带this指针</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Home</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">friend</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">(Home *home)</span></span>;</span><br><span class="line">	Home()</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">this</span>-&gt;bedroom = <span class="string">"卧室"</span>;</span><br><span class="line">		<span class="keyword">this</span>-&gt;sittingroom = <span class="string">"客厅"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">string</span> sittingroom;<span class="comment">//客厅</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="built_in">string</span> bedroom;<span class="comment">//卧室</span></span><br><span class="line"></span><br><span class="line">	</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">(Home *home)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"你的好友正在访问"</span> &lt;&lt; home-&gt;sittingroom &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"你的好友正在访问"</span> &lt;&lt; home-&gt;bedroom &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Home *home=<span class="keyword">new</span> Home;</span><br><span class="line">	test(home);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果如下：<br><img src="https://i.imgur.com/7zOVDCG.png" alt>  </p>
+<p>从输出结果可以看出，当全局函数作为声明为友元函数之后，全局函数也可以访问类的私有成员。   </p>
+<blockquote>
+<h1 id="2-整个类做友元类"><a href="#2-整个类做友元类" class="headerlink" title="2.整个类做友元类"></a>2.整个类做友元类</h1></blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Home</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="keyword">friend</span> <span class="class"><span class="keyword">class</span> <span class="title">Good_Friend</span>;</span></span><br><span class="line">	Home()</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">this</span>-&gt;bedroom = <span class="string">"卧室"</span>;</span><br><span class="line">		<span class="keyword">this</span>-&gt;sittingroom = <span class="string">"客厅"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">string</span> sittingroom;<span class="comment">//客厅</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="built_in">string</span> bedroom;<span class="comment">//卧室</span></span><br><span class="line"></span><br><span class="line">	</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Good_Friend</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	Good_Friend(<span class="built_in">string</span> name)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">this</span>-&gt;name = name;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">visit</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"好友"</span>&lt;&lt;<span class="keyword">this</span>-&gt;name&lt;&lt;<span class="string">"正在拜访"</span> &lt;&lt; <span class="keyword">this</span>-&gt;home.sittingroom &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"好友"</span>&lt;&lt;<span class="keyword">this</span>-&gt;name&lt;&lt;<span class="string">"正在拜访"</span> &lt;&lt; <span class="keyword">this</span>-&gt;home.bedroom &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	Home home;</span><br><span class="line">	<span class="built_in">string</span> name;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="function">Good_Friend <span class="title">frend</span><span class="params">(<span class="string">"Aoki"</span>)</span></span>;</span><br><span class="line">	frend.visit();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	test();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;输出结果如下：<br><img src="https://i.imgur.com/qst1rZx.png" alt><br>&emsp;&emsp;将好友类声明为友元类之后，好友类的对象可以访问Home类的私有成员。<br>&emsp;&emsp;在友元类中我们应当注意：  </p>
+<ol>
+<li>友元关系不能被继承</li>
+<li>友元关系是单向的</li>
+<li>友元关系不具有传递性</li>
+</ol>
+<blockquote>
+<p><strong>C++是纯面向对象的吗？</strong><br>&emsp;&emsp;如果一个类被声明为friend<br>，意味着它不是这个类的成员函数，却可以是修改这个类的私有成员，而且必须列在类的定义中，因此它是一个特权函数。C++不是完全的面向对象语言，而是一个混合产品。增加friend关键字只是用来解决一些实际问题，这也说明这种语言是不纯的。毕竟C++设计的目的是为了实用性，而不是追求理想的抽象。<br>                          -———《Think in C++》  </p>
+</blockquote>
+<p>&lt;/br&gt;</p>
+<blockquote>
+<h1 id="3-成员函数做友元函数"><a href="#3-成员函数做友元函数" class="headerlink" title="3.成员函数做友元函数"></a>3.成员函数做友元函数</h1></blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Home</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Good_Friend</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	Good_Friend(<span class="built_in">string</span> name);</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">visit</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">visit2</span><span class="params">()</span></span>;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	Home *home;</span><br><span class="line">	<span class="built_in">string</span> name;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Home</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">friend</span> <span class="keyword">void</span>  Good_Friend::visit();</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	Home();</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">string</span> sittingroom;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="built_in">string</span> bedroom;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Good_Friend::Good_Friend(<span class="built_in">string</span> name)</span><br><span class="line">&#123;</span><br><span class="line">	home = <span class="keyword">new</span> Home;</span><br><span class="line">	<span class="keyword">this</span>-&gt;name = name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> Good_Friend::visit()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"你的好友"</span> &lt;&lt; <span class="keyword">this</span>-&gt;name &lt;&lt; <span class="string">"正在访问"</span> &lt;&lt; <span class="keyword">this</span>-&gt;home-&gt;sittingroom &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"你的好友"</span> &lt;&lt; <span class="keyword">this</span>-&gt;name &lt;&lt; <span class="string">"正在访问"</span> &lt;&lt; <span class="keyword">this</span>-&gt;home-&gt;bedroom &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> Good_Friend::visit2()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"你的好友"</span>&lt;&lt;<span class="keyword">this</span>-&gt;name&lt;&lt;<span class="string">"正在访问"</span> &lt;&lt; <span class="keyword">this</span>-&gt;home-&gt;sittingroom &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="comment">//cout &lt;&lt; "你的好友" &lt;&lt; this-&gt;name &lt;&lt; "正在访问" &lt;&lt; this-&gt;home-&gt;bedroom &lt;&lt; endl;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Home::Home()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">this</span>-&gt;sittingroom = <span class="string">"客厅"</span>;</span><br><span class="line">	<span class="keyword">this</span>-&gt;bedroom = <span class="string">"卧室"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="function">Good_Friend <span class="title">frien</span><span class="params">(<span class="string">"Aoki"</span>)</span></span>;</span><br><span class="line">	frien.visit();</span><br><span class="line">	frien.visit2();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	test();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;当我们试图使用一个没有声明为Home类友元的成员函数去访问Home的私有成员时，编译器报错如下：<br><img src="https://i.imgur.com/MzXVr8v.png" alt><br>正确是输出结果如下：<br><img src="https://i.imgur.com/6PyL0Yq.png" alt><br>&emsp;&emsp;虽然我现在将<code>visit()</code>函数定义为Home类的友元，但是事情并没有这么简单地结束，因为当我第一次定义友元函数时，编译器莫名其妙地报错。那么，编译器报错的原因是什么呢？<br>&emsp;&emsp;当我尝试着把成员函数的声明与定义分开的时候，编译器显示没有错误。这也就告诉我们，在声明成员函数的时候，将声明与定义分开放，编译器会更好地处理。   </p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+  
+</div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/友元函数/" rel="tag"># 友元函数</a>
+          
+            <a href="/tags/友元类/" rel="tag"># 友元类</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/23/C-对象模型初探/" rel="next" title="C++对象模型初探">
+                <i class="fa fa-chevron-left"></i> C++对象模型初探
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/24/运算符的重载（1）/" rel="prev" title="运算符的重载（1）">
+                运算符的重载（1） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -400,6 +615,13 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -422,8 +644,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -511,6 +742,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-全局函数做友元函数"><span class="nav-number">2.</span> <span class="nav-text">1.全局函数做友元函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-整个类做友元类"><span class="nav-number">3.</span> <span class="nav-text">2.整个类做友元类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-成员函数做友元函数"><span class="nav-number">4.</span> <span class="nav-text">3.成员函数做友元函数</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -706,6 +953,10 @@ setInterval("createtime()",250);
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -1220,26 +1471,6 @@ setInterval("createtime()",250);
   
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 

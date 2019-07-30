@@ -125,7 +125,7 @@
 
 
 
-  <meta name="keywords" content="你好">
+  <meta name="keywords" content="析构函数,构造函数,">
 
 
 
@@ -136,16 +136,21 @@
 
 
 
-<meta name="description" content="hitokoto()">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Aoki&#39;s Blog">
-<meta property="og:url" content="http://wanqbin.xyz/tags/软件建模/index.html">
+<meta name="description" content="1.初始化和清理  C++中OO思想也是来源于现实，是对现实事物的抽象模拟，具体来说，当我们常见对象的时候，这个对象应该有一个初始状态，当对象销毁之前应该销毁自己创建的一些数据。对象的初始化和清理也是两个非常重要的安全问题，一个对象或者变量没有初始化时，对其使用后果是未知的，同样的使用完一个变量，，没有及时清理，也会造成一定的安全问题。C++为了给我们提供这种问题的解决方案，构造函数和析构函数">
+<meta name="keywords" content="析构函数,构造函数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="构造函数和析构函数">
+<meta property="og:url" content="http://wanqbin.xyz/2019/03/20/函数和析构函数/index.html">
 <meta property="og:site_name" content="Aoki&#39;s Blog">
-<meta property="og:description" content="hitokoto()">
+<meta property="og:description" content="1.初始化和清理  C++中OO思想也是来源于现实，是对现实事物的抽象模拟，具体来说，当我们常见对象的时候，这个对象应该有一个初始状态，当对象销毁之前应该销毁自己创建的一些数据。对象的初始化和清理也是两个非常重要的安全问题，一个对象或者变量没有初始化时，对其使用后果是未知的，同样的使用完一个变量，，没有及时清理，也会造成一定的安全问题。C++为了给我们提供这种问题的解决方案，构造函数和析构函数">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.imgur.com/scjw1sV.png">
+<meta property="og:image" content="https://i.imgur.com/p5CGt8x.png">
+<meta property="og:updated_time" content="2019-06-15T12:26:12.947Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Aoki&#39;s Blog">
-<meta name="twitter:description" content="hitokoto()">
+<meta name="twitter:title" content="构造函数和析构函数">
+<meta name="twitter:description" content="1.初始化和清理  C++中OO思想也是来源于现实，是对现实事物的抽象模拟，具体来说，当我们常见对象的时候，这个对象应该有一个初始状态，当对象销毁之前应该销毁自己创建的一些数据。对象的初始化和清理也是两个非常重要的安全问题，一个对象或者变量没有初始化时，对其使用后果是未知的，同样的使用完一个变量，，没有及时清理，也会造成一定的安全问题。C++为了给我们提供这种问题的解决方案，构造函数和析构函数">
+<meta name="twitter:image" content="https://i.imgur.com/scjw1sV.png">
 
 
 
@@ -175,14 +180,14 @@
 
 
 
-  <link rel="canonical" href="http://wanqbin.xyz/tags/软件建模/">
+  <link rel="canonical" href="http://wanqbin.xyz/2019/03/20/函数和析构函数/">
 
 
 
 
 
 
-  <title>标签: 软件建模 | Aoki's Blog</title>
+  <title>构造函数和析构函数 | Aoki's Blog</title>
   
 
 
@@ -211,7 +216,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -347,52 +352,262 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>软件建模<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://wanqbin.xyz/2019/03/20/函数和析构函数/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Aoki">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aoki's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/06/15/软件建模/" itemprop="url">
-              
-                <span itemprop="name">软件建模</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">构造函数和析构函数</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-06-15T23:46:00+08:00" content="2019-06-15">
-          06-15
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-20T20:23:00+08:00">
+                2019-03-20
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/20/函数和析构函数/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/20/函数和析构函数/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/03/20/函数和析构函数/" class="leancloud_visitors" data-flag-title="构造函数和析构函数">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 阅读数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.1k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<blockquote>
+<h1 id="1-初始化和清理"><a href="#1-初始化和清理" class="headerlink" title="1.初始化和清理"></a>1.初始化和清理</h1></blockquote>
+<hr>
+<p>C++中OO思想也是来源于现实，是对现实事物的抽象模拟，具体来说，当我们常见对象的时候，这个对象应该有一个初始状态，当对象销毁之前应该销毁自己创建的一些数据。<br>对象的初始化和清理也是两个非常重要的安全问题，一个对象或者变量没有初始化时，对其使用后果是未知的，同样的使用完一个变量，，没有及时清理，也会造成一定的安全问题。C++为了给我们提供这种问题的解决方案，构造函数和析构函数。这两个函数将会被编译器自动调用，完成对象初始化和对象清理工作。<br>无论我们是否喜欢这种方式，对象的初始化和清理工作是编译器强制我们必须要做的事情，即使我们不提供初始化操作和清理操作，编译器也会给我们增加默认对的操作，只是这个默认初始化操作不会做任何事，所以编写类就应该顺便提供初始化函数。<br>为什么初始化操作时自动调用而不是手动调用？既然是必然操作，那么自动调用会更好，如果靠我们自觉，那么就会存在遗漏初始化的情况出现。  </p>
+<blockquote>
+<h1 id="2-构造函数"><a href="#2-构造函数" class="headerlink" title="2.构造函数"></a>2.构造函数</h1></blockquote>
+<hr>
+<p>构造函数主要作用在于创建时为对象的成员属性赋值，构造函数由编译器自动调用，无须手动调用。<br><strong>构造函数语法：</strong>  </p>
+<ul>
+<li>构造函数函数名和类名相同，没有返回值，不能有void，但可以有参数。  </li>
+<li><code>ClassName(){}</code></li>
+</ul>
+<blockquote>
+<h1 id="3-析构函数"><a href="#3-析构函数" class="headerlink" title="3.析构函数"></a>3.析构函数</h1></blockquote>
+<hr>
+<p>析构函数主要用于对象销毁前系统自动调用，执行一些清理工作。<br><strong>析构函数语法：</strong>  </p>
+<ul>
+<li>析构函数函数名是类名前面加”~”组成，没有返回值，不能有void，不能有参数，不能重载。  </li>
+<li>~ClassName（）{}  </li>
+</ul>
+<p>下面我举例说明构造函数与析构函数。  </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span>  <span class="title">Person</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	Person()</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"构造函数调用"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	~Person()</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"析构函数调用"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Person p1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	test();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果如下：<br><img src="https://i.imgur.com/scjw1sV.png" alt><br>从输出结果我们可以看出，在创建对象时，构造函数调用。当对象销毁之前，又调用了析构函数。</p>
+<blockquote>
+<h1 id="4-构造函数的分类及调用"><a href="#4-构造函数的分类及调用" class="headerlink" title="4.构造函数的分类及调用"></a>4.构造函数的分类及调用</h1></blockquote>
+<hr>
+<ul>
+<li>按参数类型：分为无参构造函数和有参构造函数  </li>
+<li>按类型分类：分为普通构造函数和拷贝构造函数（复制构造函数）  </li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span>  <span class="title">Person</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	Person()<span class="comment">//默认，无参构造函数</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"默认构造函数调用"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	Person(<span class="keyword">int</span> a)<span class="comment">//有参构造函数调用</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"有参构造函数调用"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//拷贝构造函数</span></span><br><span class="line">	Person(<span class="keyword">const</span> Person&amp; p)</span><br><span class="line">	&#123;</span><br><span class="line">		m_age = p.m_age;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"拷贝构造函数调用"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	~Person()</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"析构函数调用"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	 <span class="keyword">long</span>  m_age;</span><br><span class="line">	 <span class="keyword">static</span> <span class="keyword">int</span> n_age;</span><br><span class="line">	</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> n_age = <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="function">Person <span class="title">p1</span><span class="params">(<span class="number">1</span>)</span></span>;<span class="comment">//有参拷贝构造函数调用</span></span><br><span class="line">	p1.m_age = <span class="number">10</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"p1的年龄为："</span> &lt;&lt; p1.m_age &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="function">Person <span class="title">p2</span><span class="params">(p1)</span></span>;<span class="comment">//拷贝构造函数调用</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"p2的年龄为："</span> &lt;&lt; p2.m_age &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	Person(<span class="number">100</span>);<span class="comment">//匿名对象，当本行代码执行完毕就释放对象</span></span><br><span class="line">	Person p3 = <span class="number">100</span>;<span class="comment">//隐式类型转换，相当于调用了Person p7=Person(100)</span></span><br><span class="line">	Person p4 = p3;<span class="comment">//拷贝构造函数调用，相当于Person p4=Person(p3)</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	test();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果如下：<br><img src="https://i.imgur.com/p5CGt8x.png" alt><br>这里，我们需要注意的是，析构函数和构造函数必须写在public下才可以调用。<br>同时，对于无参构造函数（默认构造）、有参构造函数在创建对象时的调用应当注意。当我们我们没有定义构造函数时，系统会给我们提供一个空的默认构造函数，但是当我们定义了无参构造函数时，系统使用我们的构造函数。除此之外，当我们定义了一个有参构造函数，但是并没有提供无参构造函数时，在创建对象的时候必须使用有参构造。原因是，当我们声明一个有参构造函数之后，系统不再提供默认构造函数。  </p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+  
+</div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/析构函数/" rel="tag"># 析构函数</a>
+          
+            <a href="/tags/构造函数/" rel="tag"># 构造函数</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/19/C语言下的封装和C-语言封装的区别/" rel="next" title="关于C语言下的封装和C++语言封装的区别">
+                <i class="fa fa-chevron-left"></i> 关于C语言下的封装和C++语言封装的区别
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/21/函数重载/" rel="prev" title="函数重载">
+                函数重载 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -400,6 +615,13 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -422,8 +644,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -511,6 +742,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-初始化和清理"><span class="nav-number">1.</span> <span class="nav-text">1.初始化和清理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-构造函数"><span class="nav-number">2.</span> <span class="nav-text">2.构造函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-析构函数"><span class="nav-number">3.</span> <span class="nav-text">3.析构函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-构造函数的分类及调用"><span class="nav-number">4.</span> <span class="nav-text">4.构造函数的分类及调用</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -706,6 +953,10 @@ setInterval("createtime()",250);
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -1220,26 +1471,6 @@ setInterval("createtime()",250);
   
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 
