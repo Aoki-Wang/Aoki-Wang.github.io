@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://wanqbin.xyz/"/>
-  <updated>2019-08-07T12:11:04.076Z</updated>
+  <updated>2019-08-07T13:51:06.335Z</updated>
   <id>http://wanqbin.xyz/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>vim的使用</title>
+    <link href="http://wanqbin.xyz/2019/08/07/vim%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+    <id>http://wanqbin.xyz/2019/08/07/vim的使用/</id>
+    <published>2019-08-07T12:24:00.000Z</published>
+    <updated>2019-08-07T13:51:06.335Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="一、vim"><a href="#一、vim" class="headerlink" title="一、vim"></a>一、vim</h2><p><img src="/2019/08/07/vim的使用/1.PNG" alt="vim"></p><p>&emsp;&emsp;vim是从vi发展出来的一个文本编辑器。代码补全、编译及错误跳转等方便编程的功能特别丰富，在程序员中被广泛使用，和Emacs并列称为类Unix系统用户最喜欢的文本编辑器。</p><p>&emsp;vim的设计理念是命令的组合。用户学习了各种各样的文本间移动/跳转的命令和其他的普通模式的编辑命令，并且能够灵活使用的话，能够比那些没有模式的编辑器是更加高效地进行文本编辑。同时vim与很多快捷键设置和正则表达式类似，可以辅助记忆，并且vim针对程序员做了优化。</p><h2 id="二、vim的使用"><a href="#二、vim的使用" class="headerlink" title="二、vim的使用"></a>二、vim的使用</h2><ol><li><h4 id="光标移动"><a href="#光标移动" class="headerlink" title="光标移动"></a>光标移动</h4></li></ol><table><thead><tr><th>按键</th><th>动作</th></tr></thead><tbody><tr><td>k</td><td>上</td></tr><tr><td>j</td><td>下</td></tr><tr><td>h</td><td>左</td></tr><tr><td>l</td><td>右</td></tr><tr><td>0</td><td>到行首</td></tr><tr><td>shift+4（即$)</td><td>到行尾</td></tr><tr><td>gg</td><td>移动到文件头</td></tr><tr><td>G</td><td>移动到文件尾部</td></tr><tr><td>nG（n为行数）</td><td>移动到某一行</td></tr></tbody></table><ol start="2"><li><h4 id="删除内容"><a href="#删除内容" class="headerlink" title="删除内容"></a>删除内容</h4></li></ol><table><thead><tr><th>按键</th><th>动作</th></tr></thead><tbody><tr><td>x</td><td>删除光标所在字母</td></tr><tr><td>u</td><td>撤销</td></tr><tr><td>X</td><td>删除光标前面的内容</td></tr><tr><td>dw</td><td>从光标删除一个单词</td></tr><tr><td>d0</td><td>删除光标到行首</td></tr><tr><td>D</td><td>删除光标到行尾</td></tr><tr><td>dd</td><td>删除光标所在行</td></tr><tr><td>ndd</td><td>删除光标所在行开始n行</td></tr></tbody></table><ol start="3"><li><h4 id="复制粘贴与可视模式"><a href="#复制粘贴与可视模式" class="headerlink" title="复制粘贴与可视模式"></a>复制粘贴与可视模式</h4></li></ol><table><thead><tr><th>按键</th><th>动作</th></tr></thead><tbody><tr><td>yy</td><td>复制一行内容</td></tr><tr><td>dd</td><td>剪切一方内容</td></tr><tr><td>nyy</td><td>复制n行内容</td></tr><tr><td>p</td><td>粘贴到当前行</td></tr><tr><td>P</td><td>粘贴到上一行</td></tr><tr><td>r</td><td>替换一个字母（输入r之后，再输入一个字母）</td></tr></tbody></table><p>   可视模式：</p><ul><li><p>按v进入可视模式</p></li><li><p>移动光标选中内容</p></li><li><p>按y复制内容</p></li><li><p>移动光标到目的地</p></li><li><p>按p/P将内容粘贴</p></li></ul><ol start="4"><li><h4 id="查找-amp-格式调整-amp-查看"><a href="#查找-amp-格式调整-amp-查看" class="headerlink" title="查找&amp;格式调整&amp;查看"></a>查找&amp;格式调整&amp;查看</h4><p>内容查找：</p><ul><li>/要查找的字符或字符串</li><li>n/N进行遍历，向前或向后</li><li>?要查找的字符或字符串</li><li>光标移动到字符串上，按#也可以查找该字符串</li></ul><p>格式调整：</p><ul><li>gg=G 文件整体调整格式</li><li><code>&gt;&gt;</code>当前光标所在行右移一个Tab</li><li><code>&lt;&lt;</code>光标所在行左移一个Tab</li><li>n<code>&gt;&gt;</code>光标开始n行左移一个Tab</li></ul></li><li><h4 id="从命令模式到编辑模式"><a href="#从命令模式到编辑模式" class="headerlink" title="从命令模式到编辑模式"></a>从命令模式到编辑模式</h4><p>命令模式变为编辑模式：</p><ul><li><code>i</code>在光标前插入</li><li><code>a</code>在光标后插入</li><li><code>I</code>在行首插入</li><li><code>A</code>在行尾插入</li><li><code>o/O</code>在下一行或上一行插入</li><li><code>s</code>删除当前字母，进入插入模式</li><li><code>S</code>删除当前行，进入插入模式</li></ul></li><li><h4 id="末行查找替换与保存退出"><a href="#末行查找替换与保存退出" class="headerlink" title="末行查找替换与保存退出"></a>末行查找替换与保存退出</h4><p>末行模式：</p><ul><li><code>:s/被替换内容/替换内容</code>只替换当前行第一个匹配的“被替换内容”为“替换内容”</li><li><code>:s/被替换内容/替换内容/g</code>替换当前行所有的“被替换类同”为“替换内容”</li><li><code>:%s/被替换内容/替换内容</code>替换所有行的第一个匹配“被替换内容”为“替换内容”</li><li><code>:%s/被替换内容/替换内容/g</code>替换文件内所有的“被替换内容”为“替换内容”</li></ul><p>保存退出：</p><ul><li><code>wq</code>保存退出</li><li><code>:w</code>只保存</li><li><code>:q</code>只退出，文件不能修改</li><li><code>:q!</code>强退，不保存</li><li><code>:x</code>保存退出</li><li><code>ZZ</code>保存退出（命令模式下）</li></ul></li><li><h4 id="分屏"><a href="#分屏" class="headerlink" title="分屏"></a>分屏</h4><p><code>:sp filename</code>横分</p><p><code>:vsp filename</code>竖分</p><p><img src="/2019/08/07/vim的使用/2.PNG" alt="分屏——横分"></p><p><img src="/2019/08/07/vim的使用/3.PNG" alt="分屏——竖分"></p><p>退出：<br><code>:q</code>退出一个文件</p><p><code>:qall</code>全部文件退出</p><p><code>:wqall</code>全部保存退出</p><p>切换屏幕：</p><p>​    Ctrl+w+w</p></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;一、vim&quot;&gt;&lt;a href=&quot;#一、vim&quot; class=&quot;headerlink&quot; title=&quot;一、vim&quot;&gt;&lt;/a&gt;一、vim&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;/2019/08/07/vim的使用/1.PNG&quot; alt=&quot;vim&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&amp;ems
+      
+    
+    </summary>
+    
+      <category term="Linux命令" scheme="http://wanqbin.xyz/categories/Linux%E5%91%BD%E4%BB%A4/"/>
+    
+    
+      <category term="Ubuntu" scheme="http://wanqbin.xyz/tags/Ubuntu/"/>
+    
+      <category term="Linux" scheme="http://wanqbin.xyz/tags/Linux/"/>
+    
+      <category term="Vim" scheme="http://wanqbin.xyz/tags/Vim/"/>
+    
+  </entry>
   
   <entry>
     <title>Linux压缩解压命令及其他命令</title>
@@ -608,33 +638,6 @@
       <category term="二叉树" scheme="http://wanqbin.xyz/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
     
       <category term="数据结构" scheme="http://wanqbin.xyz/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>树</title>
-    <link href="http://wanqbin.xyz/2019/07/30/%E6%A0%91/"/>
-    <id>http://wanqbin.xyz/2019/07/30/树/</id>
-    <published>2019-07-30T10:24:00.000Z</published>
-    <updated>2019-07-30T10:25:32.909Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="一、仿真指针"><a href="#一、仿真指针" class="headerlink" title="一、仿真指针"></a>一、仿真指针</h2><p>&emsp;在链式存储结构中，我们实现数据元素之间的次序关系依靠指针。在使用数据存储数据元素时，我们可在存储数据元素的数组中增加一个或几个数据下标域，这些数据下标域的值表示了该数组中某个数据元素的下标。由于在数据中增加的数据下标域仿真了链式存储结构中的指针域，所以这种存储结构也称为<code>仿真指针</code>。</p><p>&emsp;仿真指针也可英语存储如树和二叉树的非线性结构。当仿真指针用于存储树或二叉树时通常需要一个以上的仿真指针域。</p><h2 id="二、树的定义"><a href="#二、树的定义" class="headerlink" title="二、树的定义"></a>二、树的定义</h2><p>树是由n个有限节点构成的集合。n=0的树为空树，对于n&gt;0的树T有：  </p><ul><li>有一个特殊的节点称为根节点，根节点没有前趋节点  </li><li>当n&gt;1时，除根节点外其他节点被分成m（m&gt;0）个互不相交的集合T1,T2……,Tm。其中，每一个集合Ti本身又是一棵称为根节点的子树的树。  </li></ul><p>&emsp;&emsp;显然，树是递归定义的，即在树的定义中用到了树本身，因此，在包含树结构的算法中将会频繁地出现递归。  </p><h2 id="三、树的常用术语"><a href="#三、树的常用术语" class="headerlink" title="三、树的常用术语"></a>三、树的常用术语</h2><ul><li>结点。在树中通常把数据元素和构造数据元素之间的指针合起来称为结点。</li><li>结点的度。结点所拥有的子树的个数称为该结点的度。</li><li>叶结点。度为0的结点称为叶结点，叶结点也称为终端结点。</li><li>分支结点。度不为0的结点会称为分支结点，分支结点也称为非终端结点。显然，一棵树中除了叶结点外的所有节点都是分支结点。</li><li>孩子结点。树中一个结点的子树的根节点称为这个节点的孩子结点.</li><li>双亲结点。若树中某结点有孩子结点，则该结点就称为它的孩子结点的双亲结点。双亲结点也称为前趋结点。</li><li>兄弟结点。具有相同的双亲结点被称为兄弟结点。</li><li>祖先结点。从根结点到树中某结点经过的所有分支结点被称为该结点的祖先结点。一个树中根结点是该树中所有其他结点的祖先结点。</li><li>子孙结点。某一节点的所有孩子结点，以及这些孩子结点的孩子结点称为该结点的子孙结点。一个树中所有结点都是根结点的子孙结点。</li><li>树的度。树中所有结点的度的最大值称为该树的结点。</li><li>结点的层次。从根结点到树中某结点所经路径上的分支数称为该结点额层次。通常规定根结点的层次为0，这样其他结点的层次就是它的双亲结点的层次加1.</li><li>树的深度。树中所有结点的层次的最大值称为该树的深度。空树的深度规定为0.</li><li>无序树。树中任意一个结点的各个子树之间的次序构成无关紧要，即交换树中任意一个结点的各个子树的次序均和原树相同的树称为无序树。树均定义为无序树。</li><li>有序树。树中任意一个结点的各个子树都是有次序的树称为有序树。二叉树是一种有序树。</li><li>森林。m(m&gt;=0)棵树的集合称为森林。</li></ul><h2 id="四、树的基本操作"><a href="#四、树的基本操作" class="headerlink" title="四、树的基本操作"></a>四、树的基本操作</h2><p>&emsp;&emsp;由于树是非线性结构，节点之间的关系较线性结构复杂得多，所以树的操作也复杂得多。表示一棵树的数据成员一般来说不仅要有树的根节点指针（简称根指针），还应有树的当前操作节点指针（简称当前指针）。当前指针能保证当对树的某个节点操作后，下一次再要对其相邻节点（如该节点的双亲节点或该节点的第一个孩子节点）操作时不至于又从根节点开始查找起。<br>&emsp;&emsp;树的操作主要分为三大类：第一类，寻找满足某种特定关系的节点；第二类，插入或删除某个节点；第三类，遍历树中每个节点。  </p><ol><li>第一类操作。  </li></ol><ul><li>寻找根节点使之成为当前节点</li><li>寻找当前节点的双亲节点使之成为当前节点</li><li>寻找当前节点的第一个孩子节点使之后才能为当前节点</li><li>寻找当前节点的下一个兄弟节点使之成为当前节点<br>这一类操作时树的其他两类操作的基础操作，如插入操作就可设计成在当前节点插入一个新节点。 </li></ul><ol start="2"><li>第二类操作  </li></ol><ul><li>在树的当前节点上插入一个新节点，使新插入节点成为当前节点的第i个孩子节点</li><li>删除树的当前节点的第i个孩子节点</li><li>在树的当前节点上插入一个新子树，使新插入子树称为当前节点的第i棵子树</li><li>删除树的当前节点的第i棵子树  </li></ul><ol start="3"><li>第三类操作</li></ol><ul><li>按某种方式遍历一棵树显示树中每个节点的数据域值  </li><li>按某种方式遍历一棵树寻找数据元素域为某一值的节点  </li></ul><p>&emsp;&emsp;树的遍历操作是指按照某种方式访问树中的每一个节点且每一个节点只被访问一次。对于线性结构，通过for循环或while循环就可访问其中的每一个数据元素且每一个数据元素只被访问一次。但是对于树这种非线性数据结构，for循环和while循环就无法访问树中的每一个节点且每一个节点只被访问一次。树的遍历操作算法主要有先根遍历和后根遍历两种。下面的先根遍历和后根遍历算法都是递归的。  </p><ol><li>先根遍历。先根遍历算法为：  </li></ol><ul><li>访问根节点</li><li>按照从左到右的次序先根遍历根节点的每一棵子树</li></ul><ol start="2"><li>后根遍历。后根遍历算法为：</li></ol><ul><li>按照从左导游的次序后根遍历根节点的每一棵子树</li><li>访问根节点  </li></ul><p>&emsp;&emsp;此外，树的遍历算法还有层序遍历。树的层序遍历是要求按照从根节点至叶节点、从第一棵子树到最后一棵子树的次序访问树的节点。  </p><h2 id="五、树的存储结构"><a href="#五、树的存储结构" class="headerlink" title="五、树的存储结构"></a>五、树的存储结构</h2><p>计算机中树的存储要求既要存储节点的数据元素，又要存储节点之间的逻辑关系。构造节点之间的逻辑关系的方法可用指针或仿真指针。</p><p>1.双亲表示法</p><p>&emsp;&emsp;双亲表示法是用仿真指针结构存储树。具体方法是用一组连续的存储单元（数组）存储树中的所有节点，每个节点有两个域，一个域是数据域，一个域是指示其双亲节点在数组中下标序号的仿真指针域。<br>&emsp;&emsp;双亲表示法的仿真指针也可以改为常规的指针域。双亲表示法对于实现前述的树的基本操作中寻找双亲节点和寻找根节点使它们各自成为当前节点操作很方便，但是对于实现寻找第一个孩子节点和循环下一个兄弟节点使它们各自成为当前节点却很不方便。  </p><p>2.孩子表示法</p><p>&emsp;&emsp;由于树中每个节点的子树个数（即节点的度）不同，如果按照各个节点的度设计变长结构，则每个节点的孩子节点指针域个数增加使算法实现非常麻烦。孩子表示法可按树的度（即树中所有节点度的最大值）设计节点的孩子节点指针域的个数。同样，节点的孩子节点指针域可以是仿真指针，也可以是常规指针。  </p><p>3.双亲孩子表示法  </p><p>&emsp;&emsp;树的存储结构若把双亲表示法和孩子表示法结合起来可使之兼有这两种存储结构的优点。可有许多种结合双亲表示法和孩子表示法的存储结构方法。一种双亲孩子表示法是在仿真指针双亲表示法的基础上，给数组得到每个节点增加一个指向该节点所有孩子节点链表的常规指针。   </p><p>4.孩子兄弟表示法  </p><p>&emsp;&emsp;孩子兄弟表示法是为每个节点设计三个域，一个数据元素域，一个该节点的第一个孩子指针域，一个该节点的下一个兄弟节点指针域。此种孩子兄弟表示法的两个域通常都是常规指针。<br>&emsp;&emsp;由于树的孩子兄弟表示法有两个指针域，并且这两个指针是有序的，所以孩子兄弟表示法是将树转换为二叉树的存储结构。把二叉树转换为二叉树所对应的结构恰好就是这种孩子兄弟表示法结构，所以，孩子兄弟表示法的最大优点是可方便地实现树和二叉树的相互转换。但是，孩子兄弟表示法的缺点也和孩子表示法的缺点一样，就是从当前节点查找双亲节点比较麻烦，需要从树的根节点开始逐个查找。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;一、仿真指针&quot;&gt;&lt;a href=&quot;#一、仿真指针&quot; class=&quot;headerlink&quot; title=&quot;一、仿真指针&quot;&gt;&lt;/a&gt;一、仿真指针&lt;/h2&gt;&lt;p&gt;&amp;emsp;在链式存储结构中，我们实现数据元素之间的次序关系依靠指针。在使用数据存储数据元素时，我们可在存储
-      
-    
-    </summary>
-    
-      <category term="数据结构" scheme="http://wanqbin.xyz/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-    
-      <category term="数据结构" scheme="http://wanqbin.xyz/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-      <category term="树" scheme="http://wanqbin.xyz/tags/%E6%A0%91/"/>
     
   </entry>
   
