@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://wanqbin.xyz/"/>
-  <updated>2019-08-07T08:26:16.332Z</updated>
+  <updated>2019-08-07T11:19:13.674Z</updated>
   <id>http://wanqbin.xyz/</id>
   
   <author>
@@ -17,13 +17,50 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Linux文件搜索命令</title>
+    <link href="http://wanqbin.xyz/2019/08/07/Linux%E6%96%87%E4%BB%B6%E6%90%9C%E7%B4%A2%E5%91%BD%E4%BB%A4/"/>
+    <id>http://wanqbin.xyz/2019/08/07/Linux文件搜索命令/</id>
+    <published>2019-08-07T09:02:00.000Z</published>
+    <updated>2019-08-07T11:19:13.674Z</updated>
+    
+    <content type="html"><![CDATA[<ol><li><p>文件搜索命令：<code>find</code></p><p>注意：搜索会占用大量服务器资源。</p><ul><li><p>命令名称：find</p></li><li><p>命令所在路径：/bin/find</p></li><li><p>执行权限：所有用户</p></li><li><p>语法：find [搜索范围] [匹配条件]</p></li><li><p>执行权限： 所有用户</p></li><li><p>语法：find [文件搜索] [匹配条件]</p></li><li><p>功能描述：文件搜索</p></li></ul><p><code>$find aokis -name cpp</code></p><p>在目录<code>aokis</code>中查找文件<code>cpp</code></p><p><img src="/2019/08/07/Linux文件搜索命令/1.PNG" alt="文件搜索命令"></p><p><code>$find aokis -size +1024</code></p><p>+n代表大于， -n代表小于， n 表示等于</p><p><img src="/2019/08/07/Linux文件搜索命令/2.PNG" alt="文件搜索命令"></p><p><code>$find aokis -user aoki</code></p><p>在目录<code>aokis</code>中查找所有者为<code>aoki</code>的文件</p><p><code>-group</code>为根据所属组查找</p><p><code>$find aokis -cmin -120</code></p><p>在目录aokis下查找120分钟内修改过的文件和目录。</p><p><img src="/2019/08/07/Linux文件搜索命令/4.PNG" alt="文件搜索命令"></p><p><code>-amin</code> 访问时间access</p><p><code>-cmin</code> 文件属性change，改变文件属性的时间</p><p><code>-mmin</code> 文件内modify,文件内容被改变</p><p><code>find aokis -size +0 -a -size -1024</code></p><p>在aokis目录下查找大于0，小于1024的文件</p><p><img src="/2019/08/07/Linux文件搜索命令/5.PNG" alt="文件搜索命令"></p><p><code>-a</code>两个条件同时满足</p><p><code>-o</code>两个条件满足任意一个即可。</p><p><code>$find aokis -name aoki -exec cat {} \;</code></p><p>在aokis下查找aoki文件，并对其进行查看操作</p><p><code>-exec/-ok 命令{}\</code>对搜索结果执行操作</p><p><code>-type</code>根据文件类型查找</p><ul><li><code>-f</code>文件 <code>-d</code>目录  <code>-l</code>软链接文件</li></ul><p><code>-inum</code>根据i结点查找</p><p><img src="/2019/08/07/Linux文件搜索命令/6.PNG" alt="文件搜索命令"></p></li><li><p>文件搜索命令：<code>locate</code></p><ul><li><p>命令名称：locate</p></li><li><p>命令所在路径：/usr/bin/locate</p></li><li><p>执行权限:所有用户</p></li><li><p>语法：locate 文件名</p></li><li><p>功能描述：在文件资料库中查找文件</p></li><li><p>updatedb 更新locate文件资料库</p></li><li><p>注意：</p><ul><li>/tmp临时文件并不在locate的文件资料库中</li><li>locate 严格区分大小写</li><li>locate -i 不严格区分大小写</li></ul></li></ul><p><img src="/2019/08/07/Linux文件搜索命令/7.PNG" alt="文件搜索命令"></p></li><li><p>文件搜索命令：<code>which</code></p><ul><li><p>命令名称：which</p></li><li><p>命令所在路径：/usr/bin/which</p></li><li><p>执行权限：所有用户</p></li><li><p>语法：which 命令</p></li><li><p>功能描述：搜索命令所在目录及别名信息</p></li></ul><p><img src="/2019/08/07/Linux文件搜索命令/8.PNG" alt="文件搜索命令"></p></li><li><p>文件搜索命令：<code>grep</code></p><ul><li><p>命令名称：grep</p></li><li><p>命令所在路径：/bin/grep</p></li><li><p>执行权限：所有用户</p></li><li><p>语法：grep -iv [指定字符串] [文件]</p></li><li><p>功能描述：在文件中搜寻字符串匹配的行并输出</p><p>​                    -i  不区分大小写</p><p>​                    -v  排除指定字串</p><p><img src="/2019/08/07/Linux文件搜索命令/9.PNG" alt="文件搜索命令"></p><p><img src="/2019/08/07/Linux文件搜索命令/10.PNG" alt="文件搜索命令"></p></li></ul></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;ol&gt;
+&lt;li&gt;&lt;p&gt;文件搜索命令：&lt;code&gt;find&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;注意：搜索会占用大量服务器资源。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;命令名称：find&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;命令所在路径：/bin/find&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;执行
+      
+    
+    </summary>
+    
+      <category term="Linux命令" scheme="http://wanqbin.xyz/categories/Linux%E5%91%BD%E4%BB%A4/"/>
+    
+    
+      <category term="Linux命令" scheme="http://wanqbin.xyz/tags/Linux%E5%91%BD%E4%BB%A4/"/>
+    
+      <category term="Ubuntu" scheme="http://wanqbin.xyz/tags/Ubuntu/"/>
+    
+      <category term="Linux文件搜索" scheme="http://wanqbin.xyz/tags/Linux%E6%96%87%E4%BB%B6%E6%90%9C%E7%B4%A2/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Linux链接命令及权限管理命令</title>
     <link href="http://wanqbin.xyz/2019/08/07/Linux%E9%93%BE%E6%8E%A5%E5%91%BD%E4%BB%A4%E5%8F%8A%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4/"/>
     <id>http://wanqbin.xyz/2019/08/07/Linux链接命令及权限管理命令/</id>
     <published>2019-08-07T07:45:00.000Z</published>
     <updated>2019-08-07T08:26:16.332Z</updated>
     
-    <content type="html"><![CDATA[<ol><li><h3 id="文件处理命令：ln"><a href="#文件处理命令：ln" class="headerlink" title="文件处理命令：ln"></a>文件处理命令：<code>ln</code></h3><ul><li><p>命令名称：ln</p></li><li><p>命令英文原意：link</p></li><li><p>命令所在路径：/bin/ln</p></li><li><p>执行权限：所有用户</p></li><li><p>语法：ln -s [原文件] [目标文件]</p><p>​            -s 创建软链接</p></li><li><p>功能描述：生成链接文件</p></li></ul><p><img src="/2019/08/07/Linux链接命令及权限管理命令/1.PNG" alt="链接命令"></p><p>软链接特征：类似于Windos快捷方式</p><ul><li><code>lrwxrwxrwx</code> l代表软链接</li><li>文件大小只是符号链接的大小</li><li>cpp.soft-&gt;aokis/cpp 指向源文件</li></ul><p>硬链接特征：</p><ul><li>相当于执行了‘cp -p’命令，复制了相同属性的文件，且硬链接可以同步更新</li><li>通过i结点识别</li><li>不能跨分区</li><li>不能针对目录使用</li></ul><p><img src="/2019/08/07/Linux链接命令及权限管理命令/2.PNG" alt="硬链接"></p></li><li><h3 id="权限管理命令：chmod"><a href="#权限管理命令：chmod" class="headerlink" title="权限管理命令：chmod"></a>权限管理命令：<code>chmod</code></h3><ul><li>命令名称：chmod</li><li>命令英文原意：<strong>ch</strong>ange the  permissions <strong>mod</strong>e of a file</li><li>命令所在路径：/bin/chmod</li><li>执行权限：所有用户</li><li>语法：chmod  [{ugoa} {+-=} {rwx}] [文件或目录]   a表示所有人   u 表示所有者 g表示所属组  o表示other，其他人</li></ul><p>​            [mode=421] [文件或目录]          </p><p>​            -R 递归修改</p><ul><li><p>功能描述：改变文件或目录权限</p></li><li><p>权限的数字表示：</p><p>r —-4</p><p>w —-2</p><p>x —–l</p><p>rwxrw-r–</p><p>7  6  4</p></li></ul></li></ol><table><thead><tr><th>代表字符</th><th>权限</th><th>对文件的含义</th><th>对目录的含义</th></tr></thead><tbody><tr><td>r</td><td>读权限</td><td>可以查看文件内容</td><td>可以列出目录中的内容</td></tr><tr><td>w</td><td>写权限</td><td>可以修改文件内容</td><td>可以在目录中创建、删除文件</td></tr><tr><td>x</td><td>执行权限</td><td>可以执行文件内容</td><td>可以进入目录</td></tr></tbody></table><p>   <img src="/2019/08/07/Linux链接命令及权限管理命令/3.PNG" alt="权限管理命令"></p><ol start="3"><li><h3 id="权限管理命令：useradd-amp-groupadd"><a href="#权限管理命令：useradd-amp-groupadd" class="headerlink" title="权限管理命令：useradd &amp; groupadd"></a>权限管理命令：<code>useradd &amp; groupadd</code></h3><p>添加用户：<code>useradd</code></p><p><img src="/2019/08/07/Linux链接命令及权限管理命令/4.PNG" alt="添加用户"></p><p>添加结果：</p><p><img src="/2019/08/07/Linux链接命令及权限管理命令/5.PNG" alt="添加结果"></p><p>添加组：</p><p><img src="/2019/08/07/Linux链接命令及权限管理命令/6.PNG" alt="添加组"></p></li><li><h3 id="权限管理命令：chown"><a href="#权限管理命令：chown" class="headerlink" title="权限管理命令：chown"></a>权限管理命令：<code>chown</code></h3><ul><li><p>权限管理命令：chown</p></li><li><p>命令名称：chown</p></li><li><p>命令英文原意：change  owership file</p></li><li><p>命令所在路径：/bin/chown</p></li><li><p>执行权限：所有用户</p></li><li><p>语法：chown [用户] [文件或目录]</p></li><li><p>功能描述：改变文件或目录的所有者</p></li></ul><p><img src="/2019/08/07/Linux链接命令及权限管理命令/7.PNG" alt="权限管理命令"></p></li><li><h3 id="权限管理命令：chgrp"><a href="#权限管理命令：chgrp" class="headerlink" title="权限管理命令：chgrp"></a>权限管理命令：<code>chgrp</code></h3><ul><li><p>权限管理命令：chgrp</p></li><li><p>命令名称：chgrp</p></li><li><p>命令英文原意：change file group ownership</p></li><li><p>命令所在路径：/bin/chgrp</p></li><li><p>执行权限：所有用户</p></li><li><p>语法：chgrp [用户组] [文件或目录]</p></li><li><p>功能描述：改变文件或目录的所属组</p></li></ul><p><img src="/2019/08/07/Linux链接命令及权限管理命令/8.PNG" alt="权限管理命令"></p></li></ol>]]></content>
+    <content type="html"><![CDATA[<ol><li><h3 id="文件处理命令：ln"><a href="#文件处理命令：ln" class="headerlink" title="文件处理命令：ln"></a>文件处理命令：<code>ln</code></h3><ul><li><p>命令名称：ln</p></li><li><p>命令英文原意：link</p></li><li><p>命令所在路径：/bin/ln</p></li><li><p>执行权限：所有用户</p></li><li><p>语法：ln -s [原文件] [目标文件]</p><p>​            -s 创建软链接</p></li><li><p>功能描述：生成链接文件</p></li></ul><p><img src="/2019/08/07/Linux链接命令及权限管理命令/1.PNG" alt="链接命令"></p><p>软链接特征：类似于Windos快捷方式</p><ul><li><code>lrwxrwxrwx</code> l代表软链接</li><li>文件大小只是符号链接的大小</li><li>cpp.soft-&gt;aokis/cpp 指向源文件</li></ul><p>硬链接特征：</p><ul><li>相当于执行了‘cp -p’命令，复制了相同属性的文件，且硬链接可以同步更新</li><li>通过i结点识别</li><li>不能跨分区</li><li>不能针对目录使用</li></ul><p><img src="/2019/08/07/Linux链接命令及权限管理命令/2.PNG" alt="硬链接"></p></li><li><h3 id="权限管理命令：chmod"><a href="#权限管理命令：chmod" class="headerlink" title="权限管理命令：chmod"></a>权限管理命令：<code>chmod</code></h3><ul><li>命令名称：chmod</li><li>命令英文原意：<strong>ch</strong>ange the  permissions <strong>mod</strong>e of a file</li><li>命令所在路径：/bin/chmod</li><li>执行权限：所有用户</li><li>语法：chmod  [{ugoa} {+-=} {rwx}] [文件或目录]   a表示所有人   u 表示所有者 g表示所属组  o表示other，其他人</li></ul><p>​            [mode=421] [文件或目录]          </p><p>​            -R 递归修改</p><ul><li><p>功能描述：改变文件或目录权限</p></li><li><p>权限的数字表示：</p><p>r ——4</p><p>w ——2</p><p>x ——-l</p><p>rwxrw-r—</p><p>7  6  4</p></li></ul></li></ol><div class="table-container"><table><thead><tr><th>代表字符</th><th>权限</th><th>对文件的含义</th><th>对目录的含义</th></tr></thead><tbody><tr><td>r</td><td>读权限</td><td>可以查看文件内容</td><td>可以列出目录中的内容</td></tr><tr><td>w</td><td>写权限</td><td>可以修改文件内容</td><td>可以在目录中创建、删除文件</td></tr><tr><td>x</td><td>执行权限</td><td>可以执行文件内容</td><td>可以进入目录</td></tr></tbody></table></div><p>   <img src="/2019/08/07/Linux链接命令及权限管理命令/3.PNG" alt="权限管理命令"></p><ol><li><h3 id="权限管理命令：useradd-amp-groupadd"><a href="#权限管理命令：useradd-amp-groupadd" class="headerlink" title="权限管理命令：useradd &amp; groupadd"></a>权限管理命令：<code>useradd &amp; groupadd</code></h3><p>添加用户：<code>useradd</code></p><p><img src="/2019/08/07/Linux链接命令及权限管理命令/4.PNG" alt="添加用户"></p><p>添加结果：</p><p><img src="/2019/08/07/Linux链接命令及权限管理命令/5.PNG" alt="添加结果"></p><p>添加组：</p><p><img src="/2019/08/07/Linux链接命令及权限管理命令/6.PNG" alt="添加组"></p></li><li><h3 id="权限管理命令：chown"><a href="#权限管理命令：chown" class="headerlink" title="权限管理命令：chown"></a>权限管理命令：<code>chown</code></h3><ul><li><p>权限管理命令：chown</p></li><li><p>命令名称：chown</p></li><li><p>命令英文原意：change  owership file</p></li><li><p>命令所在路径：/bin/chown</p></li><li><p>执行权限：所有用户</p></li><li><p>语法：chown [用户] [文件或目录]</p></li><li><p>功能描述：改变文件或目录的所有者</p></li></ul><p><img src="/2019/08/07/Linux链接命令及权限管理命令/7.PNG" alt="权限管理命令"></p></li><li><h3 id="权限管理命令：chgrp"><a href="#权限管理命令：chgrp" class="headerlink" title="权限管理命令：chgrp"></a>权限管理命令：<code>chgrp</code></h3><ul><li><p>权限管理命令：chgrp</p></li><li><p>命令名称：chgrp</p></li><li><p>命令英文原意：change file group ownership</p></li><li><p>命令所在路径：/bin/chgrp</p></li><li><p>执行权限：所有用户</p></li><li><p>语法：chgrp [用户组] [文件或目录]</p></li><li><p>功能描述：改变文件或目录的所属组</p></li></ul><p><img src="/2019/08/07/Linux链接命令及权限管理命令/8.PNG" alt="权限管理命令"></p></li></ol>]]></content>
     
     <summary type="html">
     
@@ -354,11 +391,11 @@
     
       <category term="C++" scheme="http://wanqbin.xyz/tags/C/"/>
     
+      <category term="排序" scheme="http://wanqbin.xyz/tags/%E6%8E%92%E5%BA%8F/"/>
+    
       <category term="冒泡排序" scheme="http://wanqbin.xyz/tags/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/"/>
     
       <category term="快速排序" scheme="http://wanqbin.xyz/tags/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/"/>
-    
-      <category term="排序" scheme="http://wanqbin.xyz/tags/%E6%8E%92%E5%BA%8F/"/>
     
   </entry>
   
@@ -588,38 +625,6 @@
       <category term="C++" scheme="http://wanqbin.xyz/tags/C/"/>
     
       <category term="继承" scheme="http://wanqbin.xyz/tags/%E7%BB%A7%E6%89%BF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>stack和queue</title>
-    <link href="http://wanqbin.xyz/2019/07/29/stack%E5%92%8Cqueue/"/>
-    <id>http://wanqbin.xyz/2019/07/29/stack和queue/</id>
-    <published>2019-07-29T00:07:00.000Z</published>
-    <updated>2019-07-30T02:49:45.692Z</updated>
-    
-    <content type="html"><![CDATA[<h2>  <center>stack</center>  </h2><p>一、stack概述</p><p>&emsp;stack是一种先进后出（First In Last Out，FILO)的数据结构，它只有一个出口。stack允许新增元素、移除元素、取得最顶端元素。但是除了最顶端外，没有任何其他方法可以存取其他元素，换言之，stack不允许有遍历行为。</p><p>二、stack没有迭代器</p><p>&emsp;stack所有元素的进出都必须符合“先进后出”的条件，只有stack顶端的元素才有机会被外界取用。stack不提供遍历功能，也不提供迭代器。</p><p>三、stack常用API</p><ul><li>栈顶top</li><li>压栈push</li><li>栈顶弹出pop</li><li>大小 size</li><li>是否empty</li></ul><p>示例：</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">stest</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt;istack;</span><br><span class="line"><span class="keyword">if</span> (istack.empty())</span><br><span class="line">&#123;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"stack为空!"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"stack的大小为："</span> &lt;&lt; istack.size() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">&#123;</span><br><span class="line">istack.push(i);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"stack的大小为："</span> &lt;&lt; istack.size() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"stack的栈顶元素为："</span> &lt;&lt; istack.top() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"弹出栈顶元素后:"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">istack.pop();</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"stack的大小为："</span> &lt;&lt; istack.size() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"stack的栈顶元素为："</span> &lt;&lt; istack.top() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>输出结果：</p><p><img src="/2019/07/29/stack和queue/stest.PNG" alt="stack常用API"></p><h2><center>queue</center></h2><p>一、queue概述</p><p>&emsp;queue是一种先进先出（First In First Out，FIFO）的数据结构。它有两个出口。queue允许新增元素、移除元素、从最低端加入元素、取得最顶端元素。但除了最底端可以加入、最顶端可以取出外，没有任何办法可以存取queue的其他元素。换言之，queue不允许有遍历行为。</p><p>二、queue没有迭代器</p><p>&emsp;queue所有元素的进出都必须符合“先进先出“的条件，只有queue顶端的元素，才有机会被外界取用。queue不提供遍历功能，也不提供迭代器。</p><p>三、queue常用API</p><ul><li>先进先出</li><li>队头front 队尾back</li><li>入队 push</li><li>弹出队头 pop</li><li>大小 size</li><li>为空 empty</li></ul><p>示例:</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">qtest</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt;iqueue;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">&#123;</span><br><span class="line">iqueue.push(i);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"队头为："</span> &lt;&lt; iqueue.front() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"队尾为："</span> &lt;&lt; iqueue.back() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"iqueue的大小为："</span> &lt;&lt; iqueue.size() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">iqueue.pop();</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"弹出队头后："</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"队头为："</span> &lt;&lt; iqueue.front() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"队尾为："</span> &lt;&lt; iqueue.back() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"iqueue的大小为："</span> &lt;&lt; iqueue.size() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>输出结果：</p><p><img src="/2019/07/29/stack和queue/qtest.PNG" alt="queue常用API"></p><p>四、源码地址</p><p>​        <a href="https://github.com/Aoki-Wang/CheckStation/tree/master/STL/stack%20and%20queue" target="_blank" rel="noopener">stack and queue示例源码</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2&gt;
-  &lt;center&gt;stack&lt;/center&gt;  
-&lt;/h2&gt;
-
-&lt;p&gt;一、stack概述&lt;/p&gt;
-&lt;p&gt;&amp;emsp;stack是一种先进后出（First In Last Out，FILO)的数据结构，它只有一个出口。stack允许新增元素、移除元素、取得最顶端元素。
-      
-    
-    </summary>
-    
-      <category term="STL" scheme="http://wanqbin.xyz/categories/STL/"/>
-    
-    
-      <category term="STL" scheme="http://wanqbin.xyz/tags/STL/"/>
-    
-      <category term="stack" scheme="http://wanqbin.xyz/tags/stack/"/>
     
   </entry>
   

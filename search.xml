@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Linux文件搜索命令]]></title>
+    <url>%2F2019%2F08%2F07%2FLinux%E6%96%87%E4%BB%B6%E6%90%9C%E7%B4%A2%E5%91%BD%E4%BB%A4%2F</url>
+    <content type="text"><![CDATA[文件搜索命令：find 注意：搜索会占用大量服务器资源。 命令名称：find 命令所在路径：/bin/find 执行权限：所有用户 语法：find [搜索范围] [匹配条件] 执行权限： 所有用户 语法：find [文件搜索] [匹配条件] 功能描述：文件搜索 $find aokis -name cpp 在目录aokis中查找文件cpp $find aokis -size +1024 +n代表大于， -n代表小于， n 表示等于 $find aokis -user aoki 在目录aokis中查找所有者为aoki的文件 -group为根据所属组查找 $find aokis -cmin -120 在目录aokis下查找120分钟内修改过的文件和目录。 -amin 访问时间access -cmin 文件属性change，改变文件属性的时间 -mmin 文件内modify,文件内容被改变 find aokis -size +0 -a -size -1024 在aokis目录下查找大于0，小于1024的文件 -a两个条件同时满足 -o两个条件满足任意一个即可。 $find aokis -name aoki -exec cat {} \; 在aokis下查找aoki文件，并对其进行查看操作 -exec/-ok 命令{}\对搜索结果执行操作 -type根据文件类型查找 -f文件 -d目录 -l软链接文件 -inum根据i结点查找 文件搜索命令：locate 命令名称：locate 命令所在路径：/usr/bin/locate 执行权限:所有用户 语法：locate 文件名 功能描述：在文件资料库中查找文件 updatedb 更新locate文件资料库 注意： /tmp临时文件并不在locate的文件资料库中 locate 严格区分大小写 locate -i 不严格区分大小写 文件搜索命令：which 命令名称：which 命令所在路径：/usr/bin/which 执行权限：所有用户 语法：which 命令 功能描述：搜索命令所在目录及别名信息 文件搜索命令：grep 命令名称：grep 命令所在路径：/bin/grep 执行权限：所有用户 语法：grep -iv [指定字符串] [文件] 功能描述：在文件中搜寻字符串匹配的行并输出 ​ -i 不区分大小写 ​ -v 排除指定字串]]></content>
+      <categories>
+        <category>Linux命令</category>
+      </categories>
+      <tags>
+        <tag>Linux命令</tag>
+        <tag>Ubuntu</tag>
+        <tag>Linux文件搜索</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Linux链接命令及权限管理命令]]></title>
     <url>%2F2019%2F08%2F07%2FLinux%E9%93%BE%E6%8E%A5%E5%91%BD%E4%BB%A4%E5%8F%8A%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4%2F</url>
-    <content type="text"><![CDATA[文件处理命令：ln 命令名称：ln 命令英文原意：link 命令所在路径：/bin/ln 执行权限：所有用户 语法：ln -s [原文件] [目标文件] ​ -s 创建软链接 功能描述：生成链接文件 软链接特征：类似于Windos快捷方式 lrwxrwxrwx l代表软链接 文件大小只是符号链接的大小 cpp.soft-&gt;aokis/cpp 指向源文件 硬链接特征： 相当于执行了‘cp -p’命令，复制了相同属性的文件，且硬链接可以同步更新 通过i结点识别 不能跨分区 不能针对目录使用 权限管理命令：chmod 命令名称：chmod 命令英文原意：change the permissions mode of a file 命令所在路径：/bin/chmod 执行权限：所有用户 语法：chmod [{ugoa} {+-=} {rwx}] [文件或目录] a表示所有人 u 表示所有者 g表示所属组 o表示other，其他人 ​ [mode=421] [文件或目录] ​ -R 递归修改 功能描述：改变文件或目录权限 权限的数字表示： r —-4 w —-2 x —–l rwxrw-r– 7 6 4 代表字符 权限 对文件的含义 对目录的含义 r 读权限 可以查看文件内容 可以列出目录中的内容 w 写权限 可以修改文件内容 可以在目录中创建、删除文件 x 执行权限 可以执行文件内容 可以进入目录 权限管理命令：useradd &amp; groupadd添加用户：useradd 添加结果： 添加组： 权限管理命令：chown 权限管理命令：chown 命令名称：chown 命令英文原意：change owership file 命令所在路径：/bin/chown 执行权限：所有用户 语法：chown [用户] [文件或目录] 功能描述：改变文件或目录的所有者 权限管理命令：chgrp 权限管理命令：chgrp 命令名称：chgrp 命令英文原意：change file group ownership 命令所在路径：/bin/chgrp 执行权限：所有用户 语法：chgrp [用户组] [文件或目录] 功能描述：改变文件或目录的所属组]]></content>
+    <content type="text"><![CDATA[文件处理命令：ln 命令名称：ln 命令英文原意：link 命令所在路径：/bin/ln 执行权限：所有用户 语法：ln -s [原文件] [目标文件] ​ -s 创建软链接 功能描述：生成链接文件 软链接特征：类似于Windos快捷方式 lrwxrwxrwx l代表软链接 文件大小只是符号链接的大小 cpp.soft-&gt;aokis/cpp 指向源文件 硬链接特征： 相当于执行了‘cp -p’命令，复制了相同属性的文件，且硬链接可以同步更新 通过i结点识别 不能跨分区 不能针对目录使用 权限管理命令：chmod 命令名称：chmod 命令英文原意：change the permissions mode of a file 命令所在路径：/bin/chmod 执行权限：所有用户 语法：chmod [{ugoa} {+-=} {rwx}] [文件或目录] a表示所有人 u 表示所有者 g表示所属组 o表示other，其他人 ​ [mode=421] [文件或目录] ​ -R 递归修改 功能描述：改变文件或目录权限 权限的数字表示： r ——4 w ——2 x ——-l rwxrw-r— 7 6 4 代表字符 权限 对文件的含义 对目录的含义 r 读权限 可以查看文件内容 可以列出目录中的内容 w 写权限 可以修改文件内容 可以在目录中创建、删除文件 x 执行权限 可以执行文件内容 可以进入目录 权限管理命令：useradd &amp; groupadd添加用户：useradd 添加结果： 添加组： 权限管理命令：chown 权限管理命令：chown 命令名称：chown 命令英文原意：change owership file 命令所在路径：/bin/chown 执行权限：所有用户 语法：chown [用户] [文件或目录] 功能描述：改变文件或目录的所有者 权限管理命令：chgrp 权限管理命令：chgrp 命令名称：chgrp 命令英文原意：change file group ownership 命令所在路径：/bin/chgrp 执行权限：所有用户 语法：chgrp [用户组] [文件或目录] 功能描述：改变文件或目录的所属组]]></content>
       <categories>
         <category>Linux命令</category>
       </categories>
@@ -148,9 +161,9 @@
       </categories>
       <tags>
         <tag>C++</tag>
+        <tag>排序</tag>
         <tag>冒泡排序</tag>
         <tag>快速排序</tag>
-        <tag>排序</tag>
       </tags>
   </entry>
   <entry>
