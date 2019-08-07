@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+      
+    
+    
+      
+    
+  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+  <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-flash.min.css" rel="stylesheet">
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+      app_id: "81e314d5"
+    });
+  daovoice('update');
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="https://fonts.loli.net/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="操作系统,Linux进程调度,内核调度器,内核调度算法,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、调度原理&amp;emsp;&amp;emsp;调度程序是内核的组成部分，它负责选择下一个要运行的进程。进程调度器可以看做是为处于就绪态的所有进程分配有限的处理器时间资源的内核子系统。在多任务的操作系统中，进程调度是一个全局性的关键的问题，它对系统的总体设计、系统的实现、功能设置以及各方面的性能都有着决定性的影响，是多任务操作系统的基础，只有通过调度程序的合理调度，系统资源才能最大限度地发挥作用，多任务才会有">
+<meta name="keywords" content="操作系统,Linux进程调度,内核调度器,内核调度算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux进程调度——内核调度概述">
+<meta property="og:url" content="http://wanqbin.xyz/2019/08/07/Linux进程调度——内核调度概述/index.html">
+<meta property="og:site_name" content="Aoki&#39;s Blog">
+<meta property="og:description" content="一、调度原理&amp;emsp;&amp;emsp;调度程序是内核的组成部分，它负责选择下一个要运行的进程。进程调度器可以看做是为处于就绪态的所有进程分配有限的处理器时间资源的内核子系统。在多任务的操作系统中，进程调度是一个全局性的关键的问题，它对系统的总体设计、系统的实现、功能设置以及各方面的性能都有着决定性的影响，是多任务操作系统的基础，只有通过调度程序的合理调度，系统资源才能最大限度地发挥作用，多任务才会有">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-07T15:32:17.962Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux进程调度——内核调度概述">
+<meta name="twitter:description" content="一、调度原理&amp;emsp;&amp;emsp;调度程序是内核的组成部分，它负责选择下一个要运行的进程。进程调度器可以看做是为处于就绪态的所有进程分配有限的处理器时间资源的内核子系统。在多任务的操作系统中，进程调度是一个全局性的关键的问题，它对系统的总体设计、系统的实现、功能设置以及各方面的性能都有着决定性的影响，是多任务操作系统的基础，只有通过调度程序的合理调度，系统资源才能最大限度地发挥作用，多任务才会有">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":18,"b2t":true,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://wanqbin.xyz/2019/08/07/Linux进程调度——内核调度概述/">
+
+
+
+
+
+
+  <title>Linux进程调度——内核调度概述 | Aoki's Blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?2fc5164c1572845ef380a7474dbcddf8";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Aoki's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">“吾生也有涯，而知无涯”</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://wanqbin.xyz/2019/08/07/Linux进程调度——内核调度概述/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Aoki">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aoki's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linux进程调度——内核调度概述</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-07T23:31:00+08:00">
+                2019-08-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux内核/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux内核</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/08/07/Linux进程调度——内核调度概述/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/07/Linux进程调度——内核调度概述/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/08/07/Linux进程调度——内核调度概述/" class="leancloud_visitors" data-flag-title="Linux进程调度——内核调度概述">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 阅读数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3.4k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一、调度原理"><a href="#一、调度原理" class="headerlink" title="一、调度原理"></a>一、调度原理</h2><p>&emsp;&emsp;调度程序是内核的组成部分，它负责选择下一个要运行的进程。进程调度器可以看做是为处于就绪态的所有进程分配有限的处理器时间资源的内核子系统。在多任务的操作系统中，进程调度是一个全局性的关键的问题，它对系统的总体设计、系统的实现、功能设置以及各方面的性能都有着决定性的影响，是多任务操作系统的基础，只有通过调度程序的合理调度，系统资源才能最大限度地发挥作用，多任务才会有并发执行的效果。</p>
+<p>&emsp;&emsp;调度程序的主要目标是：最大限度地利用处理器时间，同时要保证进程之间的公平性，使系统中的所有进程都有机会执行。为了满足这些目标，在设计进程调度程序时，应该考虑以下三个方面：</p>
+<ul>
+<li>调度时机：什么时候，什么情况下进行程序调度</li>
+<li>调度策略：使用什么样的策略来选择下一个进入运行的进程</li>
+<li>调度的方式：是抢占式还是非抢占式。当由调度程序来决定什么时候停止一个进程的执行，以便让其他程序能够得到执行机会时，这种强制挂起进程的动作称为抢占式。</li>
+</ul>
+<p>&emsp;进程调度器的设计，对系统的复杂性有着极大的影响，常常会由于调度器实现过于复杂而需要在功能与性能方面做出必要的权衡和让步。一个好的操作系统调度算法要兼顾三种不同应用的需要。</p>
+<ol>
+<li>交互式进程:在这种应用中，着重于系统的响应速度，使共用一个系统的各个用户都能感觉到自己是在独占地使用一个系统。特别是，当系统中有大量进程共存时，需要能保证每个交互式进程都有可接受的响应速度而使每个用户感觉不到明显的延时。</li>
+<li>批处理进程：批处理进程往往是作为“后台作业”运行的，所以对响应速度并无要求，但是完成一个作业所要的时间仍是一个重要的因素，主要考虑“平均速度”。</li>
+<li>实时进程：这是时间性最强的一类进程，不但要考虑进程执行的平均速度，还要考虑“即时速度”；不但要考虑响应速度，还要考虑有关程序能否在规定时间内执行完毕。</li>
+</ol>
+<h2 id="二、Linux调度器的发展"><a href="#二、Linux调度器的发展" class="headerlink" title="二、Linux调度器的发展"></a>二、Linux调度器的发展</h2><ol>
+<li><h3 id="Linux2-4内核的调度器"><a href="#Linux2-4内核的调度器" class="headerlink" title="Linux2.4内核的调度器"></a>Linux2.4内核的调度器</h3><p>&emsp;&emsp;Linux2.4中使用的调度器采用基于优先级的设计。该调度器的<code>pick_next</code>算法非常简单：对运行队列<code>runqueue</code>中所有进程优先级依次进行比较，选择最高优先级的进程作为下一个被调度的进程。</p>
+<p>&emsp;&emsp;每个进程被创建时都被赋予一个时间片。时钟中断则递减当前运行进程的时间片，当进程的时间片被用完时，它必须等待重新赋予时间片才能有机会运行。Linux2.4调度器保证只有当所有处于<code>RUNNING</code>状态的进程的时间片都被用完之后，才对所有进程重新分配时间片。这种设计保证了每个进程都有机会得到执行。</p>
+<p>&emsp;&emsp;对于实时进程，调度器将实时进程的优先级静态设定，而且始终大于普通进程的优先级。因此只有当<code>runqueue</code>队列中没有实时进程存在的情况下，普通进程才能够得到调度，获得处理器时间。在Linux内核，实时进程采用两种调度策略：<code>SCHED_FIFO</code>和<code>SCHED_RR</code>。FIFO调度采用先进先出的策略，对于所有相同优先级的进程，最先进入<code>runqueue</code>队列的进程总能优先获得调度；<code>SCHED_RR</code>调度采用更加公平的轮转策略，使得相同优先级的实时进程能够轮流得到执行。</p>
+<p>&emsp;&emsp;对于普通进程，调度器倾向于提高交互式进程的优先级，因为它们需要快速地用户响应。普通进程的优先级主要由进程描述符中的<code>counter</code>字段决定。进程被创建时子进程的<code>counter</code>值为父进程<code>counter</code>值的一半，这样保证了任何进程不能依靠不断的调用<code>fork()</code>函数创建子进程从而获得更多的执行机会。Linux2.4调度器在提高交互式进程的优先级时，做了如下工作：当所有<code>RUNNING</code>状态进程的时间片被用完之后，将重新计算所有进程的<code>counter</code>值，所有进程不仅包括<code>RUNNING</code>进程，也包括处于睡眠状态的进程。处于睡眠状态的进程的<code>counter</code>本来就没有用完，在重新计算时，它们的<code>counter</code>值会加上这些原来未用完的部分，从而提高了它们的优先级。交互式进程经常因为等待用户输入而处于睡眠状态，当它们重新被唤醒并进入<code>runqueue</code>队列时，就会优于其他进程而获得CPU。从用户的角度来看，交互式进程的响应速度就提高了。</p>
+<p>&emsp;&emsp;这种调度的主要不足在于：</p>
+<p>（1）可扩展性不好：调度器选择进程时需要遍历整个<code>runqueue</code>队列，从中选出最佳调度进程，因此该算法的执行时间与进程数成正比。另外每次重新计算<code>counter</code>所花费的时间也会随着系统中进程数的增加而线性增长，当进程数很大时，更新<code>counter</code>操作的代价会非常高，导致系统整体的性能下降。</p>
+<p>（2）高负载系统上的调度性能比较低：Linux2.4的调度器预分配给每个进程的时间片比较大，因此在高负载的服务器上，该调度器的效率比较低，因为平均每个进程的等待时间与该时间片的大小成正比。</p>
+<p>（3）交互式进程的优化并不完善：Linux2.4识别交互式进程的原理基于如下假设：即交互式进程比批处理进程更频繁地处于阻塞状态。然而现实情况往往并非如此，有些批处理进程虽然没有用户交互，但是也会频繁地进行I/O操作，比如一个数据库引擎在处理查询时会经常地进行磁盘I/O，虽然它们并不需要快速的用户响应，还是被提高了优先级。当系统中这类进程的负载较重时，会影响真正的交互式进程的响应时间。</p>
+<p>（4）对实时进程的支持不够：Linux2.4内核是非抢占的，当进程处于内核态时不会发生抢占，这对于真正的实时应用是不能接受的。</p>
+</li>
+<li><h3 id="Linux2-6内核的O-1-调度器"><a href="#Linux2-6内核的O-1-调度器" class="headerlink" title="Linux2.6内核的O(1)调度器"></a>Linux2.6内核的O(1)调度器</h3><p>&emsp;&emsp;O(1)调度算法所花费的时间为常数，与当前系统中的进程个数无关。此外Linux2.6内核支持内核抢占，因此更好地支持了实时进程。相比于前任，O(1)调度器还更好地区分了交互式进程和批处理式进程。</p>
+<p>&emsp;&emsp;Linux2.6内核也支持三种调度策略：<code>SCHED_NORMAL</code>、<code>SCHED_FIFO</code>、<code>SHCED_RR</code>。其中，<code>SCHED_FIFO</code>和<code>SCHED_RR</code>用于实时进程，而<code>SCHED_NORMAL</code>用于普通进程。O(1)调度器在两个方面修改了Linux2.4调度器，一是进程优先级的计算方法，二是<code>pick_next</code>算法。</p>
+<p>&emsp;&emsp;（1）优先级计算方法</p>
+<p>&emsp;&emsp;普通进程优先级是动态计算的，计算公式中包含了静态优先级。一般来讲，静态优先级越高，进程所能分配到的时间片越长，用户可通过<code>nice</code>系统调用修改进程的静态优先级。动态优先级由下面的公式计算得出。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dynamic_priority=max(<span class="number">100</span>,min(<span class="keyword">static</span> prority-bonus+<span class="number">5139</span>))</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;其中，<code>bouns</code>取决于进程的平均睡眠时间。平均睡眠时间越长，其<code>bouns</code>越大，从而得到更高的优先级。</p>
+<p>&emsp;&emsp;实时进程的优先级由系统调用<code>sys_sched_setschedule()</code>设置。该值不会动态修改，而且总是比普通进程的优先级高。在进程描述符中用<code>rt_prioriity</code>域表示。</p>
+<p>&emsp;&emsp;(2)<code>pick_next</code>算法</p>
+<p>&emsp;&emsp;普通进程的调度选择算法基于进程优先级，拥有最高优先级的进程被调度器选中。在Linux2.4内核中，时间片<code>counter</code>同时也表示了一个进程的优先级。Linux2.6中的时间片用任务描述符中的<code>time_slice</code>域表示，而优先级用<code>prio(普通进程)</code>或者<code>rt_priority（实时进程）</code>表示。</p>
+<p>&emsp;&emsp;调度器为每个CPU维护了两个进程队列数组：<code>active</code>数组（时间片未耗尽的进程队列）和<code>expire</code>数组（时间片以耗尽的进程队列）。数组中的元素保存某一优先级的进程队列指针。系统一共有140个不同的优先级，因此这两个数组大小都是140。当需要选择最高优先级进程时，Linux2.6内核的调度器不用遍历整个<code>runqueue</code>，而是直接从<code>active</code>数组中选择当前最高优先级队列中的第一个进程。</p>
+<p>&emsp;&emsp;为了实现上述算法，<code>active</code>数组维护了一个<code>bitmap</code>位图，当某个优先级别上有进程被插入列表时，相应的比特位就被置位。<code>sched_find_first_bit()</code>函数查询位图bitmap，返回当前被置位的最高优先级的数组下标。</p>
+<p>&emsp;&emsp;为了二提高交互式进程的响应时间，O(1)调度器不仅动态地提高该类进程的优先级，还采用以下方法。</p>
+<p>&emsp;&emsp;在每次时钟<code>tick</code>中断时，进程的时间片(time_slice)被减1。当time_slice为0时，调度器判断当前进程的类型，如果是交互式进程或者实时进程，则重置时间片并重新插入<code>active</code>数组。如果不是交互式进程则从<code>active</code>数组中移到<code>expired</code>数组。这样实时进程和交互式进程就总能获得CPU。然而这些进程不能始终留在<code>active</code>数组，否则进入<code>expire</code>数组的进程就会产生饥饿现象。当进程已经占用CPU的时间超过一个固定值后，即使它是交互式进程或实时进程也会被移到<code>expire</code>数组中。</p>
+<p>&emsp;&emsp;当<code>active</code>数组中的所有进程都被移到<code>expire</code>数组中后，调度器就会交换<code>active</code>数组和<code>expire</code>数组。当进程被调度器移入<code>active</code>数组中时，调度器会重置其时间片，因此新的<code>active</code>数组又恢复了初始情况，而<code>expire</code>数组为空，从而开始新的一轮调度。</p>
+<p>&emsp;&emsp;这种调度器的主要不足是：</p>
+<p>&emsp;&emsp;O(1)调度器群交互式进程和批处理进程的算法与以前虽大有改进，但是仍然在很多情况下会失效。有一些著名的程序总能让该调度器性能下降，导致交互式进程反应缓慢。</p>
+</li>
+</ol>
+<h2 id="三、CFS调度器"><a href="#三、CFS调度器" class="headerlink" title="三、CFS调度器"></a>三、CFS调度器</h2><p>&emsp;&emsp;CFS(Completely Fair Scheduler)即“完全公平调度”，是一个新的进程调度器。</p>
+<p>&emsp;&emsp;CFS的设计思想可以用一句话概括：CFS建立了一个调度模型，在实际的硬件上模拟出一个理想的、精确的多任务CPU。理想的多任务CPU即是要发挥实际CPU100%的能量，在CPU上并行地执行每个任务，且任务的执行速度相同，即1/nr_running。例如，假如系统中有两个任务在执行，则每个任务并行化地占有50%的资源，但是在实际的硬件条件下，每时每刻都只能有一个任务运行，为此引入了虚拟运行时间（vruntime)。一个任务的虚拟运行时间用来表示任务已经获得的CPU时间。CFS根据vruntime的值来选择下一个需要运行的任务。</p>
+<p>&emsp;&emsp;与O(1)调度器相比，具有以下特点：</p>
+<p>（1）CFS的核心数据结构不再基于队列数组，而是红黑树。树里面包含了所有的处理RUNNING状态的进程，而在最左边的进程就是下一个被调度的进程。</p>
+<p>（2）CFS彻底以时间和系统负载为参照，完全抛弃原有调度方案中的双优先级数组的概念，使用红黑树来代替运行队列数组，vruntime作为红黑树中节点的键值。</p>
+<p>（3）对于普通的进程，不再进一步区分是I/O消耗型进程还是处理器消耗型进程。</p>
+<p>（4）不再使用时间片的概念，也不使用<code>jiffies</code>或者其他的Hz，而使用单位为纳秒的时间长度变量。</p>
+<p>（5）引入了模块化调度：调度实体和调度类。</p>
+<p>（6）对SMP负载平衡进行了重构，使用调度模块的迭代器。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+  
+</div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/操作系统/" rel="tag"># 操作系统</a>
+          
+            <a href="/tags/Linux进程调度/" rel="tag"># Linux进程调度</a>
+          
+            <a href="/tags/内核调度器/" rel="tag"># 内核调度器</a>
+          
+            <a href="/tags/内核调度算法/" rel="tag"># 内核调度算法</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/07/vim的使用/" rel="next" title="vim的使用">
+                <i class="fa fa-chevron-left"></i> vim的使用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+             <a href="/">
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Aoki">
+                </a>
+            
+              <p class="site-author-name" itemprop="name">Aoki</p>
+              <p class="site-description motion-element" itemprop="description"><script type="text/javascript" src="https://api.imjad.cn/hitokoto/?cat=&charset=utf-8&length=50&encode=js&fun=sync&source="></script><div id="hitokoto"><script>hitokoto()</script></div></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">69</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Aoki-WanQBin" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:aoki3352@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          <div id="music1163player">
+          <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=34341362&auto=1&height=66"></iframe>
+          
+          </div>
+
+
+
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、调度原理"><span class="nav-number">1.</span> <span class="nav-text">一、调度原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Linux调度器的发展"><span class="nav-number">2.</span> <span class="nav-text">二、Linux调度器的发展</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux2-4内核的调度器"><span class="nav-number">2.1.</span> <span class="nav-text">Linux2.4内核的调度器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux2-6内核的O-1-调度器"><span class="nav-number">2.2.</span> <span class="nav-text">Linux2.6内核的O(1)调度器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、CFS调度器"><span class="nav-number">3.</span> <span class="nav-text">三、CFS调度器</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Aoki</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+<span id="timeDate">载入天数...</span>
+<span id="times">载入时分秒...</span>  
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("03/09/2019 13:14:21");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "已运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共139.9k字</span>
+</div>
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'FchdjiQuvA5nCoDFfF6er8UC-gzGzoHsz',
+        appKey: 'yuVPbmLhvyWyLCQYispfuF6u',
+        placeholder: 'ヾﾉ≧∀≦)o 来呀！吐槽一番吧',
+        avatar:'/uploads/avatar.jpg',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("UUtBnvfSSEb2jQwP7yhlINnx-gzGzoHsz", "glLG95JsT6Y88k3qFhIobQbv");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  <script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+
+
+
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
