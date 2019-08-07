@@ -136,18 +136,18 @@
 
 
 
-<meta name="description" content="一、指针简介一般来说，指针是一个其数值为地址的变量（或更一般地说是一个数据对象）。正如char类型的变量用字符作为其数值，而int类型变量的数值是整数，指针变量的数值表示的是地址。 如果你将某个指针变量命名为ptr，就可以使用如下语句： 1ptr=&amp;amp;pooh;   //把pooh的地址赋给ptr 对于这个语句，我们称ptr指向pooh。ptr和&amp;amp;pooh的区别在于前者是变量，后者是">
+<meta name="description" content="一、指针简介一般来说，指针是一个其数值为地址的变量（或更一般地说是一个数据对象）。正如char类型的变量用字符作为其数值，而int类型变量的数值是整数，指针变量的数值表示的是地址。 如果你将某个指针变量命名为ptr，就可以使用如下语句： 1ptr=&amp;amp;pooh;   //把pooh的地址赋给ptr  对于这个语句，我们称ptr指向pooh。ptr和&amp;amp;pooh的区别在于前者是变量，后者">
 <meta name="keywords" content="指针,C++">
 <meta property="og:type" content="article">
 <meta property="og:title" content="指针，又见指针">
 <meta property="og:url" content="http://wanqbin.xyz/2019/06/10/指针，又见指针/index.html">
 <meta property="og:site_name" content="Aoki&#39;s Blog">
-<meta property="og:description" content="一、指针简介一般来说，指针是一个其数值为地址的变量（或更一般地说是一个数据对象）。正如char类型的变量用字符作为其数值，而int类型变量的数值是整数，指针变量的数值表示的是地址。 如果你将某个指针变量命名为ptr，就可以使用如下语句： 1ptr=&amp;amp;pooh;   //把pooh的地址赋给ptr 对于这个语句，我们称ptr指向pooh。ptr和&amp;amp;pooh的区别在于前者是变量，后者是">
+<meta property="og:description" content="一、指针简介一般来说，指针是一个其数值为地址的变量（或更一般地说是一个数据对象）。正如char类型的变量用字符作为其数值，而int类型变量的数值是整数，指针变量的数值表示的是地址。 如果你将某个指针变量命名为ptr，就可以使用如下语句： 1ptr=&amp;amp;pooh;   //把pooh的地址赋给ptr  对于这个语句，我们称ptr指向pooh。ptr和&amp;amp;pooh的区别在于前者是变量，后者">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-06-15T13:06:21.270Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="指针，又见指针">
-<meta name="twitter:description" content="一、指针简介一般来说，指针是一个其数值为地址的变量（或更一般地说是一个数据对象）。正如char类型的变量用字符作为其数值，而int类型变量的数值是整数，指针变量的数值表示的是地址。 如果你将某个指针变量命名为ptr，就可以使用如下语句： 1ptr=&amp;amp;pooh;   //把pooh的地址赋给ptr 对于这个语句，我们称ptr指向pooh。ptr和&amp;amp;pooh的区别在于前者是变量，后者是">
+<meta name="twitter:description" content="一、指针简介一般来说，指针是一个其数值为地址的变量（或更一般地说是一个数据对象）。正如char类型的变量用字符作为其数值，而int类型变量的数值是整数，指针变量的数值表示的是地址。 如果你将某个指针变量命名为ptr，就可以使用如下语句： 1ptr=&amp;amp;pooh;   //把pooh的地址赋给ptr  对于这个语句，我们称ptr指向pooh。ptr和&amp;amp;pooh的区别在于前者是变量，后者">
 
 
 
@@ -500,44 +500,60 @@
         <h2 id="一、指针简介"><a href="#一、指针简介" class="headerlink" title="一、指针简介"></a>一、指针简介</h2><p>一般来说，指针是一个其数值为地址的变量（或更一般地说是一个数据对象）。正如char类型的变量用字符作为其数值，而int类型变量的数值是整数，指针变量的数值表示的是地址。</p>
 <p>如果你将某个指针变量命名为ptr，就可以使用如下语句：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ptr=&amp;pooh;   <span class="comment">//把pooh的地址赋给ptr</span></span><br></pre></td></tr></table></figure>
+
 <p>对于这个语句，我们称ptr指向pooh。ptr和&amp;pooh的区别在于前者是变量，后者是常量。ptr可以指向任何地方：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ptr=&amp;bath;    <span class="comment">//令ptr指向bath</span></span><br></pre></td></tr></table></figure>
+
 <h2 id="二、间接运算符"><a href="#二、间接运算符" class="headerlink" title="二、间接运算符"></a>二、间接运算符</h2><p>假定ptr指向bath：ptr=&amp;bath</p>
 <p>这时就可以使用间接运算符*（也称取值运算符）来获取bath中存放的数值。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">val=*ptr;    <span class="comment">//得到ptr指向的值</span></span><br></pre></td></tr></table></figure>
+
 <p>语句ptr=&amp;bath；以及语句val=*ptr；放在一起等同于下面的语句：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">val=bath;</span><br></pre></td></tr></table></figure>
+
 <p>下面进行举例：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nurse=<span class="number">22</span>;</span><br><span class="line">ptr=&amp;nurse;  <span class="comment">//指向nurse的指针</span></span><br><span class="line">val=*ptr;  <span class="comment">//将ptr指向的值赋给val</span></span><br></pre></td></tr></table></figure>
+
 <p>上述语句实现的功能是把数值22赋给变量val</p>
 <h2 id="三、指针声明"><a href="#三、指针声明" class="headerlink" title="三、指针声明"></a>三、指针声明</h2><p>例如：long和float两种类型的数值可能使用相同大小的存储空间，但是他们的数据存储方式完全不同，指针的声明形式如下：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *pi;  <span class="comment">//pi是指向一个整数变量的指针</span></span><br><span class="line"><span class="keyword">char</span> *pc;  <span class="comment">//pc是指向一个字符变量的指针</span></span><br><span class="line"><span class="keyword">float</span> *pf,*pg;  <span class="comment">//pf和pg是指向浮点变量的指针</span></span><br></pre></td></tr></table></figure>
-<p>类型标识符表明了被指向变量的类型，而<em>表示该变量是一个指针。声明int </em> pi;的意思是pi是一个指针，而且*pi是int类型的。</p>
+
+<p>类型标识符表明了被指向变量的类型，而<em>表示该变量是一个指针。声明int * pi;的意思是pi是一个指针，而且</em>pi是int类型的。</p>
 <p>*和指针名之间地空格是可选的。通常程序员在声明中用空格，而在指向变量时将其省略。</p>
 <p>pc所指向的值（*pc）是char类型的。而pc本身是什么类型的？</p>
 <p>我们将其描述为“指向char的指针”类型。pc的值是一个地址，在大多数系统中，它是由一个无符号整数表示。但是这并不表示可以把指针当做整数类型。一些处理整数的方法不能用来处理指针，反之亦然。例如，可以进行两整数相乘，而指针不能。因此指针的确是一种新的数据类型，而不是整数类型。</p>
 <h2 id="四、使用指针在函数间通信"><a href="#四、使用指针在函数间通信" class="headerlink" title="四、使用指针在函数间通信"></a>四、使用指针在函数间通信</h2><p>在下面的程序中，函数interchange（）只用了指针参数，我们将对该函数进行详细的讨论。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">interchange</span><span class="params">(<span class="keyword">int</span> * u, <span class="keyword">int</span> * v)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> x = <span class="number">5</span>, y = <span class="number">10</span>;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"Originally x=%d and y= %d.\n"</span>, x, y);</span><br><span class="line">	interchange(&amp;x, &amp;y); <span class="comment">//向函数传送地址</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"Now x= %d and y=%d.\n"</span>, x, y);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">interchange</span><span class="params">(<span class="keyword">int</span> * u, <span class="keyword">int</span> * v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> temp;</span><br><span class="line">	temp = *u;<span class="comment">//temp得到u指向的值。</span></span><br><span class="line">	*u = *v;</span><br><span class="line">	*v = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>下面我们分析以上程序的运行情况。首先，函数调用语句如下：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">interchange(&amp;x, &amp;y); <span class="comment">//向函数传送地址</span></span><br></pre></td></tr></table></figure>
+
 <p>可以看出，函数传递的是x和y的地址而不是他们的值。这就意味着intechange（）函数原型声明和定义中的形式参数u和v将使用地址作为它们的值。因此他们应该声明为指针，由于x和y都是整数，所以u和v是指向整数的指针。其声明如下：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">interchange</span><span class="params">(<span class="keyword">int</span> * u, <span class="keyword">int</span> * v)</span></span>;</span><br></pre></td></tr></table></figure>
+
 <p>接下来，函数体进行如下声明：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> temp;</span><br></pre></td></tr></table></figure>
+
 <p>从而提供了所需要的临时变量。为了把x的值存在temp中，需要使用下面语句：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">temp = *u;<span class="comment">//temp得到u指向的值。</span></span><br></pre></td></tr></table></figure>
+
 <p>注意，因为u的值是&amp;x，所以u指向x的地址，这就以意味着*u代表了x的值，而这正是我们需要的数值。</p>
 <p>在示例程序中，我们用一个函数实现x和y的数值交换。首先函数使用x和y的地址作为参数，这使得它可以访问x和y变量。通过使用指针和运算符*，函数可以获得相应存储地址的数据，从而就可以改变这些数据。</p>
 <p>在ANSI原型中可以省略变量名称。这样，函数原型可以按如下形式进行声明：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">interchange</span> <span class="params">(<span class="keyword">int</span> * ,<span class="keyword">int</span> *)</span></span>;</span><br></pre></td></tr></table></figure>
+
 <p>通常情况下，可以把关于变量的两类信息传递给一个函数，如果函数的调用形式为：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">function1(x);</span><br></pre></td></tr></table></figure>
+
 <p>这时传递的是x的值，但是如果使用下面这种函数调用形式：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">function2(&amp;x);</span><br></pre></td></tr></table></figure>
+
 <p>那么会把x的地址传递给函数。第一种调用形式要求函数定义部分必须包含一个和x具有相同数据类型的形式参数。如下所示：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">function1</span><span class="params">(<span class="keyword">int</span> num)</span></span>;</span><br></pre></td></tr></table></figure>
+
 <p>而第二种形式要求函数定义部分的形式参数必须是指向相应数据类型的指针：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">function2</span><span class="params">(<span class="keyword">int</span> *ptr)</span></span>;</span><br></pre></td></tr></table></figure>
+
 <p>使用函数进行数据计算等操作时，可以使用第一种调用形式。但是如果需要改变调用函数中的多个变量的值时，就需要使用第二种调用形式。</p>
 <p>尽管interchange（）只使用局部变量，但是通过使用指针，该函数可以操作main（）中的变量的值。</p>
 
@@ -680,7 +696,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">66</span>
+                  <span class="site-state-item-count">67</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -702,7 +718,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">130</span>
+                  <span class="site-state-item-count">133</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -825,7 +841,7 @@ setInterval("createtime()",250);
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共134.9k字</span>
+  <span class="post-count">博客全站共135.7k字</span>
 </div>
 
 

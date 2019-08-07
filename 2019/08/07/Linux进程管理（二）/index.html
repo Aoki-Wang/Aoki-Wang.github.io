@@ -510,6 +510,9 @@
 <p><code>fork()</code>函数调用一次返回两次：一次在父进程，一次在子进程。如果在子进程中，则返回0；如果在父进程中，则将返回子进程的<code>pid</code>。<code>fork()</code>函数通过系统调用<code>sys_fork()</code>来实现，<code>sys_fork()</code>函数的实现依赖于体系结构，因为它的参数需要系统寄存器来传递。</p>
 <p>在x86体系结构下该函数定义如下：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">asminkage <span class="keyword">int</span> <span class="title">sys_fork</span><span class="params">(struct pt_regs regs)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> do_fork(SIGCHILD,reg.esp,&amp;reg,<span class="number">0</span>,<span class="literal">NULL</span>,<span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
 </li>
 </ul>
 </li>
@@ -518,20 +521,30 @@
 <li><p>vfork()函数</p>
 <p><code>vfork()</code>函数和<code>fork()</code>函数类似，但前者的父进程一直阻塞，直到子进程退出或者调用<code>exec()</code>函数。之所以引进该函数，是因为当时还没有引入“写时复制”技术，调用<code>fork()</code>来创建新的进程需要复制整个父进程的数据，在有些情况下，这样会降低系统的利用率，引入<code>vfork()</code>就是为了在创建进程时子进程不复制父进程的页表项。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">asmlinkage <span class="keyword">int</span> <span class="title">sys_vfork</span><span class="params">(struct pt_regs regs)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> do_fork(CLONE_VFORK|CLONE_VM|SIGCHLD,regs.esp,&amp;regs,<span class="number">0</span>,<span class="literal">NULL</span>,<span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
 </li>
 </ul>
 <ul>
 <li><p>clone()函数</p>
 <p><code>clone()</code>函数不同于<code>fork()</code>和<code>vfork()</code>函数，它接受一个指向函数的指针和该函数的参数，由<code>do_fork()</code>创建的子进程刚一创建就去调用这个函数。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">asmlinkage <span class="keyword">int</span> <span class="title">sys_clone</span><span class="params">(struct pt_regs regs)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> clone_flags;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> newsp;</span><br><span class="line">    <span class="keyword">int</span> _user *parent_tidptr,*child_tidptr;</span><br><span class="line">    clone_flags=regs.ebx;</span><br><span class="line">    newsp=reg.ecx;</span><br><span class="line">    parent_tidptr=(<span class="keyword">int</span> _user *)regs.edx;</span><br><span class="line">    child_tidptr=(<span class="keyword">int</span> _user *)regs.edi;</span><br><span class="line">    <span class="keyword">if</span>(!newsp)</span><br><span class="line">        newsp=regs.esp;</span><br><span class="line">    <span class="keyword">return</span> do_fork(clone_flags,newsp,&amp;regs,<span class="number">0</span>,parent_tidptr,child_tidptr);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
 </li>
 </ul>
 <ul>
 <li><p>do_fork()函数</p>
 <p>我们知道需要通过调用<code>fork()</code>、<code>vfork()</code>、<code>clone()</code>来创建进程，这三个函数调用相应的系统调用<code>sys_fork()</code>、<code>sys_vfork()</code>和<code>sys_clone()</code>，而这三个系统调用的区别在于调用<code>do_fork()</code>函数时设置的那些标志不同，该函数实现真正的进程创建。函数原型如下：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">do_fork</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">long</span> clone_flags,<span class="keyword">unsigned</span> <span class="keyword">long</span> stack_start,struct pt_regs *regs,<span class="keyword">unsigned</span> <span class="keyword">long</span> stack_size,<span class="keyword">int</span> _user *parent_tidptr,<span class="keyword">int</span> _user *child_tidptr)</span></span>;</span><br></pre></td></tr></table></figure>
+
 <p>其中，参数<code>stack_start</code>表示栈的起始地址，参数<code>regs</code>表示存储所有寄存器的结构指针，参数<code>stack_size</code>表示栈的大小，参数<code>parent_tidptr</code>表示父进程的用户态变量<code>pid</code>地址，参数<code>child_tidptr</code>表示子进程的用户态变量<code>pid</code>地址，<code>clone_flags</code>表示<code>clone</code>标志位，包括<code>CLONE_VM</code>,<code>CLONE_FILES</code>,<code>CLONE_SIGHAND</code>,<code>CLONE_PID</code>,<code>CLONE_VFORK</code>等，任何一位被置1则表明创建的子进程和父进程共享该位对应的资源。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CSIGNAL                         0x000000ff <span class="comment">/*进程退出时需要传递的信号*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CLONE_VM                        0x00000100 <span class="comment">/*父子进程共享地址空间*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CLONE_FS                        0x00000200 <span class="comment">/*父子进程共享文件系统信息*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CLONE_FILES                     0x00000400 <span class="comment">/*父子进程共享已打开的文件*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CLONE_SIGHAND                   0x00000800 <span class="comment">/*父子进程共享信号处理*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CLONE_PTRACE                    0x00002000 <span class="comment">/*继续调试子进程*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CLONE_VFORK                     0x00004000 <span class="comment">/*调用vfork(),父进程休眠*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CLONE_PARENT                    0x00008000 <span class="comment">/*设置一个共有的父进程*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CLONE_THREAD                    0x00010000 <span class="comment">/*父子进程在同一个线程组*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CLONE_NEWNS                     0x00020000 <span class="comment">/*为子进程创建一个新的命名空间*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CLONE_SYSVSEM                   0x00040000 <span class="comment">/*父子进程共享system V SEM_UNDO*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CLONE_SETTLES                   0x00080000 <span class="comment">/*为子进程创建新的TLS*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CLONE_PARENT_SETTID             0x00100000 <span class="comment">/*设置父进程TID*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CLONE_CHILD_CLEARTID            0x00200000 <span class="comment">/*清除子进程TID*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CLONE_DETACHED                  0x00400000 <span class="comment">/*Unused,ignored*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CLONE_UNTRACED                  0x00800000 <span class="comment">/*不允许调试子进程*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CLONE_CHILD_SETTID              0x01000000 <span class="comment">/*设置子进程TID*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CLONE_STOPPED                   0x02000000 <span class="comment">/*设置进程停止状态*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CLONE_NEWUTS                    0x04000000 <span class="comment">/*创建新的utsname组*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CLONE_NEWIPC                    0x08000000 <span class="comment">/*创建新的IPC*/</span></span></span><br></pre></td></tr></table></figure>
+
+
+
 </li>
 </ul>
 <h2 id="四、进程终止"><a href="#四、进程终止" class="headerlink" title="四、进程终止"></a>四、进程终止</h2><ol>
@@ -560,8 +573,10 @@
 </li>
 <li><h3 id="wait-函数"><a href="#wait-函数" class="headerlink" title="wait()函数"></a>wait()函数</h3><p>&emsp;&emsp;在调用了<code>do_exit()</code>函数之后，尽管进程已经僵死不能再运行了，但是系统还保留了它的进程描述符，系统可以通过<code>wait()</code>函数来获取进程信息。父进程可以选择调用<code>wait()</code>函数族中的4个函数之一。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">pid_t</span> wait(<span class="keyword">int</span> *status);</span><br><span class="line"><span class="keyword">pid_t</span> waitpid(<span class="keyword">pid_t</span> pid,<span class="keyword">int</span> *status,<span class="keyword">int</span> options);</span><br><span class="line"><span class="keyword">pid_t</span> wait3(<span class="keyword">int</span> *status,<span class="keyword">int</span> options,struct rusage*rusage);</span><br><span class="line"><span class="keyword">pid_t</span> wait4(<span class="keyword">pid_t</span> pid,<span class="keyword">int</span> * status,<span class="keyword">int</span> options,struct rusage *rusage);</span><br></pre></td></tr></table></figure>
+
 <p>每个函数又会调用系统调用<code>sys_wait4</code>，而<code>sys_wait4</code>只做一些错误检查，随后调用<code>do_wait()</code>函数。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">long</span> <span class="title">do_wait</span><span class="params">(<span class="keyword">pid_t</span> pid,<span class="keyword">int</span> options,struct signinfo _user *infop,<span class="keyword">int</span> _user *stat_addr,struct rusage _user *ru)</span></span>;</span><br></pre></td></tr></table></figure>
+
 <p>其中参数<code>pid</code>表示目标进程的<code>pid</code>，<code>options</code>表示传递给该函数的标志，<code>infop</code>指向进程的信号信息的指针，<code>stat_addr</code>表示子进程退出状态应存放的地址，<code>ru</code>表示子进程资源使用信息应存放的地址。<code>do_wait()</code>函数的处理流程如下:</p>
 <ul>
 <li>把当前进程放到等待队列中，设置进程的状态为<code>TASK_INTERRUPRIBLE</code></li>
@@ -575,6 +590,7 @@
 <p>&emsp;&emsp;在Linux中线程的实现比较特殊，它不像其他操作系统将进程与线程严格分开对待和处理，并在系统内核中提供专门的支持线程的机制，而是将系统中所有的线程都当作进程来实现的，在内核中没有准备一个特定的数据结构来表示线程，也没有为线程定义它们自己的调度策略，相反在Linux中线程仅仅是被看作一个与其他进程共享某些资源的进程。</p>
 <p>&emsp;&emsp;正是由于Linux并没有将线程作为一个单独的对象来对待，在Linux中创建一个线程与一个进程非常相似，唯一的区别就是调用特定的函数的时候所传递的参数不同，在Linux中可以通过系统调用<code>clone()</code>来创建一个线程，它与创建进程的区别就在于调用<code>clone()</code>的时候需要传递一些参数来指定需要共享的资源。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clone(CLONE_VM|CLONE_FS|CLONE_FILES|CLONE_SIGHAND,<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+
 <p>&emsp;&emsp;上面的代码产生的结果和调用<code>fork()</code>差不多，只是“父子俩”共享地址空间、文件系统资源、文件描述符和信号处理程序。</p>
 </li>
 <li><h3 id="内核线程"><a href="#内核线程" class="headerlink" title="内核线程"></a>内核线程</h3></li>
@@ -582,6 +598,7 @@
 <p>&emsp;&emsp;内核经常需要在后台执行一些操作。这种任务可以通过内核线程完成——独立运行在内核空间的标准进程。内核线程和普通进程间的区别在于内核线程没有独立的地址空间，它们只是在内核空间运行，从来不切换到用户空间去。内核线程和普通进程一样，可以被调度，也可以被抢占。</p>
 <p>&emsp;&emsp;Linux确实会把一些任务交给内核线程去做，像<code>pdflush</code>和<code>ksoftrqd</code>这些任务就是明显的例子。这些线程在系统启动时由另外一些内核线程启动。实际上，内核线程也只能由其他内核线程创建。内核通过<code>kernel_thread()</code>函数来创建内核线程，该函数的实现与体系结构有关。在x86体系结构中，该函数定义如下：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">kernel_thread</span><span class="params">(<span class="keyword">int</span>(*fn)(<span class="keyword">void</span>*),<span class="keyword">void</span>* arg,<span class="keyword">unsigned</span> <span class="keyword">long</span> flags)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">/*声明一个寄存器变量，并对其进行初始化*/</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">pt_regs</span> <span class="title">regs</span>;</span></span><br><span class="line">    <span class="built_in">memset</span>(&amp;regs,<span class="number">0</span>,<span class="keyword">sizeof</span>(regs));</span><br><span class="line">    regs.ebx=(<span class="keyword">unsigned</span> <span class="keyword">long</span>)fn;</span><br><span class="line">    regs.edx=(<span class="keyword">unsigned</span> <span class="keyword">long</span>)arg;</span><br><span class="line">    regs.xds=_USER_DS;</span><br><span class="line">    regs.xes=_USER_DS;</span><br><span class="line">    regs.xfs=_KERNEL_PERCPU;</span><br><span class="line">    regs.orig_eax=<span class="number">-1</span>;</span><br><span class="line">    regs.eip=(<span class="keyword">unsigned</span> <span class="keyword">long</span>)kernel_thread_helper;</span><br><span class="line">    regs.xcs=_KERNEL_CS|get_kernel_rpl();</span><br><span class="line">    regs.eflags=x86_EFLAGS_IF|X86_EFLAGS_SF|X86_EFLAGS_PF|<span class="number">0X2</span>;</span><br><span class="line">    <span class="comment">/*调用do_fork()函数创建一个内核线程*/</span></span><br><span class="line">    <span class="keyword">return</span> do_fork(flags|CLONE_VM|CLONE_UNTRACED,<span class="number">0</span>,&amp;regs,<span class="number">0</span>,<span class="literal">NULL</span>,<span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -726,7 +743,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">66</span>
+                  <span class="site-state-item-count">67</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -748,7 +765,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">130</span>
+                  <span class="site-state-item-count">133</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -871,7 +888,7 @@ setInterval("createtime()",250);
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共134.9k字</span>
+  <span class="post-count">博客全站共135.7k字</span>
 </div>
 
 
