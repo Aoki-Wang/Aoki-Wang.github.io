@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://wanqbin.xyz/"/>
-  <updated>2019-08-09T06:29:38.978Z</updated>
+  <updated>2019-08-09T14:28:33.018Z</updated>
   <id>http://wanqbin.xyz/</id>
   
   <author>
@@ -15,6 +15,68 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Linux内核同步机制分析——原子操作</title>
+    <link href="http://wanqbin.xyz/2019/08/09/inux%E5%86%85%E6%A0%B8%E5%90%8C%E6%AD%A5%E6%9C%BA%E5%88%B6%E5%88%86%E6%9E%90%E2%80%94%E2%80%94%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C/"/>
+    <id>http://wanqbin.xyz/2019/08/09/inux内核同步机制分析——原子操作/</id>
+    <published>2019-08-09T14:27:00.000Z</published>
+    <updated>2019-08-09T14:28:33.018Z</updated>
+    
+    <content type="html"><![CDATA[<p>&emsp;&emsp;原子操作是Linux中提供的一种实现同步的方法。所谓原子操作就是指某一操作在执行过程中是不可以被打断的，它要么全部执行完毕，要么就一点也不执行。原子原本指的是不可分割的微粒，所以原子操作也就是不可分割的指令。也就是说原子操作是绝对不会出现该操作执行了一半，内核又去执行其他操作了的情况。</p><p>&emsp;&emsp;内核提供了两组原子操作接口：一组是针对整数的原子操作，另一组是针对单独的位进行操作。在Linux支持的所有体系结构上都实现了两组原子接口。而且大多数体系结构要么原本就支持简单的原子操作，要么就为单步执行提供了锁内存总线的指令（这就确保其他操作不能同时发生）。而有些体系结构本身就不太支持原子操作，比如<code>SPARC</code>，我们则可以通过加锁的方式来实现。</p><h2 id="一、原子整数操作"><a href="#一、原子整数操作" class="headerlink" title="一、原子整数操作"></a>一、原子整数操作</h2><p>&emsp;&emsp;原子整数操作需要硬件的支持，因此它是与体系结构有关的，x86提供给用户的接口和原子类型都定义在<code>include/asm-x86/atomic.h</code>文件中，使用宏来实现。</p><p>&emsp;&emsp;原子整数操作主要用于实现资源计数，很多引用计数都是通过原子操作实现的。原子结构类型定义如下：</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span><span class="keyword">int</span> counter;&#125; <span class="keyword">atomic_t</span>;</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;原子整数操作，顾名思义，这是一组针对整数进行的操作，但是，该操作有几点需要特别注意的地方</p><ul><li>在Linux中的原子整数操作只能对<code>atomic_t</code>类型的数据进行操作，而不能对在C语言中用到的整数类型<code>int</code>进行操作</li><li>使用<code>atomic_t</code>的代码只能将该数据当做24位来使用。</li></ul><p>&emsp;&emsp;现在来看一下产生这两个特别的地方的原因。</p><p>&emsp;&emsp;首先是第一个，为什么Linux中给该操作定义了一个特殊的数据类型，这主要可以有如下几种原因:<br>（1）可以确保原子操作只与这种规定的特殊类型的数据一起使用，这也就保证了该类型的数据不会被传递到其他非原子操作的函数中，</p><p>（2）使用<code>atomic_t</code>类型确保了编译器不会对定义的该类型的数据进行访问，这也就是保证了原子操作最终接收到一个正确的内存地址而不是一个别名，该别名也保存了相同的值。</p><p>（3）重新定义了一个数据类型<code>atomic_t</code>，可以屏蔽到在不同体系结构上实现原子操作的差异。</p><p>&emsp;&emsp;其次，是第二个特别的地方的原因，主要是在<code>SPARC</code>体系结构上，原子操作的实现不同于其他体系结构，该体系结构上32位<code>int</code>型的低8位中设置了一个锁，这主要是由于<code>SPARC</code>体系结构对原子操作缺乏指令级的支持，所以只能利用锁来避免对原子类型数据的并发访问。</p><table><thead><tr><th>函数原型</th><th>描述</th></tr></thead><tbody><tr><td>ATOMIC_INIT(i)</td><td>用于初始化一个原子变量的值为i，并1返回这个atomic_t结构</td></tr><tr><td>atomic_read(v)</td><td>返回原子变量v的当前值</td></tr><tr><td>atomic_set(&amp;v,1)</td><td>设置原子变量v的值为i</td></tr><tr><td>atomic_add(int i,atomic_t *v)</td><td>将原子变量v的值加i</td></tr><tr><td>atomic_sub(int i,atomic_t*v)</td><td>将原子变量v的值减i</td></tr><tr><td>atomic_sub_and_test(int i.atomic_t *v)</td><td>将原子变量v的值减i，并将原子变量运算后结果为0的情况下，返回1，否则返回0</td></tr><tr><td>atomic_inc(atomic_t *v)</td><td>将原子变量v的值加1</td></tr><tr><td>atomic_dec(atomic_t *v)</td><td>将原子变量v的值减1</td></tr><tr><td>atomic_dec_and_test(atomic_t *v)</td><td>将原子变量v的值减1，并将原子运算后结果为0的情况下，返回1，否则返回0</td></tr><tr><td>atomic_inc_and_test(atomic_t *v)</td><td>将原子变量v的值加1，并将原子变量运算后结果为0的情况下返回1，否则返回0</td></tr><tr><td>atomic_add_negative(int i,atomic_t *v)</td><td>将原子变量v的值加i，并在原子变量运算结果后结果为负值的情况下返回1，否则返回0</td></tr><tr><td>atomic_add_return(int i,atomic_t *v)</td><td>将原子变量v的值加i，并返回运算后原子变量的值</td></tr><tr><td>atomic_sub_return(int i,atomic_t *v</td><td>将原子变量v的值减i，并返回运算后原子变量的值</td></tr></tbody></table><h2 id="二、原子位操作"><a href="#二、原子位操作" class="headerlink" title="二、原子位操作"></a>二、原子位操作</h2><p>&emsp;&emsp;原子位操作，就是针对数据的每一位进行操作，当然它的实现也是与体系结构相关的。其定义在<code>include/x86/bitops_32.h</code>中。</p><p>&emsp;&emsp;在这里需要注意的是原子位操作与原子整数操作不同，它不需要定义一个与该操作相对应的数据结构，因为原值位操作只是针对普通的指针进行操作的，我们可以对任何指针指向的数据进行原子位操作。Linux内核1提供了一系列原值位操作的函数。</p><table><thead><tr><th>函数原型</th><th>描述</th></tr></thead><tbody><tr><td>set_bit(int nr,volatile unsigned long *addr)</td><td>原子地设置add所指对象的第nr位</td></tr><tr><td>clear_bit(int nr,volatile unsigned long *addr)</td><td>原子地清空add所指对象的第nr位</td></tr><tr><td>change_bit(int nr,volatile unsigned long *addr)</td><td>原子地翻转add所指对象的第nr位</td></tr><tr><td>test_and_set_bit(int nr ,volatile unsigned long *addr)</td><td>原子地设置addr所指对象的第nr位，并返回原来的值</td></tr><tr><td>test_and _clear_bit(int nr ,volatile unsigned long * addr)</td><td>原子地清空addr所指对象的第nr位，并返回原来的值</td></tr><tr><td>test_and _change_bit(int nr ,volatile unsigned long * addr)</td><td>原子地翻转addr所指对象的第nr位，并返回原来的值</td></tr><tr><td>test_bit(nr,addr)</td><td>原子地返回addr所指对象的第nr位</td></tr></tbody></table><p>&emsp;&emsp;下面通过说明一个典型的操作函数<code>set_bit(int nr,volatile unsigned long *addr)</code>来分析原子位操作的具体处理过程。该函数以原子方式设置在addr所指对应的第nr位，即保证操作过程不会被打断。代码如下：</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">set_bit</span><span class="params">(<span class="keyword">int</span> nr,<span class="keyword">volatile</span> <span class="keyword">unsigned</span> <span class="keyword">long</span> *addr)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    _asm__volatile_(LOCK_PREFIX</span><br><span class="line">                       <span class="string">"btsl%1,%0</span></span><br><span class="line"><span class="string">                        :"</span>+m<span class="string">"(ADDR)</span></span><br><span class="line"><span class="string">                        :"</span>Ir(nr));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>第4行声明了内嵌汇编所使用的汇编指令<code>btsl</code>，用于设置占位符1%对应操作数的第%1位，然后将结果保存到占位符%0对应的变量；这里的占位符%0、%1分别对应变量<code>addr</code>和<code>nr</code>。</p><p>第5行代码声明了内嵌汇编所使用的输出变量列表。这里声明的输出变量为内存地址指针<code>addr</code>，其限定符<code>+m</code>说明该变量是一个读写类型的内存变量，即该变量既是输入变量，也是输出变量。</p><p>第6行代码声明了内嵌汇编所使用的输入变量列表。这里声明的输入变量是：代表位移的参数<code>nr</code>，其限定符<code>Ir</code>表示该变量是一个0~31的立即数，且要求编译器将该变量与处理器的某个寄存器相关联。</p><p>&emsp;&emsp;在Linux中还定义了一组与这些原子位操作相对应的非原子位操作，这些函数与原子位操作的函数所完成的功能是相同的，只是这些非原子位操作不能保证操作的原子性，其命名就是在原子位操作的函数的前面加上两个喜爱划线，如与<code>set_bit()</code>函数相对应的非原值为操作就是<code>_set_bit()</code>，其余的函数的命名方式与它完成相同。非原子位操作要比原子位操作执行速度快一些，若代码已经避免了竞争条件，那么就可以在代码中使用这些非原子位操作以提高程序的执行速度。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&amp;emsp;&amp;emsp;原子操作是Linux中提供的一种实现同步的方法。所谓原子操作就是指某一操作在执行过程中是不可以被打断的，它要么全部执行完毕，要么就一点也不执行。原子原本指的是不可分割的微粒，所以原子操作也就是不可分割的指令。也就是说原子操作是绝对不会出现该操作执行了
+      
+    
+    </summary>
+    
+      <category term="Linux内核" scheme="http://wanqbin.xyz/categories/Linux%E5%86%85%E6%A0%B8/"/>
+    
+    
+      <category term="Linux内核" scheme="http://wanqbin.xyz/tags/Linux%E5%86%85%E6%A0%B8/"/>
+    
+      <category term="操作系统" scheme="http://wanqbin.xyz/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+      <category term="原子操作" scheme="http://wanqbin.xyz/tags/%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C/"/>
+    
+      <category term="原子整数操作" scheme="http://wanqbin.xyz/tags/%E5%8E%9F%E5%AD%90%E6%95%B4%E6%95%B0%E6%93%8D%E4%BD%9C/"/>
+    
+      <category term="原子位操作" scheme="http://wanqbin.xyz/tags/%E5%8E%9F%E5%AD%90%E4%BD%8D%E6%93%8D%E4%BD%9C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux内核同步机制分析——临界区与竞争条件</title>
+    <link href="http://wanqbin.xyz/2019/08/09/nux%E5%86%85%E6%A0%B8%E5%90%8C%E6%AD%A5%E6%9C%BA%E5%88%B6%E5%88%86%E6%9E%90%E2%80%94%E2%80%94%E4%B8%B4%E7%95%8C%E5%8C%BA%E4%B8%8E%E7%AB%9E%E4%BA%89%E6%9D%A1%E4%BB%B6/"/>
+    <id>http://wanqbin.xyz/2019/08/09/nux内核同步机制分析——临界区与竞争条件/</id>
+    <published>2019-08-09T14:26:00.000Z</published>
+    <updated>2019-08-09T14:27:32.186Z</updated>
+    
+    <content type="html"><![CDATA[<p>&emsp;&emsp;所谓临界区就是访问和操作共享数据的代码段。多个内核任务并发访问同一个资源通常是不安全的。为了避免对临界区进行并发访问，编程者必须保证临界区代码段被原子地执行，也就是说，代码段在执行期间不可被打断，就如同整个临界区是一个不可分割的指令一样。如果两个内核任务可能处于同一临界区，这可能会导致临界资源出现不一致的状态。如果确实发生了这种情况，就称它为竞争状态。</p><h2 id="一、临界区举例"><a href="#一、临界区举例" class="headerlink" title="一、临界区举例"></a>一、临界区举例</h2><p>&emsp;&emsp;为了进一步了解竞争状态，首先要明白临界区无处不在。考虑一个非常简单的、共享资源的例子：一个全局整型变量和一个简单的临界区，其中的操作仅仅是将整型变量的值增加1，即<code>i++</code>，该操作可以转化成下卖弄的机器指令序列。</p><p>（1）得到当前变量i的值并将它复制到一个寄存器中</p><p>（2）将寄存器中的值加1</p><p>（3）把i的新值写回到内存中</p><p>这三条指令形成一个临界区。现在假定有两个执行线程同时进入这个临界区，如果i的初始值是1，那么期望的结果应该如下所示：</p><table><thead><tr><th>线程1</th><th>线程2</th></tr></thead><tbody><tr><td>获得i（1）</td><td>—</td></tr><tr><td>增加i（1-&gt;2)</td><td>—</td></tr><tr><td>写回i(2)</td><td>—</td></tr><tr><td></td><td>获得i(2)</td></tr><tr><td></td><td>增加i(2-&gt;3)</td></tr><tr><td></td><td>写回i(3)</td></tr></tbody></table><p>正如期望的那样，i被两个线程分别加1变成3。但是实际的执行序列却可能如下所示：</p><table><thead><tr><th>线程1</th><th>线程2</th></tr></thead><tbody><tr><td>获得i（1）</td><td>—</td></tr><tr><td>—</td><td>获得i（1）</td></tr><tr><td>增加i(1-&gt;2)</td><td>—</td></tr><tr><td>—</td><td>增加i(1-&gt;2)</td></tr><tr><td>写回i(2)</td><td>—</td></tr><tr><td>_</td><td>写回i（2）</td></tr></tbody></table><p>&emsp;&emsp;如果两个执行线程都在变量i值增加前读取它的初值，进而又分别增加变量i的值，最后再保存该值，那么变量i的值就变成了2，而变量i的值本该是3的。这是最简单的临界区例子，幸好对这种简单竞争条件的解决办法也同样简单——我们仅仅需要将这些指令作为一个不可分割的整个来执行就可以了。多数处理器都提供了指令来原子地读变量、增加变量然后再写回变量，使用这样的指令就能解决问题。Linux内核也提供了一组实现这些原子操作的接口。</p><h2 id="二、共享队列和加锁"><a href="#二、共享队列和加锁" class="headerlink" title="二、共享队列和加锁"></a>二、共享队列和加锁</h2><p>&emsp;&emsp;下面讨论一个更为复杂的竞争状态。假定有一个需要处理的请求队列，这里假定该队列是一个链表，链表中的每个节点逻辑上代表一个“请求”。有两个函数可以用来操作此队列，一个函数将新请求添加到队列尾部，另一个函数从队列中删除请求，然后进行处理。内核各部分都会调用这两个函数，所以内核会频繁地在队列中加入请求、从队列中删除请求并对其进行处理。对请求队列的操作无疑要用到多条指令。如果一个线程试图读取队列，而这时另一个线程正在处理该队列，那么读取线程就会发现队列此刻正处于不一致状态。很明显，如果允许并发访问队列，聚会产生意想不到的错误。当共享资源是一个复杂的数据结构时，竞争状态往往会使该结构遭到破坏。</p><p>&emsp;&emsp;对于这种情况，锁机制可以避免竞争状态。这种锁就如同一把门锁，门内的房间可想象成一个临界区。在一个指定时刻，房间里只能有一个内核线程存在，当一个内核线程进入房间后，它就会锁住身后的房间；当它结束对共享数据的操作后，就会打开门锁，走出房间。如果另一个线程在房门上锁时到达，那么它必须等待房间内的线程打开门锁出来后，才能进入房间。</p><p>&emsp;&emsp;对于前面提到的请求队列，可以使用一个单独的锁进行保护。每当有一个新请求要加入队列，线程会首先占住锁，然后就可以安全地将请求加入到队列中，结束操作后再释放该锁；同样，当一个线程想从请求队列中删除一个请求时，也需要占住锁，然后才能从队列中读取和删除请求，而且在完成操作后必须释放锁。任何要访问队列的其他线程也类似，必须占住锁之后才能进行操作。因为在一个时刻只能有一个线程持有锁，所以在任何一个时刻只有一个线程可以操作队列。由此可见，锁机制可以防止并发执行，并且保护队列不受竞争状态影响。</p><p>&emsp;&emsp;任何要访问队列的代码都需要首先占住相应的锁，这样该锁就能阻止来自其他内核线程的并发访问，形式如下所示：</p><table><thead><tr><th>线程1</th><th>线程2</th></tr></thead><tbody><tr><td>试图锁定队列</td><td>试图锁定队列</td></tr><tr><td>成功，获得锁</td><td>失败：等待……</td></tr><tr><td>访问队列……</td><td>等待……</td></tr><tr><td>为队列解除锁</td><td>等待……</td></tr><tr><td>……</td><td>成功:获得锁</td></tr><tr><td>……</td><td>访问队列……</td></tr><tr><td>……</td><td>为队列解除锁</td></tr></tbody></table><p>&emsp;&emsp;注意锁的使用是自愿的、非强制性的，它完全属于一种编程者自选的编程手段。没有什么1可以强制编程者在操作虚拟队列时必须使用锁。当然，如果不这么做，无疑会造成竞争状态而破坏队列。</p><p>&emsp;&emsp;锁有多种形式，而且加锁的粒度范围也各不相同，Linux自身实现了几种不同的锁机制。各种锁机制直接的区别主要在于当锁被持有时的行为表现，一些锁持有时会不断进行循环，等待锁重新可用，而有些锁会使当前任务睡眠，直到锁可用为止。</p><h2 id="三、确定保护对象"><a href="#三、确定保护对象" class="headerlink" title="三、确定保护对象"></a>三、确定保护对象</h2><p>&emsp;&emsp;找出哪些数据需要保护是内核同步实现的关键所在。由于任何可能被并发访问的代码都需要保护，所以寻找哪些代码不需要保护反而更容易些。内核任务的局部数据仅仅被自身访问，显然不需要保护，比如，局部自动变量不需要任何形式的锁，因为它们独立存在于内核线程的栈中。类似，如果数据只会被特定的进程访问，那么也不需要加锁。</p><p>&emsp;&emsp;到底什么数据需要加锁呢？答案是大多数内核数据结构都需要加锁。有一条很好的经验可以帮助人们进行判断：如果有其他内核线程可以访问这些数据，那么就给这些数据局加上某种形式的锁；如果有任何其他东西能看到它，那么就要锁定它。</p><h2 id="四、并发执行的原因"><a href="#四、并发执行的原因" class="headerlink" title="四、并发执行的原因"></a>四、并发执行的原因</h2><p>&emsp;&emsp;内核空间之所以需要同步，是因为内核程序会被抢占和重新调度。由于处于内核态的进程可能会在任何时刻被抢占，从而使调度程序完全可能会选择另一个高优先级的进程到处理器执行，所以就有可能在一个进程进入临界区时就被非自愿地抢占了，如果新被调度的进程随后也进入同一个临界区，前后两个进程之间就会产生竞争。这种类型的并发操作并不是同时发生，它们只是相互交叉进行，所以也称为伪并发。</p><p>&emsp;&emsp;如果在对称多处理器的机器上，那么两个进程就可以真正地在临界区中同时执行。这种类型被称为真并发。虽然真并发和伪并发的原因和含义不同，但它们都同样会造成竞争状态，而且同样也需要保护。</p><p>&emsp;&emsp;那么，内核中造成并发执行的原因有哪些？简单来说有以下几种。</p><p>（1）中断：中断几乎可以在任何时刻异步发生，即可能随时打断当前正在执行的代码。</p><p>（2）内核抢占：如果内核具有抢占性，那么内核中的任务可能会被另一个任务抢占。</p><p>（3）软中断和<code>tasklet</code>：内核能在任何时刻唤醒或调度软中断和<code>tasklet</code>，打断当前正在执行的代码。</p><p>（4）睡眠：在内核执行的进程可能会睡眠，这就会唤醒调度程序，从而导致调度一个新的进程执行。</p><p>（5）对称多处理器：两个或多个处理器可以同时执行代码。</p><p>&emsp;&emsp;对于内核开发者来说，必须理解上述并发执行的原因1，并且事先为它们做好准备工作。如果在一段内核代码访问某资源的时候系统产生了一个中断，而该中断的处理程序居然还要访问这一资源，这就是一个bug；类似地，如果一段代码在访问一个共享资源期间被抢占，这也是一个bug；还有，如果内核代码在临界区里睡眠，那就是毫无原则地等待竞争状态的到来。最后还要注意，两个处理器绝对不能访问同一个共享资源。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&amp;emsp;&amp;emsp;所谓临界区就是访问和操作共享数据的代码段。多个内核任务并发访问同一个资源通常是不安全的。为了避免对临界区进行并发访问，编程者必须保证临界区代码段被原子地执行，也就是说，代码段在执行期间不可被打断，就如同整个临界区是一个不可分割的指令一样。如果两个内核
+      
+    
+    </summary>
+    
+      <category term="Linux内核" scheme="http://wanqbin.xyz/categories/Linux%E5%86%85%E6%A0%B8/"/>
+    
+    
+      <category term="Linux内核同步" scheme="http://wanqbin.xyz/tags/Linux%E5%86%85%E6%A0%B8%E5%90%8C%E6%AD%A5/"/>
+    
+      <category term="临界区" scheme="http://wanqbin.xyz/tags/%E4%B8%B4%E7%95%8C%E5%8C%BA/"/>
+    
+      <category term="竞争条件" scheme="http://wanqbin.xyz/tags/%E7%AB%9E%E4%BA%89%E6%9D%A1%E4%BB%B6/"/>
+    
+  </entry>
   
   <entry>
     <title>92.反转链表II</title>
@@ -560,66 +622,6 @@
       <category term="Linux" scheme="http://wanqbin.xyz/tags/Linux/"/>
     
       <category term="文件处理命令" scheme="http://wanqbin.xyz/tags/%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Linux文件处理命令</title>
-    <link href="http://wanqbin.xyz/2019/08/07/Linux%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4/"/>
-    <id>http://wanqbin.xyz/2019/08/07/Linux文件处理命令/</id>
-    <published>2019-08-07T07:01:00.000Z</published>
-    <updated>2019-08-07T07:29:18.560Z</updated>
-    
-    <content type="html"><![CDATA[<ol><li><h3 id="文件处理命令：touch"><a href="#文件处理命令：touch" class="headerlink" title="文件处理命令：touch"></a>文件处理命令：touch</h3><ul><li><p>命令名称：touch</p></li><li><p>命令所在路径：/bin/touch</p></li><li><p>执行权限：所有用户</p></li><li><p>语法：touh [文件名] </p></li><li><p>功能描述：创建空文件</p></li><li><p>范例：</p><p>​    touch program files //会在当前目录下创建两个文件，一个为program，另一个为files</p><p>​    创建一个文件 ：touch “program files” //不建议加空格</p><p><img src="/2019/08/07/Linux文件处理命令/1.PNG" alt="文件处理命令"></p></li></ul></li><li><h3 id="文件处理命令：cat"><a href="#文件处理命令：cat" class="headerlink" title="文件处理命令：cat"></a>文件处理命令：cat</h3><ul><li><p>文件处理命令：cat</p></li><li><p>命令名称：cat</p></li><li><p>命令所在路径：/bin/cat</p></li><li><p>执行权限：所有用户</p></li><li><p>语法：cat [文件名]</p></li><li><p>功能描述：显示文件内容</p><p>​                    -n 显示行号</p><p><img src="/2019/08/07/Linux文件处理命令/2.PNG" alt="文件处理命令"></p></li></ul></li><li><h3 id="文件处理命令：more"><a href="#文件处理命令：more" class="headerlink" title="文件处理命令：more"></a>文件处理命令：more</h3><ul><li><p>文件处理命令：more</p></li><li><p>命令名称：more</p></li><li><p>命令所在路径：/bin/more</p></li><li><p>执行权限：所有用户</p></li><li><p>语法：more [文件名]</p><p>​            (空格)或f   翻页</p><p>​        （Enter） 换行</p><p>​            q或Q         退出</p></li><li><p>功能描述：分页显示文件内容</p></li></ul><p><img src="/2019/08/07/Linux文件处理命令/3.PNG" alt="文件处理命令"></p></li><li><h3 id="文件处理命令：less"><a href="#文件处理命令：less" class="headerlink" title="文件处理命令：less"></a>文件处理命令：less</h3><ul><li>文件处理命令：less</li><li>命令名称：less</li><li>命令所在路径： /usr/bin/less</li><li>执行权限：所有用户</li><li>语法：less [文件名]</li><li>功能描述：分页显示文件内容 （可向上翻页）</li></ul></li><li><h3 id="文件处理命令：head"><a href="#文件处理命令：head" class="headerlink" title="文件处理命令：head"></a>文件处理命令：head</h3><ul><li><p>文件处理命令：head</p></li><li><p>命令名称：head</p></li><li><p>命令所在路径：/usr/bin/head</p></li><li><p>执行权限：所有用户</p></li><li><p>语法：head [文件名]</p></li><li><p>功能描述：显示文件前面几行</p><p>​                    -n 指定行数</p></li></ul><p><img src="/2019/08/07/Linux文件处理命令/4.PNG" alt="文件处理命令"></p></li><li><h3 id="文件处理命令：tail"><a href="#文件处理命令：tail" class="headerlink" title="文件处理命令：tail"></a>文件处理命令：tail</h3><ul><li><p>文件处理命令：tail</p></li><li><p>命令名称：tail</p></li><li><p>命令所在路径：/usr/bin/tail</p></li><li><p>执行权限：所有用户</p></li><li><p>语法： tail [文件名]</p></li><li><p>功能描述：显示文件后面几行</p><p>​                -n 指定行数</p><p>​                -f 动态显示文件末尾内容</p></li></ul><p><img src="/2019/08/07/Linux文件处理命令/5.PNG" alt="文件处理命令"></p></li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;ol&gt;
-&lt;li&gt;&lt;h3 id=&quot;文件处理命令：touch&quot;&gt;&lt;a href=&quot;#文件处理命令：touch&quot; class=&quot;headerlink&quot; title=&quot;文件处理命令：touch&quot;&gt;&lt;/a&gt;文件处理命令：touch&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;命令名称：touch&lt;/
-      
-    
-    </summary>
-    
-      <category term="Linux命令" scheme="http://wanqbin.xyz/categories/Linux%E5%91%BD%E4%BB%A4/"/>
-    
-    
-      <category term="Linux命令" scheme="http://wanqbin.xyz/tags/Linux%E5%91%BD%E4%BB%A4/"/>
-    
-      <category term="Ubuntu" scheme="http://wanqbin.xyz/tags/Ubuntu/"/>
-    
-      <category term="Linux文件处理命令" scheme="http://wanqbin.xyz/tags/Linux%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Linux目录及常用命令</title>
-    <link href="http://wanqbin.xyz/2019/08/07/Linux%E7%9B%AE%E5%BD%95%E5%8F%8A%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
-    <id>http://wanqbin.xyz/2019/08/07/Linux目录及常用命令/</id>
-    <published>2019-08-07T06:16:00.000Z</published>
-    <updated>2019-08-07T06:45:48.272Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="一、Ubuntu各目录含义"><a href="#一、Ubuntu各目录含义" class="headerlink" title="一、Ubuntu各目录含义"></a>一、Ubuntu各目录含义</h2><div class="table-container"><table><thead><tr><th>目录名</th><th>作用</th></tr></thead><tbody><tr><td>/boot/</td><td>启动目录，保存系统启动相关文件</td></tr><tr><td>/boot/grub/</td><td>grub引导其器相关的配置文件</td></tr><tr><td>/dev/</td><td>设备文件保存位置。Linux中所有内容以文件形式保存，包括硬件。那么这个目录就是用来保存所有硬件设备文件的</td></tr><tr><td>/proc/</td><td>虚拟文件目录，该目录中的数据并不保存到硬盘当中，而是保存到内存中。主要保存系统同的内核、进程、外部设备状态和网络状态灯</td></tr><tr><td>/mnt/</td><td>挂载目录，系统建议用来挂载NFS服务的共享目录。只要是一个已经建立的空目录就可以作为挂载点。系统虽然准备了三个默认挂载点/media、/mnt、/misc，但是到底哪个目录挂载什么设备都可以由管理员自己决定。</td></tr><tr><td>/media/</td><td>挂载目录，系统建议用来挂载媒体设备的，例如光盘和软盘</td></tr><tr><td>/root/</td><td>超级用户的家目录。普通用户家目录在/home下，超级用户家目录直接在/下</td></tr><tr><td>/home/用户名/</td><td>普通用户的家目录，创建一个一般用户账号时，默认的用户主文件夹就在该目录下</td></tr><tr><td>/bin/</td><td>存放系统命令的目录，普通用户和超级用户都可以执行</td></tr><tr><td>/sbin/</td><td>保存和系统环境设置相关的命令，只有超级用户可以使用这些命令进行系统环境设置</td></tr><tr><td>/lib/</td><td>系统调用的函数库保存位置</td></tr><tr><td>/etc/</td><td>配置文件保存位置。</td></tr><tr><td>/etc/init.d/</td><td>System V分类风格的启动脚本</td></tr><tr><td>/etc/X11/</td><td>图形界面配置文件</td></tr><tr><td>/lost+found</td><td>包含了系统修复时的恢复文件</td></tr><tr><td>/sys/</td><td>虚拟文件系统。和/proc目录相似，都是保存在内存当中的，主要保存与内核相关信息</td></tr><tr><td>/usr</td><td>Unix Software Resouce,即Unix操作系统软件资源放在该目录，而不是用户的是数据</td></tr><tr><td>/usr/bin</td><td>用户可使用的大部分命令都放在这儿</td></tr><tr><td>/usr/include</td><td>存放C/C++等程序语言的头文件和目标文件</td></tr><tr><td>/usr/lib</td><td>包含各应用软件的函数库，目标文件</td></tr><tr><td>/usr/local</td><td>系统管理员在本机执行下载自行安装的软件</td></tr><tr><td>/var</td><td>动态数据保存位置。主要保存缓存，日志以及软件运行所产生的文件</td></tr><tr><td>/var/cache</td><td>应用缓存目录</td></tr><tr><td>/var/lib</td><td>存放程序执行过程中，需要使用到的数据文件</td></tr><tr><td>/var/lock</td><td>它是/run/lock目录的软链接，某些设备或文件一次只能被一个应用所使用</td></tr><tr><td>var/log</td><td>日志文件目录</td></tr></tbody></table></div><h2 id="二、Linux相关知识"><a href="#二、Linux相关知识" class="headerlink" title="二、Linux相关知识"></a>二、Linux相关知识</h2><ol><li>Linux严格区分大小写</li><li>Linux中所有内容以文件形式保存，包括硬件<ul><li>硬盘文件是/dev/sd[a-p]</li><li>光盘文件是/dev/sr0等</li></ul></li><li>Linux不靠扩展名区分文件类型<ul><li>压缩包：.gz、.bz、.tar、.bz2、.tgz</li><li>二进制软件包：.rpm</li><li>网页文件：.html、.php</li><li>脚本文件：.ssh</li><li>配置文件：.conf</li></ul></li><li>Linux所有的存储设备都必须挂载之后用户才能使用，包括硬盘，U盘，光盘。</li><li>Windows下的程序不能直接在Linux中安装和运行</li></ol><h2 id="三、Linux目录处理命令"><a href="#三、Linux目录处理命令" class="headerlink" title="三、Linux目录处理命令"></a>三、Linux目录处理命令</h2><ol><li><p>命令格式</p><p>命令格式： <code>命令 [-选项] [参数]</code></p><p>例如：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -la</span><br></pre></td></tr></table></figure><p>说明：</p><ul><li>个别命令使用不遵循此格式</li><li>当有多个选项时，可以写在一起</li><li>简化选项与完整选项 -a等于—all</li></ul></li><li><p>目录处理命令：ls</p><ul><li><p>命令名称：ls</p></li><li><p>命令英文原意：list</p></li><li><p>命令所在路径：/bin/ls</p></li><li><p>执行权限：所有用户</p></li><li><p>功能描述：显示目录文件夹</p></li><li><p>语法： ls 选项[-add] [文件或目录]</p><p>​            -a 显示所有文件，包括隐藏文件</p><p>​            -l详细信息显示</p><p>​            -d查看指定目录的详细信息</p><p>​            -i 查询任何一个文件的id</p><p><img src="/2019/08/07/Linux目录及常用命令/1.PNG" alt="目录处理命令"></p><p><img src="/2019/08/07/Linux目录及常用命令/2.PNG" alt="目录处理命令"></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -lh  #人性化显示</span><br></pre></td></tr></table></figure><p><img src="/2019/08/07/Linux目录及常用命令/3.人性化显示.PNG" alt="人性化显示"></p></li></ul></li><li><p>目录处理命令：mkdir</p><ul><li><p>命令名称：mkdir</p></li><li><p>命令英文原意：make directories【目录】</p></li><li><p>命令所在路径:/bin/mkdir</p></li><li><p>执行权限：所有用户</p></li><li><p>语法：mkdir -p[目录名]</p></li><li><p>功能描述：创建新目录</p><p>​                    -p   递归创建</p><p><img src="/2019/08/07/Linux目录及常用命令/4.PNG" alt="目录处理命令mkdir"></p></li></ul></li><li><p>目录处理命令：cd</p><ul><li><p>命令名称：cd</p></li><li><p>命令英文原意：change directory</p></li><li><p>命令所在路径：shell内置命令</p></li><li><p>执行权限：所有用户</p></li><li><p>语法：cd [目录]</p></li><li><p>功能描述：切换目录</p></li></ul></li><li><p>目录处理命令：pwd</p><ul><li><p>目录处理命令：pwd</p></li><li><p>命令名称：pwd</p></li><li><p>命令英文原意：print working directory</p></li><li><p>命令所在路径：/bin/pwd</p></li><li><p>执行权限：所有用户</p></li><li><p>语法：pwd</p></li><li><p>功能描述：显示当前目录</p></li></ul><p><img src="/2019/08/07/Linux目录及常用命令/5.PNG" alt="目录处理命令"></p></li><li><p>目录处理命令：rmdir</p><ul><li><p>命令名称：rmdir</p></li><li><p>命令英文原意：remove empty directories</p></li><li><p>命令所在路径：/bin/rmdir</p></li><li><p>执行权限：所有用户</p></li><li><p>语法：rmdir [目录名]</p></li><li><p>功能：删除空目录</p></li></ul><p><img src="/2019/08/07/Linux目录及常用命令/6.PNG" alt="目录处理命令"></p><p>当目录非空时，使用rmdir无法删除目录。</p><p>将目录为空时，可以使用rmdir删除目录。这里删除了xiaoming目录下的文件，删除成功。</p><p><img src="/2019/08/07/Linux目录及常用命令/7.PNG" alt="目录处理命令"></p></li><li><p>目录处理命令：cp</p><ul><li><p>命令名称：cp</p></li><li><p>命令英文原意：copy</p></li><li><p>命令所在路径：/bin/cp</p></li><li><p>执行权限：所有用户</p></li><li><p>语法： cd -rp [原文件或目录] [目标目录]</p><p>​            -r 复制目录</p><p>​            -p 保留文件属性</p></li><li><p>功能：复制文件或目录</p><p>​            可以同时复制多个文件</p></li></ul><p><img src="/2019/08/07/Linux目录及常用命令/8.PNG" alt="目录处理命令"></p></li><li><p>目录处理命令：mv</p><ul><li><p>命令名称：mv</p></li><li><p>命令英文原意：move</p></li><li><p>命令所在路径：/bin/mv</p></li><li><p>执行权限：所有用户</p></li><li><p>语法：mv [原文件或目录] [目标目录]</p></li><li><p>功能描述：剪切文件、改名</p></li></ul><p><img src="/2019/08/07/Linux目录及常用命令/9.PNG" alt="目录处理命令"></p><p>上图所示操作将<code>/xiaohong/xiaoming</code>目录下的<code>my</code>目录剪切到了<code>/xiaohong</code>目录下，并改名为<code>aokis</code>。</p></li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;一、Ubuntu各目录含义&quot;&gt;&lt;a href=&quot;#一、Ubuntu各目录含义&quot; class=&quot;headerlink&quot; title=&quot;一、Ubuntu各目录含义&quot;&gt;&lt;/a&gt;一、Ubuntu各目录含义&lt;/h2&gt;&lt;div class=&quot;table-container&quot;&gt;
-      
-    
-    </summary>
-    
-      <category term="Linux命令" scheme="http://wanqbin.xyz/categories/Linux%E5%91%BD%E4%BB%A4/"/>
-    
-    
-      <category term="Linux命令" scheme="http://wanqbin.xyz/tags/Linux%E5%91%BD%E4%BB%A4/"/>
-    
-      <category term="Ubuntu" scheme="http://wanqbin.xyz/tags/Ubuntu/"/>
-    
-      <category term="目录处理命令" scheme="http://wanqbin.xyz/tags/%E7%9B%AE%E5%BD%95%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4/"/>
     
   </entry>
   
