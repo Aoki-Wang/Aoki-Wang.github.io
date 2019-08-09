@@ -516,6 +516,7 @@
 <li>在类的外部（作用域范围外），访问权限才有意义：public,private,protected</li>
 <li>在类的外部，只有public修饰的成员才能被访问，在没有涉及继承和派生时，private和protected是同等级的，外界不可以访问。   </li>
 </ul>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -525,7 +526,8 @@
 <th>对象外部</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>public</td>
 <td>公有</td>
 <td>可访问</td>
@@ -543,7 +545,9 @@
 <td>可访问</td>
 <td>不可访问</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>其中，potected为保护权限，类内部可以访问，当前类的子类可以访问，类外部不可以。而private是对象的私有数据，子类和类外部都不可以访问。  </p>
 <p>下面，我们对比以下C语言下的封装和C++语言下封装的区别。  </p>
 <blockquote>
@@ -551,10 +555,8 @@
 <hr>
 <p>在C语言中我们可以定义一个结构体来表示一个对象所包含的属性，函数用来表示出来一个事物，在C语言中，结构体中不能定义函数，所以行为和定义方式分开的，也就是说吃饭这个属性不属于某个对象，而属于所有的共同数据。  </p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _CRT_SECURE_NO_WARNINGS</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">person</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">char</span> name[<span class="number">10</span>];</span><br><span class="line">	<span class="keyword">int</span> age;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PersonEat</span><span class="params">(struct person *p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%s在吃饭\n"</span>, p-&gt;name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Dog</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">char</span> name[<span class="number">10</span>];</span><br><span class="line">	<span class="keyword">int</span> age;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DogEat</span><span class="params">(struct Dog *d)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%s在狗粮\n"</span>, d-&gt;name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span>	<span class="title">Dog</span> <span class="title">one</span>;</span></span><br><span class="line">	<span class="built_in">strcpy</span>(one.name, <span class="string">"旺财"</span>);</span><br><span class="line">	DogEat(&amp;one);</span><br><span class="line"></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">person</span> <span class="title">two</span>;</span></span><br><span class="line">	<span class="built_in">strcpy</span>(two.name, <span class="string">"Aoki"</span>);</span><br><span class="line">	DogEat(&amp;two);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	test01();</span><br><span class="line">	system(<span class="string">"pause"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>输出结果如下：<br><img src="https://i.imgur.com/LqNK5AT.png" alt><br>从输出结果我们可以看出，小狗旺财和Aoki这个人正在一块吃狗粮，但是正常情况下，Aoki怎么可能吃狗粮呢？<br>从这里，我们可以看出在C中封装一个对象造成了什么样的后果。那么，在C++中的封装呢？  </p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _CRT_SECURE_NO_WARNINGS</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Person</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">char</span> name[<span class="number">10</span>];</span><br><span class="line">	<span class="keyword">int</span> age;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">PersonEat</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; name &lt;&lt; <span class="string">"在吃饭"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Dog</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">char</span> name[<span class="number">10</span>];</span><br><span class="line">	<span class="keyword">int</span> age;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">DogEat</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; name &lt;&lt; <span class="string">"在吃狗粮"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Person one;</span><br><span class="line">	<span class="built_in">strcpy</span>(one.name, <span class="string">"Aoki"</span>);</span><br><span class="line">	one.PersonEat();</span><br><span class="line">	<span class="comment">//one.DogEat();</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	test();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>刚开始，我尝试了使用one这个对象来调用DogEat这个函数，编译器报错，不允许我们使用它，因为DogEat并不是Person的成员函数。编译器报错如下：<br><img src="https://i.imgur.com/lbG3AkV.png" alt><br>在注释掉报错语句之后，正确输出结果如下：<br><img src="https://i.imgur.com/qpibb78.png" alt><br>从上面的例子中，我们可以看到，C++中的封装，有着严格的类型转换检测，C++让属性和行为绑定在一起。属性和行为作为一个整体来表示生活中的事物。</p>
 
       
@@ -694,7 +696,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">78</span>
+                  <span class="site-state-item-count">82</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -705,7 +707,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -716,7 +718,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">149</span>
+                  <span class="site-state-item-count">158</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -839,7 +841,7 @@ setInterval("createtime()",250);
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共153k字</span>
+  <span class="post-count">博客全站共154.2k字</span>
 </div>
 
 
