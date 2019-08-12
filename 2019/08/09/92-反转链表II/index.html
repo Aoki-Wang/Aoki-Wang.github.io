@@ -136,24 +136,24 @@
 
 
 
-<meta name="description" content="一、题目描述反转从位置 m 到 n 的链表。请使用一趟扫描完成反转。 说明:1 ≤ m ≤ n ≤ 链表长度。 示例: 12输入: 1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;5-&amp;gt;NULL, m = 2, n = 4输出: 1-&amp;gt;4-&amp;gt;3-&amp;gt;2-&amp;gt;5-&amp;gt;NULL  二、分析对于题目要求，画图如下：  在该题中需要实现对指定范围内的链表的反转。m和n代表范围">
+<meta name="description" content="一、题目描述反转从位置 m 到 n 的链表。请使用一趟扫描完成反转。 说明:1 ≤ m ≤ n ≤ 链表长度。 示例: 12输入: 1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;5-&amp;gt;NULL, m = 2, n = 4输出: 1-&amp;gt;4-&amp;gt;3-&amp;gt;2-&amp;gt;5-&amp;gt;NULL 二、分析对于题目要求，画图如下：  在该题中需要实现对指定范围内的链表的反转。m和n代表范围区">
 <meta name="keywords" content="LeetCode,反转链表,算法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="92.反转链表II">
 <meta property="og:url" content="http://wanqbin.xyz/2019/08/09/92-反转链表II/index.html">
 <meta property="og:site_name" content="Aoki&#39;s Blog">
-<meta property="og:description" content="一、题目描述反转从位置 m 到 n 的链表。请使用一趟扫描完成反转。 说明:1 ≤ m ≤ n ≤ 链表长度。 示例: 12输入: 1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;5-&amp;gt;NULL, m = 2, n = 4输出: 1-&amp;gt;4-&amp;gt;3-&amp;gt;2-&amp;gt;5-&amp;gt;NULL  二、分析对于题目要求，画图如下：  在该题中需要实现对指定范围内的链表的反转。m和n代表范围">
+<meta property="og:description" content="一、题目描述反转从位置 m 到 n 的链表。请使用一趟扫描完成反转。 说明:1 ≤ m ≤ n ≤ 链表长度。 示例: 12输入: 1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;5-&amp;gt;NULL, m = 2, n = 4输出: 1-&amp;gt;4-&amp;gt;3-&amp;gt;2-&amp;gt;5-&amp;gt;NULL 二、分析对于题目要求，画图如下：  在该题中需要实现对指定范围内的链表的反转。m和n代表范围区">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://wanqbin.xyz/2019/08/09/92-反转链表II/1.PNG">
 <meta property="og:image" content="http://wanqbin.xyz/2019/08/09/92-反转链表II/2.PNG">
 <meta property="og:image" content="http://wanqbin.xyz/2019/08/09/92-反转链表II/3.PNG">
 <meta property="og:image" content="http://wanqbin.xyz/2019/08/09/92-反转链表II/4.PNG">
 <meta property="og:image" content="http://wanqbin.xyz/2019/08/09/92-反转链表II/5.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/08/09/92-反转链表II/%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/2019/08/09/92-反转链表II/执行结果.PNG">
 <meta property="og:updated_time" content="2019-08-09T06:29:38.978Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="92.反转链表II">
-<meta name="twitter:description" content="一、题目描述反转从位置 m 到 n 的链表。请使用一趟扫描完成反转。 说明:1 ≤ m ≤ n ≤ 链表长度。 示例: 12输入: 1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;5-&amp;gt;NULL, m = 2, n = 4输出: 1-&amp;gt;4-&amp;gt;3-&amp;gt;2-&amp;gt;5-&amp;gt;NULL  二、分析对于题目要求，画图如下：  在该题中需要实现对指定范围内的链表的反转。m和n代表范围">
+<meta name="twitter:description" content="一、题目描述反转从位置 m 到 n 的链表。请使用一趟扫描完成反转。 说明:1 ≤ m ≤ n ≤ 链表长度。 示例: 12输入: 1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;5-&amp;gt;NULL, m = 2, n = 4输出: 1-&amp;gt;4-&amp;gt;3-&amp;gt;2-&amp;gt;5-&amp;gt;NULL 二、分析对于题目要求，画图如下：  在该题中需要实现对指定范围内的链表的反转。m和n代表范围区">
 <meta name="twitter:image" content="http://wanqbin.xyz/2019/08/09/92-反转链表II/1.PNG">
 
 
@@ -519,7 +519,6 @@
 <p>说明:<br>1 ≤ m ≤ n ≤ 链表长度。</p>
 <p>示例:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL, m = 2, n = 4</span><br><span class="line">输出: 1-&gt;4-&gt;3-&gt;2-&gt;5-&gt;NULL</span><br></pre></td></tr></table></figure>
-
 <h2 id="二、分析"><a href="#二、分析" class="headerlink" title="二、分析"></a>二、分析</h2><p>对于题目要求，画图如下：</p>
 <p><img src="/2019/08/09/92-反转链表II/1.PNG" alt="题目要求"></p>
 <p>在该题中需要实现对指定范围内的链表的反转。<code>m</code>和<code>n</code>代表范围区间。我们可以知道，<code>n-m+1</code>即为需要反转的链表的长度。在一开始，我们需要知道该从什么地方开始反转，<code>m</code>代表链表中的第<code>m</code>个结点。即从第<code>m</code>个结点开始对<code>n-m+1</code>长度的链表进行反转。</p>
@@ -532,10 +531,8 @@
 <p>步骤三：将<code>pre_head</code>与<code>new_head</code>连接，<code>modify_list_tail</code>与<code>head</code>连接。</p>
 <p><img src="/2019/08/09/92-反转链表II/5.PNG" alt="步骤三"></p>
 <h2 id="三、实现"><a href="#三、实现" class="headerlink" title="三、实现"></a>三、实现</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span> &#123;</span></span><br><span class="line">	<span class="keyword">int</span> val;</span><br><span class="line">	ListNode* next;</span><br><span class="line">	ListNode(<span class="keyword">int</span> x) : val(x), next(<span class="literal">NULL</span>) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function">ListNode* <span class="title">reverseBetween</span><span class="params">(ListNode* head, <span class="keyword">int</span> m, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> change_len = n - m + <span class="number">1</span>;<span class="comment">//需逆序的节点个数</span></span><br><span class="line">		ListNode* pre_head = <span class="literal">NULL</span>;<span class="comment">//头节点的前一个节点</span></span><br><span class="line">		ListNode* result = head;<span class="comment">//返回结果</span></span><br><span class="line">		<span class="keyword">while</span> (head &amp;&amp; --m)</span><br><span class="line">		&#123;</span><br><span class="line">			pre_head = head;</span><br><span class="line">			head = head-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line">		ListNode* modify_list_tail = head;</span><br><span class="line">		ListNode* newHead = <span class="literal">NULL</span>;</span><br><span class="line">		<span class="keyword">while</span> (head &amp;&amp; change_len)</span><br><span class="line">		&#123;</span><br><span class="line">			ListNode* next = head-&gt;next;</span><br><span class="line">			head-&gt;next = newHead;</span><br><span class="line">			newHead = head;</span><br><span class="line">			head = next;</span><br><span class="line">			change_len--;</span><br><span class="line">		&#125;</span><br><span class="line">		modify_list_tail-&gt;next = head;<span class="comment">//链接逆置的链表尾与逆置段的后一个节点</span></span><br><span class="line">		<span class="keyword">if</span> (pre_head)<span class="comment">//pre_head不为空，说明不是从第一个节点开始逆置的</span></span><br><span class="line">		&#123;</span><br><span class="line">			pre_head-&gt;next = newHead;<span class="comment">//将逆置链表开始的前趋与逆置后的头结点链接</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			result = newHead;<span class="comment">//说明从第一个节点开始逆置，结果即为逆置后的头结点</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> result;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
 <h3 id="测试函数："><a href="#测试函数：" class="headerlink" title="测试函数："></a>测试函数：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="function">ListNode <span class="title">a</span><span class="params">(<span class="number">1</span>)</span></span>;</span><br><span class="line">	<span class="function">ListNode <span class="title">b</span><span class="params">(<span class="number">2</span>)</span></span>;</span><br><span class="line">	<span class="function">ListNode <span class="title">c</span><span class="params">(<span class="number">3</span>)</span></span>;</span><br><span class="line">	<span class="function">ListNode <span class="title">d</span><span class="params">(<span class="number">4</span>)</span></span>;</span><br><span class="line">	<span class="function">ListNode <span class="title">e</span><span class="params">(<span class="number">5</span>)</span></span>;</span><br><span class="line">	<span class="function">ListNode <span class="title">f</span><span class="params">(<span class="number">15</span>)</span></span>;</span><br><span class="line">	a.next = &amp;b;</span><br><span class="line">	b.next = &amp;c;</span><br><span class="line">	c.next = &amp;d;</span><br><span class="line">	d.next = &amp;e;</span><br><span class="line">	e.next = &amp;f;</span><br><span class="line">	Solution sol;</span><br><span class="line">	ListNode* newhead = sol.reverseBetween(&amp;a, <span class="number">2</span>, <span class="number">5</span>);</span><br><span class="line">	<span class="keyword">while</span> (newhead)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; newhead-&gt;val &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		newhead = newhead-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="执行结果："><a href="#执行结果：" class="headerlink" title="执行结果："></a>执行结果：</h3><p><img src="/2019/08/09/92-反转链表II/%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C.PNG" alt="执行结果"></p>
+<h3 id="执行结果："><a href="#执行结果：" class="headerlink" title="执行结果："></a>执行结果：</h3><p><img src="/2019/08/09/92-反转链表II/执行结果.PNG" alt="执行结果"></p>
 <h2 id="三、源码地址"><a href="#三、源码地址" class="headerlink" title="三、源码地址"></a>三、源码地址</h2><p>​        <a href="https://github.com/Aoki-Wang/CheckStation/tree/master/LeetCode/92.ReverseList2" target="_blank" rel="noopener">反转链表的实现</a></p>
 
       
@@ -591,7 +588,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/08/09/nux内核同步机制分析——临界区与竞争条件/" rel="prev" title="Linux内核同步机制分析——临界区与竞争条件">
+              <a href="/2019/08/09/ux内核同步机制分析——临界区与竞争条件/" rel="prev" title="Linux内核同步机制分析——临界区与竞争条件">
                 Linux内核同步机制分析——临界区与竞争条件 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -679,7 +676,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">84</span>
+                  <span class="site-state-item-count">93</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -701,7 +698,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">164</span>
+                  <span class="site-state-item-count">188</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -824,7 +821,7 @@ setInterval("createtime()",250);
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共158.6k字</span>
+  <span class="post-count">博客全站共180.8k字</span>
 </div>
 
 
