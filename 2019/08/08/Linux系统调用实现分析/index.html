@@ -125,7 +125,7 @@
 
 
 
-  <meta name="keywords" content="Linux系统调用,操作系统,系统调用,C程序库,">
+  <meta name="keywords" content="操作系统,Linux系统调用,系统调用,C程序库,">
 
 
 
@@ -137,7 +137,7 @@
 
 
 <meta name="description" content="一、C程序库和系统调用&amp;emsp;&amp;emsp;系统调用视为了编程人员提供内核服务的一组函数，而C程序库通过软中断陷入内核，实现内核服务。 &amp;emsp;&amp;emsp;系统调用时系统内核向用户程序提供支持的接口，通过这些接口应用程序向系统内核服务，控制转向系统内核，而系统内核在完成服务之后，将控制和结果返回给用户程序。系统调用是用户程序与系统内核的边界，通过系统调用，进程可由用户模式转入内核模式，在内核">
-<meta name="keywords" content="Linux系统调用,操作系统,系统调用,C程序库">
+<meta name="keywords" content="操作系统,Linux系统调用,系统调用,C程序库">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux系统调用实现分析">
 <meta property="og:url" content="http://wanqbin.xyz/2019/08/08/Linux系统调用实现分析/index.html">
@@ -515,10 +515,12 @@
 </li>
 <li><h4 id="与系统调用相关的数据结构"><a href="#与系统调用相关的数据结构" class="headerlink" title="与系统调用相关的数据结构"></a>与系统调用相关的数据结构</h4><h4 id="（1）系统调用号"><a href="#（1）系统调用号" class="headerlink" title="（1）系统调用号"></a>（1）系统调用号</h4><p>&emsp;&emsp;在Linux中每个系统调用被赋予一个唯一的编号，这个编号被称为系统调用号。这样通过这个独一无二的号就可以关联到相应的系统调用处理处理程序。系统调用号定义在<code>include/asm/unistd.h</code>中，编号的定义方式如下所示：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _NR_result_syscall		0</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _NR_exit			   1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _NR_fork			  2</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _NR_read	                         3</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _NR_write			  4</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _NR_open			5</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _NR_close			  6</span></span><br><span class="line"></span><br><span class="line">……</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> NR_syscalls  325</span></span><br></pre></td></tr></table></figure>
+
 <p>&emsp;&emsp;其中，<code>NR_syscalls</code>表示系统调用的总数，在检查一个系统调用号是否合法时要用到。</p>
 <p>&emsp;&emsp;系统调用号非常关键，当用户空间的进程执行一个系统调用的时候，系统使用系统调用号而不是系统调用的函数名称，来指明到底是要执行那个系统调用。系统调用号一旦分配就不能再有任何变更，否则编译好的应用程序就会崩溃。此外，如果一个系统调用被删除，它所占用的系统调用号也不允许被回收利用，否则，以前编译过的代码在调用这个系统调用时，就会出错。为此，Linux设置了专门的“未实现”系统调用<code>sys_ni_syscall()</code>，它除了返回<code>-ENOSYS</code>外，不做任何其他的事。当系统调用一个被删除的系统调用时，或者无效的系统调用时，这个函数就会被执行。</p>
 <h4 id="（2）系统调用表"><a href="#（2）系统调用表" class="headerlink" title="（2）系统调用表"></a>（2）系统调用表</h4><p>&emsp;&emsp;内核使用系统调用表记录了各个系统调用处理函数的入口地址，以系统同调用号为偏移量能够很容易地在该表中找到对应的处理函数地址。系统调用表存储在<code>sys_call_table</code>中，它与体系结构有关，x86体系结构的系统调用表定义在<code>arch/x86/kernel/syscall_table.S</code>中，其定义方式如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ENTER(sys_call_table)</span><br><span class="line">	.long sys_restart_syscall</span><br><span class="line">	.long sys_exit</span><br><span class="line">	.long sys_fork</span><br><span class="line">	.long sys_read</span><br><span class="line">	……</span><br></pre></td></tr></table></figure>
+
 <p>&emsp;&emsp;当用户空间程序调用一个系统调用时，系统调用号作为参数传递给中断<code>0x80</code>，而该标号实际上就相当于系统调用表的下标，通过该值可以找到相应的系统调用的处理函数。</p>
 </li>
 <li><h4 id="系统调用入口函数"><a href="#系统调用入口函数" class="headerlink" title="系统调用入口函数"></a>系统调用入口函数</h4><p>&emsp;&emsp;当用户执行了软中断指令后，系统从用户空间进入内核空间，并在内核空间执行系统调用入口函数。系统调用入口函数由<code>arch/x386/kernel/entry_32.S</code>文件中的<code>system_call</code>汇编代码段定义，其主要功能是对系统调用进行预处理，并调用相应的系统调用服务例程。函数的执行过程如下：</p>
@@ -562,9 +564,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Linux系统调用/" rel="tag"># Linux系统调用</a>
-          
             <a href="/tags/操作系统/" rel="tag"># 操作系统</a>
+          
+            <a href="/tags/Linux系统调用/" rel="tag"># Linux系统调用</a>
           
             <a href="/tags/系统调用/" rel="tag"># 系统调用</a>
           
@@ -690,7 +692,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -701,7 +703,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">188</span>
+                  <span class="site-state-item-count">189</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -824,7 +826,7 @@ setInterval("createtime()",250);
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共180.8k字</span>
+  <span class="post-count">博客全站共181.4k字</span>
 </div>
 
 

@@ -125,7 +125,7 @@
 
 
 
-  <meta name="keywords" content="Linux内核,操作系统,进程调度,模块化调度,组调度,">
+  <meta name="keywords" content="操作系统,Linux内核,进程调度,模块化调度,组调度,">
 
 
 
@@ -137,7 +137,7 @@
 
 
 <meta name="description" content="一、模块化调度&amp;emsp;&amp;emsp;CFS提供了模块化调度，使得各种不同的调度算法都可以作为一个模块注册到该管理器中。不同的进程可以选择不同的调度模块。为了实现模块化调度，引入了称为“调度类”的概念。 &amp;emsp;&amp;emsp;调度类类似于一个模块链，封装了关于调度算法的信息，协助内核调度程序工作，每个调度算法模块需要实现由调度类建议的一组函数。CFS实现了两个调度算法模块，CFS算法模块(sch">
-<meta name="keywords" content="Linux内核,操作系统,进程调度,模块化调度,组调度">
+<meta name="keywords" content="操作系统,Linux内核,进程调度,模块化调度,组调度">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux进程调度——模块化调度和组调度">
 <meta property="og:url" content="http://wanqbin.xyz/2019/08/08/inux进程调度——模块化调度和组调度/index.html">
@@ -500,6 +500,7 @@
         <h2 id="一、模块化调度"><a href="#一、模块化调度" class="headerlink" title="一、模块化调度"></a>一、模块化调度</h2><p>&emsp;&emsp;CFS提供了模块化调度，使得各种不同的调度算法都可以作为一个模块注册到该管理器中。不同的进程可以选择不同的调度模块。为了实现模块化调度，引入了称为“调度类”的概念。</p>
 <p>&emsp;&emsp;调度类类似于一个模块链，封装了关于调度算法的信息，协助内核调度程序工作，每个调度算法模块需要实现由调度类建议的一组函数。CFS实现了两个调度算法模块，CFS算法模块(<code>sched_fair.c</code>)和实时调度模块(<code>sched_re.c</code>)。对应实时进程，将使用实时调度模块，对应普通进程则使用CFS算法。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sched_class</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">sched_class</span> *<span class="title">next</span>;</span><span class="comment">/*指向下一个调度类*/</span></span><br><span class="line">    <span class="keyword">void</span>(*enqueue_task)(struct rq *rq,struct task_struct *p,<span class="keyword">int</span> wakeup);</span><br><span class="line">    <span class="keyword">void</span>(*dequeue_task)(struct rq *rq,struct task_struct *p,<span class="keyword">int</span> sleep);</span><br><span class="line">    <span class="keyword">void</span>(*yield_task)(struct rq *rq);</span><br><span class="line">    <span class="keyword">void</span>(*check_preempt_curr)(struct rq *rq,struct task_struct *p);</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">task_struct</span> *(*<span class="title">pick_next_task</span>)(<span class="title">struct</span> <span class="title">rq</span> *<span class="title">rq</span>);</span></span><br><span class="line">    <span class="keyword">void</span>(*put_prev_task)(struct rq *rq,struct task_struct *p);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> CONFIG_SMP</span></span><br><span class="line">    <span class="function"><span class="keyword">unsigned</span> <span class="title">long</span><span class="params">(*load_balance)</span><span class="params">(struct rq *this_rq,<span class="keyword">int</span> this_cpu,</span></span></span><br><span class="line"><span class="function"><span class="params">                                struct rq *busiest,<span class="keyword">unsigned</span> <span class="keyword">long</span> max_load_move,</span></span></span><br><span class="line"><span class="function"><span class="params">                                struct sched_domain *sd,<span class="keyword">enum</span> cpu_idle_type idle,</span></span></span><br><span class="line"><span class="function"><span class="params">                                <span class="keyword">int</span> *all_pinned,<span class="keyword">int</span> *this_best_prio)</span></span>;</span><br><span class="line">    <span class="keyword">int</span>(*move_one_task)(struct rq * this_rq,<span class="keyword">int</span> this_cpu,</span><br><span class="line">                       struct rq *busiest,struct sched_domain *sd,</span><br><span class="line">                       <span class="keyword">enum</span> cpu_idle_type idle);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="keyword">void</span>(*set_curr_task)(struct rq *rq);</span><br><span class="line">    <span class="keyword">void</span>(*task_tick)(struct rq *rq,struct task_struct *p);</span><br><span class="line">    <span class="keyword">void</span>(*task_new)(struct rq *rq,struct  task_struct *p);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
 <ol>
 <li><code>enqueue_task</code>:当某个任务进入可运行状态时，该函数将得到调用。它将调度实体（进程）放入相应的运行队列中，并对运行队列成员变量<code>nr_running</code>加1</li>
 <li><code>dequeue_task</code>：当某个任务退出运行状态时调用该函数，它将从相应的运行队列中去掉对应的调度实体，并从<code>nr_running</code>变量中减1</li>
@@ -517,12 +518,14 @@
 <p>&emsp;&emsp;调度实体是一个层次结构，每个调度实体代表一组进程，每个调度实体内部有一个自己的运行队列<code>my_q</code>。当我们定义了组调度时，调度实体内还存在一个指向上一层的实体<code>parent</code>指针和一个该实体所在的运行队列<code>cfs_rq</code>。缺省地，调度实体中只存在一个进程，且都在顶级层次结构中。</p>
 <p>&emsp;&emsp;但当调度器选择下一个要运行的任务的时候，它首先检查所有顶级调度实体，取出最应获取CPU的实体，如果这个实体是一个高层调度实体，那么调度器就会检查调度实体中运行队列，并重复这一过程，直到达到层次结构的最底层，找到一个可执行的进程。在进程运行过程中，同样会收集一些运行时信息，这些信息同时会向上层调度实体传播，从而在每个级别上都正确度量其占用CPU的时间。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sched_entity</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">load_weight</span> <span class="title">load</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">rb_node</span> <span class="title">run_node</span>;</span><span class="comment">/*调度实体上的运行节点*/</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> on_rq;<span class="comment">/*该调度实体上是否在运行队列上*/</span></span><br><span class="line">    u64 exec_strart;<span class="comment">/*任务开始运行的时间*/</span></span><br><span class="line">    u64 sum_exec_runtime;<span class="comment">/*任务总的运行时间*/</span></span><br><span class="line">    u64 vruntime;<span class="comment">/*应当占用CPU的时间*/</span></span><br><span class="line">    u64 prev_sum_exec_runtime;<span class="comment">/*任务最近一次执行前的sum_exec_runtime*/</span></span><br><span class="line">    </span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> CONFIG_FAIR_GROUP_SCHED</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">sched_entity</span> *<span class="title">parent</span>;</span><span class="comment">/*指向该调度实体的父节点*/</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">cfs_rq</span> *<span class="title">cfs_rq</span>;</span><span class="comment">/*调度实体所在的CFS运行队列*/</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">cfs_rq</span> *<span class="title">my_q</span>;</span><span class="comment">/*调度实体所拥有的CFS运行队列*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
 <p>&emsp;&emsp;从调度实体可以看出，当我们定义了<code>CONFIG_FAIR_GROUP_SCHED</code>时，就开启了组调度。到目前为止，有两种策略对任务进行分组。</p>
 <p>（1）基于用户id的分组策略（<code>CONFIG_FAIR_GROUP_SCHED</code>)</p>
 <p>在这种分组策略中，根据任务所属的用户，对任务进行分组。</p>
 <p>（2）基于cgroup的伪文件系统（<code>CONFIG_FAIR_CGROUP_SCHED</code>)</p>
 <p>在这种分组策略中，管理员可以使用<code>cgroup</code>伪文件系统任意地创建任务组。调度器只能采用这两种策略中的一个，不能全部采用。Linux内核使用<code>task group</code>结构描述与任务组相关的信息。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">task_group</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> CONFIG_FAIR_CGROUP_SCHED</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">cgroup_subsys_state</span> <span class="title">css</span>;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">sched_entity</span> **<span class="title">se</span>;</span><span class="comment">/*任务组在每个CPU上所包含的调度实体*/</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">cfs_rq</span> **<span class="title">cfs_rq</span>;</span><span class="comment">/*任务组在每个CPU上所用的运行队列*/</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> shares;</span><br><span class="line">    <span class="keyword">spinlock_t</span> lock;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">rcu</span>)<span class="title">head</span> <span class="title">rcu</span>;</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -550,9 +553,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Linux内核/" rel="tag"># Linux内核</a>
-          
             <a href="/tags/操作系统/" rel="tag"># 操作系统</a>
+          
+            <a href="/tags/Linux内核/" rel="tag"># Linux内核</a>
           
             <a href="/tags/进程调度/" rel="tag"># 进程调度</a>
           
@@ -680,7 +683,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -691,7 +694,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">188</span>
+                  <span class="site-state-item-count">189</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -814,7 +817,7 @@ setInterval("createtime()",250);
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共180.8k字</span>
+  <span class="post-count">博客全站共181.4k字</span>
 </div>
 
 
