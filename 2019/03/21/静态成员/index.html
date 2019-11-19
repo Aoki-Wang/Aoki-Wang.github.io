@@ -125,7 +125,7 @@
 
 
 
-  <meta name="keywords" content="Docker,容器,">
+  <meta name="keywords" content="静态成员变量,静态成员函数,">
 
 
 
@@ -136,18 +136,24 @@
 
 
 
-<meta name="description" content="一、Docker是什么？Docker是容器的一种，容器是一种轻量级的虚拟技术，和容器对应的更为重量级的虚拟技术是虚拟机。虚拟机是一种基于硬件的虚拟技术，它采用指令级的模拟，完全模拟一整套物理主机。容器是一种基于操作系统的虚拟技术，它运行在操作系统之上的用户空间，所有的容器都共用一个系统内核，甚至是公共库，容器引擎提供进程级别的隔离，让每个容器都像运行在单独的系统之上，但又能共享很多底层资源。 二、">
-<meta name="keywords" content="Docker,容器">
+<meta name="description" content="写在前面 在类定义中，它的成员（包括成员变量和成员函数），这些成员可以用关键字static声明为静态的，称为静态成员。不管这个类创建了多少个对象，静态成员只有一个拷贝，这个拷贝被所有属于这个类的对象共享。    1.静态成员变量 在一个类中，若将一个成员变量声明为static，这种成员变量称为静态成员变量。与一般的数据成员不同，无论建立多少个对象，都只有一个静态数据的拷贝。静态成员变量，属于某个">
+<meta name="keywords" content="静态成员变量,静态成员函数">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Docker和容器">
-<meta property="og:url" content="http://wanqbin.xyz/2019/11/20/Docker和容器/index.html">
+<meta property="og:title" content="静态成员">
+<meta property="og:url" content="http://wanqbin.xyz/2019/03/21/静态成员/index.html">
 <meta property="og:site_name" content="Aoki&#39;s Blog">
-<meta property="og:description" content="一、Docker是什么？Docker是容器的一种，容器是一种轻量级的虚拟技术，和容器对应的更为重量级的虚拟技术是虚拟机。虚拟机是一种基于硬件的虚拟技术，它采用指令级的模拟，完全模拟一整套物理主机。容器是一种基于操作系统的虚拟技术，它运行在操作系统之上的用户空间，所有的容器都共用一个系统内核，甚至是公共库，容器引擎提供进程级别的隔离，让每个容器都像运行在单独的系统之上，但又能共享很多底层资源。 二、">
+<meta property="og:description" content="写在前面 在类定义中，它的成员（包括成员变量和成员函数），这些成员可以用关键字static声明为静态的，称为静态成员。不管这个类创建了多少个对象，静态成员只有一个拷贝，这个拷贝被所有属于这个类的对象共享。    1.静态成员变量 在一个类中，若将一个成员变量声明为static，这种成员变量称为静态成员变量。与一般的数据成员不同，无论建立多少个对象，都只有一个静态数据的拷贝。静态成员变量，属于某个">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-19T16:26:14.105Z">
+<meta property="og:image" content="https://i.imgur.com/0bA1W2G.png">
+<meta property="og:image" content="https://i.imgur.com/3AEOJuk.png">
+<meta property="og:image" content="https://i.imgur.com/a7XcCCs.png">
+<meta property="og:image" content="https://i.imgur.com/jdx1QUC.png">
+<meta property="og:image" content="https://i.imgur.com/KrYrT4D.png">
+<meta property="og:updated_time" content="2019-06-15T12:28:04.643Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Docker和容器">
-<meta name="twitter:description" content="一、Docker是什么？Docker是容器的一种，容器是一种轻量级的虚拟技术，和容器对应的更为重量级的虚拟技术是虚拟机。虚拟机是一种基于硬件的虚拟技术，它采用指令级的模拟，完全模拟一整套物理主机。容器是一种基于操作系统的虚拟技术，它运行在操作系统之上的用户空间，所有的容器都共用一个系统内核，甚至是公共库，容器引擎提供进程级别的隔离，让每个容器都像运行在单独的系统之上，但又能共享很多底层资源。 二、">
+<meta name="twitter:title" content="静态成员">
+<meta name="twitter:description" content="写在前面 在类定义中，它的成员（包括成员变量和成员函数），这些成员可以用关键字static声明为静态的，称为静态成员。不管这个类创建了多少个对象，静态成员只有一个拷贝，这个拷贝被所有属于这个类的对象共享。    1.静态成员变量 在一个类中，若将一个成员变量声明为static，这种成员变量称为静态成员变量。与一般的数据成员不同，无论建立多少个对象，都只有一个静态数据的拷贝。静态成员变量，属于某个">
+<meta name="twitter:image" content="https://i.imgur.com/0bA1W2G.png">
 
 
 
@@ -177,14 +183,14 @@
 
 
 
-  <link rel="canonical" href="http://wanqbin.xyz/2019/11/20/Docker和容器/">
+  <link rel="canonical" href="http://wanqbin.xyz/2019/03/21/静态成员/">
 
 
 
 
 
 
-  <title>Docker和容器 | Aoki's Blog</title>
+  <title>静态成员 | Aoki's Blog</title>
   
 
 
@@ -363,7 +369,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://wanqbin.xyz/2019/11/20/Docker和容器/">
+    <link itemprop="mainEntityOfPage" href="http://wanqbin.xyz/2019/03/21/静态成员/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Aoki">
@@ -380,7 +386,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Docker和容器</h1>
+          <h1 class="post-title" itemprop="name headline">静态成员</h1>
         
 
         <div class="post-meta">
@@ -392,8 +398,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-20T00:25:00+08:00">
-                2019-11-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-21T20:27:00+08:00">
+                2019-03-21
               </time>
             
 
@@ -415,8 +421,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/分布式与云计算/" itemprop="url" rel="index">
-                    <span itemprop="name">分布式与云计算</span>
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
                   </a>
                 </span>
 
@@ -433,8 +439,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/11/20/Docker和容器/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/11/20/Docker和容器/" itemprop="commentCount"></span>
+                <a href="/2019/03/21/静态成员/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/21/静态成员/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -442,7 +448,7 @@
 
           
           
-             <span id="/2019/11/20/Docker和容器/" class="leancloud_visitors" data-flag-title="Docker和容器">
+             <span id="/2019/03/21/静态成员/" class="leancloud_visitors" data-flag-title="静态成员">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -472,7 +478,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.8k
+                  1.2k
                 </span>
               
 
@@ -497,87 +503,53 @@
       
 
       
-        <h2 id="一、Docker是什么？"><a href="#一、Docker是什么？" class="headerlink" title="一、Docker是什么？"></a>一、Docker是什么？</h2><p>Docker是容器的一种，容器是一种轻量级的虚拟技术，和容器对应的更为重量级的虚拟技术是虚拟机。虚拟机是一种基于硬件的虚拟技术，它采用指令级的模拟，完全模拟一整套物理主机。容器是一种基于操作系统的虚拟技术，它运行在操作系统之上的用户空间，所有的容器都共用一个系统内核，甚至是公共库，容器引擎提供进程级别的隔离，让每个容器都像运行在单独的系统之上，但又能共享很多底层资源。</p>
-<h2 id="二、Docker的组件"><a href="#二、Docker的组件" class="headerlink" title="二、Docker的组件"></a>二、Docker的组件</h2><p>Docker采用C/S架构。Docker客户端，即Docker可执行程序，可以通过命令行和API的形式与Docker守候程序进行通信，Docker守候程序提供Docker服务。</p>
-<p>Docker包含三大核心组件——镜像，容器和库。</p>
+        <blockquote>
+<h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1></blockquote>
+<p>在类定义中，它的成员（包括成员变量和成员函数），这些成员可以用关键字<code>static</code>声明为静态的，称为静态成员。<br>不管这个类创建了多少个对象，静态成员只有一个拷贝，这个拷贝被所有属于这个类的对象共享。  </p>
+<blockquote>
+<h1 id="1-静态成员变量"><a href="#1-静态成员变量" class="headerlink" title="1.静态成员变量"></a>1.静态成员变量</h1></blockquote>
+<p>在一个类中，若将一个成员变量声明为<code>static</code>，这种成员变量称为静态成员变量。与一般的数据成员不同，无论建立多少个对象，都只有一个静态数据的拷贝。静态成员变量，属于某个类，所有对象共享。<br>静态变量，是在编译阶段就分配空间，对象还没创建，就已经分配空间。  </p>
 <ul>
-<li>镜像：是一个只读的静态模板。它保存着容器需要的环境和应用的执行代码，可以把镜像看成是容器的代码，当代码运行起来后就成了容器。镜像采用分层机制，每个镜像都是只读的，但是可以将写数据的层通过联合文件系统附加在原有的镜像之上。这种增量式修改使得镜像非常容器存储、传输和更新。</li>
-<li>容器：是一个运行时环境，它是一个镜像的运行状态，想到对于静态的镜像而言，容器是镜像执行的动态表现。</li>
-<li>库：Docker采用注册服务器来存储和共享用户的镜像，库是某个特定用户存储镜像的目录。通常，一个用户可以建立多个库来保存自己的镜像。如Docker官方的Docker Hub。</li>
+<li>静态成员变量必须在类中声明，在类外定义</li>
+<li>静态数据成员不属于某个对象，在为对象分配空间中不包括静态成员所占的空间  </li>
+<li>静态数据成员可以通过类名或者对象名来引用</li>
 </ul>
-<h2 id="三、容器的管理操作"><a href="#三、容器的管理操作" class="headerlink" title="三、容器的管理操作"></a>三、容器的管理操作</h2><ol>
-<li><h3 id="创建容器"><a href="#创建容器" class="headerlink" title="创建容器"></a>创建容器</h3><ul>
-<li><p>docker create</p>
-<p> 创建的容器处于停止状态</p>
-</li>
-<li><p>docker run</p>
-<p>不仅创建的容器，而且启动了容器</p>
-</li>
-</ul>
-<p>容器创建后，会返回容器的ID。</p>
-<p>要想让创建的容器立马进入运行态，可以使用<code>docker run</code>命令，该命令相当于下面的两条命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker create</span><br><span class="line">docker start</span><br></pre></td></tr></table></figure>
-<p>使用<code>docker run</code>命令可以创建两种类型的容器——后台型容器和交互型容器。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> m_Age;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> m_other;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> Person::m_Age = <span class="number">100</span>;</span><br><span class="line"><span class="keyword">int</span> Person::m_other = <span class="number">20</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Person p1;</span><br><span class="line">	p1.m_Age = <span class="number">10</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"p1="</span> &lt;&lt; p1.m_Age &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"p1的地址为："</span> &lt;&lt; &amp;p1.m_Age &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	Person p2;</span><br><span class="line">	p2.m_Age = <span class="number">20</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"p1="</span> &lt;&lt; p1.m_Age &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"p2="</span> &lt;&lt; p2.m_Age &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"p2的地址为："</span> &lt;&lt; &amp;p2.m_Age &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	test();</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出结果如下图：<br><img src="https://i.imgur.com/0bA1W2G.png" alt><br>通过输出结果我们可以很清除地看到，静态成员变量是所有对象共享的。任何一个对象都可以改变静态变量的值，但是静态变量不属于任何一个对象。<br>下面我们看一下对象的大小，以此来说明静态数据成员不属于某个对象，在为对象分配的空间中不包括静态成员所占的空间。  </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> m_Age;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> m_other;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> Person::m_Age = <span class="number">100</span>;</span><br><span class="line"><span class="keyword">int</span> Person::m_other = <span class="number">20</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Person p;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="keyword">sizeof</span>(p) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="keyword">sizeof</span>(p.m_Age) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	test();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出结果如下图：<br><img src="https://i.imgur.com/3AEOJuk.png" alt><br>我们可以看出，对象的大小为1，而静态成员佰利联的大小为4。<br>当我们尝试去访问m_other时，编译器会报错，因为它是一个私有数据成员，这也说明了静态成员变量是有权限控制机制的。  </p>
+<blockquote>
+<h1 id="2-静态成员变量"><a href="#2-静态成员变量" class="headerlink" title="2.静态成员变量"></a>2.静态成员变量</h1></blockquote>
+<p>在类定义中，前面有<code>static</code>说明的成员函数称为静态成员函数。静态成员函数使用方式和静态变量一样，同样在对象没有创建前创建，即可他通过类名调用。静态成员函数主要为了访问静态变量，但是不能访问普通成员变量。<br>静态成员函数的意义，不在于信息共享，数据沟通，而在于管理静态数据成员，完成对静态数据成员的封装。  </p>
 <ul>
-<li>交互型容器：运行在前台，通常会指定有交互的控制台，可以给容器输入，也可以得到容器的输出。创建该容器的终端被关闭，在容器内部使用<code>exit</code>命令或者调用了<code>docker stop</code>、<code>docker kill</code>命令后，容器会变成停止状态。</li>
-<li>后台型容器：运行在后台，创建启动之后就与终端无关。即便终端关闭了，该后台容器也依然存在，只有调用<code>docker stop</code>或<code>docker kill</code>命令时才能够使容器变成停止状态。</li>
+<li>静态成员函数只能访问静态变量，不能访问普通成员变量</li>
+<li>静态成员函数的使用和静态成员变量一样</li>
+<li>静态成员函数也有访问权限</li>
+<li>普通成员函数可以访问静态成员变量，也可以访问非静态变量</li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -i -t --name=inspect_shell ubuntu /bin/bash</span><br></pre></td></tr></table></figure>
-<p>其中，<code>-i</code>用于打开容器的标准输入(STDIN),<code>-t</code>告诉Docker为容器建立一个命令行终端。</p>
-<p><code>--name</code>为容器指定一个名字，是一个可选项。如果没有这个选项，Docker会为容器创建一个随机名字</p>
-<p><code>ubuntu</code>是镜像名，<code>/bin/bash</code>代表告诉Docker要在容器里面执行命令<code>/bin/bash</code>。</p>
-<p>执行该命令之后，如果本地没有该镜像，Docker会从远程仓库中获取。然后，Docker使用这个镜像创建一个新的容器并将其启动；容器的文件系统是在只读的镜像文件上增加一层可读写的文件层，这样可以保证镜像不变而只记录改变的数据，这对容器的共享和传输都非常有利。接着会配置容器的网络，Docker会为容器分配一个虚拟网络接口，并通过网桥的方式将该网络接口桥接到宿主主机上，然后该虚拟网络接口分配一个IP地址。最后，Docker在新容器中运行指定的命令。</p>
-</li>
-<li><h3 id="查看容器"><a href="#查看容器" class="headerlink" title="查看容器"></a>查看容器</h3><p>查看正在运行的容器：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure>
-<p>CONTAINER ID：唯一标识容器的ID</p>
-<p>IMAGE：创建容器时使用的镜像</p>
-<p>COMMAND：容器最后运行的命令</p>
-<p>CREATED：创建容器的时间</p>
-<p>STATUS：容器的状态</p>
-<p>PORT：对外开放的接口</p>
-<p>NAMES：容器名。和容器ID一样都可以唯一标识一个容器。</p>
-<p>查看所有的容器：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps -a</span><br></pre></td></tr></table></figure>
-<p>列出所有容器，包括运行的和停止的容器。</p>
-</li>
-<li><h3 id="启动容器"><a href="#启动容器" class="headerlink" title="启动容器"></a>启动容器</h3><p>通过<code>docker create</code>命令创建的容器会进入到停止状态，想要运行该容器，可以执行以下命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker start 容器名/容器ID</span><br></pre></td></tr></table></figure>
-</li>
-<li><h3 id="终止容器"><a href="#终止容器" class="headerlink" title="终止容器"></a>终止容器</h3><p>执行命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker stop 容器名/容器ID</span><br></pre></td></tr></table></figure>
-</li>
-<li><h3 id="删除容器"><a href="#删除容器" class="headerlink" title="删除容器"></a>删除容器</h3><p>执行命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm 容器名</span><br></pre></td></tr></table></figure>
-<p>注意：不可以删除一个运行中的容器，必须先用<code>docker stop</code>或<code>docker kill</code>命令停止它才能删除。当然，也可以使用<code>-f</code>选项强制删除。</p>
-<p>删除所有容器：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm 'docker ps -a -q'</span><br></pre></td></tr></table></figure>
-<p><code>-a</code>标志列出所有容器，<code>-q</code>标志只列出容器的ID，不包括容器的其他信息。然后将这个列表传给<code>docker rm</code>命令，依次删除容器。</p>
-</li>
-</ol>
-<h2 id="四、容器内信息获取与命令执行"><a href="#四、容器内信息获取与命令执行" class="headerlink" title="四、容器内信息获取与命令执行"></a>四、容器内信息获取与命令执行</h2><ol>
-<li><h3 id="依附容器"><a href="#依附容器" class="headerlink" title="依附容器"></a>依附容器</h3><p>依附操作<code>attach</code>通常用于由<code>docker start</code>或者<code>docker restart</code>启动的交互型容器中。由于<code>docker start</code>启动的交互型容器并没有具体终端可以依附，而容器本身是可以接收用户交互的，这时就需要通过<code>attach</code>命令来将终端依附到容器上。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker attach 容器ID</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
+<p><img src="https://i.imgur.com/a7XcCCs.png" alt><br>如上图所示，当我们使用静态成员函数试图访问非静态成员变量时，编译器会报错，提示信息如上图所示。<br><img src="https://i.imgur.com/jdx1QUC.png" alt><br>在上图中，我试图使用类名来访问私有的静态成员函数，编译器报错，因为静态成员函数也有自己的权限。  </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">func</span><span class="params">()</span><span class="comment">//静态成员函数</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		m_Age = <span class="number">100</span>;</span><br><span class="line">		<span class="comment">//m_A = 20;//作用域</span></span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"静态成员函数调用"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> m_Age;</span><br><span class="line">	<span class="keyword">int</span> m_A;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> m_other;</span><br><span class="line">	<span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">func01</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"静态成员函数func2调用"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> Person::m_Age = <span class="number">100</span>;</span><br><span class="line"><span class="keyword">int</span> Person::m_other = <span class="number">20</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Person p1;</span><br><span class="line">	Person p2;</span><br><span class="line">	p1.func();</span><br><span class="line">	p2.func();</span><br><span class="line">	Person::func();</span><br><span class="line">	<span class="comment">//Person::func01();//作用域</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	test();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出结果如下图：<br><img src="https://i.imgur.com/KrYrT4D.png" alt>  </p>
+<blockquote>
+<h1 id="3-总结"><a href="#3-总结" class="headerlink" title="3.总结"></a>3.总结</h1></blockquote>
 <ol>
-<li><h3 id="查看容器日志"><a href="#查看容器日志" class="headerlink" title="查看容器日志"></a>查看容器日志</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker logs -f 容器名 </span><br><span class="line">docker logs -f --tails=5 容器名   #控制logs输出的日志行数，只输出最后五行</span><br></pre></td></tr></table></figure>
+<li>静态成员变量  <ul>
+<li>编译阶段分配内存</li>
+<li>所有对象共享数据</li>
+<li>通过对象访问，通过类名访问</li>
+<li>有权限控制</li>
+<li>类内声明，类外初始化</li>
+</ul>
 </li>
-</ol>
-<ol>
-<li><h3 id="查看容器进程"><a href="#查看容器进程" class="headerlink" title="查看容器进程"></a>查看容器进程</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker top 容器名</span><br></pre></td></tr></table></figure>
-</li>
-<li><h3 id="查看容器信息"><a href="#查看容器信息" class="headerlink" title="查看容器信息"></a>查看容器信息</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker inspect 容器名</span><br></pre></td></tr></table></figure>
-<p>用来查看容器的配置环境，包括容器名，环境变量，运行命令，主机配置，网络配置和数据卷配置等。使用<code>-f</code>或者<code>--format</code>命令格式化标志，可以查看指定部分的信息。</p>
-</li>
-<li><h3 id="容器的导入与导出"><a href="#容器的导入与导出" class="headerlink" title="容器的导入与导出"></a>容器的导入与导出</h3><p>Docker的导入和导出分别由<code>import</code>命令和<code>export</code>命令完成。</p>
-<p>使用<code>docker export</code>命令导出容器：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker export 容器名 &gt; my_container.tar</span><br></pre></td></tr></table></figure>
-<p><code>docker export</code>命令会把容器的文件系统以tar包的格式导出到标准输出。我们将其定位到目标文件<code>name.tar</code>。将容器保存到本地文件也算是持久化方式的一种。将容器保存到本次之后，我们就可以通过网络等方法将tar包分享给他人。</p>
-<p>使用<code>docker import</code>命令导入一个本地的tar包作为镜像：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat my_container.tar | docker import - imported:container</span><br></pre></td></tr></table></figure>
-<p><code>docker import</code>会把打包的容器导入为一个镜像。</p>
-<p><code>import</code>表示从标准输入读取容器内容，我们把<code>name.tar</code>的内容传给标准输入，res和tag代表生成的镜像和标记。</p>
+<li>静态成员函数<ul>
+<li>可以访问静态成员变量，不可以访问普通成员变量</li>
+<li>普通成员函数都可以访问</li>
+<li>静态成员函数也有权限</li>
+<li>可以通过对象访问，也可以通过类名访问  </li>
+</ul>
 </li>
 </ol>
 
@@ -607,9 +579,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Docker/" rel="tag"># Docker</a>
+            <a href="/tags/静态成员变量/" rel="tag"># 静态成员变量</a>
           
-            <a href="/tags/容器/" rel="tag"># 容器</a>
+            <a href="/tags/静态成员函数/" rel="tag"># 静态成员函数</a>
           
         </div>
       
@@ -622,8 +594,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/11/19/Kubernetes集群部署/" rel="next" title="Kubernetes集群部署">
-                <i class="fa fa-chevron-left"></i> Kubernetes集群部署
+              <a href="/2019/03/21/拷贝构造函数/" rel="next" title="拷贝构造函数">
+                <i class="fa fa-chevron-left"></i> 拷贝构造函数
               </a>
             
           </div>
@@ -631,6 +603,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/23/C-对象模型初探/" rel="prev" title="C++对象模型初探">
+                C++对象模型初探 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -795,7 +771,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、Docker是什么？"><span class="nav-number">1.</span> <span class="nav-text">一、Docker是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Docker的组件"><span class="nav-number">2.</span> <span class="nav-text">二、Docker的组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、容器的管理操作"><span class="nav-number">3.</span> <span class="nav-text">三、容器的管理操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建容器"><span class="nav-number">3.1.</span> <span class="nav-text">创建容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看容器"><span class="nav-number">3.2.</span> <span class="nav-text">查看容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动容器"><span class="nav-number">3.3.</span> <span class="nav-text">启动容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#终止容器"><span class="nav-number">3.4.</span> <span class="nav-text">终止容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除容器"><span class="nav-number">3.5.</span> <span class="nav-text">删除容器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、容器内信息获取与命令执行"><span class="nav-number">4.</span> <span class="nav-text">四、容器内信息获取与命令执行</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#依附容器"><span class="nav-number">4.1.</span> <span class="nav-text">依附容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看容器日志"><span class="nav-number">4.2.</span> <span class="nav-text">查看容器日志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看容器进程"><span class="nav-number">4.3.</span> <span class="nav-text">查看容器进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看容器信息"><span class="nav-number">4.4.</span> <span class="nav-text">查看容器信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#容器的导入与导出"><span class="nav-number">4.5.</span> <span class="nav-text">容器的导入与导出</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-静态成员变量"><span class="nav-number">2.</span> <span class="nav-text">1.静态成员变量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-静态成员变量"><span class="nav-number">3.</span> <span class="nav-text">2.静态成员变量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-总结"><span class="nav-number">4.</span> <span class="nav-text">3.总结</span></a></li></ol></div>
             
 
           </div>

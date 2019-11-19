@@ -125,7 +125,7 @@
 
 
 
-  <meta name="keywords" content="Docker,容器,">
+  <meta name="keywords" content="C++,继承,">
 
 
 
@@ -136,18 +136,26 @@
 
 
 
-<meta name="description" content="一、Docker是什么？Docker是容器的一种，容器是一种轻量级的虚拟技术，和容器对应的更为重量级的虚拟技术是虚拟机。虚拟机是一种基于硬件的虚拟技术，它采用指令级的模拟，完全模拟一整套物理主机。容器是一种基于操作系统的虚拟技术，它运行在操作系统之上的用户空间，所有的容器都共用一个系统内核，甚至是公共库，容器引擎提供进程级别的隔离，让每个容器都像运行在单独的系统之上，但又能共享很多底层资源。 二、">
-<meta name="keywords" content="Docker,容器">
+<meta name="description" content="一、继承&amp;emsp;继承是面向对象编程额基本概念之一。继承使我们能在已有类的基础上构造新类。这个新的类拥有或继承已有类的数据成员和成员函数，也可添加新的数据成员和成员函数，对已有的类进行扩充。这个已有的类就称为基类,而这个新类则称为派生类。 &amp;emsp;如果我们需要定义一个个人类和职工类，在不使用继承的情况下，代码重复会比较严重。这时，我们就需要用到继承。 &amp;emsp;下面定义一个基类网页，重复的">
+<meta name="keywords" content="C++,继承">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Docker和容器">
-<meta property="og:url" content="http://wanqbin.xyz/2019/11/20/Docker和容器/index.html">
+<meta property="og:title" content="继承">
+<meta property="og:url" content="http://wanqbin.xyz/2019/07/30/继承/index.html">
 <meta property="og:site_name" content="Aoki&#39;s Blog">
-<meta property="og:description" content="一、Docker是什么？Docker是容器的一种，容器是一种轻量级的虚拟技术，和容器对应的更为重量级的虚拟技术是虚拟机。虚拟机是一种基于硬件的虚拟技术，它采用指令级的模拟，完全模拟一整套物理主机。容器是一种基于操作系统的虚拟技术，它运行在操作系统之上的用户空间，所有的容器都共用一个系统内核，甚至是公共库，容器引擎提供进程级别的隔离，让每个容器都像运行在单独的系统之上，但又能共享很多底层资源。 二、">
+<meta property="og:description" content="一、继承&amp;emsp;继承是面向对象编程额基本概念之一。继承使我们能在已有类的基础上构造新类。这个新的类拥有或继承已有类的数据成员和成员函数，也可添加新的数据成员和成员函数，对已有的类进行扩充。这个已有的类就称为基类,而这个新类则称为派生类。 &amp;emsp;如果我们需要定义一个个人类和职工类，在不使用继承的情况下，代码重复会比较严重。这时，我们就需要用到继承。 &amp;emsp;下面定义一个基类网页，重复的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-19T16:26:14.105Z">
+<meta property="og:image" content="http://wanqbin.xyz/2019/07/30/继承/test1.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/2019/07/30/继承/test2.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/2019/07/30/继承/test21.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/2019/07/30/继承/test03.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/2019/07/30/继承/test04.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/2019/07/30/继承/test05.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/2019/07/30/继承/test06.PNG">
+<meta property="og:updated_time" content="2019-07-30T10:22:44.536Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Docker和容器">
-<meta name="twitter:description" content="一、Docker是什么？Docker是容器的一种，容器是一种轻量级的虚拟技术，和容器对应的更为重量级的虚拟技术是虚拟机。虚拟机是一种基于硬件的虚拟技术，它采用指令级的模拟，完全模拟一整套物理主机。容器是一种基于操作系统的虚拟技术，它运行在操作系统之上的用户空间，所有的容器都共用一个系统内核，甚至是公共库，容器引擎提供进程级别的隔离，让每个容器都像运行在单独的系统之上，但又能共享很多底层资源。 二、">
+<meta name="twitter:title" content="继承">
+<meta name="twitter:description" content="一、继承&amp;emsp;继承是面向对象编程额基本概念之一。继承使我们能在已有类的基础上构造新类。这个新的类拥有或继承已有类的数据成员和成员函数，也可添加新的数据成员和成员函数，对已有的类进行扩充。这个已有的类就称为基类,而这个新类则称为派生类。 &amp;emsp;如果我们需要定义一个个人类和职工类，在不使用继承的情况下，代码重复会比较严重。这时，我们就需要用到继承。 &amp;emsp;下面定义一个基类网页，重复的">
+<meta name="twitter:image" content="http://wanqbin.xyz/2019/07/30/继承/test1.PNG">
 
 
 
@@ -177,14 +185,14 @@
 
 
 
-  <link rel="canonical" href="http://wanqbin.xyz/2019/11/20/Docker和容器/">
+  <link rel="canonical" href="http://wanqbin.xyz/2019/07/30/继承/">
 
 
 
 
 
 
-  <title>Docker和容器 | Aoki's Blog</title>
+  <title>继承 | Aoki's Blog</title>
   
 
 
@@ -363,7 +371,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://wanqbin.xyz/2019/11/20/Docker和容器/">
+    <link itemprop="mainEntityOfPage" href="http://wanqbin.xyz/2019/07/30/继承/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Aoki">
@@ -380,7 +388,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Docker和容器</h1>
+          <h1 class="post-title" itemprop="name headline">继承</h1>
         
 
         <div class="post-meta">
@@ -392,8 +400,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-20T00:25:00+08:00">
-                2019-11-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-30T11:16:00+08:00">
+                2019-07-30
               </time>
             
 
@@ -415,8 +423,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/分布式与云计算/" itemprop="url" rel="index">
-                    <span itemprop="name">分布式与云计算</span>
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
                   </a>
                 </span>
 
@@ -433,8 +441,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/11/20/Docker和容器/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/11/20/Docker和容器/" itemprop="commentCount"></span>
+                <a href="/2019/07/30/继承/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/30/继承/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -442,7 +450,7 @@
 
           
           
-             <span id="/2019/11/20/Docker和容器/" class="leancloud_visitors" data-flag-title="Docker和容器">
+             <span id="/2019/07/30/继承/" class="leancloud_visitors" data-flag-title="继承">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -472,7 +480,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.8k
+                  2k
                 </span>
               
 
@@ -497,89 +505,89 @@
       
 
       
-        <h2 id="一、Docker是什么？"><a href="#一、Docker是什么？" class="headerlink" title="一、Docker是什么？"></a>一、Docker是什么？</h2><p>Docker是容器的一种，容器是一种轻量级的虚拟技术，和容器对应的更为重量级的虚拟技术是虚拟机。虚拟机是一种基于硬件的虚拟技术，它采用指令级的模拟，完全模拟一整套物理主机。容器是一种基于操作系统的虚拟技术，它运行在操作系统之上的用户空间，所有的容器都共用一个系统内核，甚至是公共库，容器引擎提供进程级别的隔离，让每个容器都像运行在单独的系统之上，但又能共享很多底层资源。</p>
-<h2 id="二、Docker的组件"><a href="#二、Docker的组件" class="headerlink" title="二、Docker的组件"></a>二、Docker的组件</h2><p>Docker采用C/S架构。Docker客户端，即Docker可执行程序，可以通过命令行和API的形式与Docker守候程序进行通信，Docker守候程序提供Docker服务。</p>
-<p>Docker包含三大核心组件——镜像，容器和库。</p>
+        <h2 id="一、继承"><a href="#一、继承" class="headerlink" title="一、继承"></a>一、继承</h2><p>&emsp;<code>继承</code>是面向对象编程额基本概念之一。继承使我们能在已有类的基础上构造新类。这个新的类拥有或继承已有类的数据成员和成员函数，也可添加新的数据成员和成员函数，对已有的类进行扩充。这个已有的类就称为<code>基类</code>,而这个新类则称为<code>派生类</code>。</p>
+<p>&emsp;如果我们需要定义一个个人类和职工类，在不使用继承的情况下，代码重复会比较严重。这时，我们就需要用到继承。</p>
+<p>&emsp;下面定义一个基类网页，重复的代码都写到这个网页上。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//基类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BasePage</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">header</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"公共头部"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">footer</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"公共底部"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">left</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"公共左侧列表"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">News</span> :</span><span class="keyword">public</span> BasePage<span class="comment">//继承BasePage</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">content</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"今日新闻"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>主函数：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	News news;</span><br><span class="line">	news.header();</span><br><span class="line">	news.left();</span><br><span class="line">	news.footer();</span><br><span class="line">	news.content();</span><br><span class="line">	system(<span class="string">"pause"</span>);</span><br><span class="line">	<span class="keyword">return</span> EXIT_SUCCESS;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>执行结果：</p>
+<p><img src="/2019/07/30/继承/test1.PNG" alt="执行结果"></p>
+<p>继承可以减少代码的重复部分，派生类可以继承基类的数据成员和成员函数。</p>
+<p>网页中有很多公共部分，导致实现的时候由很多重复的代码。在使用继承之后，基类为公共网页，具体的子类实现把不同的内容，较好地解决了代码的复用。</p>
+<h2 id="二、继承方式"><a href="#二、继承方式" class="headerlink" title="二、继承方式"></a>二、继承方式</h2><p>继承方式主要有：</p>
 <ul>
-<li>镜像：是一个只读的静态模板。它保存着容器需要的环境和应用的执行代码，可以把镜像看成是容器的代码，当代码运行起来后就成了容器。镜像采用分层机制，每个镜像都是只读的，但是可以将写数据的层通过联合文件系统附加在原有的镜像之上。这种增量式修改使得镜像非常容器存储、传输和更新。</li>
-<li>容器：是一个运行时环境，它是一个镜像的运行状态，想到对于静态的镜像而言，容器是镜像执行的动态表现。</li>
-<li>库：Docker采用注册服务器来存储和共享用户的镜像，库是某个特定用户存储镜像的目录。通常，一个用户可以建立多个库来保存自己的镜像。如Docker官方的Docker Hub。</li>
+<li><code>public</code>：公有继承</li>
+<li><code>private</code>：私有继承</li>
+<li><code>protected</code>：保护继承</li>
 </ul>
-<h2 id="三、容器的管理操作"><a href="#三、容器的管理操作" class="headerlink" title="三、容器的管理操作"></a>三、容器的管理操作</h2><ol>
-<li><h3 id="创建容器"><a href="#创建容器" class="headerlink" title="创建容器"></a>创建容器</h3><ul>
-<li><p>docker create</p>
-<p> 创建的容器处于停止状态</p>
-</li>
-<li><p>docker run</p>
-<p>不仅创建的容器，而且启动了容器</p>
-</li>
-</ul>
-<p>容器创建后，会返回容器的ID。</p>
-<p>要想让创建的容器立马进入运行态，可以使用<code>docker run</code>命令，该命令相当于下面的两条命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker create</span><br><span class="line">docker start</span><br></pre></td></tr></table></figure>
-<p>使用<code>docker run</code>命令可以创建两种类型的容器——后台型容器和交互型容器。</p>
+<ol>
+<li>不管是公有继承、保护继承还是私有继承，基类中的私有属性，都不可以继承下去</li>
+<li>在公有继承中，父类的protected属性在子类中是protected属性。父类中的public属性在子类中是public属性</li>
+<li>在保护继承中，父类中的protected属性，在子类中是protected属性。父类中的public属性在子类中是protected属性</li>
+<li>在私有继承中，父类中的protected属性在子类中是private属性。父类中的public属性在子类中是private属性。</li>
+</ol>
+<h2 id="三、继承中的构造和析构顺序"><a href="#三、继承中的构造和析构顺序" class="headerlink" title="三、继承中的构造和析构顺序"></a>三、继承中的构造和析构顺序</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	Base()</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"Base默认构造函数调用"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	~Base()</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"Base析构函数调用"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son</span>:</span><span class="keyword">public</span> Base</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	Son()</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"Son默认构造函数调用"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	~Son()</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"Son析构函数调用"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//子类会继承父类的成员属性，成员函数</span></span><br><span class="line"><span class="comment">//但是子类不会继承父类的构造函数和析构函数</span></span><br><span class="line"><span class="comment">//只有父类自己知道如何构造和析构自己的属性，而子类不知道</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test02</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Base base;</span><br><span class="line">	Son son;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>执行结果：<br><img src="/2019/07/30/继承/test2.PNG" alt="执行"></p>
 <ul>
-<li>交互型容器：运行在前台，通常会指定有交互的控制台，可以给容器输入，也可以得到容器的输出。创建该容器的终端被关闭，在容器内部使用<code>exit</code>命令或者调用了<code>docker stop</code>、<code>docker kill</code>命令后，容器会变成停止状态。</li>
-<li>后台型容器：运行在后台，创建启动之后就与终端无关。即便终端关闭了，该后台容器也依然存在，只有调用<code>docker stop</code>或<code>docker kill</code>命令时才能够使容器变成停止状态。</li>
+<li>子类在创建对象时，先调用父类的构造函数，然后再调用自身的构造函数</li>
+<li>析构顺序与构造顺序相反</li>
+<li>子类不会继承父类的构造函数和析构函数</li>
+<li>如果父类中没有合适默认构造，那么子类可以利用初始化列表方式显式地调用父类的其他构造函数。</li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -i -t --name=inspect_shell ubuntu /bin/bash</span><br></pre></td></tr></table></figure>
-<p>其中，<code>-i</code>用于打开容器的标准输入(STDIN),<code>-t</code>告诉Docker为容器建立一个命令行终端。</p>
-<p><code>--name</code>为容器指定一个名字，是一个可选项。如果没有这个选项，Docker会为容器创建一个随机名字</p>
-<p><code>ubuntu</code>是镜像名，<code>/bin/bash</code>代表告诉Docker要在容器里面执行命令<code>/bin/bash</code>。</p>
-<p>执行该命令之后，如果本地没有该镜像，Docker会从远程仓库中获取。然后，Docker使用这个镜像创建一个新的容器并将其启动；容器的文件系统是在只读的镜像文件上增加一层可读写的文件层，这样可以保证镜像不变而只记录改变的数据，这对容器的共享和传输都非常有利。接着会配置容器的网络，Docker会为容器分配一个虚拟网络接口，并通过网桥的方式将该网络接口桥接到宿主主机上，然后该虚拟网络接口分配一个IP地址。最后，Docker在新容器中运行指定的命令。</p>
-</li>
-<li><h3 id="查看容器"><a href="#查看容器" class="headerlink" title="查看容器"></a>查看容器</h3><p>查看正在运行的容器：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure>
-<p>CONTAINER ID：唯一标识容器的ID</p>
-<p>IMAGE：创建容器时使用的镜像</p>
-<p>COMMAND：容器最后运行的命令</p>
-<p>CREATED：创建容器的时间</p>
-<p>STATUS：容器的状态</p>
-<p>PORT：对外开放的接口</p>
-<p>NAMES：容器名。和容器ID一样都可以唯一标识一个容器。</p>
-<p>查看所有的容器：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps -a</span><br></pre></td></tr></table></figure>
-<p>列出所有容器，包括运行的和停止的容器。</p>
-</li>
-<li><h3 id="启动容器"><a href="#启动容器" class="headerlink" title="启动容器"></a>启动容器</h3><p>通过<code>docker create</code>命令创建的容器会进入到停止状态，想要运行该容器，可以执行以下命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker start 容器名/容器ID</span><br></pre></td></tr></table></figure>
-</li>
-<li><h3 id="终止容器"><a href="#终止容器" class="headerlink" title="终止容器"></a>终止容器</h3><p>执行命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker stop 容器名/容器ID</span><br></pre></td></tr></table></figure>
-</li>
-<li><h3 id="删除容器"><a href="#删除容器" class="headerlink" title="删除容器"></a>删除容器</h3><p>执行命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm 容器名</span><br></pre></td></tr></table></figure>
-<p>注意：不可以删除一个运行中的容器，必须先用<code>docker stop</code>或<code>docker kill</code>命令停止它才能删除。当然，也可以使用<code>-f</code>选项强制删除。</p>
-<p>删除所有容器：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm 'docker ps -a -q'</span><br></pre></td></tr></table></figure>
-<p><code>-a</code>标志列出所有容器，<code>-q</code>标志只列出容器的ID，不包括容器的其他信息。然后将这个列表传给<code>docker rm</code>命令，依次删除容器。</p>
-</li>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	Base()</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"Base默认构造函数调用"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	~Base()</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"Base析构函数调用"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	Base(<span class="keyword">int</span> a)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"有参构造函数调用,参数为："</span> &lt;&lt; a &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son</span>:</span><span class="keyword">public</span> Base</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	Son()</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"Son默认构造函数调用"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	Son(<span class="keyword">int</span> a) :Base(a)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"Son初始化列表调用父类带参构造"</span> &lt;&lt; a &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	~Son()</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"Son析构函数调用"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//子类会继承父类的成员属性，成员函数</span></span><br><span class="line"><span class="comment">//但是子类不会继承父类的构造函数和析构函数</span></span><br><span class="line"><span class="comment">//只有父类自己知道如何构造和析构自己的属性，而子类不知道</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test02</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Base base;</span><br><span class="line">	Son son;</span><br><span class="line">	<span class="function">Son <span class="title">son2</span><span class="params">(<span class="number">15</span>)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>执行结果：</p>
+<p><img src="/2019/07/30/继承/test21.PNG" alt="执行结果"></p>
+<h2 id="四、继承中同名函数的处理"><a href="#四、继承中同名函数的处理" class="headerlink" title="四、继承中同名函数的处理"></a>四、继承中同名函数的处理</h2><ol>
+<li>如果子类和父类拥有同名的函数、属性，子类不会覆盖父类的成员</li>
+<li>如果子类与父类的成员函数名称相同，子类会把父类的所有同名版本都隐藏掉</li>
+<li>如果想调用父类的方法，必须加作用域</li>
+<li>成员属性直接调用是子类的，如果想调用父类的成员属性，需要加作用域</li>
+<li>成员函数直接调用先调用子类的，父类的所有版本都会被隐藏，除非显式地用作用域运算符去调用。</li>
 </ol>
-<h2 id="四、容器内信息获取与命令执行"><a href="#四、容器内信息获取与命令执行" class="headerlink" title="四、容器内信息获取与命令执行"></a>四、容器内信息获取与命令执行</h2><ol>
-<li><h3 id="依附容器"><a href="#依附容器" class="headerlink" title="依附容器"></a>依附容器</h3><p>依附操作<code>attach</code>通常用于由<code>docker start</code>或者<code>docker restart</code>启动的交互型容器中。由于<code>docker start</code>启动的交互型容器并没有具体终端可以依附，而容器本身是可以接收用户交互的，这时就需要通过<code>attach</code>命令来将终端依附到容器上。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker attach 容器ID</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<ol>
-<li><h3 id="查看容器日志"><a href="#查看容器日志" class="headerlink" title="查看容器日志"></a>查看容器日志</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker logs -f 容器名 </span><br><span class="line">docker logs -f --tails=5 容器名   #控制logs输出的日志行数，只输出最后五行</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<ol>
-<li><h3 id="查看容器进程"><a href="#查看容器进程" class="headerlink" title="查看容器进程"></a>查看容器进程</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker top 容器名</span><br></pre></td></tr></table></figure>
-</li>
-<li><h3 id="查看容器信息"><a href="#查看容器信息" class="headerlink" title="查看容器信息"></a>查看容器信息</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker inspect 容器名</span><br></pre></td></tr></table></figure>
-<p>用来查看容器的配置环境，包括容器名，环境变量，运行命令，主机配置，网络配置和数据卷配置等。使用<code>-f</code>或者<code>--format</code>命令格式化标志，可以查看指定部分的信息。</p>
-</li>
-<li><h3 id="容器的导入与导出"><a href="#容器的导入与导出" class="headerlink" title="容器的导入与导出"></a>容器的导入与导出</h3><p>Docker的导入和导出分别由<code>import</code>命令和<code>export</code>命令完成。</p>
-<p>使用<code>docker export</code>命令导出容器：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker export 容器名 &gt; my_container.tar</span><br></pre></td></tr></table></figure>
-<p><code>docker export</code>命令会把容器的文件系统以tar包的格式导出到标准输出。我们将其定位到目标文件<code>name.tar</code>。将容器保存到本地文件也算是持久化方式的一种。将容器保存到本次之后，我们就可以通过网络等方法将tar包分享给他人。</p>
-<p>使用<code>docker import</code>命令导入一个本地的tar包作为镜像：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat my_container.tar | docker import - imported:container</span><br></pre></td></tr></table></figure>
-<p><code>docker import</code>会把打包的容器导入为一个镜像。</p>
-<p><code>import</code>表示从标准输入读取容器内容，我们把<code>name.tar</code>的内容传给标准输入，res和tag代表生成的镜像和标记。</p>
-</li>
-</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base0</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	Base0()</span><br><span class="line">	&#123;</span><br><span class="line">		m_A = <span class="number">100</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> m_A;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son0</span>:</span><span class="keyword">public</span> Base0</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	Son0()</span><br><span class="line">	&#123;</span><br><span class="line">		m_A = <span class="number">20</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> m_A;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test03</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Son0 s1;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"子类中的属性："</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; s1.m_A &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"父类中的属性："</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; s1.Base0::m_A &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>执行结果：</p>
+<p><img src="/2019/07/30/继承/test03.PNG" alt="执行结果"></p>
+<h2 id="五、继承中的静态成员处理"><a href="#五、继承中的静态成员处理" class="headerlink" title="五、继承中的静态成员处理"></a>五、继承中的静态成员处理</h2><ul>
+<li>如果基类定义了一个静态成员，则在整个继承体系中只存在该成员的唯一定义。不论从基类中派生出多少个派生类，对于每个静态成员来说都只存在唯一的实例。</li>
+<li>静态成员遵循通用的访问控制规则，如果基类中的成员是private的，则派生类无权访问它。假设某静态成员是可访问的，则我们既能通过基类使用它，也可以通过派生类使用它。</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Father</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> m_A;</span><br><span class="line">	<span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">func</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"Father func()"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">int</span> Father::m_A = <span class="number">200</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son1</span> :</span><span class="keyword">public</span> Father</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> A;</span><br><span class="line">	<span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">func</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"Son func()"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test04</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"Father的静态成员值为："</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; Father::m_A &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"Son1继承的静态成员值为："</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; Son1::m_A &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	Son1::func();</span><br><span class="line">	Father::func();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>执行结果：</p>
+<p><img src="/2019/07/30/继承/test04.PNG" alt="执行结果"></p>
+<h2 id="六、防止继承的发生"><a href="#六、防止继承的发生" class="headerlink" title="六、防止继承的发生"></a>六、防止继承的发生</h2><p>有时候我们会定义这样一种类，我们不希望其他类继承它，或者不想考虑它是否合适作为一个基类。为了实现这个目的，C++11新标准提供了一种防止继承发生的方法，即在类后跟一个关键字<code>final</code>。</p>
+<p><img src="/2019/07/30/继承/test05.PNG" alt="final关键字"></p>
+<h2 id="七、菱形继承（钻石继承）的问题"><a href="#七、菱形继承（钻石继承）的问题" class="headerlink" title="七、菱形继承（钻石继承）的问题"></a>七、菱形继承（钻石继承）的问题</h2><p>&emsp;两个派生类继承同一个基类，而又有某个类同时继承了两个派生类，这种继承被称为菱形继承，或者钻石继承。</p>
+<p>这种继承带来的问题：</p>
+<ul>
+<li>羊继承了动物的数据和函数，驼继承了动物的数据和函数，羊驼同时继承了羊和驼的数据和函数。当羊驼调用函数或者数据时，就会产生二义性。</li>
+<li>羊驼继承自动物的函数和数据继承了两份，其实我们应该清楚，这份数据我们只需要一份就可以了。</li>
+</ul>
+<p>解决办法：</p>
+<ul>
+<li>采用虚继承的方式来解决。通过虚继承的方式，可以保证羊驼类中只有一份动物类的属性和函数的赋值，因此可以避免菱形继承的二义性，也就解决了“钻石继承”的问题。</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//动物类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="keyword">int</span> m_Age;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//羊类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Sheep</span> :</span><span class="keyword">virtual</span> <span class="keyword">public</span> Animal</span><br><span class="line">&#123;</span><br><span class="line">	</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//驼类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Tuo</span> :</span><span class="keyword">virtual</span> <span class="keyword">public</span> Animal</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//羊驼类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SheepTuo</span> :</span><span class="keyword">public</span> Tuo, <span class="keyword">public</span> Sheep</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test06</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	SheepTuo st;</span><br><span class="line">	st.Sheep::m_Age = <span class="number">10</span>;</span><br><span class="line">	st.Tuo::m_Age = <span class="number">20</span>;</span><br><span class="line">	st.m_Age = <span class="number">5</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"驼的年龄为"</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; st.Tuo::m_Age &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"羊的年龄为："</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; st.Sheep::m_Age &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"羊驼的年龄为："</span>;</span><br><span class="line">	<span class="comment">//可以直接访问，没有二义性的可能，只有一份数据</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; st.m_Age &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>执行结果：</p>
+<p><img src="/2019/07/30/继承/test06.PNG" alt="执行结果"></p>
+<h2 id="八、源码地址"><a href="#八、源码地址" class="headerlink" title="八、源码地址"></a>八、源码地址</h2><p>​        <a href="https://github.com/Aoki-Wang/CheckStation/tree/master/C%2B%2B/Inheritance" target="_blank" rel="noopener">继承源码示例</a></p>
 
       
     </div>
@@ -607,9 +615,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Docker/" rel="tag"># Docker</a>
+            <a href="/tags/C/" rel="tag"># C++</a>
           
-            <a href="/tags/容器/" rel="tag"># 容器</a>
+            <a href="/tags/继承/" rel="tag"># 继承</a>
           
         </div>
       
@@ -622,8 +630,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/11/19/Kubernetes集群部署/" rel="next" title="Kubernetes集群部署">
-                <i class="fa fa-chevron-left"></i> Kubernetes集群部署
+              <a href="/2019/07/29/stack和queue/" rel="next" title="stack和queue">
+                <i class="fa fa-chevron-left"></i> stack和queue
               </a>
             
           </div>
@@ -631,6 +639,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/30/树/" rel="prev" title="树">
+                树 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -795,7 +807,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、Docker是什么？"><span class="nav-number">1.</span> <span class="nav-text">一、Docker是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Docker的组件"><span class="nav-number">2.</span> <span class="nav-text">二、Docker的组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、容器的管理操作"><span class="nav-number">3.</span> <span class="nav-text">三、容器的管理操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建容器"><span class="nav-number">3.1.</span> <span class="nav-text">创建容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看容器"><span class="nav-number">3.2.</span> <span class="nav-text">查看容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动容器"><span class="nav-number">3.3.</span> <span class="nav-text">启动容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#终止容器"><span class="nav-number">3.4.</span> <span class="nav-text">终止容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除容器"><span class="nav-number">3.5.</span> <span class="nav-text">删除容器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、容器内信息获取与命令执行"><span class="nav-number">4.</span> <span class="nav-text">四、容器内信息获取与命令执行</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#依附容器"><span class="nav-number">4.1.</span> <span class="nav-text">依附容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看容器日志"><span class="nav-number">4.2.</span> <span class="nav-text">查看容器日志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看容器进程"><span class="nav-number">4.3.</span> <span class="nav-text">查看容器进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看容器信息"><span class="nav-number">4.4.</span> <span class="nav-text">查看容器信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#容器的导入与导出"><span class="nav-number">4.5.</span> <span class="nav-text">容器的导入与导出</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、继承"><span class="nav-number">1.</span> <span class="nav-text">一、继承</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、继承方式"><span class="nav-number">2.</span> <span class="nav-text">二、继承方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、继承中的构造和析构顺序"><span class="nav-number">3.</span> <span class="nav-text">三、继承中的构造和析构顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、继承中同名函数的处理"><span class="nav-number">4.</span> <span class="nav-text">四、继承中同名函数的处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、继承中的静态成员处理"><span class="nav-number">5.</span> <span class="nav-text">五、继承中的静态成员处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、防止继承的发生"><span class="nav-number">6.</span> <span class="nav-text">六、防止继承的发生</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七、菱形继承（钻石继承）的问题"><span class="nav-number">7.</span> <span class="nav-text">七、菱形继承（钻石继承）的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#八、源码地址"><span class="nav-number">8.</span> <span class="nav-text">八、源码地址</span></a></li></ol></div>
             
 
           </div>

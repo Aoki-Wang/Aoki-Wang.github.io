@@ -125,7 +125,7 @@
 
 
 
-  <meta name="keywords" content="Docker,容器,">
+  <meta name="keywords" content="STL,deque,">
 
 
 
@@ -136,18 +136,25 @@
 
 
 
-<meta name="description" content="一、Docker是什么？Docker是容器的一种，容器是一种轻量级的虚拟技术，和容器对应的更为重量级的虚拟技术是虚拟机。虚拟机是一种基于硬件的虚拟技术，它采用指令级的模拟，完全模拟一整套物理主机。容器是一种基于操作系统的虚拟技术，它运行在操作系统之上的用户空间，所有的容器都共用一个系统内核，甚至是公共库，容器引擎提供进程级别的隔离，让每个容器都像运行在单独的系统之上，但又能共享很多底层资源。 二、">
-<meta name="keywords" content="Docker,容器">
+<meta name="description" content="一、deque概述 &amp;emsp;vector是单向开口的连续线性空间，deque则是一种双向开口的连续线性空间。所谓双向开口，意思是可以在头尾两端分别做元素的插入和删除操作。虽然vector容器也可以在头尾两端插入元素，但是在其头部操作效率奇差，无法被接受。 &amp;emsp;deque容器和vector容器最大的差异在于：  deque允许使用常数项时间对头端进行元素的插入和删除 deque没有容量的">
+<meta name="keywords" content="STL,deque">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Docker和容器">
-<meta property="og:url" content="http://wanqbin.xyz/2019/11/20/Docker和容器/index.html">
+<meta property="og:title" content="deque容器">
+<meta property="og:url" content="http://wanqbin.xyz/2019/07/29/deque容器/index.html">
 <meta property="og:site_name" content="Aoki&#39;s Blog">
-<meta property="og:description" content="一、Docker是什么？Docker是容器的一种，容器是一种轻量级的虚拟技术，和容器对应的更为重量级的虚拟技术是虚拟机。虚拟机是一种基于硬件的虚拟技术，它采用指令级的模拟，完全模拟一整套物理主机。容器是一种基于操作系统的虚拟技术，它运行在操作系统之上的用户空间，所有的容器都共用一个系统内核，甚至是公共库，容器引擎提供进程级别的隔离，让每个容器都像运行在单独的系统之上，但又能共享很多底层资源。 二、">
+<meta property="og:description" content="一、deque概述 &amp;emsp;vector是单向开口的连续线性空间，deque则是一种双向开口的连续线性空间。所谓双向开口，意思是可以在头尾两端分别做元素的插入和删除操作。虽然vector容器也可以在头尾两端插入元素，但是在其头部操作效率奇差，无法被接受。 &amp;emsp;deque容器和vector容器最大的差异在于：  deque允许使用常数项时间对头端进行元素的插入和删除 deque没有容量的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-19T16:26:14.105Z">
+<meta property="og:image" content="http://wanqbin.xyz/2019/07/29/deque容器/test01.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/2019/07/29/deque容器/test02.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/2019/07/29/deque容器/test03.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/2019/07/29/deque容器/test04.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/2019/07/29/deque容器/test05.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/2019/07/29/deque容器/test06.PNG">
+<meta property="og:updated_time" content="2019-07-30T02:50:16.737Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Docker和容器">
-<meta name="twitter:description" content="一、Docker是什么？Docker是容器的一种，容器是一种轻量级的虚拟技术，和容器对应的更为重量级的虚拟技术是虚拟机。虚拟机是一种基于硬件的虚拟技术，它采用指令级的模拟，完全模拟一整套物理主机。容器是一种基于操作系统的虚拟技术，它运行在操作系统之上的用户空间，所有的容器都共用一个系统内核，甚至是公共库，容器引擎提供进程级别的隔离，让每个容器都像运行在单独的系统之上，但又能共享很多底层资源。 二、">
+<meta name="twitter:title" content="deque容器">
+<meta name="twitter:description" content="一、deque概述 &amp;emsp;vector是单向开口的连续线性空间，deque则是一种双向开口的连续线性空间。所谓双向开口，意思是可以在头尾两端分别做元素的插入和删除操作。虽然vector容器也可以在头尾两端插入元素，但是在其头部操作效率奇差，无法被接受。 &amp;emsp;deque容器和vector容器最大的差异在于：  deque允许使用常数项时间对头端进行元素的插入和删除 deque没有容量的">
+<meta name="twitter:image" content="http://wanqbin.xyz/2019/07/29/deque容器/test01.PNG">
 
 
 
@@ -177,14 +184,14 @@
 
 
 
-  <link rel="canonical" href="http://wanqbin.xyz/2019/11/20/Docker和容器/">
+  <link rel="canonical" href="http://wanqbin.xyz/2019/07/29/deque容器/">
 
 
 
 
 
 
-  <title>Docker和容器 | Aoki's Blog</title>
+  <title>deque容器 | Aoki's Blog</title>
   
 
 
@@ -363,7 +370,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://wanqbin.xyz/2019/11/20/Docker和容器/">
+    <link itemprop="mainEntityOfPage" href="http://wanqbin.xyz/2019/07/29/deque容器/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Aoki">
@@ -380,7 +387,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Docker和容器</h1>
+          <h1 class="post-title" itemprop="name headline">deque容器</h1>
         
 
         <div class="post-meta">
@@ -392,8 +399,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-20T00:25:00+08:00">
-                2019-11-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-29T00:25:00+08:00">
+                2019-07-29
               </time>
             
 
@@ -415,8 +422,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/分布式与云计算/" itemprop="url" rel="index">
-                    <span itemprop="name">分布式与云计算</span>
+                  <a href="/categories/STL/" itemprop="url" rel="index">
+                    <span itemprop="name">STL</span>
                   </a>
                 </span>
 
@@ -433,8 +440,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/11/20/Docker和容器/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/11/20/Docker和容器/" itemprop="commentCount"></span>
+                <a href="/2019/07/29/deque容器/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/29/deque容器/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -442,7 +449,7 @@
 
           
           
-             <span id="/2019/11/20/Docker和容器/" class="leancloud_visitors" data-flag-title="Docker和容器">
+             <span id="/2019/07/29/deque容器/" class="leancloud_visitors" data-flag-title="deque容器">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -472,7 +479,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.8k
+                  1.9k
                 </span>
               
 
@@ -497,89 +504,75 @@
       
 
       
-        <h2 id="一、Docker是什么？"><a href="#一、Docker是什么？" class="headerlink" title="一、Docker是什么？"></a>一、Docker是什么？</h2><p>Docker是容器的一种，容器是一种轻量级的虚拟技术，和容器对应的更为重量级的虚拟技术是虚拟机。虚拟机是一种基于硬件的虚拟技术，它采用指令级的模拟，完全模拟一整套物理主机。容器是一种基于操作系统的虚拟技术，它运行在操作系统之上的用户空间，所有的容器都共用一个系统内核，甚至是公共库，容器引擎提供进程级别的隔离，让每个容器都像运行在单独的系统之上，但又能共享很多底层资源。</p>
-<h2 id="二、Docker的组件"><a href="#二、Docker的组件" class="headerlink" title="二、Docker的组件"></a>二、Docker的组件</h2><p>Docker采用C/S架构。Docker客户端，即Docker可执行程序，可以通过命令行和API的形式与Docker守候程序进行通信，Docker守候程序提供Docker服务。</p>
-<p>Docker包含三大核心组件——镜像，容器和库。</p>
-<ul>
-<li>镜像：是一个只读的静态模板。它保存着容器需要的环境和应用的执行代码，可以把镜像看成是容器的代码，当代码运行起来后就成了容器。镜像采用分层机制，每个镜像都是只读的，但是可以将写数据的层通过联合文件系统附加在原有的镜像之上。这种增量式修改使得镜像非常容器存储、传输和更新。</li>
-<li>容器：是一个运行时环境，它是一个镜像的运行状态，想到对于静态的镜像而言，容器是镜像执行的动态表现。</li>
-<li>库：Docker采用注册服务器来存储和共享用户的镜像，库是某个特定用户存储镜像的目录。通常，一个用户可以建立多个库来保存自己的镜像。如Docker官方的Docker Hub。</li>
-</ul>
-<h2 id="三、容器的管理操作"><a href="#三、容器的管理操作" class="headerlink" title="三、容器的管理操作"></a>三、容器的管理操作</h2><ol>
-<li><h3 id="创建容器"><a href="#创建容器" class="headerlink" title="创建容器"></a>创建容器</h3><ul>
-<li><p>docker create</p>
-<p> 创建的容器处于停止状态</p>
-</li>
-<li><p>docker run</p>
-<p>不仅创建的容器，而且启动了容器</p>
-</li>
-</ul>
-<p>容器创建后，会返回容器的ID。</p>
-<p>要想让创建的容器立马进入运行态，可以使用<code>docker run</code>命令，该命令相当于下面的两条命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker create</span><br><span class="line">docker start</span><br></pre></td></tr></table></figure>
-<p>使用<code>docker run</code>命令可以创建两种类型的容器——后台型容器和交互型容器。</p>
-<ul>
-<li>交互型容器：运行在前台，通常会指定有交互的控制台，可以给容器输入，也可以得到容器的输出。创建该容器的终端被关闭，在容器内部使用<code>exit</code>命令或者调用了<code>docker stop</code>、<code>docker kill</code>命令后，容器会变成停止状态。</li>
-<li>后台型容器：运行在后台，创建启动之后就与终端无关。即便终端关闭了，该后台容器也依然存在，只有调用<code>docker stop</code>或<code>docker kill</code>命令时才能够使容器变成停止状态。</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -i -t --name=inspect_shell ubuntu /bin/bash</span><br></pre></td></tr></table></figure>
-<p>其中，<code>-i</code>用于打开容器的标准输入(STDIN),<code>-t</code>告诉Docker为容器建立一个命令行终端。</p>
-<p><code>--name</code>为容器指定一个名字，是一个可选项。如果没有这个选项，Docker会为容器创建一个随机名字</p>
-<p><code>ubuntu</code>是镜像名，<code>/bin/bash</code>代表告诉Docker要在容器里面执行命令<code>/bin/bash</code>。</p>
-<p>执行该命令之后，如果本地没有该镜像，Docker会从远程仓库中获取。然后，Docker使用这个镜像创建一个新的容器并将其启动；容器的文件系统是在只读的镜像文件上增加一层可读写的文件层，这样可以保证镜像不变而只记录改变的数据，这对容器的共享和传输都非常有利。接着会配置容器的网络，Docker会为容器分配一个虚拟网络接口，并通过网桥的方式将该网络接口桥接到宿主主机上，然后该虚拟网络接口分配一个IP地址。最后，Docker在新容器中运行指定的命令。</p>
-</li>
-<li><h3 id="查看容器"><a href="#查看容器" class="headerlink" title="查看容器"></a>查看容器</h3><p>查看正在运行的容器：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure>
-<p>CONTAINER ID：唯一标识容器的ID</p>
-<p>IMAGE：创建容器时使用的镜像</p>
-<p>COMMAND：容器最后运行的命令</p>
-<p>CREATED：创建容器的时间</p>
-<p>STATUS：容器的状态</p>
-<p>PORT：对外开放的接口</p>
-<p>NAMES：容器名。和容器ID一样都可以唯一标识一个容器。</p>
-<p>查看所有的容器：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps -a</span><br></pre></td></tr></table></figure>
-<p>列出所有容器，包括运行的和停止的容器。</p>
-</li>
-<li><h3 id="启动容器"><a href="#启动容器" class="headerlink" title="启动容器"></a>启动容器</h3><p>通过<code>docker create</code>命令创建的容器会进入到停止状态，想要运行该容器，可以执行以下命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker start 容器名/容器ID</span><br></pre></td></tr></table></figure>
-</li>
-<li><h3 id="终止容器"><a href="#终止容器" class="headerlink" title="终止容器"></a>终止容器</h3><p>执行命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker stop 容器名/容器ID</span><br></pre></td></tr></table></figure>
-</li>
-<li><h3 id="删除容器"><a href="#删除容器" class="headerlink" title="删除容器"></a>删除容器</h3><p>执行命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm 容器名</span><br></pre></td></tr></table></figure>
-<p>注意：不可以删除一个运行中的容器，必须先用<code>docker stop</code>或<code>docker kill</code>命令停止它才能删除。当然，也可以使用<code>-f</code>选项强制删除。</p>
-<p>删除所有容器：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm 'docker ps -a -q'</span><br></pre></td></tr></table></figure>
-<p><code>-a</code>标志列出所有容器，<code>-q</code>标志只列出容器的ID，不包括容器的其他信息。然后将这个列表传给<code>docker rm</code>命令，依次删除容器。</p>
-</li>
-</ol>
-<h2 id="四、容器内信息获取与命令执行"><a href="#四、容器内信息获取与命令执行" class="headerlink" title="四、容器内信息获取与命令执行"></a>四、容器内信息获取与命令执行</h2><ol>
-<li><h3 id="依附容器"><a href="#依附容器" class="headerlink" title="依附容器"></a>依附容器</h3><p>依附操作<code>attach</code>通常用于由<code>docker start</code>或者<code>docker restart</code>启动的交互型容器中。由于<code>docker start</code>启动的交互型容器并没有具体终端可以依附，而容器本身是可以接收用户交互的，这时就需要通过<code>attach</code>命令来将终端依附到容器上。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker attach 容器ID</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
+        <p>一、deque概述</p>
+<p>&emsp;<code>vector</code>是单向开口的连续线性空间，<code>deque</code>则是一种双向开口的连续线性空间。所谓双向开口，意思是可以在头尾两端分别做元素的插入和删除操作。虽然vector容器也可以在头尾两端插入元素，但是在其头部操作效率奇差，无法被接受。</p>
+<p>&emsp;deque容器和vector容器最大的差异在于：</p>
 <ol>
-<li><h3 id="查看容器日志"><a href="#查看容器日志" class="headerlink" title="查看容器日志"></a>查看容器日志</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker logs -f 容器名 </span><br><span class="line">docker logs -f --tails=5 容器名   #控制logs输出的日志行数，只输出最后五行</span><br></pre></td></tr></table></figure>
-</li>
+<li>deque允许使用常数项时间对头端进行元素的插入和删除</li>
+<li>deque没有容量的概念，因为它是动态的以分段连续空间组成的，随时可以增加一段新的空间并链接起来，换句话说，像vector那样“旧空间不足而重新配置一块更大的空间，然后复制元素，再释放旧空间”这样的事情不会在deque发生，也因此，deque没有必要提供所谓的空间保留功能。</li>
+<li>虽然deque容器也提供<code>Random Access Iterator</code>，但是它的迭代器并不是普通指针，其复杂度和vector不是一个量级，这当然影响各个运算的层面，除非必要，我们应该尽可能选择vector而不是deque，对deque进行的排序操作，为了最高效率，可将deque先完整复制到一个vector中，将vector排序后，再复制回deque。</li>
 </ol>
-<ol>
-<li><h3 id="查看容器进程"><a href="#查看容器进程" class="headerlink" title="查看容器进程"></a>查看容器进程</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker top 容器名</span><br></pre></td></tr></table></figure>
-</li>
-<li><h3 id="查看容器信息"><a href="#查看容器信息" class="headerlink" title="查看容器信息"></a>查看容器信息</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker inspect 容器名</span><br></pre></td></tr></table></figure>
-<p>用来查看容器的配置环境，包括容器名，环境变量，运行命令，主机配置，网络配置和数据卷配置等。使用<code>-f</code>或者<code>--format</code>命令格式化标志，可以查看指定部分的信息。</p>
-</li>
-<li><h3 id="容器的导入与导出"><a href="#容器的导入与导出" class="headerlink" title="容器的导入与导出"></a>容器的导入与导出</h3><p>Docker的导入和导出分别由<code>import</code>命令和<code>export</code>命令完成。</p>
-<p>使用<code>docker export</code>命令导出容器：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker export 容器名 &gt; my_container.tar</span><br></pre></td></tr></table></figure>
-<p><code>docker export</code>命令会把容器的文件系统以tar包的格式导出到标准输出。我们将其定位到目标文件<code>name.tar</code>。将容器保存到本地文件也算是持久化方式的一种。将容器保存到本次之后，我们就可以通过网络等方法将tar包分享给他人。</p>
-<p>使用<code>docker import</code>命令导入一个本地的tar包作为镜像：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat my_container.tar | docker import - imported:container</span><br></pre></td></tr></table></figure>
-<p><code>docker import</code>会把打包的容器导入为一个镜像。</p>
-<p><code>import</code>表示从标准输入读取容器内容，我们把<code>name.tar</code>的内容传给标准输入，res和tag代表生成的镜像和标记。</p>
-</li>
-</ol>
+<p>二、deque容器的中控器</p>
+<p>&emsp;deque是由一段一段定量连续空间构成。一旦有必要在deque的前端或尾端增加新空间，便配置一段定量连续空间，串接在整个deque的头端或尾端，deque的最大任务，便是在这些分段的定量连续空间上，维护其整体连续的假象，并提供随机存取的接口，避开了“重新配置、复制、释放”的轮回，代价则是复杂的迭代器架构。</p>
+<p>&emsp;deque为分段连续空间，就必须有中央控制，而为了维持整体连续的假象，数据结构的设计及迭代器前进后退等操作都颇为繁琐。deque的实现代码分量远比vector或list都多得多。</p>
+<p>&emsp;采用一块所谓的<code>map</code>（不是STL的map）作为主控。这里所谓的<code>map</code>是一小块连续空间，其中每个元素都是指针，指向另一段（较大的）连续线性空间，称为<code>缓冲区</code>。缓冲区才是deque存储空间主体。</p>
+<p>三、deque迭代器</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">T* cur;<span class="comment">//此迭代器指向缓冲区中当前的元素</span></span><br><span class="line">T* first;<span class="comment">//此迭代器指向缓冲区的头</span></span><br><span class="line">T* last;<span class="comment">//此迭代器指向缓冲区的尾</span></span><br><span class="line">map_pointer node;<span class="comment">//指向中控器中心</span></span><br></pre></td></tr></table></figure>
+
+<p>四、deque常用API</p>
+<p>1.deque构造函数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">deque</span>&lt;T&gt; deqT;<span class="comment">//默认构造形式</span></span><br><span class="line"><span class="built_in">deque</span>(beg,end);<span class="comment">//构造函数将[beg,end)区间中的元素拷贝给本身</span></span><br><span class="line"><span class="built_in">deque</span>(n,elem);<span class="comment">//构造函数将n个elem拷贝给本身</span></span><br><span class="line"><span class="built_in">deque</span>(<span class="keyword">const</span> <span class="built_in">deque</span> &amp;deq);<span class="comment">//拷贝构造函数</span></span><br></pre></td></tr></table></figure>
+
+<p>示例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">deque</span>&lt;<span class="keyword">int</span>&gt;deq1(<span class="number">5</span>,<span class="number">10</span>);<span class="comment">//构造deq1</span></span><br><span class="line">	<span class="built_in">deque</span>&lt;<span class="keyword">int</span>&gt;deq2(deq1);<span class="comment">//拷贝构造deq2</span></span><br><span class="line">	displayDeque(deq1);<span class="comment">//打印deq1</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	displayDeque(deq2);</span><br><span class="line">	<span class="built_in">deque</span>&lt;<span class="keyword">int</span>&gt;deq3(deq2.begin(), deq2.begin() + <span class="number">3</span>);<span class="comment">//区间拷贝方式构造deq3</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	displayDeque(deq3);</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：</p>
+<p><img src="/2019/07/29/deque容器/test01.PNG" alt="构造函数示例"></p>
+<p>2.deque赋值操作</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">assign(beg,end);<span class="comment">//将[beg,end)区间中的数据拷贝给本身</span></span><br><span class="line">assign(n,elem);<span class="comment">//将n个elem拷贝赋值给本身</span></span><br><span class="line"><span class="built_in">deque</span>&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> <span class="built_in">deque</span> &amp;deq);<span class="comment">//重载等号操作符</span></span><br><span class="line">swap(deq);<span class="comment">//将deq与本身的元素互换</span></span><br></pre></td></tr></table></figure>
+
+<p>示例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test02</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">deque</span>&lt;<span class="keyword">int</span>&gt;deq1(<span class="number">5</span>, <span class="number">10</span>);<span class="comment">//构造deq1</span></span><br><span class="line">	<span class="built_in">deque</span>&lt;<span class="keyword">int</span>&gt;deq2(<span class="number">10</span>, <span class="number">15</span>);</span><br><span class="line">	deq1.assign(deq2.begin(), deq2.begin() + <span class="number">3</span>);<span class="comment">//将deq2下标为0,1,2的数据拷贝给deq1</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"deq1:"</span>;</span><br><span class="line">	displayDeque(deq1);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	deq1.assign(<span class="number">4</span>, <span class="number">4</span>);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"deq1:"</span>;</span><br><span class="line">	displayDeque(deq1);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"deq2:"</span>;</span><br><span class="line">	displayDeque(deq2);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	deq1.swap(deq2);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"deq1和deq2的数据交换后："</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"deq1:"</span>;</span><br><span class="line">	displayDeque(deq1);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"deq2:"</span>;</span><br><span class="line">	displayDeque(deq2);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：</p>
+<p><img src="/2019/07/29/deque容器/test02.PNG" alt="赋值操作示例"></p>
+<p>3.deque大小操作</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">deque</span>.size();<span class="comment">//返回容器中元素的个数</span></span><br><span class="line"><span class="built_in">deque</span>.empty();<span class="comment">//判断容器是否为空</span></span><br><span class="line"><span class="built_in">deque</span>.resize(num);<span class="comment">//重新指定容器的长度为num，若容器变长，则以默认值填充新位置。如果容器变短，则末尾超出容器长度的元素被删除</span></span><br><span class="line"><span class="built_in">deque</span>.resize(num,elem);<span class="comment">//重新指定容器的长度为num，若容器变长，则以elem值填充新位置，如果容器变短，则末尾超出容器长度的元素被删除</span></span><br></pre></td></tr></table></figure>
+
+<p>示例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test03</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">deque</span>&lt;<span class="keyword">int</span>&gt;deq1(<span class="number">5</span>, <span class="number">10</span>);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"deq1的长度为："</span> &lt;&lt; deq1.size() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">if</span> (deq1.empty())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"deq1为空!"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"deq1非空!长度为："</span> &lt;&lt; deq1.size() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		displayDeque(deq1);</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	deq1.resize(<span class="number">10</span>);<span class="comment">//重新指定deq的长度为10,</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"指定deq1的长度为10时，其元素为："</span>;</span><br><span class="line">	displayDeque(deq1);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	deq1.resize(<span class="number">15</span>, <span class="number">100</span>);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"指定deq1的长度为15时，其元素为："</span>;</span><br><span class="line">	displayDeque(deq1);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	deq1.resize(<span class="number">3</span>,<span class="number">100</span>);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"指定deq1的长度为3时，其元素为："</span>;</span><br><span class="line">	displayDeque(deq1);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：<br><img src="/2019/07/29/deque容器/test03.PNG" alt="大小操作示例"></p>
+<p>4.deque双端插入和删除操作</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">push_back(elem);<span class="comment">//在容器尾部添加一个数据</span></span><br><span class="line">push_front(elem);<span class="comment">//在容器头部插入一个数据</span></span><br><span class="line">pop_back();<span class="comment">//删除容器最后一个数据</span></span><br><span class="line">pop_front();<span class="comment">//删除容器第一个数据</span></span><br></pre></td></tr></table></figure>
+
+<p>示例:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test04</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">deque</span>&lt;<span class="keyword">int</span>&gt;deq1(<span class="number">5</span>, <span class="number">5</span>);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"deq1："</span>;</span><br><span class="line">	displayDeque(deq1);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	deq1.push_back(<span class="number">100</span>);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"deq1.push_back(100)后为："</span>;</span><br><span class="line">	displayDeque(deq1);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	deq1.push_front(<span class="number">15</span>);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"deq1.push_front(15)后为："</span>;</span><br><span class="line">	displayDeque(deq1);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	deq1.pop_back();</span><br><span class="line">	deq1.pop_front();</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"deque删头去尾后为："</span>;</span><br><span class="line">	displayDeque(deq1);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：</p>
+<p><img src="/2019/07/29/deque容器/test04.PNG" alt="双端插入删除操作示例"></p>
+<p>5.deque数据存取</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">at(index);<span class="comment">//返回索引index所指的数据，如果index越界，抛出out_of_range</span></span><br><span class="line"><span class="keyword">operator</span>[];<span class="comment">//返回索引index所指向的数据，如果index越界，不抛出异常，直接出错</span></span><br><span class="line">front();<span class="comment">//返回第一个数据</span></span><br><span class="line">back();<span class="comment">//返回最后一个数据</span></span><br></pre></td></tr></table></figure>
+
+<p>示例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test05</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">deque</span>&lt;<span class="keyword">int</span>&gt; deq1(<span class="number">5</span>, <span class="number">15</span>);</span><br><span class="line">	<span class="comment">//cout &lt;&lt; "索引为5的元素为：" &lt;&lt; deq1.at(5) &lt;&lt; endl;</span></span><br><span class="line">	<span class="comment">//上面的输出语句报错，抛出out_of_range</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"索引为3的元素为："</span> &lt;&lt; deq1.at(<span class="number">3</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	deq1.push_front(<span class="number">44</span>);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"索引为0的元素为："</span> &lt;&lt; deq1.at(<span class="number">0</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="comment">//cout &lt;&lt; deq1[15] &lt;&lt; endl;//越界报错</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"索引为3的元素为："</span> &lt;&lt; deq1[<span class="number">3</span>] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"索引为0的元素为："</span> &lt;&lt; deq1[<span class="number">0</span>] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"deq的首元素为："</span> &lt;&lt; deq1.front() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"deq的尾元素为："</span> &lt;&lt; deq1.back() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：</p>
+<p><img src="/2019/07/29/deque容器/test05.PNG" alt="数据存取操作示例"></p>
+<p>6.deque插入操作</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">insert(pos,elem);<span class="comment">//在pos位置插入一个elem元素的拷贝，返回新数据的位置</span></span><br><span class="line">insert(pos,n,elem);<span class="comment">//在pos位置插入n个elem数据，无返回值</span></span><br><span class="line">insert(pos,beg,end);<span class="comment">//在pos位置插入[beg,end)区间的数据，无返回值</span></span><br></pre></td></tr></table></figure>
+
+<p>示例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test06</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">deque</span>&lt;<span class="keyword">int</span>&gt; deq1(<span class="number">5</span>, <span class="number">15</span>); </span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"deq1:"</span>;</span><br><span class="line">	displayDeque(deq1);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	deq1.insert(deq1.begin() + <span class="number">3</span>, <span class="number">18</span>);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"deq1:"</span>;</span><br><span class="line">	displayDeque(deq1);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	deq1.insert(deq1.begin(),<span class="number">2</span>,<span class="number">20</span>);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"deq1:"</span>;</span><br><span class="line">	displayDeque(deq1);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	deq1.erase(deq1.begin());</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"deq1:"</span>;</span><br><span class="line">	displayDeque(deq1);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	deq1.erase(deq1.begin(), deq1.begin() + <span class="number">5</span>);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"deq1:"</span>;</span><br><span class="line">	displayDeque(deq1);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	deq1.clear();</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"deq1:"</span>;</span><br><span class="line">	displayDeque(deq1);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：</p>
+<p><img src="/2019/07/29/deque容器/test06.PNG" alt="插入和删除操作示例"></p>
+<p>7.deque删除操作</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">clear();<span class="comment">//移除容器的所有数据</span></span><br><span class="line">erase(beg,end);<span class="comment">//删除[beg,end)区间的数据，返回下一个数据的位置</span></span><br><span class="line">erase(pos);<span class="comment">//删除pos位置的很舒服，返回下一个数据的位置</span></span><br></pre></td></tr></table></figure>
+
+<p>如上例所示。</p>
+<p>五、源码地址</p>
+<p>​        <a href="https://github.com/Aoki-Wang/CheckStation/tree/master/STL/deque" target="_blank" rel="noopener">deque容器示例源码</a></p>
 
       
     </div>
@@ -607,9 +600,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Docker/" rel="tag"># Docker</a>
+            <a href="/tags/STL/" rel="tag"># STL</a>
           
-            <a href="/tags/容器/" rel="tag"># 容器</a>
+            <a href="/tags/deque/" rel="tag"># deque</a>
           
         </div>
       
@@ -622,8 +615,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/11/19/Kubernetes集群部署/" rel="next" title="Kubernetes集群部署">
-                <i class="fa fa-chevron-left"></i> Kubernetes集群部署
+              <a href="/2019/07/01/点对点信道的数据链路层/" rel="next" title="使用点对点信道的数据链路层">
+                <i class="fa fa-chevron-left"></i> 使用点对点信道的数据链路层
               </a>
             
           </div>
@@ -631,6 +624,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/29/stack和queue/" rel="prev" title="stack和queue">
+                stack和queue <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -687,17 +684,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -785,22 +773,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、Docker是什么？"><span class="nav-number">1.</span> <span class="nav-text">一、Docker是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Docker的组件"><span class="nav-number">2.</span> <span class="nav-text">二、Docker的组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、容器的管理操作"><span class="nav-number">3.</span> <span class="nav-text">三、容器的管理操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建容器"><span class="nav-number">3.1.</span> <span class="nav-text">创建容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看容器"><span class="nav-number">3.2.</span> <span class="nav-text">查看容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动容器"><span class="nav-number">3.3.</span> <span class="nav-text">启动容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#终止容器"><span class="nav-number">3.4.</span> <span class="nav-text">终止容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除容器"><span class="nav-number">3.5.</span> <span class="nav-text">删除容器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、容器内信息获取与命令执行"><span class="nav-number">4.</span> <span class="nav-text">四、容器内信息获取与命令执行</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#依附容器"><span class="nav-number">4.1.</span> <span class="nav-text">依附容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看容器日志"><span class="nav-number">4.2.</span> <span class="nav-text">查看容器日志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看容器进程"><span class="nav-number">4.3.</span> <span class="nav-text">查看容器进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看容器信息"><span class="nav-number">4.4.</span> <span class="nav-text">查看容器信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#容器的导入与导出"><span class="nav-number">4.5.</span> <span class="nav-text">容器的导入与导出</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       

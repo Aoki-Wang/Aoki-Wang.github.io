@@ -125,7 +125,7 @@
 
 
 
-  <meta name="keywords" content="Docker,容器,">
+  <meta name="keywords" content="STL,">
 
 
 
@@ -136,18 +136,18 @@
 
 
 
-<meta name="description" content="一、Docker是什么？Docker是容器的一种，容器是一种轻量级的虚拟技术，和容器对应的更为重量级的虚拟技术是虚拟机。虚拟机是一种基于硬件的虚拟技术，它采用指令级的模拟，完全模拟一整套物理主机。容器是一种基于操作系统的虚拟技术，它运行在操作系统之上的用户空间，所有的容器都共用一个系统内核，甚至是公共库，容器引擎提供进程级别的隔离，让每个容器都像运行在单独的系统之上，但又能共享很多底层资源。 二、">
-<meta name="keywords" content="Docker,容器">
+<meta name="description" content="长久以来，软件界一直希望建立一种可重复运用的东西，以及一种得以制造出“可重复运用的东西”的方法，让工程师/程序员的心血不致于随时间迁移、人事异动、私心欲念而烟消云散。从子函数、程序、函数、类别、到函数库、类别库、各种组件、从结构化设计、模块化设计、面向对象设计、到模式的归纳整理，无一不是软件工程的慢慢奋斗史。 为的，就是复用性的提升。 ——《STL源码剖析》  为了建立数据结构和算法的一套标准，">
+<meta name="keywords" content="STL">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Docker和容器">
-<meta property="og:url" content="http://wanqbin.xyz/2019/11/20/Docker和容器/index.html">
+<meta property="og:title" content="STL概论">
+<meta property="og:url" content="http://wanqbin.xyz/2019/06/30/STL概论/index.html">
 <meta property="og:site_name" content="Aoki&#39;s Blog">
-<meta property="og:description" content="一、Docker是什么？Docker是容器的一种，容器是一种轻量级的虚拟技术，和容器对应的更为重量级的虚拟技术是虚拟机。虚拟机是一种基于硬件的虚拟技术，它采用指令级的模拟，完全模拟一整套物理主机。容器是一种基于操作系统的虚拟技术，它运行在操作系统之上的用户空间，所有的容器都共用一个系统内核，甚至是公共库，容器引擎提供进程级别的隔离，让每个容器都像运行在单独的系统之上，但又能共享很多底层资源。 二、">
+<meta property="og:description" content="长久以来，软件界一直希望建立一种可重复运用的东西，以及一种得以制造出“可重复运用的东西”的方法，让工程师/程序员的心血不致于随时间迁移、人事异动、私心欲念而烟消云散。从子函数、程序、函数、类别、到函数库、类别库、各种组件、从结构化设计、模块化设计、面向对象设计、到模式的归纳整理，无一不是软件工程的慢慢奋斗史。 为的，就是复用性的提升。 ——《STL源码剖析》  为了建立数据结构和算法的一套标准，">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-19T16:26:14.105Z">
+<meta property="og:updated_time" content="2019-06-30T10:31:33.704Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Docker和容器">
-<meta name="twitter:description" content="一、Docker是什么？Docker是容器的一种，容器是一种轻量级的虚拟技术，和容器对应的更为重量级的虚拟技术是虚拟机。虚拟机是一种基于硬件的虚拟技术，它采用指令级的模拟，完全模拟一整套物理主机。容器是一种基于操作系统的虚拟技术，它运行在操作系统之上的用户空间，所有的容器都共用一个系统内核，甚至是公共库，容器引擎提供进程级别的隔离，让每个容器都像运行在单独的系统之上，但又能共享很多底层资源。 二、">
+<meta name="twitter:title" content="STL概论">
+<meta name="twitter:description" content="长久以来，软件界一直希望建立一种可重复运用的东西，以及一种得以制造出“可重复运用的东西”的方法，让工程师/程序员的心血不致于随时间迁移、人事异动、私心欲念而烟消云散。从子函数、程序、函数、类别、到函数库、类别库、各种组件、从结构化设计、模块化设计、面向对象设计、到模式的归纳整理，无一不是软件工程的慢慢奋斗史。 为的，就是复用性的提升。 ——《STL源码剖析》  为了建立数据结构和算法的一套标准，">
 
 
 
@@ -177,14 +177,14 @@
 
 
 
-  <link rel="canonical" href="http://wanqbin.xyz/2019/11/20/Docker和容器/">
+  <link rel="canonical" href="http://wanqbin.xyz/2019/06/30/STL概论/">
 
 
 
 
 
 
-  <title>Docker和容器 | Aoki's Blog</title>
+  <title>STL概论 | Aoki's Blog</title>
   
 
 
@@ -363,7 +363,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://wanqbin.xyz/2019/11/20/Docker和容器/">
+    <link itemprop="mainEntityOfPage" href="http://wanqbin.xyz/2019/06/30/STL概论/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Aoki">
@@ -380,7 +380,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Docker和容器</h1>
+          <h1 class="post-title" itemprop="name headline">STL概论</h1>
         
 
         <div class="post-meta">
@@ -392,8 +392,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-20T00:25:00+08:00">
-                2019-11-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-30T18:30:00+08:00">
+                2019-06-30
               </time>
             
 
@@ -415,8 +415,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/分布式与云计算/" itemprop="url" rel="index">
-                    <span itemprop="name">分布式与云计算</span>
+                  <a href="/categories/STL/" itemprop="url" rel="index">
+                    <span itemprop="name">STL</span>
                   </a>
                 </span>
 
@@ -433,8 +433,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/11/20/Docker和容器/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/11/20/Docker和容器/" itemprop="commentCount"></span>
+                <a href="/2019/06/30/STL概论/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/30/STL概论/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -442,7 +442,7 @@
 
           
           
-             <span id="/2019/11/20/Docker和容器/" class="leancloud_visitors" data-flag-title="Docker和容器">
+             <span id="/2019/06/30/STL概论/" class="leancloud_visitors" data-flag-title="STL概论">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -472,7 +472,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.8k
+                  1.7k
                 </span>
               
 
@@ -497,89 +497,94 @@
       
 
       
-        <h2 id="一、Docker是什么？"><a href="#一、Docker是什么？" class="headerlink" title="一、Docker是什么？"></a>一、Docker是什么？</h2><p>Docker是容器的一种，容器是一种轻量级的虚拟技术，和容器对应的更为重量级的虚拟技术是虚拟机。虚拟机是一种基于硬件的虚拟技术，它采用指令级的模拟，完全模拟一整套物理主机。容器是一种基于操作系统的虚拟技术，它运行在操作系统之上的用户空间，所有的容器都共用一个系统内核，甚至是公共库，容器引擎提供进程级别的隔离，让每个容器都像运行在单独的系统之上，但又能共享很多底层资源。</p>
-<h2 id="二、Docker的组件"><a href="#二、Docker的组件" class="headerlink" title="二、Docker的组件"></a>二、Docker的组件</h2><p>Docker采用C/S架构。Docker客户端，即Docker可执行程序，可以通过命令行和API的形式与Docker守候程序进行通信，Docker守候程序提供Docker服务。</p>
-<p>Docker包含三大核心组件——镜像，容器和库。</p>
-<ul>
-<li>镜像：是一个只读的静态模板。它保存着容器需要的环境和应用的执行代码，可以把镜像看成是容器的代码，当代码运行起来后就成了容器。镜像采用分层机制，每个镜像都是只读的，但是可以将写数据的层通过联合文件系统附加在原有的镜像之上。这种增量式修改使得镜像非常容器存储、传输和更新。</li>
-<li>容器：是一个运行时环境，它是一个镜像的运行状态，想到对于静态的镜像而言，容器是镜像执行的动态表现。</li>
-<li>库：Docker采用注册服务器来存储和共享用户的镜像，库是某个特定用户存储镜像的目录。通常，一个用户可以建立多个库来保存自己的镜像。如Docker官方的Docker Hub。</li>
-</ul>
-<h2 id="三、容器的管理操作"><a href="#三、容器的管理操作" class="headerlink" title="三、容器的管理操作"></a>三、容器的管理操作</h2><ol>
-<li><h3 id="创建容器"><a href="#创建容器" class="headerlink" title="创建容器"></a>创建容器</h3><ul>
-<li><p>docker create</p>
-<p> 创建的容器处于停止状态</p>
-</li>
-<li><p>docker run</p>
-<p>不仅创建的容器，而且启动了容器</p>
-</li>
-</ul>
-<p>容器创建后，会返回容器的ID。</p>
-<p>要想让创建的容器立马进入运行态，可以使用<code>docker run</code>命令，该命令相当于下面的两条命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker create</span><br><span class="line">docker start</span><br></pre></td></tr></table></figure>
-<p>使用<code>docker run</code>命令可以创建两种类型的容器——后台型容器和交互型容器。</p>
-<ul>
-<li>交互型容器：运行在前台，通常会指定有交互的控制台，可以给容器输入，也可以得到容器的输出。创建该容器的终端被关闭，在容器内部使用<code>exit</code>命令或者调用了<code>docker stop</code>、<code>docker kill</code>命令后，容器会变成停止状态。</li>
-<li>后台型容器：运行在后台，创建启动之后就与终端无关。即便终端关闭了，该后台容器也依然存在，只有调用<code>docker stop</code>或<code>docker kill</code>命令时才能够使容器变成停止状态。</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -i -t --name=inspect_shell ubuntu /bin/bash</span><br></pre></td></tr></table></figure>
-<p>其中，<code>-i</code>用于打开容器的标准输入(STDIN),<code>-t</code>告诉Docker为容器建立一个命令行终端。</p>
-<p><code>--name</code>为容器指定一个名字，是一个可选项。如果没有这个选项，Docker会为容器创建一个随机名字</p>
-<p><code>ubuntu</code>是镜像名，<code>/bin/bash</code>代表告诉Docker要在容器里面执行命令<code>/bin/bash</code>。</p>
-<p>执行该命令之后，如果本地没有该镜像，Docker会从远程仓库中获取。然后，Docker使用这个镜像创建一个新的容器并将其启动；容器的文件系统是在只读的镜像文件上增加一层可读写的文件层，这样可以保证镜像不变而只记录改变的数据，这对容器的共享和传输都非常有利。接着会配置容器的网络，Docker会为容器分配一个虚拟网络接口，并通过网桥的方式将该网络接口桥接到宿主主机上，然后该虚拟网络接口分配一个IP地址。最后，Docker在新容器中运行指定的命令。</p>
-</li>
-<li><h3 id="查看容器"><a href="#查看容器" class="headerlink" title="查看容器"></a>查看容器</h3><p>查看正在运行的容器：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure>
-<p>CONTAINER ID：唯一标识容器的ID</p>
-<p>IMAGE：创建容器时使用的镜像</p>
-<p>COMMAND：容器最后运行的命令</p>
-<p>CREATED：创建容器的时间</p>
-<p>STATUS：容器的状态</p>
-<p>PORT：对外开放的接口</p>
-<p>NAMES：容器名。和容器ID一样都可以唯一标识一个容器。</p>
-<p>查看所有的容器：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps -a</span><br></pre></td></tr></table></figure>
-<p>列出所有容器，包括运行的和停止的容器。</p>
-</li>
-<li><h3 id="启动容器"><a href="#启动容器" class="headerlink" title="启动容器"></a>启动容器</h3><p>通过<code>docker create</code>命令创建的容器会进入到停止状态，想要运行该容器，可以执行以下命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker start 容器名/容器ID</span><br></pre></td></tr></table></figure>
-</li>
-<li><h3 id="终止容器"><a href="#终止容器" class="headerlink" title="终止容器"></a>终止容器</h3><p>执行命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker stop 容器名/容器ID</span><br></pre></td></tr></table></figure>
-</li>
-<li><h3 id="删除容器"><a href="#删除容器" class="headerlink" title="删除容器"></a>删除容器</h3><p>执行命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm 容器名</span><br></pre></td></tr></table></figure>
-<p>注意：不可以删除一个运行中的容器，必须先用<code>docker stop</code>或<code>docker kill</code>命令停止它才能删除。当然，也可以使用<code>-f</code>选项强制删除。</p>
-<p>删除所有容器：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm 'docker ps -a -q'</span><br></pre></td></tr></table></figure>
-<p><code>-a</code>标志列出所有容器，<code>-q</code>标志只列出容器的ID，不包括容器的其他信息。然后将这个列表传给<code>docker rm</code>命令，依次删除容器。</p>
-</li>
-</ol>
-<h2 id="四、容器内信息获取与命令执行"><a href="#四、容器内信息获取与命令执行" class="headerlink" title="四、容器内信息获取与命令执行"></a>四、容器内信息获取与命令执行</h2><ol>
-<li><h3 id="依附容器"><a href="#依附容器" class="headerlink" title="依附容器"></a>依附容器</h3><p>依附操作<code>attach</code>通常用于由<code>docker start</code>或者<code>docker restart</code>启动的交互型容器中。由于<code>docker start</code>启动的交互型容器并没有具体终端可以依附，而容器本身是可以接收用户交互的，这时就需要通过<code>attach</code>命令来将终端依附到容器上。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker attach 容器ID</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
+        <blockquote>
+<p>长久以来，软件界一直希望建立一种可重复运用的东西，以及一种得以制造出“可重复运用的东西”的方法，让工程师/程序员的心血不致于随时间迁移、人事异动、私心欲念而烟消云散。从子函数、程序、函数、类别、到函数库、类别库、各种组件、从结构化设计、模块化设计、面向对象设计、到模式的归纳整理，无一不是软件工程的慢慢奋斗史。</p>
+<p>为的，就是复用性的提升。</p>
+<p>——《STL源码剖析》</p>
+</blockquote>
+<p>为了建立数据结构和算法的一套标准，并且降低他们之间的耦合关系，以提升各自的独立性、弹性、交互操作性、，诞生了STL。</p>
+<p>STL（标准模板库），是惠普实验室开发的一系列软件的统称。</p>
+<p>STL从广义上分为：容器、算法、迭代器。容器和算法之间通过迭代器进行无缝连接。STL几乎所有的代码都采用了模板类或模板函数，相比于由函数和类组成的库来说提供了更好的代码复用机会。</p>
+<p>一、STL六大组件</p>
 <ol>
-<li><h3 id="查看容器日志"><a href="#查看容器日志" class="headerlink" title="查看容器日志"></a>查看容器日志</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker logs -f 容器名 </span><br><span class="line">docker logs -f --tails=5 容器名   #控制logs输出的日志行数，只输出最后五行</span><br></pre></td></tr></table></figure>
-</li>
+<li>容器：各种数据结构，如vector,list,deque,set,map，用来存放数据。</li>
+<li>算法：各种常用的算法如：sort,search,copy,erase……</li>
+<li>迭代器:扮演了容器和算法之间的胶合剂，是所谓的泛型指针。共有五种类型，以及其他的衍生变化，从实现的角度来看，迭代器是一种将operator*,operator-&gt;,operator++,operator–等指针相关操作予以重载的class template。所有STL容器都附带有自己专属的迭代器，只有容器设计者才知道如何遍历自己的元素。原生指针也是一种迭代器。</li>
+<li>仿函数：行为类似函数，可作为算法的某种策略。从实现的角度看，仿函数是一种重载了operator()的class或class template</li>
+<li>适配器：一种用来修饰容器或仿函数或得带器接口的东西。</li>
+<li>空间配置器：负责空间配置与管理。从实现的角度来看，配置器是一个实现了动态空间配置，空间管理，空间释放的class template。</li>
 </ol>
+<p>STL六大组件的交互关系，容器通过空间配置器取得数据存储空间，算法通过迭代器存储容器空间中的内容，仿函数可以协助算法完成不同的策略的变化，适配器可以修饰仿函数</p>
+<p>二、STL优点</p>
 <ol>
-<li><h3 id="查看容器进程"><a href="#查看容器进程" class="headerlink" title="查看容器进程"></a>查看容器进程</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker top 容器名</span><br></pre></td></tr></table></figure>
-</li>
-<li><h3 id="查看容器信息"><a href="#查看容器信息" class="headerlink" title="查看容器信息"></a>查看容器信息</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker inspect 容器名</span><br></pre></td></tr></table></figure>
-<p>用来查看容器的配置环境，包括容器名，环境变量，运行命令，主机配置，网络配置和数据卷配置等。使用<code>-f</code>或者<code>--format</code>命令格式化标志，可以查看指定部分的信息。</p>
-</li>
-<li><h3 id="容器的导入与导出"><a href="#容器的导入与导出" class="headerlink" title="容器的导入与导出"></a>容器的导入与导出</h3><p>Docker的导入和导出分别由<code>import</code>命令和<code>export</code>命令完成。</p>
-<p>使用<code>docker export</code>命令导出容器：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker export 容器名 &gt; my_container.tar</span><br></pre></td></tr></table></figure>
-<p><code>docker export</code>命令会把容器的文件系统以tar包的格式导出到标准输出。我们将其定位到目标文件<code>name.tar</code>。将容器保存到本地文件也算是持久化方式的一种。将容器保存到本次之后，我们就可以通过网络等方法将tar包分享给他人。</p>
-<p>使用<code>docker import</code>命令导入一个本地的tar包作为镜像：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat my_container.tar | docker import - imported:container</span><br></pre></td></tr></table></figure>
-<p><code>docker import</code>会把打包的容器导入为一个镜像。</p>
-<p><code>import</code>表示从标准输入读取容器内容，我们把<code>name.tar</code>的内容传给标准输入，res和tag代表生成的镜像和标记。</p>
+<li>STL是C++的一部分，因此不用额外安装什么，它被内建在编译器之内</li>
+<li>STL的一个重要特性是将数据和操作分离，数据由容器类别加以管理，操作则由可定制的算法定义。迭代器在两者之间充当粘合剂，以使算法可以和容器交互运行。</li>
+<li>程序员不用思考STL具体的实现过程，只要能熟练使用STL就可以。这样他们就可以把精力放在程序开发的别的方面</li>
+<li>STL具有高复用性、高性能、高移植性、跨平台等优点。<ul>
+<li>高可重用性：STL中几乎所有的代码都采用了模板类和模板函数的方式实现，这相比于传统的由函数和类组成的库来说提供了更好的代码重用机会。</li>
+<li>高性能：如map可以高效地从十万记录里面查找出指定的记录。因为map是采用红黑树的变体实现的</li>
+<li>高移植性：如在项目A上用STL编写的模块，可以直接移植到项目B上。</li>
+</ul>
 </li>
 </ol>
+<p>三、STL三大组件介绍</p>
+<ol>
+<li><p>容器</p>
+<p>容器，置物之所也。</p>
+<p>研究数据的特定排列方式，以利于搜索或排序或其他特殊每亩地，这一门学科就是数据结构。</p>
+<p>任何特定的数据结构都是为了实现某种特定的算法。STL容器就是将运用最广泛的一些数据结构实现出来。</p>
+<p>常用的数据结构：数组（array），链表（list）、树（tree），栈（stack），队列（queue），集合（set），映射表（map），根据数据在容器这两个排列的特性，这些数据分为序列式容器和关联式容器两种。  </p>
+<ul>
+<li>序列式容器强调的是值的排序，序列式容器中的每个元素均有固定的位置，除非用删除或插入操作改变这个位置。vector容器，deque容器，list容器</li>
+<li>关联式容器是非线性的树结构，更准确的说是二叉树结构，各元素之间没有严格的物理上的顺序关系，也就是说元素在容器中并没有保存元素置入容器时的逻辑顺序。关联式容器另一个显著特点是：在值中选择一个值作为关键字key，这个关键字对值起到了索引的作用，方便查找。set/multiset容器，map/multimap容器</li>
+</ul>
+</li>
+<li><p>算法</p>
+<p>算法，问题之解法也。</p>
+<p>以有限的步骤，解决逻辑或数学上的问题，即为算法。</p>
+<p>算法分为：质变算法和非质变算法</p>
+<p>质变算法：是指在运算过程中会戈恩噶区间内元素的内容，例如拷贝、替换、删除等</p>
+<p>非质变算法：是指运算过程中不会更改区间内的元素内容，例如查找、计数、遍历寻找极值等。</p>
+</li>
+<li><p>迭代器</p>
+<p>迭代器（iterator）是一种抽象的设计概念，显示程序语言中并诶呦直接对应于这个概念的实物。设计模式中iterator模式定义如下：提供一种方法，使之能够依序寻访某个容器所含的各个元素，而又无须暴露该容器的内部表示方式。 </p>
+<p>迭代器的设计思维-STL的关键所在，STL的中心思想在于将容器和算法分开，彼此独立设计，最后再贴胶着剂将他们撮合在一起，从技术角度来看，容器和算法的泛型化并不困难，C++的class template 和function template可分别达到目标，如果设计出这两个之间的良好的胶着剂，才是大难题。  </p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>分类</th>
+<th>描述</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>输入迭代器</td>
+<td>提供对数据的只读访问</td>
+<td></td>
+</tr>
+<tr>
+<td>输出迭代器</td>
+<td>提供读写操作，并能向前推进迭代器</td>
+<td></td>
+</tr>
+<tr>
+<td>前向迭代器</td>
+<td>提供读写操作，并能向前推进迭代器</td>
+<td>读写，支持++，==，~=</td>
+</tr>
+<tr>
+<td>双向迭代器</td>
+<td>提供读写操作，并能向前和向后操作</td>
+<td>读写，只会++，–</td>
+</tr>
+<tr>
+<td>随机访问迭代器</td>
+<td>提供读写操作，并能以跳跃的方式访问容器的任意数据，是功能最强大的的迭代器</td>
+<td>读写，支持++，–，[n],-n,&lt;,&lt;=,&gt;,&gt;=</td>
+</tr>
+</tbody></table>
 
       
     </div>
@@ -607,9 +612,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Docker/" rel="tag"># Docker</a>
-          
-            <a href="/tags/容器/" rel="tag"># 容器</a>
+            <a href="/tags/STL/" rel="tag"># STL</a>
           
         </div>
       
@@ -622,8 +625,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/11/19/Kubernetes集群部署/" rel="next" title="Kubernetes集群部署">
-                <i class="fa fa-chevron-left"></i> Kubernetes集群部署
+              <a href="/2019/06/30/软件测试知识点总结/" rel="next" title="软件测试知识点总结">
+                <i class="fa fa-chevron-left"></i> 软件测试知识点总结
               </a>
             
           </div>
@@ -631,6 +634,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/30/vector容器/" rel="prev" title="vector容器">
+                vector容器 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -687,17 +694,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -785,22 +783,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、Docker是什么？"><span class="nav-number">1.</span> <span class="nav-text">一、Docker是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Docker的组件"><span class="nav-number">2.</span> <span class="nav-text">二、Docker的组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、容器的管理操作"><span class="nav-number">3.</span> <span class="nav-text">三、容器的管理操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建容器"><span class="nav-number">3.1.</span> <span class="nav-text">创建容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看容器"><span class="nav-number">3.2.</span> <span class="nav-text">查看容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动容器"><span class="nav-number">3.3.</span> <span class="nav-text">启动容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#终止容器"><span class="nav-number">3.4.</span> <span class="nav-text">终止容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除容器"><span class="nav-number">3.5.</span> <span class="nav-text">删除容器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、容器内信息获取与命令执行"><span class="nav-number">4.</span> <span class="nav-text">四、容器内信息获取与命令执行</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#依附容器"><span class="nav-number">4.1.</span> <span class="nav-text">依附容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看容器日志"><span class="nav-number">4.2.</span> <span class="nav-text">查看容器日志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看容器进程"><span class="nav-number">4.3.</span> <span class="nav-text">查看容器进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看容器信息"><span class="nav-number">4.4.</span> <span class="nav-text">查看容器信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#容器的导入与导出"><span class="nav-number">4.5.</span> <span class="nav-text">容器的导入与导出</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       

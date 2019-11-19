@@ -125,7 +125,7 @@
 
 
 
-  <meta name="keywords" content="Docker,容器,">
+  <meta name="keywords" content="习题解答,线程,进程,">
 
 
 
@@ -136,18 +136,18 @@
 
 
 
-<meta name="description" content="一、Docker是什么？Docker是容器的一种，容器是一种轻量级的虚拟技术，和容器对应的更为重量级的虚拟技术是虚拟机。虚拟机是一种基于硬件的虚拟技术，它采用指令级的模拟，完全模拟一整套物理主机。容器是一种基于操作系统的虚拟技术，它运行在操作系统之上的用户空间，所有的容器都共用一个系统内核，甚至是公共库，容器引擎提供进程级别的隔离，让每个容器都像运行在单独的系统之上，但又能共享很多底层资源。 二、">
-<meta name="keywords" content="Docker,容器">
+<meta name="description" content="为什么程序并发执行会产生间断性特征？程序在并发执行时，由于它们共享系统管理资源，以及为万分同一项任务而相互合作，致使在这些并发执行的程序之间形成了相互制约的关系，而相互制约将导致程序具有“执行——暂停——执行”这种间断性的活动规律，所以说程序并发执行会产生间断性特征。">
+<meta name="keywords" content="习题解答,线程,进程">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Docker和容器">
-<meta property="og:url" content="http://wanqbin.xyz/2019/11/20/Docker和容器/index.html">
+<meta property="og:title" content="计算机操作系统（第四版）习题二解答">
+<meta property="og:url" content="http://wanqbin.xyz/2019/06/20/计算机操作系统（第四版）习题二解答/index.html">
 <meta property="og:site_name" content="Aoki&#39;s Blog">
-<meta property="og:description" content="一、Docker是什么？Docker是容器的一种，容器是一种轻量级的虚拟技术，和容器对应的更为重量级的虚拟技术是虚拟机。虚拟机是一种基于硬件的虚拟技术，它采用指令级的模拟，完全模拟一整套物理主机。容器是一种基于操作系统的虚拟技术，它运行在操作系统之上的用户空间，所有的容器都共用一个系统内核，甚至是公共库，容器引擎提供进程级别的隔离，让每个容器都像运行在单独的系统之上，但又能共享很多底层资源。 二、">
+<meta property="og:description" content="为什么程序并发执行会产生间断性特征？程序在并发执行时，由于它们共享系统管理资源，以及为万分同一项任务而相互合作，致使在这些并发执行的程序之间形成了相互制约的关系，而相互制约将导致程序具有“执行——暂停——执行”这种间断性的活动规律，所以说程序并发执行会产生间断性特征。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-19T16:26:14.105Z">
+<meta property="og:updated_time" content="2019-06-19T22:57:04.671Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Docker和容器">
-<meta name="twitter:description" content="一、Docker是什么？Docker是容器的一种，容器是一种轻量级的虚拟技术，和容器对应的更为重量级的虚拟技术是虚拟机。虚拟机是一种基于硬件的虚拟技术，它采用指令级的模拟，完全模拟一整套物理主机。容器是一种基于操作系统的虚拟技术，它运行在操作系统之上的用户空间，所有的容器都共用一个系统内核，甚至是公共库，容器引擎提供进程级别的隔离，让每个容器都像运行在单独的系统之上，但又能共享很多底层资源。 二、">
+<meta name="twitter:title" content="计算机操作系统（第四版）习题二解答">
+<meta name="twitter:description" content="为什么程序并发执行会产生间断性特征？程序在并发执行时，由于它们共享系统管理资源，以及为万分同一项任务而相互合作，致使在这些并发执行的程序之间形成了相互制约的关系，而相互制约将导致程序具有“执行——暂停——执行”这种间断性的活动规律，所以说程序并发执行会产生间断性特征。">
 
 
 
@@ -177,14 +177,14 @@
 
 
 
-  <link rel="canonical" href="http://wanqbin.xyz/2019/11/20/Docker和容器/">
+  <link rel="canonical" href="http://wanqbin.xyz/2019/06/20/计算机操作系统（第四版）习题二解答/">
 
 
 
 
 
 
-  <title>Docker和容器 | Aoki's Blog</title>
+  <title>计算机操作系统（第四版）习题二解答 | Aoki's Blog</title>
   
 
 
@@ -363,7 +363,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://wanqbin.xyz/2019/11/20/Docker和容器/">
+    <link itemprop="mainEntityOfPage" href="http://wanqbin.xyz/2019/06/20/计算机操作系统（第四版）习题二解答/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Aoki">
@@ -380,7 +380,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Docker和容器</h1>
+          <h1 class="post-title" itemprop="name headline">计算机操作系统（第四版）习题二解答</h1>
         
 
         <div class="post-meta">
@@ -392,8 +392,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-20T00:25:00+08:00">
-                2019-11-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-20T06:54:00+08:00">
+                2019-06-20
               </time>
             
 
@@ -415,8 +415,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/分布式与云计算/" itemprop="url" rel="index">
-                    <span itemprop="name">分布式与云计算</span>
+                  <a href="/categories/操作系统/" itemprop="url" rel="index">
+                    <span itemprop="name">操作系统</span>
                   </a>
                 </span>
 
@@ -433,8 +433,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/11/20/Docker和容器/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/11/20/Docker和容器/" itemprop="commentCount"></span>
+                <a href="/2019/06/20/计算机操作系统（第四版）习题二解答/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/20/计算机操作系统（第四版）习题二解答/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -442,7 +442,7 @@
 
           
           
-             <span id="/2019/11/20/Docker和容器/" class="leancloud_visitors" data-flag-title="Docker和容器">
+             <span id="/2019/06/20/计算机操作系统（第四版）习题二解答/" class="leancloud_visitors" data-flag-title="计算机操作系统（第四版）习题二解答">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -472,7 +472,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.8k
+                  3.2k
                 </span>
               
 
@@ -497,87 +497,205 @@
       
 
       
-        <h2 id="一、Docker是什么？"><a href="#一、Docker是什么？" class="headerlink" title="一、Docker是什么？"></a>一、Docker是什么？</h2><p>Docker是容器的一种，容器是一种轻量级的虚拟技术，和容器对应的更为重量级的虚拟技术是虚拟机。虚拟机是一种基于硬件的虚拟技术，它采用指令级的模拟，完全模拟一整套物理主机。容器是一种基于操作系统的虚拟技术，它运行在操作系统之上的用户空间，所有的容器都共用一个系统内核，甚至是公共库，容器引擎提供进程级别的隔离，让每个容器都像运行在单独的系统之上，但又能共享很多底层资源。</p>
-<h2 id="二、Docker的组件"><a href="#二、Docker的组件" class="headerlink" title="二、Docker的组件"></a>二、Docker的组件</h2><p>Docker采用C/S架构。Docker客户端，即Docker可执行程序，可以通过命令行和API的形式与Docker守候程序进行通信，Docker守候程序提供Docker服务。</p>
-<p>Docker包含三大核心组件——镜像，容器和库。</p>
+        <ol start="3">
+<li><h4 id="为什么程序并发执行会产生间断性特征？"><a href="#为什么程序并发执行会产生间断性特征？" class="headerlink" title="为什么程序并发执行会产生间断性特征？"></a>为什么程序并发执行会产生间断性特征？</h4><p>程序在并发执行时，由于它们共享系统管理资源，以及为万分同一项任务而相互合作，致使在这些并发执行的程序之间形成了相互制约的关系，而相互制约将导致程序具有“执行——暂停——执行”这种间断性的活动规律，所以说程序并发执行会产生间断性特征。                                                                                                                                                   </p>
+</li>
+<li><h4 id="程序并发执行时为什么会失去封闭性和可再现性？"><a href="#程序并发执行时为什么会失去封闭性和可再现性？" class="headerlink" title="程序并发执行时为什么会失去封闭性和可再现性？"></a>程序并发执行时为什么会失去封闭性和可再现性？</h4><p>当系统中存在着多个可以并发执行的程序时，系统中的各种资源将为它们所共享，而这些资源的状态也由这些程序来改变，致使其中任一程序在运行时，其环境都必然会受到其他程序的影响，显然，程序的运行已失去了封闭性。而失去封闭性会导致程序失去可再现性。</p>
+</li>
+<li><h4 id="在操作系统中为什么要引入进程的概念？它会产生什么样的影响"><a href="#在操作系统中为什么要引入进程的概念？它会产生什么样的影响" class="headerlink" title="在操作系统中为什么要引入进程的概念？它会产生什么样的影响?"></a>在操作系统中为什么要引入进程的概念？它会产生什么样的影响?</h4><p>在多道程序环境下，程序的执行属于并发执行，此时它们失去其封闭性，并且具有间断性，以及其运行结果不可再现。这些决定了通常的程序是不能参与并发执行的，否则，程序的运行也就失去了意义。<code>为了能使程序并发执行，并且可以对并发执行的程序加以描述和控制，才操作系统中引入了进程概念.</code></p>
+</li>
+<li><h4 id="试从动态性、并发性和独立性上比较进程和程序"><a href="#试从动态性、并发性和独立性上比较进程和程序" class="headerlink" title="试从动态性、并发性和独立性上比较进程和程序"></a>试从动态性、并发性和独立性上比较进程和程序</h4><p>进程和程序是两个截然不同的概念。</p>
 <ul>
-<li>镜像：是一个只读的静态模板。它保存着容器需要的环境和应用的执行代码，可以把镜像看成是容器的代码，当代码运行起来后就成了容器。镜像采用分层机制，每个镜像都是只读的，但是可以将写数据的层通过联合文件系统附加在原有的镜像之上。这种增量式修改使得镜像非常容器存储、传输和更新。</li>
-<li>容器：是一个运行时环境，它是一个镜像的运行状态，想到对于静态的镜像而言，容器是镜像执行的动态表现。</li>
-<li>库：Docker采用注册服务器来存储和共享用户的镜像，库是某个特定用户存储镜像的目录。通常，一个用户可以建立多个库来保存自己的镜像。如Docker官方的Docker Hub。</li>
+<li>动态性。进程的实质是进程实体的执行过程，因此，<code>动态性是进程的最基本的特征</code>。表现为“由创建而产生，由调度而执行，由撤销而消亡”，<code>进程具有一定的生命期</code>；而程序则只是一组有序指令的集合，并存放于某种介质上，其本身并不具有活动的含义，是静态实体。</li>
+<li>并发性是进程的重要特征，同时也是OS的重要特征；而<code>程序是不能参与并发执行的</code>。</li>
+<li>独立性是指进程实体是一个能独立运行、独立获得资源和独立接受调度的基本单位（传统OS中）；而对于未建立PCB的程序来说，它不能作为一个独立单位参与运行。</li>
 </ul>
-<h2 id="三、容器的管理操作"><a href="#三、容器的管理操作" class="headerlink" title="三、容器的管理操作"></a>三、容器的管理操作</h2><ol>
-<li><h3 id="创建容器"><a href="#创建容器" class="headerlink" title="创建容器"></a>创建容器</h3><ul>
-<li><p>docker create</p>
-<p> 创建的容器处于停止状态</p>
 </li>
-<li><p>docker run</p>
-<p>不仅创建的容器，而且启动了容器</p>
+<li><h4 id="试说明PCB的作用具体表现在哪几个方面，为什么说PCB是进程存在的唯一标志？"><a href="#试说明PCB的作用具体表现在哪几个方面，为什么说PCB是进程存在的唯一标志？" class="headerlink" title="试说明PCB的作用具体表现在哪几个方面，为什么说PCB是进程存在的唯一标志？"></a>试说明PCB的作用具体表现在哪几个方面，为什么说PCB是进程存在的唯一标志？</h4><p>PCB作为进程实体的一部分，记录了操作系统所需的，用于描述进程当前情况以及管理进程运行的全部信息，是操作系统中最重要的<code>记录型数据结构</code>。</p>
+<p>作用是使一个在多道陈存储环境下不能独立运行的程序（包括数据）成为一个能独立运行的基本单位，一个能与其他进程并发执行的进程。</p>
+<p>当一个程序（含数据）配置了PCB后，就表示它已是一个能在多道程序环境下独立运行的、合法的基本单位，也就具有取得OS服务的权利。系统时通过PCB感知进程的存在的，所以，PCB已成为进程存在的唯一标志。</p>
+</li>
+<li><h4 id="PCB提供了进程管理和进程调度所需要的哪些信息？"><a href="#PCB提供了进程管理和进程调度所需要的哪些信息？" class="headerlink" title="PCB提供了进程管理和进程调度所需要的哪些信息？"></a>PCB提供了进程管理和进程调度所需要的哪些信息？</h4><ul>
+<li>进程标识符</li>
+<li>处理机状态</li>
+<li>进程调度信息<ul>
+<li>进程状态</li>
+<li>进程优先级</li>
+<li>进程调度所需的其他信息</li>
+<li>事件</li>
+</ul>
+</li>
+<li>进程控制信息<ul>
+<li>程序和数据的地址</li>
+<li>进程同步和通信机制</li>
+<li>资源清单</li>
+<li>链接指针</li>
+</ul>
 </li>
 </ul>
-<p>容器创建后，会返回容器的ID。</p>
-<p>要想让创建的容器立马进入运行态，可以使用<code>docker run</code>命令，该命令相当于下面的两条命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker create</span><br><span class="line">docker start</span><br></pre></td></tr></table></figure>
-<p>使用<code>docker run</code>命令可以创建两种类型的容器——后台型容器和交互型容器。</p>
+</li>
+<li><h4 id="进程控制块的组织方式有哪几种？"><a href="#进程控制块的组织方式有哪几种？" class="headerlink" title="进程控制块的组织方式有哪几种？"></a>进程控制块的组织方式有哪几种？</h4><ul>
+<li>线性方式</li>
+<li>链接方式</li>
+<li>索引方式</li>
+</ul>
+</li>
+<li><h4 id="何谓操作系统内核？内核的主要功能是是什么？"><a href="#何谓操作系统内核？内核的主要功能是是什么？" class="headerlink" title="何谓操作系统内核？内核的主要功能是是什么？"></a>何谓操作系统内核？内核的主要功能是是什么？</h4><p>现代操作系统一般将OS划分为若干层次，再将OS的不同功能分别设置在不同的层次中。</p>
+<p>通常将一些与硬件紧密相关的模块、各种常用设备的驱动程序以及运行频率较高的模块，都安排在紧靠硬件的软件层次，让它们常驻内存，即OS内核。</p>
+<p>OS内核的功能主要是以下两大方面：</p>
 <ul>
-<li>交互型容器：运行在前台，通常会指定有交互的控制台，可以给容器输入，也可以得到容器的输出。创建该容器的终端被关闭，在容器内部使用<code>exit</code>命令或者调用了<code>docker stop</code>、<code>docker kill</code>命令后，容器会变成停止状态。</li>
-<li>后台型容器：运行在后台，创建启动之后就与终端无关。即便终端关闭了，该后台容器也依然存在，只有调用<code>docker stop</code>或<code>docker kill</code>命令时才能够使容器变成停止状态。</li>
+<li>支撑功能<ul>
+<li>中断处理</li>
+<li>时钟管理</li>
+<li>原语操作</li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -i -t --name=inspect_shell ubuntu /bin/bash</span><br></pre></td></tr></table></figure>
-<p>其中，<code>-i</code>用于打开容器的标准输入(STDIN),<code>-t</code>告诉Docker为容器建立一个命令行终端。</p>
-<p><code>--name</code>为容器指定一个名字，是一个可选项。如果没有这个选项，Docker会为容器创建一个随机名字</p>
-<p><code>ubuntu</code>是镜像名，<code>/bin/bash</code>代表告诉Docker要在容器里面执行命令<code>/bin/bash</code>。</p>
-<p>执行该命令之后，如果本地没有该镜像，Docker会从远程仓库中获取。然后，Docker使用这个镜像创建一个新的容器并将其启动；容器的文件系统是在只读的镜像文件上增加一层可读写的文件层，这样可以保证镜像不变而只记录改变的数据，这对容器的共享和传输都非常有利。接着会配置容器的网络，Docker会为容器分配一个虚拟网络接口，并通过网桥的方式将该网络接口桥接到宿主主机上，然后该虚拟网络接口分配一个IP地址。最后，Docker在新容器中运行指定的命令。</p>
 </li>
-<li><h3 id="查看容器"><a href="#查看容器" class="headerlink" title="查看容器"></a>查看容器</h3><p>查看正在运行的容器：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure>
-<p>CONTAINER ID：唯一标识容器的ID</p>
-<p>IMAGE：创建容器时使用的镜像</p>
-<p>COMMAND：容器最后运行的命令</p>
-<p>CREATED：创建容器的时间</p>
-<p>STATUS：容器的状态</p>
-<p>PORT：对外开放的接口</p>
-<p>NAMES：容器名。和容器ID一样都可以唯一标识一个容器。</p>
-<p>查看所有的容器：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps -a</span><br></pre></td></tr></table></figure>
-<p>列出所有容器，包括运行的和停止的容器。</p>
+<li>资源管理功能<ul>
+<li>进程管理</li>
+<li>存储器管理</li>
+<li>设备管理</li>
+</ul>
 </li>
-<li><h3 id="启动容器"><a href="#启动容器" class="headerlink" title="启动容器"></a>启动容器</h3><p>通过<code>docker create</code>命令创建的容器会进入到停止状态，想要运行该容器，可以执行以下命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker start 容器名/容器ID</span><br></pre></td></tr></table></figure>
+</ul>
 </li>
-<li><h3 id="终止容器"><a href="#终止容器" class="headerlink" title="终止容器"></a>终止容器</h3><p>执行命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker stop 容器名/容器ID</span><br></pre></td></tr></table></figure>
+<li><h4 id="试说明进程在三个基本状态之间转换的典型原因"><a href="#试说明进程在三个基本状态之间转换的典型原因" class="headerlink" title="试说明进程在三个基本状态之间转换的典型原因"></a>试说明进程在三个基本状态之间转换的典型原因</h4><ul>
+<li>执行状态$\rightarrow$就绪状态：时间片完</li>
+<li>就绪状态$\rightarrow$执行状态：进程调度</li>
+<li>执行状态$\rightarrow$阻塞状态：I/O请求</li>
+<li>阻塞状态$\rightarrow$就绪状态：I/O完成</li>
+</ul>
 </li>
-<li><h3 id="删除容器"><a href="#删除容器" class="headerlink" title="删除容器"></a>删除容器</h3><p>执行命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm 容器名</span><br></pre></td></tr></table></figure>
-<p>注意：不可以删除一个运行中的容器，必须先用<code>docker stop</code>或<code>docker kill</code>命令停止它才能删除。当然，也可以使用<code>-f</code>选项强制删除。</p>
-<p>删除所有容器：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm 'docker ps -a -q'</span><br></pre></td></tr></table></figure>
-<p><code>-a</code>标志列出所有容器，<code>-q</code>标志只列出容器的ID，不包括容器的其他信息。然后将这个列表传给<code>docker rm</code>命令，依次删除容器。</p>
+<li><h4 id="为什么要引入挂起状态？该状态有哪些性质？"><a href="#为什么要引入挂起状态？该状态有哪些性质？" class="headerlink" title="为什么要引入挂起状态？该状态有哪些性质？"></a>为什么要引入挂起状态？该状态有哪些性质？</h4><p>引入挂起的原因，是基于系统和用户的如下需要：</p>
+<ul>
+<li>终端用户的需要</li>
+<li>父进程请求</li>
+<li>负荷调节的需要</li>
+<li>操作系统的需求</li>
+</ul>
+<p>挂起状态的性质是：放弃CPU调度，不接受调度。引入挂起状态后，进程状态转换图增加了活动阻塞、静止阻塞、活动就绪、静止就绪四个状态，并增加了活动就绪与静止就绪，活动阻塞和静止阻塞之间的相互转换。</p>
 </li>
-</ol>
-<h2 id="四、容器内信息获取与命令执行"><a href="#四、容器内信息获取与命令执行" class="headerlink" title="四、容器内信息获取与命令执行"></a>四、容器内信息获取与命令执行</h2><ol>
-<li><h3 id="依附容器"><a href="#依附容器" class="headerlink" title="依附容器"></a>依附容器</h3><p>依附操作<code>attach</code>通常用于由<code>docker start</code>或者<code>docker restart</code>启动的交互型容器中。由于<code>docker start</code>启动的交互型容器并没有具体终端可以依附，而容器本身是可以接收用户交互的，这时就需要通过<code>attach</code>命令来将终端依附到容器上。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker attach 容器ID</span><br></pre></td></tr></table></figure>
+<li><h4 id="在进行进程切换时，所要保存的处理机状态信息有哪些？"><a href="#在进行进程切换时，所要保存的处理机状态信息有哪些？" class="headerlink" title="在进行进程切换时，所要保存的处理机状态信息有哪些？"></a>在进行进程切换时，所要保存的处理机状态信息有哪些？</h4><p>进程进行切换时，需要保存的处理机状态信息有：</p>
+<ul>
+<li>进程当前暂存信息</li>
+<li>下一指令地址信息</li>
+<li>进程状态信息</li>
+<li>过程和系统调用参数及调用地址信息</li>
+</ul>
 </li>
-</ol>
-<ol>
-<li><h3 id="查看容器日志"><a href="#查看容器日志" class="headerlink" title="查看容器日志"></a>查看容器日志</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker logs -f 容器名 </span><br><span class="line">docker logs -f --tails=5 容器名   #控制logs输出的日志行数，只输出最后五行</span><br></pre></td></tr></table></figure>
+<li><h4 id="试说明引起进程创建的主要事件"><a href="#试说明引起进程创建的主要事件" class="headerlink" title="试说明引起进程创建的主要事件"></a>试说明引起进程创建的主要事件</h4><ul>
+<li>用户登录</li>
+<li>作业调度</li>
+<li>提供服务</li>
+<li>应用请求</li>
+</ul>
 </li>
-</ol>
-<ol>
-<li><h3 id="查看容器进程"><a href="#查看容器进程" class="headerlink" title="查看容器进程"></a>查看容器进程</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker top 容器名</span><br></pre></td></tr></table></figure>
+<li><h4 id="试说明引起进程被撤销的主要事件"><a href="#试说明引起进程被撤销的主要事件" class="headerlink" title="试说明引起进程被撤销的主要事件"></a>试说明引起进程被撤销的主要事件</h4><ul>
+<li>正常结束</li>
+<li>异常结束<ul>
+<li>越界错</li>
+<li>保护错</li>
+<li>非法指令</li>
+<li>特权指令错</li>
+<li>运行超时</li>
+<li>等待超时</li>
+<li>算术运算错</li>
+<li>I/O故障</li>
+</ul>
 </li>
-<li><h3 id="查看容器信息"><a href="#查看容器信息" class="headerlink" title="查看容器信息"></a>查看容器信息</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker inspect 容器名</span><br></pre></td></tr></table></figure>
-<p>用来查看容器的配置环境，包括容器名，环境变量，运行命令，主机配置，网络配置和数据卷配置等。使用<code>-f</code>或者<code>--format</code>命令格式化标志，可以查看指定部分的信息。</p>
+<li>外界干预</li>
+</ul>
 </li>
-<li><h3 id="容器的导入与导出"><a href="#容器的导入与导出" class="headerlink" title="容器的导入与导出"></a>容器的导入与导出</h3><p>Docker的导入和导出分别由<code>import</code>命令和<code>export</code>命令完成。</p>
-<p>使用<code>docker export</code>命令导出容器：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker export 容器名 &gt; my_container.tar</span><br></pre></td></tr></table></figure>
-<p><code>docker export</code>命令会把容器的文件系统以tar包的格式导出到标准输出。我们将其定位到目标文件<code>name.tar</code>。将容器保存到本地文件也算是持久化方式的一种。将容器保存到本次之后，我们就可以通过网络等方法将tar包分享给他人。</p>
-<p>使用<code>docker import</code>命令导入一个本地的tar包作为镜像：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat my_container.tar | docker import - imported:container</span><br></pre></td></tr></table></figure>
-<p><code>docker import</code>会把打包的容器导入为一个镜像。</p>
-<p><code>import</code>表示从标准输入读取容器内容，我们把<code>name.tar</code>的内容传给标准输入，res和tag代表生成的镜像和标记。</p>
+<li><h4 id="在创建一个进程时所要完成的主要工作是什么？"><a href="#在创建一个进程时所要完成的主要工作是什么？" class="headerlink" title="在创建一个进程时所要完成的主要工作是什么？"></a>在创建一个进程时所要完成的主要工作是什么？</h4><p>在系统中每当出现了创建新进程的请求后，OS便调用进程创建原语Create按下述步骤创建一个新进程：</p>
+<ul>
+<li>申请空白PCB</li>
+<li>为新进程分配运行所需的资源</li>
+<li>初始化进程控制块</li>
+<li>如果进程就绪队列能够接纳新进程，便将新进程插入就绪队列</li>
+</ul>
+</li>
+<li><h4 id="在撤销一个进程时所要完成的主要工作是什么？"><a href="#在撤销一个进程时所要完成的主要工作是什么？" class="headerlink" title="在撤销一个进程时所要完成的主要工作是什么？"></a>在撤销一个进程时所要完成的主要工作是什么？</h4><p>如果系统中发生了要求终止进程的某事件，OS便调用进程终止原语，按下述过程去终止指定的进程：</p>
+<ul>
+<li>根据被终止进程的标识符，从PCB集合中检索出该进程的PCB，从中读出该进程的状态</li>
+<li>若被终止形成正处于执行状态，应立即终止该进程的执行，并置调度标志为真，用于指示该进程被终止后应重新进行调度</li>
+<li>若该进程还有子孙进程，还应将其所有子孙进程也都予以终止，以防它们成为不可控进程</li>
+<li>将被终止进程所拥有的全部资源或者归还给其父进程，或者归还给系统</li>
+<li>将被终止进程（PCB）从所在队列（或链表）移除，等待其他程序来搜集信息</li>
+</ul>
+</li>
+<li><h4 id="试说明引起进程阻塞或被唤醒的主要事件是什么？"><a href="#试说明引起进程阻塞或被唤醒的主要事件是什么？" class="headerlink" title="试说明引起进程阻塞或被唤醒的主要事件是什么？"></a>试说明引起进程阻塞或被唤醒的主要事件是什么？</h4><ul>
+<li>向系统请求共享资源失败</li>
+<li>等待某种操作完成</li>
+<li>新数据尚未到达</li>
+<li>等待新任务的到达</li>
+</ul>
+</li>
+<li><h4 id="为什么要在OS中引入线程？"><a href="#为什么要在OS中引入线程？" class="headerlink" title="为什么要在OS中引入线程？"></a>为什么要在OS中引入线程？</h4><p>在OS中引入线程，是为了减少程序在并发执行时所付出的时空开销，使OS具有更好的并发性。</p>
+</li>
+<li><h4 id="试说明线程具有哪些属性？"><a href="#试说明线程具有哪些属性？" class="headerlink" title="试说明线程具有哪些属性？"></a>试说明线程具有哪些属性？</h4><ul>
+<li>轻型进程</li>
+<li>调度的基本单位</li>
+<li>并发性</li>
+<li>拥有资源</li>
+<li>独立性</li>
+<li>系统开销</li>
+<li>支持多处理机系统</li>
+</ul>
+</li>
+<li><h4 id="试从调度性、并发性、拥有资源及系统开销方面对进程和线程进行比较"><a href="#试从调度性、并发性、拥有资源及系统开销方面对进程和线程进行比较" class="headerlink" title="试从调度性、并发性、拥有资源及系统开销方面对进程和线程进行比较"></a>试从调度性、并发性、拥有资源及系统开销方面对进程和线程进行比较</h4><ul>
+<li><p>调度性</p>
+<ul>
+<li>在传统的OS中，进程是作为独立调度和分派的基本单位，因而进程是能独立运行的基本单位。在每次调度时，都需要进行上下文切换，开销较大。</li>
+<li>在引入线程的OS中，已把线程作为调度和分派的基本单位，因而线程是能独立运行的基本单位。当线程切换时，仅需要保存和设置少量寄存器内容，切换代价远低于进程。在同一进程中，线程的切换不会引起进程的切换，但从一个进程中的线程切换到另一个进程中的线程时，必然会引起进程的切换</li>
+</ul>
+</li>
+<li><p>并发性</p>
+<p>在引入线程的OS中，不仅进程之间可以并发执行，而且在一个进程的多个线程之间亦可并发执行，甚至允许在一个进程中的所有线程都能并发执行。同样，不同进程中的线程也能并发执行。</p>
+</li>
+<li><p>拥有资源</p>
+<ul>
+<li>进程可以拥有资源，并作为系统中拥有资源的一个基本单位。然而，线程本身并不拥有系统资源，而是仅有一点必不可少的、能保证独立运行的资源</li>
+<li>线程除了拥有自己的少量资源外，还云溪多个线程共享该进程拥有的资源。</li>
+</ul>
+</li>
+<li><p>系统开销</p>
+<p>在创建或撤销进程时，系统都要为之分配和回收进程控制块、分配或回收其他资源。OS为此所付出的开销，明显大于线程创建或撤销时所付出的开销。类似地，在进程切换时，涉及到进程上下文的切换，而线程的切换代价也远低于进程的。</p>
+</li>
+</ul>
+</li>
+<li><h4 id="线程控制块TCB中包含了哪些内容？"><a href="#线程控制块TCB中包含了哪些内容？" class="headerlink" title="线程控制块TCB中包含了哪些内容？"></a>线程控制块TCB中包含了哪些内容？</h4><ul>
+<li>线程标识符</li>
+<li>一组寄存器</li>
+<li>线程运行状态</li>
+<li>优先级</li>
+<li>线程专有存储区</li>
+<li>信号屏蔽</li>
+<li>堆栈指针</li>
+</ul>
+</li>
+<li><h4 id="何谓用户级线程和内核支持线程？"><a href="#何谓用户级线程和内核支持线程？" class="headerlink" title="何谓用户级线程和内核支持线程？"></a>何谓用户级线程和内核支持线程？</h4><ul>
+<li>用户级线程：用户级线程是在用户空间中实现的。对线程的创建、撤销、同步与通信等功能，都无需内核的支持，即用户级线程是与内核无关的。</li>
+<li>内核支持线程：是在内核的支持下运行的，它们的创建、阻塞、撤销和切换等，都是在内核空间实现的</li>
+</ul>
+</li>
+<li><h4 id="试说明用户级线程的实现方法"><a href="#试说明用户级线程的实现方法" class="headerlink" title="试说明用户级线程的实现方法"></a>试说明用户级线程的实现方法</h4><p>用户级线程是在用户空间中的实现的，运行在“运行时系统”与“内核控制线程”的中间系统上。运行时系统用于管理和控制线程的函数的集合。内核控制线程或轻型进程LWP可通过系统调用获得内核提供服务，利用LWP进程作为中间系统。</p>
+</li>
+<li><h4 id="试说明内核支持线程的实现方法"><a href="#试说明内核支持线程的实现方法" class="headerlink" title="试说明内核支持线程的实现方法"></a>试说明内核支持线程的实现方法</h4><p>系统在创建一个新进程时，便为它分配一个任务数据区PTDA，其中包括若干个线程控制块TCB空间。在每个TCB中可保存线程标识符、优先级、线程运行的CPU状态信息。每当进程要创建一个线程时，便为新线程分配一个TCB，将相关信息填入该TCB中，并为之分配必要的资源；当PTDA中的所有TCB空间已用完，而进程又要创建新的线程时，只要其所创建的线程数目未超过系统允许值，系统可再为之分配新的TCB空间；在撤销一个线程时，也应回收该线程的所有资源和TCB。</p>
+</li>
+<li><h4 id="多线程模型有哪几种类型？多对一模型有何优缺点？"><a href="#多线程模型有哪几种类型？多对一模型有何优缺点？" class="headerlink" title="多线程模型有哪几种类型？多对一模型有何优缺点？"></a>多线程模型有哪几种类型？多对一模型有何优缺点？</h4><p>由于用户级线程和内核级线程连接方式的不同，从而形成了三种不同的模型：</p>
+<ul>
+<li>多对一模型</li>
+<li>一对一模型</li>
+<li>多对多模型</li>
+</ul>
+<p>多对一模型的优点：</p>
+<ul>
+<li>线程管理的开销小，效率高</li>
+</ul>
+<p>多对一模型的缺点：</p>
+<ul>
+<li>如果一个线程在访问内核时发生阻塞，则整个进程都会被阻塞</li>
+<li>在任一时刻，只有一个线程能访问内核，多个线程不能同时在多个处理机上运行</li>
+</ul>
 </li>
 </ol>
 
@@ -607,9 +725,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Docker/" rel="tag"># Docker</a>
+            <a href="/tags/习题解答/" rel="tag"># 习题解答</a>
           
-            <a href="/tags/容器/" rel="tag"># 容器</a>
+            <a href="/tags/线程/" rel="tag"># 线程</a>
+          
+            <a href="/tags/进程/" rel="tag"># 进程</a>
           
         </div>
       
@@ -622,8 +742,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/11/19/Kubernetes集群部署/" rel="next" title="Kubernetes集群部署">
-                <i class="fa fa-chevron-left"></i> Kubernetes集群部署
+              <a href="/2019/06/17/视图与控制器传值/" rel="next" title="ASP.NET Core MVC 视图与控制器传值">
+                <i class="fa fa-chevron-left"></i> ASP.NET Core MVC 视图与控制器传值
               </a>
             
           </div>
@@ -631,6 +751,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/22/计算机操作系统（第四版）习题四解答/" rel="prev" title="计算机操作系统（第四版）习题四解答">
+                计算机操作系统（第四版）习题四解答 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -795,7 +919,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、Docker是什么？"><span class="nav-number">1.</span> <span class="nav-text">一、Docker是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Docker的组件"><span class="nav-number">2.</span> <span class="nav-text">二、Docker的组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、容器的管理操作"><span class="nav-number">3.</span> <span class="nav-text">三、容器的管理操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建容器"><span class="nav-number">3.1.</span> <span class="nav-text">创建容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看容器"><span class="nav-number">3.2.</span> <span class="nav-text">查看容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动容器"><span class="nav-number">3.3.</span> <span class="nav-text">启动容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#终止容器"><span class="nav-number">3.4.</span> <span class="nav-text">终止容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除容器"><span class="nav-number">3.5.</span> <span class="nav-text">删除容器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、容器内信息获取与命令执行"><span class="nav-number">4.</span> <span class="nav-text">四、容器内信息获取与命令执行</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#依附容器"><span class="nav-number">4.1.</span> <span class="nav-text">依附容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看容器日志"><span class="nav-number">4.2.</span> <span class="nav-text">查看容器日志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看容器进程"><span class="nav-number">4.3.</span> <span class="nav-text">查看容器进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看容器信息"><span class="nav-number">4.4.</span> <span class="nav-text">查看容器信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#容器的导入与导出"><span class="nav-number">4.5.</span> <span class="nav-text">容器的导入与导出</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么程序并发执行会产生间断性特征？"><span class="nav-number">1.</span> <span class="nav-text">为什么程序并发执行会产生间断性特征？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#程序并发执行时为什么会失去封闭性和可再现性？"><span class="nav-number">2.</span> <span class="nav-text">程序并发执行时为什么会失去封闭性和可再现性？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在操作系统中为什么要引入进程的概念？它会产生什么样的影响"><span class="nav-number">3.</span> <span class="nav-text">在操作系统中为什么要引入进程的概念？它会产生什么样的影响?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#试从动态性、并发性和独立性上比较进程和程序"><span class="nav-number">4.</span> <span class="nav-text">试从动态性、并发性和独立性上比较进程和程序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#试说明PCB的作用具体表现在哪几个方面，为什么说PCB是进程存在的唯一标志？"><span class="nav-number">5.</span> <span class="nav-text">试说明PCB的作用具体表现在哪几个方面，为什么说PCB是进程存在的唯一标志？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PCB提供了进程管理和进程调度所需要的哪些信息？"><span class="nav-number">6.</span> <span class="nav-text">PCB提供了进程管理和进程调度所需要的哪些信息？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程控制块的组织方式有哪几种？"><span class="nav-number">7.</span> <span class="nav-text">进程控制块的组织方式有哪几种？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#何谓操作系统内核？内核的主要功能是是什么？"><span class="nav-number">8.</span> <span class="nav-text">何谓操作系统内核？内核的主要功能是是什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#试说明进程在三个基本状态之间转换的典型原因"><span class="nav-number">9.</span> <span class="nav-text">试说明进程在三个基本状态之间转换的典型原因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么要引入挂起状态？该状态有哪些性质？"><span class="nav-number">10.</span> <span class="nav-text">为什么要引入挂起状态？该状态有哪些性质？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在进行进程切换时，所要保存的处理机状态信息有哪些？"><span class="nav-number">11.</span> <span class="nav-text">在进行进程切换时，所要保存的处理机状态信息有哪些？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#试说明引起进程创建的主要事件"><span class="nav-number">12.</span> <span class="nav-text">试说明引起进程创建的主要事件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#试说明引起进程被撤销的主要事件"><span class="nav-number">13.</span> <span class="nav-text">试说明引起进程被撤销的主要事件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在创建一个进程时所要完成的主要工作是什么？"><span class="nav-number">14.</span> <span class="nav-text">在创建一个进程时所要完成的主要工作是什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在撤销一个进程时所要完成的主要工作是什么？"><span class="nav-number">15.</span> <span class="nav-text">在撤销一个进程时所要完成的主要工作是什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#试说明引起进程阻塞或被唤醒的主要事件是什么？"><span class="nav-number">16.</span> <span class="nav-text">试说明引起进程阻塞或被唤醒的主要事件是什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么要在OS中引入线程？"><span class="nav-number">17.</span> <span class="nav-text">为什么要在OS中引入线程？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#试说明线程具有哪些属性？"><span class="nav-number">18.</span> <span class="nav-text">试说明线程具有哪些属性？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#试从调度性、并发性、拥有资源及系统开销方面对进程和线程进行比较"><span class="nav-number">19.</span> <span class="nav-text">试从调度性、并发性、拥有资源及系统开销方面对进程和线程进行比较</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#线程控制块TCB中包含了哪些内容？"><span class="nav-number">20.</span> <span class="nav-text">线程控制块TCB中包含了哪些内容？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#何谓用户级线程和内核支持线程？"><span class="nav-number">21.</span> <span class="nav-text">何谓用户级线程和内核支持线程？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#试说明用户级线程的实现方法"><span class="nav-number">22.</span> <span class="nav-text">试说明用户级线程的实现方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#试说明内核支持线程的实现方法"><span class="nav-number">23.</span> <span class="nav-text">试说明内核支持线程的实现方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多线程模型有哪几种类型？多对一模型有何优缺点？"><span class="nav-number">24.</span> <span class="nav-text">多线程模型有哪几种类型？多对一模型有何优缺点？</span></a></li></ol></div>
             
 
           </div>

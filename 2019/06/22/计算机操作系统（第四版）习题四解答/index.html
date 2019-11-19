@@ -125,7 +125,7 @@
 
 
 
-  <meta name="keywords" content="Docker,容器,">
+  <meta name="keywords" content="习题解答,存储器管理,对换,分页存储管理方式,分段存储管理方式,">
 
 
 
@@ -136,18 +136,20 @@
 
 
 
-<meta name="description" content="一、Docker是什么？Docker是容器的一种，容器是一种轻量级的虚拟技术，和容器对应的更为重量级的虚拟技术是虚拟机。虚拟机是一种基于硬件的虚拟技术，它采用指令级的模拟，完全模拟一整套物理主机。容器是一种基于操作系统的虚拟技术，它运行在操作系统之上的用户空间，所有的容器都共用一个系统内核，甚至是公共库，容器引擎提供进程级别的隔离，让每个容器都像运行在单独的系统之上，但又能共享很多底层资源。 二、">
-<meta name="keywords" content="Docker,容器">
+<meta name="description" content="为什么要配置层次式存储器？ 设置多个存储器可以使存储器两端的硬件能并行工作； 采用多级存储系统，特别是Cache技术，是减轻存储器带宽对系统性能影响的最佳结构方案； 在微处理机内部设置各种缓冲存储器，减轻对存储器存取的压力 增加CPU中寄存器数量，大大缓解翠存储器压力   可采用哪几种方式将程序装入内存？它们分别适用于何种场合？ 绝对装入方式 只适用于单道程序环境  可重定位装入方式 适用于多道">
+<meta name="keywords" content="习题解答,存储器管理,对换,分页存储管理方式,分段存储管理方式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Docker和容器">
-<meta property="og:url" content="http://wanqbin.xyz/2019/11/20/Docker和容器/index.html">
+<meta property="og:title" content="计算机操作系统（第四版）习题四解答">
+<meta property="og:url" content="http://wanqbin.xyz/2019/06/22/计算机操作系统（第四版）习题四解答/index.html">
 <meta property="og:site_name" content="Aoki&#39;s Blog">
-<meta property="og:description" content="一、Docker是什么？Docker是容器的一种，容器是一种轻量级的虚拟技术，和容器对应的更为重量级的虚拟技术是虚拟机。虚拟机是一种基于硬件的虚拟技术，它采用指令级的模拟，完全模拟一整套物理主机。容器是一种基于操作系统的虚拟技术，它运行在操作系统之上的用户空间，所有的容器都共用一个系统内核，甚至是公共库，容器引擎提供进程级别的隔离，让每个容器都像运行在单独的系统之上，但又能共享很多底层资源。 二、">
+<meta property="og:description" content="为什么要配置层次式存储器？ 设置多个存储器可以使存储器两端的硬件能并行工作； 采用多级存储系统，特别是Cache技术，是减轻存储器带宽对系统性能影响的最佳结构方案； 在微处理机内部设置各种缓冲存储器，减轻对存储器存取的压力 增加CPU中寄存器数量，大大缓解翠存储器压力   可采用哪几种方式将程序装入内存？它们分别适用于何种场合？ 绝对装入方式 只适用于单道程序环境  可重定位装入方式 适用于多道">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-19T16:26:14.105Z">
+<meta property="og:image" content="http://wanqbin.xyz/2019/06/22/计算机操作系统（第四版）习题四解答/11.png">
+<meta property="og:updated_time" content="2019-06-22T13:07:56.872Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Docker和容器">
-<meta name="twitter:description" content="一、Docker是什么？Docker是容器的一种，容器是一种轻量级的虚拟技术，和容器对应的更为重量级的虚拟技术是虚拟机。虚拟机是一种基于硬件的虚拟技术，它采用指令级的模拟，完全模拟一整套物理主机。容器是一种基于操作系统的虚拟技术，它运行在操作系统之上的用户空间，所有的容器都共用一个系统内核，甚至是公共库，容器引擎提供进程级别的隔离，让每个容器都像运行在单独的系统之上，但又能共享很多底层资源。 二、">
+<meta name="twitter:title" content="计算机操作系统（第四版）习题四解答">
+<meta name="twitter:description" content="为什么要配置层次式存储器？ 设置多个存储器可以使存储器两端的硬件能并行工作； 采用多级存储系统，特别是Cache技术，是减轻存储器带宽对系统性能影响的最佳结构方案； 在微处理机内部设置各种缓冲存储器，减轻对存储器存取的压力 增加CPU中寄存器数量，大大缓解翠存储器压力   可采用哪几种方式将程序装入内存？它们分别适用于何种场合？ 绝对装入方式 只适用于单道程序环境  可重定位装入方式 适用于多道">
+<meta name="twitter:image" content="http://wanqbin.xyz/2019/06/22/计算机操作系统（第四版）习题四解答/11.png">
 
 
 
@@ -177,14 +179,14 @@
 
 
 
-  <link rel="canonical" href="http://wanqbin.xyz/2019/11/20/Docker和容器/">
+  <link rel="canonical" href="http://wanqbin.xyz/2019/06/22/计算机操作系统（第四版）习题四解答/">
 
 
 
 
 
 
-  <title>Docker和容器 | Aoki's Blog</title>
+  <title>计算机操作系统（第四版）习题四解答 | Aoki's Blog</title>
   
 
 
@@ -363,7 +365,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://wanqbin.xyz/2019/11/20/Docker和容器/">
+    <link itemprop="mainEntityOfPage" href="http://wanqbin.xyz/2019/06/22/计算机操作系统（第四版）习题四解答/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Aoki">
@@ -380,7 +382,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Docker和容器</h1>
+          <h1 class="post-title" itemprop="name headline">计算机操作系统（第四版）习题四解答</h1>
         
 
         <div class="post-meta">
@@ -392,8 +394,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-20T00:25:00+08:00">
-                2019-11-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-22T21:01:00+08:00">
+                2019-06-22
               </time>
             
 
@@ -415,8 +417,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/分布式与云计算/" itemprop="url" rel="index">
-                    <span itemprop="name">分布式与云计算</span>
+                  <a href="/categories/操作系统/" itemprop="url" rel="index">
+                    <span itemprop="name">操作系统</span>
                   </a>
                 </span>
 
@@ -433,8 +435,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/11/20/Docker和容器/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/11/20/Docker和容器/" itemprop="commentCount"></span>
+                <a href="/2019/06/22/计算机操作系统（第四版）习题四解答/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/22/计算机操作系统（第四版）习题四解答/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -442,7 +444,7 @@
 
           
           
-             <span id="/2019/11/20/Docker和容器/" class="leancloud_visitors" data-flag-title="Docker和容器">
+             <span id="/2019/06/22/计算机操作系统（第四版）习题四解答/" class="leancloud_visitors" data-flag-title="计算机操作系统（第四版）习题四解答">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -472,7 +474,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.8k
+                  4.2k
                 </span>
               
 
@@ -497,87 +499,206 @@
       
 
       
-        <h2 id="一、Docker是什么？"><a href="#一、Docker是什么？" class="headerlink" title="一、Docker是什么？"></a>一、Docker是什么？</h2><p>Docker是容器的一种，容器是一种轻量级的虚拟技术，和容器对应的更为重量级的虚拟技术是虚拟机。虚拟机是一种基于硬件的虚拟技术，它采用指令级的模拟，完全模拟一整套物理主机。容器是一种基于操作系统的虚拟技术，它运行在操作系统之上的用户空间，所有的容器都共用一个系统内核，甚至是公共库，容器引擎提供进程级别的隔离，让每个容器都像运行在单独的系统之上，但又能共享很多底层资源。</p>
-<h2 id="二、Docker的组件"><a href="#二、Docker的组件" class="headerlink" title="二、Docker的组件"></a>二、Docker的组件</h2><p>Docker采用C/S架构。Docker客户端，即Docker可执行程序，可以通过命令行和API的形式与Docker守候程序进行通信，Docker守候程序提供Docker服务。</p>
-<p>Docker包含三大核心组件——镜像，容器和库。</p>
+        <ol>
+<li><h2 id="为什么要配置层次式存储器？"><a href="#为什么要配置层次式存储器？" class="headerlink" title="为什么要配置层次式存储器？"></a>为什么要配置层次式存储器？</h2><ul>
+<li>设置多个存储器可以使存储器两端的硬件能并行工作；</li>
+<li>采用多级存储系统，特别是Cache技术，是减轻存储器带宽对系统性能影响的最佳结构方案；</li>
+<li>在微处理机内部设置各种缓冲存储器，减轻对存储器存取的压力</li>
+<li>增加CPU中寄存器数量，大大缓解翠存储器压力</li>
+</ul>
+</li>
+<li><h2 id="可采用哪几种方式将程序装入内存？它们分别适用于何种场合？"><a href="#可采用哪几种方式将程序装入内存？它们分别适用于何种场合？" class="headerlink" title="可采用哪几种方式将程序装入内存？它们分别适用于何种场合？"></a>可采用哪几种方式将程序装入内存？它们分别适用于何种场合？</h2><ul>
+<li><p>绝对装入方式</p>
+<p>只适用于单道程序环境</p>
+</li>
+<li><p>可重定位装入方式</p>
+<p>适用于多道程序环境</p>
+</li>
+<li><p>动态运行时装入方式</p>
 <ul>
-<li>镜像：是一个只读的静态模板。它保存着容器需要的环境和应用的执行代码，可以把镜像看成是容器的代码，当代码运行起来后就成了容器。镜像采用分层机制，每个镜像都是只读的，但是可以将写数据的层通过联合文件系统附加在原有的镜像之上。这种增量式修改使得镜像非常容器存储、传输和更新。</li>
-<li>容器：是一个运行时环境，它是一个镜像的运行状态，想到对于静态的镜像而言，容器是镜像执行的动态表现。</li>
-<li>库：Docker采用注册服务器来存储和共享用户的镜像，库是某个特定用户存储镜像的目录。通常，一个用户可以建立多个库来保存自己的镜像。如Docker官方的Docker Hub。</li>
+<li>用于多道程序环境</li>
+<li>不允许程序运行时在内存中移动位置</li>
 </ul>
-<h2 id="三、容器的管理操作"><a href="#三、容器的管理操作" class="headerlink" title="三、容器的管理操作"></a>三、容器的管理操作</h2><ol>
-<li><h3 id="创建容器"><a href="#创建容器" class="headerlink" title="创建容器"></a>创建容器</h3><ul>
-<li><p>docker create</p>
-<p> 创建的容器处于停止状态</p>
-</li>
-<li><p>docker run</p>
-<p>不仅创建的容器，而且启动了容器</p>
 </li>
 </ul>
-<p>容器创建后，会返回容器的ID。</p>
-<p>要想让创建的容器立马进入运行态，可以使用<code>docker run</code>命令，该命令相当于下面的两条命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker create</span><br><span class="line">docker start</span><br></pre></td></tr></table></figure>
-<p>使用<code>docker run</code>命令可以创建两种类型的容器——后台型容器和交互型容器。</p>
+</li>
+<li><h2 id="何谓静态链接？静态链接时需要解决两个什么问题？"><a href="#何谓静态链接？静态链接时需要解决两个什么问题？" class="headerlink" title="何谓静态链接？静态链接时需要解决两个什么问题？"></a>何谓静态链接？静态链接时需要解决两个什么问题？</h2><ul>
+<li>静态链接是指在程序运行之前，先将各目标模块及它们所需的库函数链接成一个完整的装配模块，以后不再拆开。</li>
+<li>需要解决为问题是：<ul>
+<li>对相对地址进行修改</li>
+<li>变换外部调用符号</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h2 id="何谓装入时动态链接？装入时动态链接方式有何优点？"><a href="#何谓装入时动态链接？装入时动态链接方式有何优点？" class="headerlink" title="何谓装入时动态链接？装入时动态链接方式有何优点？"></a>何谓装入时动态链接？装入时动态链接方式有何优点？</h2><ul>
+<li>装入时动态链接是指将用户源程序编译后得到的一组目标模块，在装入内存时，采用边装入边链接的链接方式。</li>
+<li>优点：<ul>
+<li>便于修改和更新</li>
+<li>便于实现对目标模块的共享</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h2 id="何谓运行时动态链接？运行时动态链接又何优点？"><a href="#何谓运行时动态链接？运行时动态链接又何优点？" class="headerlink" title="何谓运行时动态链接？运行时动态链接又何优点？"></a>何谓运行时动态链接？运行时动态链接又何优点？</h2><ul>
+<li>运行时动态链接是将对某些模块的链接推迟到程序执行时才运行。</li>
+<li>优点：<ul>
+<li>加快程序的装入过程</li>
+<li>节省大量的内存空间</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h2 id="在动态分区分配方式中，应如何将各空闲分区链接成空闲分区链？"><a href="#在动态分区分配方式中，应如何将各空闲分区链接成空闲分区链？" class="headerlink" title="在动态分区分配方式中，应如何将各空闲分区链接成空闲分区链？"></a>在动态分区分配方式中，应如何将各空闲分区链接成空闲分区链？</h2><p>在每个分区的起始部分设置一些用于控制分区分配的信息，以及用于链接各分区所用的前向指针，在分区尾部则设置一后向指针。通过前、后向链接指针，可将所有的空闲分区链接成一个双向链。</p>
+</li>
+<li><h2 id="为什么要引入动态重定位？如何实现？"><a href="#为什么要引入动态重定位？如何实现？" class="headerlink" title="为什么要引入动态重定位？如何实现？"></a>为什么要引入动态重定位？如何实现？</h2><ul>
+<li><p>在程序执行的过程中，每当访问指令或数据时，将要访问的程序或数据的逻辑地址转换成物理地址，所以引入了动态重定位。</p>
+</li>
+<li><p>实现方法</p>
+<p>在系统中增设一个重定位寄存器，用它来存放程序（数据）在内存中的起始地址。程序在执行时，真正访问的内存地址是相对地址与重定位寄存器中的地址相加而形成的。</p>
+</li>
+</ul>
+</li>
+<li><h2 id="什么是基于顺序搜索的动态分区分配算法？它可分为哪几种？"><a href="#什么是基于顺序搜索的动态分区分配算法？它可分为哪几种？" class="headerlink" title="什么是基于顺序搜索的动态分区分配算法？它可分为哪几种？"></a>什么是基于顺序搜索的动态分区分配算法？它可分为哪几种？</h2><ul>
+<li>为了实现动态分区分配，通常是将系统中的空闲分区链接成一个链。所谓顺序搜索，是指依次搜索空闲分区链上的空闲分区，去寻找一个其大小能满足要求的分区。</li>
+<li>基于顺序搜索的动态分区分配算法可分为：<ul>
+<li>首次适应算法</li>
+<li>循环首次适应算法</li>
+<li>最佳适应算法</li>
+<li>最坏适应书房</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h2 id="在采用首次适应算法回收内存时，可能出现哪几种情况？应怎样处理？"><a href="#在采用首次适应算法回收内存时，可能出现哪几种情况？应怎样处理？" class="headerlink" title="在采用首次适应算法回收内存时，可能出现哪几种情况？应怎样处理？"></a>在采用首次适应算法回收内存时，可能出现哪几种情况？应怎样处理？</h2><p>可能会出现四种情况：</p>
 <ul>
-<li>交互型容器：运行在前台，通常会指定有交互的控制台，可以给容器输入，也可以得到容器的输出。创建该容器的终端被关闭，在容器内部使用<code>exit</code>命令或者调用了<code>docker stop</code>、<code>docker kill</code>命令后，容器会变成停止状态。</li>
-<li>后台型容器：运行在后台，创建启动之后就与终端无关。即便终端关闭了，该后台容器也依然存在，只有调用<code>docker stop</code>或<code>docker kill</code>命令时才能够使容器变成停止状态。</li>
+<li>回收区与插入点前的一个分区$F_1$相邻接。将回收区与插入点的前一分区合并，不必再为回收分区分配新表项，而只需修改其前一分区$F_1$的大小</li>
+<li>回收分区与插入点后的一空闲分区$F_2$相邻接。将两个分区合并，形成新的分区，但用回收区的首址作为新空闲区的首址，大小为两者之和</li>
+<li>回收区同时与插入点的前、后两个分区邻接。将三个分区合并，使用$F_1$的表项和$F_1$的首址，取消$F_2$的表项，大小为三者之和。</li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -i -t --name=inspect_shell ubuntu /bin/bash</span><br></pre></td></tr></table></figure>
-<p>其中，<code>-i</code>用于打开容器的标准输入(STDIN),<code>-t</code>告诉Docker为容器建立一个命令行终端。</p>
-<p><code>--name</code>为容器指定一个名字，是一个可选项。如果没有这个选项，Docker会为容器创建一个随机名字</p>
-<p><code>ubuntu</code>是镜像名，<code>/bin/bash</code>代表告诉Docker要在容器里面执行命令<code>/bin/bash</code>。</p>
-<p>执行该命令之后，如果本地没有该镜像，Docker会从远程仓库中获取。然后，Docker使用这个镜像创建一个新的容器并将其启动；容器的文件系统是在只读的镜像文件上增加一层可读写的文件层，这样可以保证镜像不变而只记录改变的数据，这对容器的共享和传输都非常有利。接着会配置容器的网络，Docker会为容器分配一个虚拟网络接口，并通过网桥的方式将该网络接口桥接到宿主主机上，然后该虚拟网络接口分配一个IP地址。最后，Docker在新容器中运行指定的命令。</p>
 </li>
-<li><h3 id="查看容器"><a href="#查看容器" class="headerlink" title="查看容器"></a>查看容器</h3><p>查看正在运行的容器：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure>
-<p>CONTAINER ID：唯一标识容器的ID</p>
-<p>IMAGE：创建容器时使用的镜像</p>
-<p>COMMAND：容器最后运行的命令</p>
-<p>CREATED：创建容器的时间</p>
-<p>STATUS：容器的状态</p>
-<p>PORT：对外开放的接口</p>
-<p>NAMES：容器名。和容器ID一样都可以唯一标识一个容器。</p>
-<p>查看所有的容器：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps -a</span><br></pre></td></tr></table></figure>
-<p>列出所有容器，包括运行的和停止的容器。</p>
+<li><h2 id="什么是基于索引搜索的动态分区分配算法？它可分为哪几种？"><a href="#什么是基于索引搜索的动态分区分配算法？它可分为哪几种？" class="headerlink" title="什么是基于索引搜索的动态分区分配算法？它可分为哪几种？"></a>什么是基于索引搜索的动态分区分配算法？它可分为哪几种？</h2><ul>
+<li>基于顺序搜索的动态分区分配算法，比较适用于不太大的系统。当系统很大时，系统中的内存分区可能会很多，相应的空闲分区链就很长，这是采用顺序搜索方法可能会很慢。为了提高搜索空闲分区的速度，在大、中型系统中往往会采用基于索引搜索的动态分区分配算法。</li>
+<li>基于索引搜索的动态分区分配算法可分为：<ul>
+<li>快速适应算法</li>
+<li>伙伴系统</li>
+<li>哈希算法</li>
+</ul>
 </li>
-<li><h3 id="启动容器"><a href="#启动容器" class="headerlink" title="启动容器"></a>启动容器</h3><p>通过<code>docker create</code>命令创建的容器会进入到停止状态，想要运行该容器，可以执行以下命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker start 容器名/容器ID</span><br></pre></td></tr></table></figure>
+</ul>
 </li>
-<li><h3 id="终止容器"><a href="#终止容器" class="headerlink" title="终止容器"></a>终止容器</h3><p>执行命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker stop 容器名/容器ID</span><br></pre></td></tr></table></figure>
+<li><h2 id="令-buddy-k-x-为大小为-2-k-、地址为x的块的伙伴系统地址，试写出-buddy-k-x-的通用表达式"><a href="#令-buddy-k-x-为大小为-2-k-、地址为x的块的伙伴系统地址，试写出-buddy-k-x-的通用表达式" class="headerlink" title="令$buddy_k$(x)为大小为$2^k$、地址为x的块的伙伴系统地址，试写出$buddy_k$(x)的通用表达式"></a>令$buddy_k$(x)为大小为$2^k$、地址为x的块的伙伴系统地址，试写出$buddy_k$(x)的通用表达式</h2><p><img src="/2019/06/22/计算机操作系统（第四版）习题四解答/11.png" alt="题解"></p>
 </li>
-<li><h3 id="删除容器"><a href="#删除容器" class="headerlink" title="删除容器"></a>删除容器</h3><p>执行命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm 容器名</span><br></pre></td></tr></table></figure>
-<p>注意：不可以删除一个运行中的容器，必须先用<code>docker stop</code>或<code>docker kill</code>命令停止它才能删除。当然，也可以使用<code>-f</code>选项强制删除。</p>
-<p>删除所有容器：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm 'docker ps -a -q'</span><br></pre></td></tr></table></figure>
-<p><code>-a</code>标志列出所有容器，<code>-q</code>标志只列出容器的ID，不包括容器的其他信息。然后将这个列表传给<code>docker rm</code>命令，依次删除容器。</p>
+<li><h2 id="分区存储管理中常用哪些分配策略？比较它们的优缺点？"><a href="#分区存储管理中常用哪些分配策略？比较它们的优缺点？" class="headerlink" title="分区存储管理中常用哪些分配策略？比较它们的优缺点？"></a>分区存储管理中常用哪些分配策略？比较它们的优缺点？</h2><ul>
+<li>首次适应算法<ul>
+<li>保留了高址部分的大空闲区，有利于后来的大型作业分配</li>
+<li>地址部分不断被划分，留下很多难以利用的小空闲区，每次查找都从地址开始增加了系统开销</li>
+</ul>
 </li>
-</ol>
-<h2 id="四、容器内信息获取与命令执行"><a href="#四、容器内信息获取与命令执行" class="headerlink" title="四、容器内信息获取与命令执行"></a>四、容器内信息获取与命令执行</h2><ol>
-<li><h3 id="依附容器"><a href="#依附容器" class="headerlink" title="依附容器"></a>依附容器</h3><p>依附操作<code>attach</code>通常用于由<code>docker start</code>或者<code>docker restart</code>启动的交互型容器中。由于<code>docker start</code>启动的交互型容器并没有具体终端可以依附，而容器本身是可以接收用户交互的，这时就需要通过<code>attach</code>命令来将终端依附到容器上。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker attach 容器ID</span><br></pre></td></tr></table></figure>
+<li>循环首次适应算法<ul>
+<li>内存空闲分区分布均匀，减少了查找系统开销</li>
+<li>缺乏大空闲分区，导致不能装入大型作业</li>
+</ul>
 </li>
-</ol>
-<ol>
-<li><h3 id="查看容器日志"><a href="#查看容器日志" class="headerlink" title="查看容器日志"></a>查看容器日志</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker logs -f 容器名 </span><br><span class="line">docker logs -f --tails=5 容器名   #控制logs输出的日志行数，只输出最后五行</span><br></pre></td></tr></table></figure>
+<li>最佳适应算法<ul>
+<li>每次分配给文件的都是最合适该文件大小的分区，内存中留下了很多难以利用的小空闲区</li>
+</ul>
 </li>
-</ol>
-<ol>
-<li><h3 id="查看容器进程"><a href="#查看容器进程" class="headerlink" title="查看容器进程"></a>查看容器进程</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker top 容器名</span><br></pre></td></tr></table></figure>
+<li>最坏适应算法<ul>
+<li>剩下空闲分区不至于太小，产生碎片的可能性最小，对中、小型作业有利</li>
+<li>存储器中缺乏大空闲区，对大型文件分区分配不利</li>
+<li>查找效率很高</li>
+</ul>
 </li>
-<li><h3 id="查看容器信息"><a href="#查看容器信息" class="headerlink" title="查看容器信息"></a>查看容器信息</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker inspect 容器名</span><br></pre></td></tr></table></figure>
-<p>用来查看容器的配置环境，包括容器名，环境变量，运行命令，主机配置，网络配置和数据卷配置等。使用<code>-f</code>或者<code>--format</code>命令格式化标志，可以查看指定部分的信息。</p>
+</ul>
 </li>
-<li><h3 id="容器的导入与导出"><a href="#容器的导入与导出" class="headerlink" title="容器的导入与导出"></a>容器的导入与导出</h3><p>Docker的导入和导出分别由<code>import</code>命令和<code>export</code>命令完成。</p>
-<p>使用<code>docker export</code>命令导出容器：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker export 容器名 &gt; my_container.tar</span><br></pre></td></tr></table></figure>
-<p><code>docker export</code>命令会把容器的文件系统以tar包的格式导出到标准输出。我们将其定位到目标文件<code>name.tar</code>。将容器保存到本地文件也算是持久化方式的一种。将容器保存到本次之后，我们就可以通过网络等方法将tar包分享给他人。</p>
-<p>使用<code>docker import</code>命令导入一个本地的tar包作为镜像：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat my_container.tar | docker import - imported:container</span><br></pre></td></tr></table></figure>
-<p><code>docker import</code>会把打包的容器导入为一个镜像。</p>
-<p><code>import</code>表示从标准输入读取容器内容，我们把<code>name.tar</code>的内容传给标准输入，res和tag代表生成的镜像和标记。</p>
+<li><h2 id="为什么要引入对换？对换可分为哪几种类型？"><a href="#为什么要引入对换？对换可分为哪几种类型？" class="headerlink" title="为什么要引入对换？对换可分为哪几种类型？"></a>为什么要引入对换？对换可分为哪几种类型？</h2><ul>
+<li>在多道程序环境下，一方面，在内存中的某些进程由于某花时间尚未发生而被阻塞运行，但它却占用了大量的内存空间，甚至有时有可能出现在内存中所有进程都被阻塞，而没有可以运行的进程，另一方面，却有着很多作业，因两次了空间不足，一直驻留在外存上，而不能进入内存运行。为了解决这一问题，系统引入了对换。<ul>
+<li>对换的类型<ul>
+<li>整体对换</li>
+<li>页面（分段）对换</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h2 id="对文件区管理的目标和对对换空间管理的目标有何不同？"><a href="#对文件区管理的目标和对对换空间管理的目标有何不同？" class="headerlink" title="对文件区管理的目标和对对换空间管理的目标有何不同？"></a>对文件区管理的目标和对对换空间管理的目标有何不同？</h2><ul>
+<li><p>对文件区管理的主要目标：</p>
+<p>提高文件存储空间的利用率，然后才是提高对文件的访问速度。因此，对文件区空间的管理采取离散分配方式</p>
+</li>
+<li><p>对对换空间管理的目标：</p>
+<p>提高进程换入和换出的速度，然后才是提高文件存储空间的利用率。为此，对对换空间的管理采取连续分配方式，较少考虑外存中的碎片问题</p>
+</li>
+</ul>
+</li>
+<li><h2 id="为实现对换，系统应具备哪几方面的功能？"><a href="#为实现对换，系统应具备哪几方面的功能？" class="headerlink" title="为实现对换，系统应具备哪几方面的功能？"></a>为实现对换，系统应具备哪几方面的功能？</h2><ul>
+<li>对换空间管理</li>
+<li>进程换入</li>
+<li>进程换出</li>
+</ul>
+</li>
+<li><h2 id="在以进程为单位进行对换时，每次是否都将整个进程换出？为什么？"><a href="#在以进程为单位进行对换时，每次是否都将整个进程换出？为什么？" class="headerlink" title="在以进程为单位进行对换时，每次是否都将整个进程换出？为什么？"></a>在以进程为单位进行对换时，每次是否都将整个进程换出？为什么？</h2><p>在以进程为单位进行对换时，并非每次都将整个进程换出，这是因为：</p>
+<ul>
+<li>从结构上讲，进程是由程序段、数据段和进程控制块组成的，其中进程控制块中总有部分或全部常驻内存，不被换出</li>
+<li>程序段和数据段可能正在被若干进程共享，此时它们也不能换出</li>
+</ul>
+</li>
+<li><h2 id="基于离散分配时所用的基本单位不同，可将离散分配分为哪几种？"><a href="#基于离散分配时所用的基本单位不同，可将离散分配分为哪几种？" class="headerlink" title="基于离散分配时所用的基本单位不同，可将离散分配分为哪几种？"></a>基于离散分配时所用的基本单位不同，可将离散分配分为哪几种？</h2><ul>
+<li>分页存储管理方式</li>
+<li>分段存储管理方式</li>
+<li>段页式存储管理方式</li>
+</ul>
+</li>
+<li><h2 id="什么是页面？什么是物理块？页面的大小应如何确定？"><a href="#什么是页面？什么是物理块？页面的大小应如何确定？" class="headerlink" title="什么是页面？什么是物理块？页面的大小应如何确定？"></a>什么是页面？什么是物理块？页面的大小应如何确定？</h2><ul>
+<li>页面。分页存储管理将进程的逻辑地址空间分为若干个页，并为各页加以编号。</li>
+<li>物理块：将内存中的物理地址空间分层若干个块</li>
+<li>在分页系统中，若选择过小的页面大小，虽然一方面可以减轻碎片，起到减少内存碎片总空间的作用，有利于内存利用率的提高，但另一方面却会造成每个进程占用较多的页面，从而导致进程的页表过长，占用大量内存。此外，还会降低换进换出的效率。然而，页面选择过大，虽然可以减少页表的长度，提高页面换进换出的速度，但却又会使页内碎片增大。因此，页面的大小应选择适中，且页面大小应是2的幂，通常为1KB-8KB。</li>
+</ul>
+</li>
+<li><h2 id="什么是页表？页表的作用是什么？"><a href="#什么是页表？页表的作用是什么？" class="headerlink" title="什么是页表？页表的作用是什么？"></a>什么是页表？页表的作用是什么？</h2><ul>
+<li>在分页系统中，允许将进程的各个页面离散地存储在内存的任一地址块中，为了保证进程仍然能够正确地运行，即能在内存中找到每个页面所对应的物理块，系统又为每个进程建立了一张页面映像表，简称页表。</li>
+<li>页表的作用是实现从页号到物理块号的地址映射</li>
+</ul>
+</li>
+<li><h2 id="为实现分页存储管理，需要哪些硬件支持？"><a href="#为实现分页存储管理，需要哪些硬件支持？" class="headerlink" title="为实现分页存储管理，需要哪些硬件支持？"></a>为实现分页存储管理，需要哪些硬件支持？</h2><ul>
+<li>页表寄存器</li>
+<li>地址变换机构</li>
+<li>联想寄存器</li>
+</ul>
+</li>
+<li><h2 id="在分页系统中是如何实现地址变换的？"><a href="#在分页系统中是如何实现地址变换的？" class="headerlink" title="在分页系统中是如何实现地址变换的？"></a>在分页系统中是如何实现地址变换的？</h2><p>&emsp;&emsp;当进程要访问某个逻辑地址中的数据时，分页地址变换机构会自动地将有效地址分为页号和页内地址两部分，再以页号为索引去检索页表。查找操作由硬件执行。在执行检索之前，先将页号与页表长度进行比较，如果页号大于或等于页表长度，则表示本次所访问的地址已超越进程的地址空间。于是，这一错误将被系统发现，并产生一地址越界中断。</p>
+<p>&emsp;&emsp;若未出现越界错误，则将页表始址与页号和页表项长度的乘积相加，便得到该表项在页表中的位置，于是可从中得到该页的物理块号，将之装入物理地址寄存器中。与此同时，再将有效地址寄存器中的页内地址送入物理地址寄存器的块内地址字段中。这样便完成了从逻辑地址到物理地址的变换。</p>
+</li>
+<li><h2 id="具有快表时是如何实现地址变换的？"><a href="#具有快表时是如何实现地址变换的？" class="headerlink" title="具有快表时是如何实现地址变换的？"></a>具有快表时是如何实现地址变换的？</h2><p>&emsp;&emsp;在CPU给出有效地址后，由地址变换机构自动地将页号P送入高速缓冲寄存器，并将此页号与高速缓存中的所有页号进行比较，若其中有与此相匹配的页号，便表示所要访问的页表项在快表中。于是，可直接从快表中读出该页所对应的物理块号，并送到物理地址寄存器中。</p>
+<p>&emsp;&emsp;若在快表中未找到对应的页表项，则还须再访问内存中的页表，找到后，把从页表项中读出的物理块号送往地址寄存器；同时，再将此页表项存入快表的一个寄存器单元中。但如果联想寄存器已满，则OS必须找到一个老的且已被认为是不再需要的页表项，将它换出。</p>
+</li>
+<li><h2 id="较详细地说明引入分段存储管理是为了满足用户哪几方面的需要。"><a href="#较详细地说明引入分段存储管理是为了满足用户哪几方面的需要。" class="headerlink" title="较详细地说明引入分段存储管理是为了满足用户哪几方面的需要。"></a>较详细地说明引入分段存储管理是为了满足用户哪几方面的需要。</h2><ul>
+<li>方便编程。用户通常把自己的作业按照逻辑关系划分为若干段，每段都从0 编址，并有自己名字和长度。因此，希望要访问的逻辑地址是由段名和段内偏移量决定。</li>
+<li>信息共享。在实现对程序和数据的共享时，是以信息逻辑单位为基础。分页系统中的页是存放信息的物理单位，无完整意义，不便于共享；段是信息的逻辑单位。为了实现段的共享，希望存储管理能与用户程序分段的组织方式相适应。</li>
+<li>信息保护。对信息的逻辑单位进行保护，分段能更有效方便地实现信息保护功能。</li>
+<li>动态增长。在实际应用中，有些段特别是数据段，在使用过程中会不断增长，事先又无法确切知道增长多少。分段存储管理方式能较好解决这个问题。</li>
+<li>动态链接。运行时先将主程序对应的目标程序装入内存并启动运行，运行过程中又需要调用某段时，才将该段调入内存链接。所以动态链接也要求以段作为管理单位。</li>
+</ul>
+</li>
+<li><h2 id="在具有快表的段页式存储管理方式中，如何实现地址变换？"><a href="#在具有快表的段页式存储管理方式中，如何实现地址变换？" class="headerlink" title="在具有快表的段页式存储管理方式中，如何实现地址变换？"></a>在具有快表的段页式存储管理方式中，如何实现地址变换？</h2><p>&emsp;在CPU给出有效地址后，由地址变换机构自动地将页号P送入高速缓冲寄存器，并将此页号与高速缓存中的所有页号进行比较，若其中有与此相匹配的页号，便表示所要访问的页表项在快表中。于是，可直接从快表中读出该页所对应的物理块号，并送到物理地址寄存器中。</p>
+<p>&emsp;&emsp;若在快表中未找到对应的页表项，则还须再访问内存中的页表，找到后，把从页表项中读出的物理块号送往地址寄存器；同时，再将此页表项存入快表的一个寄存器单元中。但如果联想寄存器已满，则OS必须找到一个老的且已被认为是不再需要的页表项，将它换出。</p>
+</li>
+<li><h2 id="为什么说分段系统比分页系统更易于实现信息的共享和保护？"><a href="#为什么说分段系统比分页系统更易于实现信息的共享和保护？" class="headerlink" title="为什么说分段系统比分页系统更易于实现信息的共享和保护？"></a>为什么说分段系统比分页系统更易于实现信息的共享和保护？</h2><ul>
+<li>分页系统的每个页面是分散存储的，为了实现信息共享和保护，页面之间需要一一对应，为此需要建立大量的页表项；</li>
+<li>而分段系统的每个段都从0 编址，并采用一段连续的地址空间，在实现共享和保护时，只需为要共享和保护的程序设置一个段表项，将其中的基址与内存地址一一对应就能够实现。</li>
+</ul>
+</li>
+<li><h2 id="分页和分段存储管理有何区别？"><a href="#分页和分段存储管理有何区别？" class="headerlink" title="分页和分段存储管理有何区别？"></a>分页和分段存储管理有何区别？</h2><ul>
+<li>页是信息的物理单位。采用分页存储管理方式是为了实现离散分配方式，以消减内存的外零头，提高内存的利用率。段则是信息的逻辑单位，它通常包含的是一组意义相对完整的信息。分段的目的主要在于能更好地满足用户的需要。</li>
+<li>页的大小固定且由系统决定。在采用分页存储管理方式的系统中，在硬件结构上就把用户程序的逻辑地址划分为页号和页内地址两部分。而段的长度却是不固定的，决定于用户所编写的程序，通常由编译程序在对源程序进行编译时，根据信息的性质来划分</li>
+<li>分页的用户程序地址空间是一维的。分页完全是系统的行为，故在分页系统中，用户程序的地址是属于单一的线性地址空间。而段式用户的行为，故在分段系统中，用户程序的地址空间是二维的。</li>
+</ul>
+</li>
+<li><h2 id="试全面比较连续分配和离散分配方式"><a href="#试全面比较连续分配和离散分配方式" class="headerlink" title="试全面比较连续分配和离散分配方式"></a>试全面比较连续分配和离散分配方式</h2><ul>
+<li>连续分配是指为一个用户程序分配一个连续的地址空间，包括单一和分区两种分配方式。单一方式将内存分为系统区和用户区，最简单且只用于单用户单任务操作系统：分区方式分为固定分区和动态分区。</li>
+<li>离散分配方式分为分页、分段和段页式存储管理。分页式存储管理旨在提高内存利用率，分段时存储管理旨在满足用户的需要，段页式存储管理则是将两者结合起来，具有分段系统便于实现、可分享、易于保护和动态链接等优点，又能像分页系统一样，很好地解决外部碎片及为各段可离散分配内存等问题，是比较有效的存储管理方式。</li>
+</ul>
 </li>
 </ol>
 
@@ -607,9 +728,15 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Docker/" rel="tag"># Docker</a>
+            <a href="/tags/习题解答/" rel="tag"># 习题解答</a>
           
-            <a href="/tags/容器/" rel="tag"># 容器</a>
+            <a href="/tags/存储器管理/" rel="tag"># 存储器管理</a>
+          
+            <a href="/tags/对换/" rel="tag"># 对换</a>
+          
+            <a href="/tags/分页存储管理方式/" rel="tag"># 分页存储管理方式</a>
+          
+            <a href="/tags/分段存储管理方式/" rel="tag"># 分段存储管理方式</a>
           
         </div>
       
@@ -622,8 +749,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/11/19/Kubernetes集群部署/" rel="next" title="Kubernetes集群部署">
-                <i class="fa fa-chevron-left"></i> Kubernetes集群部署
+              <a href="/2019/06/20/计算机操作系统（第四版）习题二解答/" rel="next" title="计算机操作系统（第四版）习题二解答">
+                <i class="fa fa-chevron-left"></i> 计算机操作系统（第四版）习题二解答
               </a>
             
           </div>
@@ -631,6 +758,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/30/软件测试知识点总结/" rel="prev" title="软件测试知识点总结">
+                软件测试知识点总结 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -795,7 +926,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、Docker是什么？"><span class="nav-number">1.</span> <span class="nav-text">一、Docker是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Docker的组件"><span class="nav-number">2.</span> <span class="nav-text">二、Docker的组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、容器的管理操作"><span class="nav-number">3.</span> <span class="nav-text">三、容器的管理操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建容器"><span class="nav-number">3.1.</span> <span class="nav-text">创建容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看容器"><span class="nav-number">3.2.</span> <span class="nav-text">查看容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动容器"><span class="nav-number">3.3.</span> <span class="nav-text">启动容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#终止容器"><span class="nav-number">3.4.</span> <span class="nav-text">终止容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除容器"><span class="nav-number">3.5.</span> <span class="nav-text">删除容器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、容器内信息获取与命令执行"><span class="nav-number">4.</span> <span class="nav-text">四、容器内信息获取与命令执行</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#依附容器"><span class="nav-number">4.1.</span> <span class="nav-text">依附容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看容器日志"><span class="nav-number">4.2.</span> <span class="nav-text">查看容器日志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看容器进程"><span class="nav-number">4.3.</span> <span class="nav-text">查看容器进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看容器信息"><span class="nav-number">4.4.</span> <span class="nav-text">查看容器信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#容器的导入与导出"><span class="nav-number">4.5.</span> <span class="nav-text">容器的导入与导出</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要配置层次式存储器？"><span class="nav-number">1.</span> <span class="nav-text">为什么要配置层次式存储器？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可采用哪几种方式将程序装入内存？它们分别适用于何种场合？"><span class="nav-number">2.</span> <span class="nav-text">可采用哪几种方式将程序装入内存？它们分别适用于何种场合？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#何谓静态链接？静态链接时需要解决两个什么问题？"><span class="nav-number">3.</span> <span class="nav-text">何谓静态链接？静态链接时需要解决两个什么问题？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#何谓装入时动态链接？装入时动态链接方式有何优点？"><span class="nav-number">4.</span> <span class="nav-text">何谓装入时动态链接？装入时动态链接方式有何优点？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#何谓运行时动态链接？运行时动态链接又何优点？"><span class="nav-number">5.</span> <span class="nav-text">何谓运行时动态链接？运行时动态链接又何优点？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在动态分区分配方式中，应如何将各空闲分区链接成空闲分区链？"><span class="nav-number">6.</span> <span class="nav-text">在动态分区分配方式中，应如何将各空闲分区链接成空闲分区链？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要引入动态重定位？如何实现？"><span class="nav-number">7.</span> <span class="nav-text">为什么要引入动态重定位？如何实现？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是基于顺序搜索的动态分区分配算法？它可分为哪几种？"><span class="nav-number">8.</span> <span class="nav-text">什么是基于顺序搜索的动态分区分配算法？它可分为哪几种？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在采用首次适应算法回收内存时，可能出现哪几种情况？应怎样处理？"><span class="nav-number">9.</span> <span class="nav-text">在采用首次适应算法回收内存时，可能出现哪几种情况？应怎样处理？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是基于索引搜索的动态分区分配算法？它可分为哪几种？"><span class="nav-number">10.</span> <span class="nav-text">什么是基于索引搜索的动态分区分配算法？它可分为哪几种？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#令-buddy-k-x-为大小为-2-k-、地址为x的块的伙伴系统地址，试写出-buddy-k-x-的通用表达式"><span class="nav-number">11.</span> <span class="nav-text">令$buddy_k$(x)为大小为$2^k$、地址为x的块的伙伴系统地址，试写出$buddy_k$(x)的通用表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分区存储管理中常用哪些分配策略？比较它们的优缺点？"><span class="nav-number">12.</span> <span class="nav-text">分区存储管理中常用哪些分配策略？比较它们的优缺点？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要引入对换？对换可分为哪几种类型？"><span class="nav-number">13.</span> <span class="nav-text">为什么要引入对换？对换可分为哪几种类型？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对文件区管理的目标和对对换空间管理的目标有何不同？"><span class="nav-number">14.</span> <span class="nav-text">对文件区管理的目标和对对换空间管理的目标有何不同？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为实现对换，系统应具备哪几方面的功能？"><span class="nav-number">15.</span> <span class="nav-text">为实现对换，系统应具备哪几方面的功能？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在以进程为单位进行对换时，每次是否都将整个进程换出？为什么？"><span class="nav-number">16.</span> <span class="nav-text">在以进程为单位进行对换时，每次是否都将整个进程换出？为什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于离散分配时所用的基本单位不同，可将离散分配分为哪几种？"><span class="nav-number">17.</span> <span class="nav-text">基于离散分配时所用的基本单位不同，可将离散分配分为哪几种？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是页面？什么是物理块？页面的大小应如何确定？"><span class="nav-number">18.</span> <span class="nav-text">什么是页面？什么是物理块？页面的大小应如何确定？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是页表？页表的作用是什么？"><span class="nav-number">19.</span> <span class="nav-text">什么是页表？页表的作用是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为实现分页存储管理，需要哪些硬件支持？"><span class="nav-number">20.</span> <span class="nav-text">为实现分页存储管理，需要哪些硬件支持？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在分页系统中是如何实现地址变换的？"><span class="nav-number">21.</span> <span class="nav-text">在分页系统中是如何实现地址变换的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#具有快表时是如何实现地址变换的？"><span class="nav-number">22.</span> <span class="nav-text">具有快表时是如何实现地址变换的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#较详细地说明引入分段存储管理是为了满足用户哪几方面的需要。"><span class="nav-number">23.</span> <span class="nav-text">较详细地说明引入分段存储管理是为了满足用户哪几方面的需要。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在具有快表的段页式存储管理方式中，如何实现地址变换？"><span class="nav-number">24.</span> <span class="nav-text">在具有快表的段页式存储管理方式中，如何实现地址变换？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么说分段系统比分页系统更易于实现信息的共享和保护？"><span class="nav-number">25.</span> <span class="nav-text">为什么说分段系统比分页系统更易于实现信息的共享和保护？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分页和分段存储管理有何区别？"><span class="nav-number">26.</span> <span class="nav-text">分页和分段存储管理有何区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#试全面比较连续分配和离散分配方式"><span class="nav-number">27.</span> <span class="nav-text">试全面比较连续分配和离散分配方式</span></a></li></ol></div>
             
 
           </div>
