@@ -1,0 +1,1745 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+      
+    
+    
+      
+    
+  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+  <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-flash.min.css" rel="stylesheet">
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+      app_id: "81e314d5"
+    });
+  daovoice('update');
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="https://fonts.loli.net/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Linux内核,Linux,Liinux进程管理,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、进程描述&amp;emsp;&amp;emsp;进程的定义：进程是可并发执行的程序在一个数据集合上的运行过程。进程具有动态性、并发性、独立性、异步性等基本特征。 &amp;emsp;&amp;emsp;为了使参与并发执行的每个程序（含数据）都能独立地运行，在操作系统中必须为之配置一个专门的数据结构，称为进程控制块（PCB）。系统利用PCB来描述进程的基本情况和活动过程，进而控制和管理进程。这样，由程序段、相关数据段和PCB三">
+<meta name="keywords" content="Linux内核,Linux,Liinux进程管理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux进程管理（一）">
+<meta property="og:url" content="http://wanqbin.xyz/Linux进程管理（一）.html">
+<meta property="og:site_name" content="Aoki&#39;s Blog">
+<meta property="og:description" content="一、进程描述&amp;emsp;&amp;emsp;进程的定义：进程是可并发执行的程序在一个数据集合上的运行过程。进程具有动态性、并发性、独立性、异步性等基本特征。 &amp;emsp;&amp;emsp;为了使参与并发执行的每个程序（含数据）都能独立地运行，在操作系统中必须为之配置一个专门的数据结构，称为进程控制块（PCB）。系统利用PCB来描述进程的基本情况和活动过程，进而控制和管理进程。这样，由程序段、相关数据段和PCB三">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://wanqbin.xyz/2019/08/06/Linux进程管理（一）/Linux.PNG">
+<meta property="og:updated_time" content="2019-08-07T03:47:06.505Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux进程管理（一）">
+<meta name="twitter:description" content="一、进程描述&amp;emsp;&amp;emsp;进程的定义：进程是可并发执行的程序在一个数据集合上的运行过程。进程具有动态性、并发性、独立性、异步性等基本特征。 &amp;emsp;&amp;emsp;为了使参与并发执行的每个程序（含数据）都能独立地运行，在操作系统中必须为之配置一个专门的数据结构，称为进程控制块（PCB）。系统利用PCB来描述进程的基本情况和活动过程，进而控制和管理进程。这样，由程序段、相关数据段和PCB三">
+<meta name="twitter:image" content="http://wanqbin.xyz/2019/08/06/Linux进程管理（一）/Linux.PNG">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":18,"b2t":true,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://wanqbin.xyz/Linux进程管理（一）.html">
+
+
+
+
+
+
+  <title>Linux进程管理（一） | Aoki's Blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?2fc5164c1572845ef380a7474dbcddf8";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Aoki's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">“惟将终夜长开眼，报答平生未展眉”</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://wanqbin.xyz/Linux进程管理（一）.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Aoki">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aoki's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linux进程管理（一）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-06T20:31:00+08:00">
+                2019-08-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux内核/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux内核</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/Linux进程管理（一）.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/Linux进程管理（一）.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/Linux进程管理（一）.html" class="leancloud_visitors" data-flag-title="Linux进程管理（一）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 阅读数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  4.7k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一、进程描述"><a href="#一、进程描述" class="headerlink" title="一、进程描述"></a>一、进程描述</h2><p>&emsp;&emsp;进程的定义：进程是可并发执行的程序在一个数据集合上的运行过程。进程具有动态性、并发性、独立性、异步性等基本特征。</p>
+<p>&emsp;&emsp;为了使参与并发执行的每个程序（含数据）都能独立地运行，在操作系统中必须为之配置一个专门的数据结构，称为进程控制块（PCB）。系统利用PCB来描述进程的基本情况和活动过程，进而控制和管理进程。这样，由程序段、相关数据段和PCB三部分便构成了进程实体。进程的程序段就是该进程所对应静态程序实体在进程地址空间中的映像，而数据段就是进程数据工作集合在进程地址空间中的映像。</p>
+<p>&emsp;&emsp;进程控制块是系统为了管理进程而设置的专门数据结构，用于记录进程的外部特征，描述进程的运动变化过程；它包含了有关进程的描述信息、控制信息以及资源信息，是进程动态特征的集中反映。因此，系统同利用PCB来控制和管理进程。PCB是系统感知进程存在的唯一标志，所以进程与PCB是一一对应的。也就是说，进程的创建以PCB的产生为标志，进程的消亡以PCB的删除为标志。</p>
+<h3 id="1-Linux进程描述符"><a href="#1-Linux进程描述符" class="headerlink" title="1.Linux进程描述符"></a>1.Linux进程描述符</h3><p>&emsp;&emsp;在Linux中，PCB使用<code>task_struct</code>结构来描述，该结构定义在&lt;Linux/sched.h&gt;文件中，称为Linux进程描述符。该描述符结构<code>task_struct</code>存放在任务对内的双向链表<code>task_list</code>中，当有新的程序创建的时候，系统从内存中分配一个新的<code>task_struct</code>结构，并把它放到双向链表中，为了便于查找，系统用全局指针<code>current</code>指向当前运行进程的<code>task_struct</code>。</p>
+<p>&emsp;&emsp;进程描述符<code>task_struct</code>结构包括了许多字段，下面按照字段进程管理过程中的不同作用，分为以下几类来介绍其中的基本功能。</p>
+<ul>
+<li>进程的基本属性</li>
+<li>进程之间的关系</li>
+<li>调度相关</li>
+<li>进程地址空间</li>
+<li>进程的文件系统信息</li>
+<li>进程的信号处理</li>
+<li>进程的访问权限</li>
+<li>资源限制</li>
+</ul>
+<h4 id="1）进程的基本属性"><a href="#1）进程的基本属性" class="headerlink" title="1）进程的基本属性"></a>1）进程的基本属性</h4><ul>
+<li><p><code>volatile long state</code></p>
+<p>用于保存进程的状态，在进程的生命期内，可以从该域获得自己的状态，在2.6中进程可以有以下几种状态：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> TASK_RUNNING 0</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> TASK_INTERRUPTIABLE 1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> TASK_UNINTERRUPTIBLE 2</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> TASK_STOPPED 4</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> TASK_TRACED 8</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EXIT_ZOMBIE 16</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EXIT_DEAD 32</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> TASK_DEAD 64</span></span><br></pre></td></tr></table></figure>
+
+<p><code>TASK_RUNNING</code>：进程当前正在运行，或者正在运行队列中等待调度</p>
+<p><code>TASK_INTERRUPTIABLE</code>：进程处于睡眠状态，正在等待某些事件发生。进程可以被信号中断。进程被显式唤醒或接收到信号之后，将转变为<code>TASK_RUNNING</code>状态。</p>
+<p><code>TASK_UNINTERRUPTIBLE</code>：进程状态类似<code>TASK_INTERRUPTIABLE</code>，只是它不会处理信号。中断处于这种状态的进程是不合适的，因为它可能正在完成某些重要的任务。当它所等待的事件发生时，进程将被唤醒。</p>
+<p><code>TASK_STOPPED</code>：进程已中止执行，它没有运行，并且不能运行，接收到<code>SIGSTOP</code>和<code>SIGSTP</code>等信号时，进程将进入这种状态。接收到<code>SIGCONT</code>信号之后，进程将再次变得可运行。</p>
+<p><code>TASK_TRACED</code>：正在被调试程序等其他进程监控时，进程将进入这种状态。</p>
+<p><code>EXIT_ZOMBIE</code>:进程已终止，它正等待其父进程收集关于它的一些统计信息。</p>
+<p><code>EXIT_DEAD</code>:最终状态，将进程从系统中删除时，它将会进入此状态，因为其父进程已经通过<code>wait4()</code>和<code>waitpid()</code>调用收集了所有统计信息。</p>
+<p><code>TASK_DEAD</code>：表示已经退出且不需要父进程回收的进程的状态。</p>
+<p><img src="/2019/08/06/Linux进程管理（一）/Linux.PNG" alt="Linux进程状态转换图"></p>
+</li>
+<li><p><code>atomic_t usage</code></p>
+<p>表示对该结构的引用次数，在进程退出时，只有当对该结构的引用次数为0时，才可以删除该结构。</p>
+</li>
+<li><p><code>int lock_depth</code></p>
+<p>表示大内核锁深度，主要用于实现内核的同步机制。</p>
+</li>
+<li><p><code>pid_t pid</code></p>
+<p>进程标识符，系统通过进程标识符唯一地标识一个进程。<code>pid_t</code>是一个隐含类型，实际上就是一个int类型，为了与老版本的UNIX和Linux兼容，pid的最大默认值为32768(short int短整型数的最大值).如果需要更大的取值范围，可以修改<code>/proc/sys/kernel/pid_max</code>，从而提高进程数的上限。</p>
+</li>
+<li><p><code>struct pid_link pids[PIDTYPE_MAX]</code></p>
+<p>标识该进程的pid所对应的哈希链表。</p>
+</li>
+<li><p><code>pid_t tgid</code></p>
+<p>表示线程组的ID</p>
+</li>
+<li><p><code>unsigned int flags</code></p>
+<p>定义了该进程的特殊属性，flags的值定义在Linux/sched.h中。</p>
+</li>
+<li><p><code>int exit_code, exit_signal</code></p>
+<p>系统强行退出时发出的信号，父进程通过这两个值来获取子进程的退出状态。exit_code表示进程的退出值，exit_signal表示进程通过信号被终止的信号值。</p>
+</li>
+<li><p><code>struct Linux_binfmt *binfmt</code></p>
+<p>Linux支持多种可执行文件格式，每种可执行文件格式都定义了一种数据结构，指明程序代码如何被载入内存。</p>
+</li>
+<li><p><code>unsigned int ptrace</code></p>
+<p>当调用ptrace()系统调用时，prtace被设置，ptrace的值定义在linux/ptrace.h中。</p>
+</li>
+<li><p><code>char comm[TASK_COMM_LEN]</code></p>
+<p>通常在命令行调用一个可执行程序来创建进程，当在命令行调用可执行程序的时候用comm表示其命令名称。</p>
+</li>
+</ul>
+<h4 id="2）进程之间的关系"><a href="#2）进程之间的关系" class="headerlink" title="2）进程之间的关系"></a>2）进程之间的关系</h4><ul>
+<li><p><code>struct task_struct *group_leader</code></p>
+<p>每个进程组都有一个被定义为该组领头的进程，如果进程是某个组的成员，<code>group_leader</code>则是一个指向其组领头的进程描述符的指针，组领头进程拥有自己的终端设备<code>tty</code>，它就是从这个终端创建的。</p>
+</li>
+<li><p><code>struct list_head thread_group</code></p>
+<p>指向该进程所在进程组的所有进程链表。</p>
+</li>
+<li><p><code>struct task_struct *real_parent</code></p>
+<p>指向当前进程的父进程，如果父进程已经死亡，则指向init进程。</p>
+</li>
+<li><p><code>struct task_struct *parent</code></p>
+<p>指向当前进程的父进程，这个值通常和<code>real_parent</code>相同，但在某些情况会和<code>real_parent</code>不同，例如使用gdb对程序进行调试时，parent指向gdb进程。</p>
+</li>
+<li><p><code>struct list_head children</code></p>
+<p>指向当前进程的子进程的链表</p>
+</li>
+<li><p><code>struct list_head sibling</code></p>
+<p>指向当前进程的兄弟进程的链表。</p>
+</li>
+</ul>
+<p>&emsp;&emsp;Linux系统进程之间存在明显的继承关系，所有的进程都是init进程的后代，内核在系统启动的最后阶段启动此进程。系统中的每个进程都有一个父进程，相应地，每个进程可以拥有0个或多个子进程，拥有相同父进程的所有进程都成为兄弟。</p>
+<h4 id="3）进程调度"><a href="#3）进程调度" class="headerlink" title="3）进程调度"></a>3）进程调度</h4><ul>
+<li><p><code>int prio,static_prio,normal_prio</code></p>
+<p>prio表示进程的动态优先级，取值范围[0,139]。根据进程prio取值的不同，可以把进程分为实时进程（prio$\in$[0,99])和非实时进程（普通进程，prio$\in$[100,139]),针对他们分别由不同的调度策略。动态优先级prio是调度器选择候选进程next的主要依据，数值越小，进程的优先级越高，越早被调度到。</p>
+<p>static_prio是进程的静态优先级，取值范围[0,139]，进程刚被创建时从父进程继承而来，主要用于进程初始时间片的计算和动态优先级prio的计算。</p>
+<p>normal_prio是常规动态优先级，使用“优先级继承协议”时，可能会临时提升进程的优先级，但提升后应该立即返回到其应有的优先级上。这个成员保存的正是这个“应有的优先级”。</p>
+</li>
+<li><p><code>struct list_head run_list</code></p>
+<p>指向就绪队列<code>runqueue</code></p>
+</li>
+<li><p><code>const struct sched_class *sched_class</code></p>
+<p>调度类，该调度类类似一个模块链，协助内核调度程序工作。每个调度程序模块需要实现<code>struct sched_class</code>建议的一组函数。</p>
+</li>
+<li><p><code>struct sched_entitu se</code></p>
+<p>该结构包含了关于调度的完整信息，用于实现对于单个任务或任务组的调度，调度实体可能与进程没有关联。</p>
+</li>
+<li><p><code>undigned int policy</code></p>
+<p>进程的调度策略。包括实时调度和非实时调度。</p>
+</li>
+<li><p><code>cpumask_t cpus_allowed</code></p>
+<p>当存在多个处理器时，用它来指明该进程可以由哪个CPU来执行。</p>
+</li>
+<li><p><code>unsigned int time_slice</code></p>
+<p>进程的时间片余额，相当于内核2.4的<code>counter</code>，但不再直接影响进程的动态优先级。</p>
+</li>
+<li><p><code>unsigned int rt_priority</code></p>
+<p>实时进程的优先级，在调用<code>schedule()</code>时被更新，仅对实时进程有效。</p>
+</li>
+<li><p><code>unsigned long nvcsw,nivcsw</code></p>
+<p>nvcsw，主动的上下文切换数，计算非基于内核抢占的上下文切换数。nivcsw，被动的上下文切换数，计算进程被内核抢占的次数，其值仅当进程从内核返回的时候才增加。</p>
+</li>
+</ul>
+<h4 id="4）进程地址空间和文件系统"><a href="#4）进程地址空间和文件系统" class="headerlink" title="4）进程地址空间和文件系统"></a>4）进程地址空间和文件系统</h4><ul>
+<li><p><code>struct mm_struct *mm,*active_mm</code></p>
+<p>mm是一个指向地址空间和内存管理相关的信息，active_mm是一个指向最近最常使用的地址空间的指针。</p>
+</li>
+<li><p><code>struct fs_struct *fs,*files</code></p>
+<p>fs保存了进程本身与VFS的关系信息，files包含了进程当前所打开的文件列表。</p>
+</li>
+</ul>
+<h4 id="5）进程的信号管理"><a href="#5）进程的信号管理" class="headerlink" title="5）进程的信号管理"></a>5）进程的信号管理</h4><ul>
+<li><p><code>sigset_t saved_sigmask</code></p>
+<p>进程所能接收信号的位掩码。置位表示屏蔽，复位表示不屏蔽。</p>
+</li>
+<li><p><code>struct sigpending pending</code></p>
+<p>存放进程中所有挂起的信号，即记录进程所有已经触发但是还未处理的信号</p>
+</li>
+<li><p><code>struct signal_struct *signal</code></p>
+<p>指向进程信号的描述符</p>
+</li>
+<li><p><code>struct sughand_struct *sighand</code></p>
+<p>指向信号的处理标识符</p>
+</li>
+<li><p><code>int pdeath_signal</code></p>
+<p>是父进程死亡时设置的信号</p>
+</li>
+</ul>
+<h4 id="6）进程的访问权限"><a href="#6）进程的访问权限" class="headerlink" title="6）进程的访问权限"></a>6）进程的访问权限</h4><ul>
+<li><p><code>uid</code>和<code>gid</code></p>
+<p>该进程的用户ID，通常是进程的创建者。因为每个用户可能属于多个组，所以还需要gid来表示该进程属于哪个用户组。</p>
+</li>
+<li><p><code>euid</code>和<code>egid</code></p>
+<p>有效的<code>uid</code>和<code>gid</code>,处于系统安全权限的考虑，运行程序时要检查<code>euid</code>和<code>egid</code>的合法性。通常，uid等于euid，gid等于egid。有时候，系统会赋予一般用户暂时拥有root的uid和gid，以便于进行运作。</p>
+</li>
+<li><p><code>suid</code>和<code>sgid</code></p>
+<p>根据POSIX标准引入的，在系统调用改变uid和gid时，用于保留真正的uid和gid</p>
+</li>
+<li><p><code>fsuid</code>和<code>fsgid</code></p>
+<p>文件系统的uid和gid，用于对文件系统操作时的合法性检查，是Linux独特的标识类型。它们一般分别和euid和egid一致，但在NFS文件系统中NFS服务器需要一个特殊的进程访问文件，这时只修改客户进程的fsuid和fsgid以便确保对于该文件的访问权限。</p>
+</li>
+<li><p><code>struct group_info *group_info</code></p>
+<p>一个Linux进程可以属于多个用户组，group_info保存与这些组相关的信息。</p>
+</li>
+</ul>
+<h2 id="二、进程的组织形式"><a href="#二、进程的组织形式" class="headerlink" title="二、进程的组织形式"></a>二、进程的组织形式</h2><p>&emsp;&emsp;为了高效地对进程进行管理，内核中采用了不同的数据结构将系统中的进程通过不同方式组织起来，以满足进程管理子系统中各种不同需求。</p>
+<ol>
+<li><h3 id="进程链表"><a href="#进程链表" class="headerlink" title="进程链表"></a>进程链表</h3><p>Linux采用了双向链表将系统中的所有进程连接起来，该双向链表基于进程描述符中类型为<code>struct list_head</code>的成员变量<code>tasks</code>。</p>
+<p>Linux内核提供了宏定义<code>for_each_process()</code>用于遍历系统中的每一个进程，该宏定义在需要对系统中每一个进程进行操作时非常有用。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> for_each_process(p)\</span></span><br><span class="line">	<span class="keyword">for</span>(p=&amp;init_task;(p=next_task(p))!=&amp;init_task;)</span><br></pre></td></tr></table></figure>
+
+<p>其中，init_task是系统初始化过程中创建的第一个进程的进程描述符，宏定义next_task表示链表的下一个进程。</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>函数原型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>next_task(p)</td>
+<td>当前进程p的下一进程</td>
+</tr>
+<tr>
+<td>add_task(p)</td>
+<td>从p的父进程孩子链表中添加该进程</td>
+</tr>
+<tr>
+<td>remove_task(p)</td>
+<td>从p的父进程孩子链表中删除该进程</td>
+</tr>
+</tbody></table>
+<ol start="2">
+<li><h3 id="哈希链表"><a href="#哈希链表" class="headerlink" title="哈希链表"></a>哈希链表</h3><p>&emsp;&emsp;内核中使用一个进程描述符来表示一个进程，因此通过进程描述符的地址来访问一个进程再方便不过了。但是POSIX规范中规定，每一个进程要有进程号，而且POSIX规范中规定的系统调用<code>kill()</code>是基于进程号向其他进程发送信号的。这就需要一种机制来高效地完成从进程号到进程描述符地址的转换。Linux内核引入了哈希表来完成进程号到进程描述符<code>task_struct</code>结构的映射。</p>
+<p>&emsp;&emsp;根据进程类型的不同以及效率上的考虑，内核设置了<code>PIDTYPE_MAX</code>（默认值为3）个不同用途的哈希表，哈希表的类型使用枚举类型<code>pid_type</code>进行定义。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> pid_type</span><br><span class="line">&#123;</span><br><span class="line">	PIDTYPE_PID,</span><br><span class="line">	PIDTYPE_PGID,</span><br><span class="line">	PIDTYPE_SID,</span><br><span class="line">	PIDTYPE_MAX</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;其中，PIDTYPE_PID代表了进程号（Process ID）哈希表，系统中所有进程（包括线程）的进程号都在该哈希表中有相应的存储位置。PIDTYPE_PGID代表了进程组号（Process）哈希表。PIDTYPE_SID代表了会话号（Session ID）哈希表。</p>
+<p>&emsp;&emsp;为了查找哈希表，需要知道进程号（pid）与哈希表中位置之间的映射函数——哈希函数，定义如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> pid_hashfn(nr,ns)</span></span><br><span class="line">	Hash_long((<span class="keyword">unsigned</span> <span class="keyword">long</span>)nr+(<span class="keyword">unsigned</span> <span class="keyword">long</span>)ns,pidhash_shift)</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;其中nr表示进程的pid，ns表示进程的pid命名空间结构<code>pid_namespace</code>,<code>pidhash_shift</code>表示哈希表的大小（1&lt;&lt;pidhash_shift).</p>
+<p>&emsp;&emsp;Linux把通过哈希函数计算得到的哈希值作为数组pid_Hash的下标，并且把哈希值相同的进程组成哈希链表，我们称该链表为哈希链表的主链表。链表中的每个哈希结点（hlist_node结构）表示进程的pid。</p>
+<h4 id="1-相关的数据结构"><a href="#1-相关的数据结构" class="headerlink" title="(1)相关的数据结构"></a>(1)相关的数据结构</h4><p>&emsp;&emsp;随着在Linux内核2.6.24中引入了pid命名空间，结构pid被分割成结构pid和结构upid，其定义如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">upid</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> nr;<span class="comment">/*pid值*/</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">pid_namespace</span> *<span class="title">ns</span>;</span><span class="comment">/*所在的命名空间*/</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">hlist_node</span> <span class="title">pid_chain</span>;</span><span class="comment">/*哈希链表节点*/</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">pid</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">atomic_t</span> count;<span class="comment">/*引用计数*/</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">hlist_head</span> <span class="title">tasks</span>[<span class="title">PIDTYPE_MAX</span>];</span><span class="comment">/*保存所有使用此pid的进程*/</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">rcu_head</span> <span class="title">rcu</span>;</span><span class="comment">/*读写锁*/</span></span><br><span class="line">    <span class="keyword">int</span> level;<span class="comment">/*包含upid结构的个数*/</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">upid</span> <span class="title">numbers</span>[1];</span><span class="comment">/*包含的upid结构*/</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;在pid结构中，包含一个struct hlist_head类型的成员变量tasks，该变量把具有相同pid值的进程联系起来，如同一个进程组的进程拥有相同的进程组号pgid，此时可以将同一个进程组的进程通过该变量联系起来，我们称该链表尾哈希链表的从链表。</p>
+<p>&emsp;&emsp;在进程描述符<code>task_struct</code>中存在成员变量pids，定义如下所示：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">pid_link</span> <span class="title">pids</span>[<span class="title">PIDTYPE_MAX</span>];</span></span><br></pre></td></tr></table></figure>
+
+<p>该成员变量的数据类型<code>pid_link</code>的定义如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">pid_link</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">hlist_nnode</span> <span class="title">node</span>;</span><span class="comment">/*从哈希表节点*/</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">pid</span> *<span class="title">pid</span>;</span><span class="comment">/*进程对应的pid结构*/</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>该结构是表示进程描述符<code>task_struct</code>与结构<code>pid</code>之间的映射关系。使用这个变量可以根据pid结构找出对应的描述符。</p>
+</li>
+</ol>
+<h4 id="2-哈希表相关的操作"><a href="#2-哈希表相关的操作" class="headerlink" title="(2)哈希表相关的操作"></a>(2)哈希表相关的操作</h4><ul>
+<li><p><code>find_pid()</code>函数根据nr的值，利用哈希函数计算其哈希值，从哈希表pid_Hash中找出哈希链表头节点，然后遍历整个链表，找出哈希值为nr的pid结构。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">struct pid* <span class="title">find_pidd</span><span class="params">(<span class="keyword">int</span> nr)</span></span>;<span class="comment">/*nr表示进程的pid值*/</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li><p><code>pid_task()</code>函数根据pid返回其对应的进程描述符地址</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">struct task_struct *fastcall <span class="title">pid</span><span class="params">(struct pid* pid,<span class="keyword">enum</span> pid_type type)</span></span>;<span class="comment">/*参数type表示pid的类型*/</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li><p><code>transfer_pid()</code>函数使用新的继承描述符new替换旧的进程描述符</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> fastcall <span class="title">transfer_pid</span><span class="params">(struct task_struct *old,struct task_struct *<span class="keyword">new</span> ,<span class="keyword">enum</span> pid_type type)</span></span>;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li><p><code>attach_pid()</code>函数建立进程描述符task与结构pid之间的映射关系，并将pid添加到相应的哈希链表的开头。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> fastcall <span class="title">attach_pid</span><span class="params">(struct task_struct *task,<span class="keyword">enum</span> pid_type,struct pid* pid)</span></span>;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li><p>当进程被销毁时需要将进程在哈希表中的映射关系解除，这一过程通过函数<code>detach_pid()</code>完成。该函数首先解除进程描述符与哈希链表的映射关系，然后检查pid结构中是否还包含别的进程，如果不是，则释放pid结构。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> fastcall <span class="title">detach_pid</span><span class="params">(struct task_struct *task,<span class="keyword">enum</span> pid_type type)</span></span>;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ol start="3">
+<li><h3 id="等待队列"><a href="#等待队列" class="headerlink" title="等待队列"></a>等待队列</h3><p>&emsp;&emsp;当进程等待一个外部事件发生时，就把它从运行队列中删除并放到等待队列上。</p>
+<p>&emsp;&emsp;在Linux内核中，使用<code>wait_queue_t</code>结构的双向链表来表示一个等待队列。在每个等待队列链表中，以<code>wait_queue_head_t</code>结构表示等待队列的表头，<code>wait_queue_t</code>表示等待队列中的每一个节点，它记录了等待进程所需要的所有信息。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> _<span class="title">wait_queue_head</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">spinlock_t</span> lock;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">list_head</span> <span class="title">task_list</span>;</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _ <span class="title">wait_queue_head</span> <span class="title">wait_queue_head_t</span>;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>lock</code>用于保护该等待队列中数据的一致性。</p>
+<p><code>task_list</code>表示睡眠在该等待队列上的所有进程构成的链表的表头</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> _ <span class="title">wait_queue</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> flags;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> WQ_FLAG_EXCLUSIVE 0X01</span></span><br><span class="line">    <span class="keyword">void</span> *<span class="keyword">private</span>;</span><br><span class="line">    <span class="keyword">wait_queue_func_t</span> func;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">list_head</span> <span class="title">task_list</span>;</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _ <span class="title">wait_queue</span> <span class="title">wait_queue_t</span>;</span></span><br></pre></td></tr></table></figure>
+
+<p>flags:它指示了该结点对应进程的环形方式，取值为<code>WQ_FLAG_EXCLUSIVE</code>或0；<code>WQ_FLAG_EXCLUSIVE</code>表示节点对应进程对临界区资源使用是排他性的，即进程是独占式进程。</p>
+<p>private:一个私有数据指针，通常保存了睡眠进程的进程描述符task_struct的地址</p>
+<p>func:存放函数的一个结构，这个函数用于唤醒等待队列上的进程。这个域的默认值为<code>default_wake_function()</code>函数，该函数负责将变量private指示的进程设置为可运行状态并插入到合适的运行队列中。</p>
+</li>
+<li><h3 id="当前进程"><a href="#当前进程" class="headerlink" title="当前进程"></a>当前进程</h3><p>&emsp;&emsp;Linux关于进程管理的大部分代码都需要获得或设置当前进程的信息，因此，是否能快速、高效地找到当前进程的描述符task_struct对系统的性能有很大的影响。Linux内核2.2开始采用了宏定义<code>current</code>来获取当前进程的描述符。硬件体系结构把不同，该宏的定义也不同，它必须针对专门的硬件体系结构作处理。有的硬件体系结构可以拿出一个专门的寄存器来存放指向当前进程描述符task_struct的指针，而像x86这样的体系由于寄存器并不富余，就只能在当前内核栈的尾端创建<code>thread_info</code>结构，通过计算偏移间接地查找task_struct结构。</p>
+<p>&emsp;&emsp;在x86体系结构中，每个进程拥有一个内核栈，且通过寄存器<code>%esp</code>即可访问内核栈的元素。基于这种思想，内核首先将当前进程的地址以及需要快速访问的其他状态标记记录在数据结构<code>struct thread info</code>中，然后将该数据结构保存到内核栈空间中的最低地址位置。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">union</span> thread_union</span><br><span class="line">&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">thread_info</span> <span class="title">thread_info</span>;</span></span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="built_in">stack</span>[THREAD_SIZE/<span class="keyword">sizeof</span>(<span class="keyword">long</span>)];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>从该结构中可以看出，内核栈<code>stack</code>和数据结构<code>thread_info</code>共享同一块内存。</p>
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+  
+</div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux内核/" rel="tag"># Linux内核</a>
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+            <a href="/tags/Liinux进程管理/" rel="tag"># Liinux进程管理</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/关于Linux内核.html" rel="next" title="关于Linux内核">
+                <i class="fa fa-chevron-left"></i> 关于Linux内核
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Linux进程管理（二）.html" rel="prev" title="Linux进程管理（二）">
+                Linux进程管理（二） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+             <a href="/">
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Aoki">
+                </a>
+            
+              <p class="site-author-name" itemprop="name">Aoki</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+            <p>
+            <script type="text/javascript" rel="external nofollow" src="https://api.imjad.cn/hitokoto/?cat=&charset=utf-8&length=50&encode=js&fun=sync&source="></script><div id="hitokoto"><script>hitokoto()</script>
+            </div></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="https://github.com/Aoki-Wang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="mailto:aoki3352@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+        
+
+
+
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、进程描述"><span class="nav-number">1.</span> <span class="nav-text">一、进程描述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Linux进程描述符"><span class="nav-number">1.1.</span> <span class="nav-text">1.Linux进程描述符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1）进程的基本属性"><span class="nav-number">1.1.1.</span> <span class="nav-text">1）进程的基本属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2）进程之间的关系"><span class="nav-number">1.1.2.</span> <span class="nav-text">2）进程之间的关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3）进程调度"><span class="nav-number">1.1.3.</span> <span class="nav-text">3）进程调度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4）进程地址空间和文件系统"><span class="nav-number">1.1.4.</span> <span class="nav-text">4）进程地址空间和文件系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5）进程的信号管理"><span class="nav-number">1.1.5.</span> <span class="nav-text">5）进程的信号管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6）进程的访问权限"><span class="nav-number">1.1.6.</span> <span class="nav-text">6）进程的访问权限</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、进程的组织形式"><span class="nav-number">2.</span> <span class="nav-text">二、进程的组织形式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#进程链表"><span class="nav-number">2.1.</span> <span class="nav-text">进程链表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#哈希链表"><span class="nav-number">2.2.</span> <span class="nav-text">哈希链表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-相关的数据结构"><span class="nav-number">2.2.1.</span> <span class="nav-text">(1)相关的数据结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-哈希表相关的操作"><span class="nav-number">2.2.2.</span> <span class="nav-text">(2)哈希表相关的操作</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#等待队列"><span class="nav-number">2.3.</span> <span class="nav-text">等待队列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#当前进程"><span class="nav-number">2.4.</span> <span class="nav-text">当前进程</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Aoki</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+<span id="timeDate">载入天数...</span>
+<span id="times">载入时分秒...</span>  
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("03/09/2019 13:14:21");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "已运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共226.2k字</span>
+</div>
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'FchdjiQuvA5nCoDFfF6er8UC-gzGzoHsz',
+        appKey: 'yuVPbmLhvyWyLCQYispfuF6u',
+        placeholder: 'ヾﾉ≧∀≦)o 来呀！吐槽一番吧',
+        avatar:'/uploads/avatar.jpg',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("UUtBnvfSSEb2jQwP7yhlINnx-gzGzoHsz", "glLG95JsT6Y88k3qFhIobQbv");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  <script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+
+
+
+</html>
+ <!-- 页面点击小红心 
+ <script type="text/javascript" src="/js/src/love.js"></script>
+-->

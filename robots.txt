@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /
+Allow: /archives/
+Allow: /categories/
+Allow: /tags/ 
+Allow: /page/ 
+Allow: /resources/
+Allow: /about/  
+Disallow: /vendors/
+Disallow: /js/
+Disallow: /css/
+Disallow: /fonts/
+
+
+Sitemap: https://wanqbin.xyz/baidusitemap.xml
+Sitemap: https://wanqbin.xyz/sitemap.xml
