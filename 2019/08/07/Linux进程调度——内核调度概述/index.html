@@ -526,7 +526,6 @@
 <p>&emsp;&emsp;（1）优先级计算方法</p>
 <p>&emsp;&emsp;普通进程优先级是动态计算的，计算公式中包含了静态优先级。一般来讲，静态优先级越高，进程所能分配到的时间片越长，用户可通过<code>nice</code>系统调用修改进程的静态优先级。动态优先级由下面的公式计算得出。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dynamic_priority=max(<span class="number">100</span>,min(<span class="keyword">static</span> prority-bonus+<span class="number">5139</span>))</span><br></pre></td></tr></table></figure>
-
 <p>&emsp;&emsp;其中，<code>bouns</code>取决于进程的平均睡眠时间。平均睡眠时间越长，其<code>bouns</code>越大，从而得到更高的优先级。</p>
 <p>&emsp;&emsp;实时进程的优先级由系统调用<code>sys_sched_setschedule()</code>设置。该值不会动态修改，而且总是比普通进程的优先级高。在进程描述符中用<code>rt_prioriity</code>域表示。</p>
 <p>&emsp;&emsp;(2)<code>pick_next</code>算法</p>
@@ -693,7 +692,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-count">110</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -715,7 +714,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">212</span>
+                  <span class="site-state-item-count">214</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -838,7 +837,7 @@ setInterval("createtime()",250);
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共224.1k字</span>
+  <span class="post-count">博客全站共226.3k字</span>
 </div>
 
 
