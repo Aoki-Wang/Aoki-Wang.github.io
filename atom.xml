@@ -18,12 +18,12 @@
   
   <entry>
     <title>UML和类图</title>
-    <link href="http://wanqbin.xyz/UML%E5%92%8C%E7%B1%BB%E5%9B%BE.html"/>
-    <id>http://wanqbin.xyz/UML和类图.html</id>
+    <link href="http://wanqbin.xyz/2019/UML%E5%92%8C%E7%B1%BB%E5%9B%BE/"/>
+    <id>http://wanqbin.xyz/2019/UML和类图/</id>
     <published>2019-11-24T09:03:00.000Z</published>
     <updated>2019-11-24T09:09:07.771Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="一、什么是UML？"><a href="#一、什么是UML？" class="headerlink" title="一、什么是UML？"></a>一、什么是UML？</h2><p>UML是一种用来创建程序模型的图形语言（即带有语义的一种图形记号）。</p><h3 id="1-UML图及其用途"><a href="#1-UML图及其用途" class="headerlink" title="1. UML图及其用途"></a>1. UML图及其用途</h3><table><thead><tr><th>当你在……</th><th>所使用的UML图</th></tr></thead><tbody><tr><td>分析阶段</td><td>用例图，所涉及的是与系统之间交互的实体，以及需要实现的功能点</td></tr><tr><td></td><td>活动图，关注的是【问题领域和其他主体工作的实际空间，程序的主题领域】的工作流，而不是程序的逻辑流</td></tr><tr><td>观察对象的交互</td><td>交互图，说明了特定对象如何相互交互。因为它们处理的都是具体情况而不是一般情况，所以在检查需求和设计时都很有用。最常见的一种交互图是顺序图。</td></tr><tr><td>设计阶段</td><td>类图，详细说明了类之间的关系</td></tr><tr><td>观察对象所处状态不同时行为的差异</td><td>状态图，详细描述了对象可能所处的不同状态以及在这些状态之间的转换。</td></tr><tr><td>配置阶段</td><td>部署图，说明如何部署不同模块。</td></tr></tbody></table><h3 id="2-为什么使用UML？"><a href="#2-为什么使用UML？" class="headerlink" title="2. 为什么使用UML？"></a>2. 为什么使用UML？</h3><ul><li><p>UML主要是用来交流的。</p></li><li><p>UML提供了一种方法，可以用来确定我对系统的理解是否与其他人相同。因为系统非常复杂，有许多不同种类的信息需要传递，所以UML提供了许多不同的图专门表示不同种类的信息。</p></li></ul><h2 id="二、类图"><a href="#二、类图" class="headerlink" title="二、类图"></a>二、类图</h2><p>类图不仅描述了类，而且说明了类之间的关系。这些关系可能有以下这些类型：</p><ul><li>当一个类是“一种”另一个类时：<code>is-a</code>（是一种/一个）关系</li><li>当两个类之间存在关联时：<ul><li>一个类“包含”另一个类：<code>has-a</code>（拥有一个）关系；</li><li>一个类“使用”另一个类：<code>use-a</code>（使用一个）关系；</li><li>一个类“创建”另一类</li></ul></li></ul><p>这些类型还有一些变体。比如，说“什么东西包含另一个东西”时，我们可能是指：</p><ul><li>被包含者是包含者的一部分（比如汽车中的发动机）</li><li>有一个集合，集合中东西可以独立存在（比如机场上的飞机）</li></ul><p>第一种情况被称为<strong>组合</strong>(composition)，第二种情况被称为<strong>聚集</strong>(aggregation)。</p><p>首先，矩形表示一个类。在UML中，可以表示最多三个方面的类的信息：</p><ul><li>类名</li><li>类的数据成员</li><li>类的方法（函数）</li></ul><p><img src="/UML和类图.htm/%5C%E7%B1%BB%E5%9B%BE%E2%80%94%E2%80%94%E4%B8%89%E7%A7%8D%E5%8F%98%E4%BD%93.PNG" alt="类图——三种变体"></p><p>表示类的信息有三种不同方式：</p><ul><li>最左边的矩形只显示了类名。在不需要更详细信息时，可以使用类的这种表示形式。</li><li>中间的举行显示了类名和类的方法。Square类有一个display方法。display前的加号（+）表示此方法是公开的。</li><li>最右边的矩形除显示了前面的信息之外，还显示了类的数据成员。</li></ul><p>表示访问权限的UML记号：</p><ul><li>公开——用一个加号（+）标记。</li><li>保护——用一个井号（#）标记。</li><li>私有——用一个减号（-）标记。</li></ul><p>表示关系的UML记号有如下四种：</p><p><img src="/UML和类图.htm/%E8%A1%A8%E7%A4%BA%E5%85%B3%E7%B3%BB%E7%9A%84UML%E8%AE%B0%E5%8F%B7.PNG" alt="表示关系的UML记号"></p><p>类图还可以表示不同类之间的关系。下图显示了Shape类和它的几个派生类之间的关系。</p><p><img src="/UML和类图.htm/is-a%E5%85%B3%E7%B3%BB.PNG" alt="is-a关系的类图"></p><p>上图说明了几件事：</p><ul><li>首先，Shape类下面的箭头的意思是：指向Shape的那些类派生自Shape类。</li><li>而且，Shape类的名字使用<em>斜体</em>表示的，说明它是一个抽象类。抽象类是用来为其派生类定义接口而且存放这些派生类共哦那个数据和方法的类。</li><li>接口可以看作是没有公共数据和方法的抽象类——它只用来作为一种“为要实现它的那些类的方法进行定义”的方式而已。</li></ul><p>如前所述，有两种<code>has-a</code>关系。</p><ul><li><p>一个对象可以拥有另一个对象，其中被包含的对象是包含对象的一部分——或者不是。</p><ul><li><p>在下图中，Airport“拥有”Aircraft。Aircraft并不是Airport的一部分，但仍然可以说Airport拥有Aircraft，这种关系称为<strong>聚集</strong>或<strong>聚合</strong>。</p><p><img src="/UML和类图.htm/%E8%81%9A%E5%90%88%E5%85%B3%E7%B3%BB.PNG" alt="has-a关系"></p><ul><li>jet表示喷气式飞机，Helicopter表示直升飞机。</li></ul></li></ul></li><li><p>另一种<code>has-a</code>关系是包含，被包含的对象是包含对象的一部分，这种关系称为组合。</p><ul><li><p>在下图中，Car（轿车）拥有Tire（轮胎），后者是Car的一部分。</p></li><li><p>下图还显示Car使用了GasStation（加油站）类，这种使用关系用带箭头的虚线表示，也称为<strong>依赖</strong>。</p><p><img src="/UML和类图.htm/%E7%BB%84%E5%90%88%E5%85%B3%E7%B3%BB.PNG" alt="组合&amp;&amp;依赖"></p></li></ul></li></ul>]]></content>
+    <content type="html"><![CDATA[<h2 id="一、什么是UML？"><a href="#一、什么是UML？" class="headerlink" title="一、什么是UML？"></a>一、什么是UML？</h2><p>UML是一种用来创建程序模型的图形语言（即带有语义的一种图形记号）。</p><h3 id="1-UML图及其用途"><a href="#1-UML图及其用途" class="headerlink" title="1. UML图及其用途"></a>1. UML图及其用途</h3><table><thead><tr><th>当你在……</th><th>所使用的UML图</th></tr></thead><tbody><tr><td>分析阶段</td><td>用例图，所涉及的是与系统之间交互的实体，以及需要实现的功能点</td></tr><tr><td></td><td>活动图，关注的是【问题领域和其他主体工作的实际空间，程序的主题领域】的工作流，而不是程序的逻辑流</td></tr><tr><td>观察对象的交互</td><td>交互图，说明了特定对象如何相互交互。因为它们处理的都是具体情况而不是一般情况，所以在检查需求和设计时都很有用。最常见的一种交互图是顺序图。</td></tr><tr><td>设计阶段</td><td>类图，详细说明了类之间的关系</td></tr><tr><td>观察对象所处状态不同时行为的差异</td><td>状态图，详细描述了对象可能所处的不同状态以及在这些状态之间的转换。</td></tr><tr><td>配置阶段</td><td>部署图，说明如何部署不同模块。</td></tr></tbody></table><h3 id="2-为什么使用UML？"><a href="#2-为什么使用UML？" class="headerlink" title="2. 为什么使用UML？"></a>2. 为什么使用UML？</h3><ul><li><p>UML主要是用来交流的。</p></li><li><p>UML提供了一种方法，可以用来确定我对系统的理解是否与其他人相同。因为系统非常复杂，有许多不同种类的信息需要传递，所以UML提供了许多不同的图专门表示不同种类的信息。</p></li></ul><h2 id="二、类图"><a href="#二、类图" class="headerlink" title="二、类图"></a>二、类图</h2><p>类图不仅描述了类，而且说明了类之间的关系。这些关系可能有以下这些类型：</p><ul><li>当一个类是“一种”另一个类时：<code>is-a</code>（是一种/一个）关系</li><li>当两个类之间存在关联时：<ul><li>一个类“包含”另一个类：<code>has-a</code>（拥有一个）关系；</li><li>一个类“使用”另一个类：<code>use-a</code>（使用一个）关系；</li><li>一个类“创建”另一类</li></ul></li></ul><p>这些类型还有一些变体。比如，说“什么东西包含另一个东西”时，我们可能是指：</p><ul><li>被包含者是包含者的一部分（比如汽车中的发动机）</li><li>有一个集合，集合中东西可以独立存在（比如机场上的飞机）</li></ul><p>第一种情况被称为<strong>组合</strong>(composition)，第二种情况被称为<strong>聚集</strong>(aggregation)。</p><p>首先，矩形表示一个类。在UML中，可以表示最多三个方面的类的信息：</p><ul><li>类名</li><li>类的数据成员</li><li>类的方法（函数）</li></ul><p><img src="/2019/UML和类图/%5C%E7%B1%BB%E5%9B%BE%E2%80%94%E2%80%94%E4%B8%89%E7%A7%8D%E5%8F%98%E4%BD%93.PNG" alt="类图——三种变体"></p><p>表示类的信息有三种不同方式：</p><ul><li>最左边的矩形只显示了类名。在不需要更详细信息时，可以使用类的这种表示形式。</li><li>中间的举行显示了类名和类的方法。Square类有一个display方法。display前的加号（+）表示此方法是公开的。</li><li>最右边的矩形除显示了前面的信息之外，还显示了类的数据成员。</li></ul><p>表示访问权限的UML记号：</p><ul><li>公开——用一个加号（+）标记。</li><li>保护——用一个井号（#）标记。</li><li>私有——用一个减号（-）标记。</li></ul><p>表示关系的UML记号有如下四种：</p><p><img src="/2019/UML和类图/%E8%A1%A8%E7%A4%BA%E5%85%B3%E7%B3%BB%E7%9A%84UML%E8%AE%B0%E5%8F%B7.PNG" alt="表示关系的UML记号"></p><p>类图还可以表示不同类之间的关系。下图显示了Shape类和它的几个派生类之间的关系。</p><p><img src="/2019/UML和类图/is-a%E5%85%B3%E7%B3%BB.PNG" alt="is-a关系的类图"></p><p>上图说明了几件事：</p><ul><li>首先，Shape类下面的箭头的意思是：指向Shape的那些类派生自Shape类。</li><li>而且，Shape类的名字使用<em>斜体</em>表示的，说明它是一个抽象类。抽象类是用来为其派生类定义接口而且存放这些派生类共哦那个数据和方法的类。</li><li>接口可以看作是没有公共数据和方法的抽象类——它只用来作为一种“为要实现它的那些类的方法进行定义”的方式而已。</li></ul><p>如前所述，有两种<code>has-a</code>关系。</p><ul><li><p>一个对象可以拥有另一个对象，其中被包含的对象是包含对象的一部分——或者不是。</p><ul><li><p>在下图中，Airport“拥有”Aircraft。Aircraft并不是Airport的一部分，但仍然可以说Airport拥有Aircraft，这种关系称为<strong>聚集</strong>或<strong>聚合</strong>。</p><p><img src="/2019/UML和类图/%E8%81%9A%E5%90%88%E5%85%B3%E7%B3%BB.PNG" alt="has-a关系"></p><ul><li>jet表示喷气式飞机，Helicopter表示直升飞机。</li></ul></li></ul></li><li><p>另一种<code>has-a</code>关系是包含，被包含的对象是包含对象的一部分，这种关系称为组合。</p><ul><li><p>在下图中，Car（轿车）拥有Tire（轮胎），后者是Car的一部分。</p></li><li><p>下图还显示Car使用了GasStation（加油站）类，这种使用关系用带箭头的虚线表示，也称为<strong>依赖</strong>。</p><p><img src="/2019/UML和类图/%E7%BB%84%E5%90%88%E5%85%B3%E7%B3%BB.PNG" alt="组合&amp;&amp;依赖"></p></li></ul></li></ul>]]></content>
     
     <summary type="html">
     
@@ -48,8 +48,8 @@
   
   <entry>
     <title>面向对象泛型</title>
-    <link href="http://wanqbin.xyz/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%B3%9B%E5%9E%8B.html"/>
-    <id>http://wanqbin.xyz/面向对象泛型.html</id>
+    <link href="http://wanqbin.xyz/2019/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%B3%9B%E5%9E%8B/"/>
+    <id>http://wanqbin.xyz/2019/面向对象泛型/</id>
     <published>2019-11-23T09:44:00.000Z</published>
     <updated>2019-11-23T09:45:27.753Z</updated>
     
@@ -75,8 +75,8 @@
   
   <entry>
     <title>面向对象泛型之前：功能分解</title>
-    <link href="http://wanqbin.xyz/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%B3%9B%E5%9E%8B%E4%B9%8B%E5%89%8D%EF%BC%9A%E5%8A%9F%E8%83%BD%E5%88%86%E8%A7%A3.html"/>
-    <id>http://wanqbin.xyz/面向对象泛型之前：功能分解.html</id>
+    <link href="http://wanqbin.xyz/2019/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%B3%9B%E5%9E%8B%E4%B9%8B%E5%89%8D%EF%BC%9A%E5%8A%9F%E8%83%BD%E5%88%86%E8%A7%A3/"/>
+    <id>http://wanqbin.xyz/2019/面向对象泛型之前：功能分解/</id>
     <published>2019-11-23T09:43:00.000Z</published>
     <updated>2019-11-23T09:44:21.098Z</updated>
     
@@ -100,8 +100,8 @@
   
   <entry>
     <title>私有docker仓库搭建</title>
-    <link href="http://wanqbin.xyz/%E7%A7%81%E6%9C%89docker%E4%BB%93%E5%BA%93%E6%90%AD%E5%BB%BA.html"/>
-    <id>http://wanqbin.xyz/私有docker仓库搭建.html</id>
+    <link href="http://wanqbin.xyz/2019/%E7%A7%81%E6%9C%89docker%E4%BB%93%E5%BA%93%E6%90%AD%E5%BB%BA/"/>
+    <id>http://wanqbin.xyz/2019/私有docker仓库搭建/</id>
     <published>2019-11-20T03:06:00.000Z</published>
     <updated>2019-11-20T03:07:49.944Z</updated>
     
@@ -129,8 +129,8 @@
   
   <entry>
     <title>镜像和Dockerfile</title>
-    <link href="http://wanqbin.xyz/%E9%95%9C%E5%83%8F%E5%92%8CDockerfile.html"/>
-    <id>http://wanqbin.xyz/镜像和Dockerfile.html</id>
+    <link href="http://wanqbin.xyz/2019/%E9%95%9C%E5%83%8F%E5%92%8CDockerfile/"/>
+    <id>http://wanqbin.xyz/2019/镜像和Dockerfile/</id>
     <published>2019-11-19T17:48:00.000Z</published>
     <updated>2019-11-19T17:49:29.645Z</updated>
     
@@ -159,8 +159,8 @@
   
   <entry>
     <title>Docker和容器</title>
-    <link href="http://wanqbin.xyz/Docker%E5%92%8C%E5%AE%B9%E5%99%A8.html"/>
-    <id>http://wanqbin.xyz/Docker和容器.html</id>
+    <link href="http://wanqbin.xyz/2019/Docker%E5%92%8C%E5%AE%B9%E5%99%A8/"/>
+    <id>http://wanqbin.xyz/2019/Docker和容器/</id>
     <published>2019-11-19T16:25:00.000Z</published>
     <updated>2019-11-19T16:26:14.105Z</updated>
     
@@ -186,8 +186,8 @@
   
   <entry>
     <title>Kubernetes集群部署</title>
-    <link href="http://wanqbin.xyz/Kubernetes%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2.html"/>
-    <id>http://wanqbin.xyz/Kubernetes集群部署.html</id>
+    <link href="http://wanqbin.xyz/2019/Kubernetes%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2/"/>
+    <id>http://wanqbin.xyz/2019/Kubernetes集群部署/</id>
     <published>2019-11-19T14:05:00.000Z</published>
     <updated>2019-11-19T14:08:22.267Z</updated>
     
@@ -214,8 +214,8 @@
   
   <entry>
     <title>面向对象设计原则</title>
-    <link href="http://wanqbin.xyz/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99.html"/>
-    <id>http://wanqbin.xyz/面向对象设计原则.html</id>
+    <link href="http://wanqbin.xyz/2019/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/"/>
+    <id>http://wanqbin.xyz/2019/面向对象设计原则/</id>
     <published>2019-11-18T17:06:00.000Z</published>
     <updated>2019-11-18T17:07:20.490Z</updated>
     
@@ -246,8 +246,8 @@
   
   <entry>
     <title>什么是设计模式？</title>
-    <link href="http://wanqbin.xyz/%E4%BB%80%E4%B9%88%E6%98%AF%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9F.html"/>
-    <id>http://wanqbin.xyz/什么是设计模式？.html</id>
+    <link href="http://wanqbin.xyz/2019/%E4%BB%80%E4%B9%88%E6%98%AF%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9F/"/>
+    <id>http://wanqbin.xyz/2019/什么是设计模式？/</id>
     <published>2019-11-18T17:05:00.000Z</published>
     <updated>2019-11-18T17:06:06.114Z</updated>
     
@@ -273,8 +273,8 @@
   
   <entry>
     <title>传输控制协议TCP</title>
-    <link href="http://wanqbin.xyz/%E4%BC%A0%E8%BE%93%E6%8E%A7%E5%88%B6%E5%8D%8F%E8%AE%AETCP.html"/>
-    <id>http://wanqbin.xyz/传输控制协议TCP.html</id>
+    <link href="http://wanqbin.xyz/2019/%E4%BC%A0%E8%BE%93%E6%8E%A7%E5%88%B6%E5%8D%8F%E8%AE%AETCP/"/>
+    <id>http://wanqbin.xyz/2019/传输控制协议TCP/</id>
     <published>2019-11-18T17:04:00.000Z</published>
     <updated>2019-11-18T17:04:33.756Z</updated>
     
@@ -301,8 +301,8 @@
   
   <entry>
     <title>拥塞控制</title>
-    <link href="http://wanqbin.xyz/%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6.html"/>
-    <id>http://wanqbin.xyz/拥塞控制.html</id>
+    <link href="http://wanqbin.xyz/2019/%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6/"/>
+    <id>http://wanqbin.xyz/2019/拥塞控制/</id>
     <published>2019-11-18T17:04:00.000Z</published>
     <updated>2019-11-18T17:05:04.673Z</updated>
     
@@ -330,8 +330,8 @@
   
   <entry>
     <title>用户数据报协议UDP</title>
-    <link href="http://wanqbin.xyz/%E7%94%A8%E6%88%B7%E6%95%B0%E6%8D%AE%E6%8A%A5%E5%8D%8F%E8%AE%AEUDP.html"/>
-    <id>http://wanqbin.xyz/用户数据报协议UDP.html</id>
+    <link href="http://wanqbin.xyz/2019/%E7%94%A8%E6%88%B7%E6%95%B0%E6%8D%AE%E6%8A%A5%E5%8D%8F%E8%AE%AEUDP/"/>
+    <id>http://wanqbin.xyz/2019/用户数据报协议UDP/</id>
     <published>2019-11-18T17:03:00.000Z</published>
     <updated>2019-11-18T17:03:48.323Z</updated>
     
@@ -359,8 +359,8 @@
   
   <entry>
     <title>运输层概述</title>
-    <link href="http://wanqbin.xyz/%E8%BF%90%E8%BE%93%E5%B1%82%E6%A6%82%E8%BF%B0.html"/>
-    <id>http://wanqbin.xyz/运输层概述.html</id>
+    <link href="http://wanqbin.xyz/2019/%E8%BF%90%E8%BE%93%E5%B1%82%E6%A6%82%E8%BF%B0/"/>
+    <id>http://wanqbin.xyz/2019/运输层概述/</id>
     <published>2019-11-18T17:02:00.000Z</published>
     <updated>2019-11-18T17:02:42.294Z</updated>
     
@@ -386,8 +386,8 @@
   
   <entry>
     <title>虚拟存储器</title>
-    <link href="http://wanqbin.xyz/%E8%99%9A%E6%8B%9F%E5%AD%98%E5%82%A8%E5%99%A8.html"/>
-    <id>http://wanqbin.xyz/虚拟存储器.html</id>
+    <link href="http://wanqbin.xyz/2019/%E8%99%9A%E6%8B%9F%E5%AD%98%E5%82%A8%E5%99%A8/"/>
+    <id>http://wanqbin.xyz/2019/虚拟存储器/</id>
     <published>2019-11-18T17:00:00.000Z</published>
     <updated>2019-11-18T17:00:52.441Z</updated>
     
@@ -413,8 +413,8 @@
   
   <entry>
     <title>存储器管理</title>
-    <link href="http://wanqbin.xyz/%E5%AD%98%E5%82%A8%E5%99%A8%E7%AE%A1%E7%90%86.html"/>
-    <id>http://wanqbin.xyz/存储器管理.html</id>
+    <link href="http://wanqbin.xyz/2019/%E5%AD%98%E5%82%A8%E5%99%A8%E7%AE%A1%E7%90%86/"/>
+    <id>http://wanqbin.xyz/2019/存储器管理/</id>
     <published>2019-11-18T16:58:00.000Z</published>
     <updated>2019-11-18T16:58:49.897Z</updated>
     
@@ -446,8 +446,8 @@
   
   <entry>
     <title>死锁</title>
-    <link href="http://wanqbin.xyz/%E6%AD%BB%E9%94%81.html"/>
-    <id>http://wanqbin.xyz/死锁.html</id>
+    <link href="http://wanqbin.xyz/2019/%E6%AD%BB%E9%94%81/"/>
+    <id>http://wanqbin.xyz/2019/死锁/</id>
     <published>2019-11-18T16:57:00.000Z</published>
     <updated>2019-11-18T16:58:00.437Z</updated>
     
@@ -477,8 +477,8 @@
   
   <entry>
     <title>处理机调度</title>
-    <link href="http://wanqbin.xyz/%E5%A4%84%E7%90%86%E6%9C%BA%E8%B0%83%E5%BA%A6.html"/>
-    <id>http://wanqbin.xyz/处理机调度.html</id>
+    <link href="http://wanqbin.xyz/2019/%E5%A4%84%E7%90%86%E6%9C%BA%E8%B0%83%E5%BA%A6/"/>
+    <id>http://wanqbin.xyz/2019/处理机调度/</id>
     <published>2019-11-18T16:56:00.000Z</published>
     <updated>2019-11-18T16:57:19.022Z</updated>
     
@@ -504,8 +504,8 @@
   
   <entry>
     <title>进程相关总结</title>
-    <link href="http://wanqbin.xyz/%E8%BF%9B%E7%A8%8B%E7%9B%B8%E5%85%B3%E6%80%BB%E7%BB%93.html"/>
-    <id>http://wanqbin.xyz/进程相关总结.html</id>
+    <link href="http://wanqbin.xyz/2019/%E8%BF%9B%E7%A8%8B%E7%9B%B8%E5%85%B3%E6%80%BB%E7%BB%93/"/>
+    <id>http://wanqbin.xyz/2019/进程相关总结/</id>
     <published>2019-11-18T16:55:00.000Z</published>
     <updated>2019-11-18T16:55:57.877Z</updated>
     
@@ -542,12 +542,12 @@
   
   <entry>
     <title>Git的基本操作</title>
-    <link href="http://wanqbin.xyz/Git%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.html"/>
-    <id>http://wanqbin.xyz/Git的基本操作.html</id>
+    <link href="http://wanqbin.xyz/2019/Git%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/"/>
+    <id>http://wanqbin.xyz/2019/Git的基本操作/</id>
     <published>2019-11-18T16:48:00.000Z</published>
     <updated>2019-11-18T16:53:22.208Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="第一阶段-初始化"><a href="#第一阶段-初始化" class="headerlink" title="第一阶段:初始化"></a>第一阶段:初始化</h2><p>想要让git对一个目录进行版本控制需要以下步骤：</p><ul><li><p>进入要管理的文件夹</p></li><li><p>执行初始化命令</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure></li><li><p>管理目录下的文件状态</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br><span class="line"><span class="meta">#</span> 注：新增的文件和修改过后的文件都是红色</span><br></pre></td></tr></table></figure></li><li><p>管理指定文件（红变绿）</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add 文件名</span><br><span class="line">git add . #添加当前文件夹下的全部文件</span><br></pre></td></tr></table></figure></li><li><p>个人信息配置：用户名，邮箱【一次即可】</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.email "Your Email"</span><br><span class="line">git config --global user.name "Your Name"</span><br></pre></td></tr></table></figure></li><li><p>生成版本</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m '描述信息'</span><br></pre></td></tr></table></figure></li><li><p>查看版本记录</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log</span><br></pre></td></tr></table></figure></li></ul><h2 id="第二阶段：扩展新功能"><a href="#第二阶段：扩展新功能" class="headerlink" title="第二阶段：扩展新功能"></a>第二阶段：扩展新功能</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commmit -m 'message'</span><br></pre></td></tr></table></figure><h2 id="第三阶段：回滚"><a href="#第三阶段：回滚" class="headerlink" title="第三阶段：回滚"></a>第三阶段：回滚</h2><ul><li><p>回滚至之前的版本</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git log</span><br><span class="line">git reset --hard 版本号</span><br></pre></td></tr></table></figure></li><li><p>回滚至之后的版本</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git reflog</span><br><span class="line">git reset --hard 版本号</span><br></pre></td></tr></table></figure></li></ul><h2 id="第四阶段：分支-amp-修改"><a href="#第四阶段：分支-amp-修改" class="headerlink" title="第四阶段：分支&amp;修改"></a>第四阶段：分支&amp;修改</h2><ul><li><p>分支</p><p>分支可以给使用者提供多个环境，意味着你可以把你的工作从开发主线上分离开来，以免影响开发主线</p></li><li><p>修改方案</p><p><img src="/Git的基本操作.htm/git%E5%88%86%E6%94%AF.PNG" alt="git分支"></p></li><li><p>查看分支</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure></li><li><p>创建分支</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch 分支名</span><br></pre></td></tr></table></figure></li><li><p>切换分支</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout 分支名</span><br></pre></td></tr></table></figure></li><li><p>分支合并（可能产生冲突）</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git merge 要合并的分支</span><br><span class="line"><span class="meta">#</span>注：切换分支再合并，</span><br></pre></td></tr></table></figure></li><li><p>删除分支</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -d 分支名称</span><br></pre></td></tr></table></figure></li></ul><h2 id="第五阶段：GitHub"><a href="#第五阶段：GitHub" class="headerlink" title="第五阶段：GitHub"></a>第五阶段：GitHub</h2><ul><li><p>在家里上传代码</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin 远程仓库地址   #给远程仓库起名字</span><br><span class="line">git push -u origin 分支  #推送代码</span><br></pre></td></tr></table></figure></li><li><p>到公司新电脑上第一次获取代码</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git clone #远程仓库地址</span><br><span class="line">git checkout 分支 #切换分支</span><br></pre></td></tr></table></figure></li><li><p>在公司进行开发</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git checkout dev  #切换到dev分支进行开发</span><br><span class="line">git merge master #把master分支合并到dev（仅一次）</span><br><span class="line"><span class="meta">#</span>修改代码</span><br><span class="line"><span class="meta">#</span>提交代码</span><br><span class="line">git add .</span><br><span class="line">git commit -m 'xxx'</span><br><span class="line">git push origin dev</span><br></pre></td></tr></table></figure></li><li><p>回家继续写代码</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>切换到dev分支进行开发</span><br><span class="line">git checkout dev</span><br><span class="line"><span class="meta">#</span>拉代码</span><br><span class="line">git pull origin dev</span><br><span class="line"><span class="meta">#</span>继续开发</span><br><span class="line"><span class="meta">#</span>提交代码</span><br><span class="line"></span><br><span class="line">git add .</span><br><span class="line">git commit -m 'xx'</span><br><span class="line">git push origin dev</span><br></pre></td></tr></table></figure></li><li><p>开发完毕，要上线</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>将dev分支合并到master，进行上线</span><br><span class="line">git checkout master</span><br><span class="line">git merge dev</span><br><span class="line">git push origin master</span><br><span class="line"><span class="meta">#</span>把dev分支也推送到远程</span><br><span class="line">git checkout dev</span><br><span class="line">git merge master</span><br><span class="line">git push origin dev</span><br></pre></td></tr></table></figure></li></ul>  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git pull origin dev</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>等同于下面的两行代码</span><br><span class="line">git fetch origin dev</span><br><span class="line">git merget origin/dev</span><br></pre></td></tr></table></figure><ul><li><p>保持代码提交整洁(变基）</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rebase 分支</span><br></pre></td></tr></table></figure></li><li><p>记录图形展示</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --graph --preey=format:"%h %s"</span><br></pre></td></tr></table></figure><h3 id="快速解决冲突"><a href="#快速解决冲突" class="headerlink" title="快速解决冲突"></a>快速解决冲突</h3></li></ul><ol><li><p>安装beyond compare</p></li><li><p>在git中配置</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git config --locla merge.tool bc3  #--local说明只在当前项目中有效</span><br><span class="line">git config --local mergetool.path '/usr/local/bin/bcomp'</span><br><span class="line">git config --local mergetool.keepBackup false</span><br></pre></td></tr></table></figure></li><li><p>应用beyond compare解决冲突</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git mergetool  #启动beyond compare</span><br></pre></td></tr></table></figure></li></ol>]]></content>
+    <content type="html"><![CDATA[<h2 id="第一阶段-初始化"><a href="#第一阶段-初始化" class="headerlink" title="第一阶段:初始化"></a>第一阶段:初始化</h2><p>想要让git对一个目录进行版本控制需要以下步骤：</p><ul><li><p>进入要管理的文件夹</p></li><li><p>执行初始化命令</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure></li><li><p>管理目录下的文件状态</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br><span class="line"><span class="meta">#</span> 注：新增的文件和修改过后的文件都是红色</span><br></pre></td></tr></table></figure></li><li><p>管理指定文件（红变绿）</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add 文件名</span><br><span class="line">git add . #添加当前文件夹下的全部文件</span><br></pre></td></tr></table></figure></li><li><p>个人信息配置：用户名，邮箱【一次即可】</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.email "Your Email"</span><br><span class="line">git config --global user.name "Your Name"</span><br></pre></td></tr></table></figure></li><li><p>生成版本</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m '描述信息'</span><br></pre></td></tr></table></figure></li><li><p>查看版本记录</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log</span><br></pre></td></tr></table></figure></li></ul><h2 id="第二阶段：扩展新功能"><a href="#第二阶段：扩展新功能" class="headerlink" title="第二阶段：扩展新功能"></a>第二阶段：扩展新功能</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commmit -m 'message'</span><br></pre></td></tr></table></figure><h2 id="第三阶段：回滚"><a href="#第三阶段：回滚" class="headerlink" title="第三阶段：回滚"></a>第三阶段：回滚</h2><ul><li><p>回滚至之前的版本</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git log</span><br><span class="line">git reset --hard 版本号</span><br></pre></td></tr></table></figure></li><li><p>回滚至之后的版本</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git reflog</span><br><span class="line">git reset --hard 版本号</span><br></pre></td></tr></table></figure></li></ul><h2 id="第四阶段：分支-amp-修改"><a href="#第四阶段：分支-amp-修改" class="headerlink" title="第四阶段：分支&amp;修改"></a>第四阶段：分支&amp;修改</h2><ul><li><p>分支</p><p>分支可以给使用者提供多个环境，意味着你可以把你的工作从开发主线上分离开来，以免影响开发主线</p></li><li><p>修改方案</p><p><img src="/2019/Git的基本操作/git%E5%88%86%E6%94%AF.PNG" alt="git分支"></p></li><li><p>查看分支</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure></li><li><p>创建分支</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch 分支名</span><br></pre></td></tr></table></figure></li><li><p>切换分支</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout 分支名</span><br></pre></td></tr></table></figure></li><li><p>分支合并（可能产生冲突）</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git merge 要合并的分支</span><br><span class="line"><span class="meta">#</span>注：切换分支再合并，</span><br></pre></td></tr></table></figure></li><li><p>删除分支</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -d 分支名称</span><br></pre></td></tr></table></figure></li></ul><h2 id="第五阶段：GitHub"><a href="#第五阶段：GitHub" class="headerlink" title="第五阶段：GitHub"></a>第五阶段：GitHub</h2><ul><li><p>在家里上传代码</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin 远程仓库地址   #给远程仓库起名字</span><br><span class="line">git push -u origin 分支  #推送代码</span><br></pre></td></tr></table></figure></li><li><p>到公司新电脑上第一次获取代码</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git clone #远程仓库地址</span><br><span class="line">git checkout 分支 #切换分支</span><br></pre></td></tr></table></figure></li><li><p>在公司进行开发</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git checkout dev  #切换到dev分支进行开发</span><br><span class="line">git merge master #把master分支合并到dev（仅一次）</span><br><span class="line"><span class="meta">#</span>修改代码</span><br><span class="line"><span class="meta">#</span>提交代码</span><br><span class="line">git add .</span><br><span class="line">git commit -m 'xxx'</span><br><span class="line">git push origin dev</span><br></pre></td></tr></table></figure></li><li><p>回家继续写代码</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>切换到dev分支进行开发</span><br><span class="line">git checkout dev</span><br><span class="line"><span class="meta">#</span>拉代码</span><br><span class="line">git pull origin dev</span><br><span class="line"><span class="meta">#</span>继续开发</span><br><span class="line"><span class="meta">#</span>提交代码</span><br><span class="line"></span><br><span class="line">git add .</span><br><span class="line">git commit -m 'xx'</span><br><span class="line">git push origin dev</span><br></pre></td></tr></table></figure></li><li><p>开发完毕，要上线</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>将dev分支合并到master，进行上线</span><br><span class="line">git checkout master</span><br><span class="line">git merge dev</span><br><span class="line">git push origin master</span><br><span class="line"><span class="meta">#</span>把dev分支也推送到远程</span><br><span class="line">git checkout dev</span><br><span class="line">git merge master</span><br><span class="line">git push origin dev</span><br></pre></td></tr></table></figure></li></ul>  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git pull origin dev</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>等同于下面的两行代码</span><br><span class="line">git fetch origin dev</span><br><span class="line">git merget origin/dev</span><br></pre></td></tr></table></figure><ul><li><p>保持代码提交整洁(变基）</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rebase 分支</span><br></pre></td></tr></table></figure></li><li><p>记录图形展示</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --graph --preey=format:"%h %s"</span><br></pre></td></tr></table></figure><h3 id="快速解决冲突"><a href="#快速解决冲突" class="headerlink" title="快速解决冲突"></a>快速解决冲突</h3></li></ul><ol><li><p>安装beyond compare</p></li><li><p>在git中配置</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git config --locla merge.tool bc3  #--local说明只在当前项目中有效</span><br><span class="line">git config --local mergetool.path '/usr/local/bin/bcomp'</span><br><span class="line">git config --local mergetool.keepBackup false</span><br></pre></td></tr></table></figure></li><li><p>应用beyond compare解决冲突</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git mergetool  #启动beyond compare</span><br></pre></td></tr></table></figure></li></ol>]]></content>
     
     <summary type="html">
     
@@ -569,8 +569,8 @@
   
   <entry>
     <title>Linux内存管理机制——基本机制</title>
-    <link href="http://wanqbin.xyz/Linux%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6%E2%80%94%E2%80%94%E5%9F%BA%E6%9C%AC%E6%9C%BA%E5%88%B6.html"/>
-    <id>http://wanqbin.xyz/Linux内存管理机制——基本机制.html</id>
+    <link href="http://wanqbin.xyz/2019/Linux%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6%E2%80%94%E2%80%94%E5%9F%BA%E6%9C%AC%E6%9C%BA%E5%88%B6/"/>
+    <id>http://wanqbin.xyz/2019/Linux内存管理机制——基本机制/</id>
     <published>2019-08-12T13:54:00.000Z</published>
     <updated>2019-08-12T13:54:49.678Z</updated>
     
@@ -589,13 +589,13 @@
       <category term="Linux内核" scheme="http://wanqbin.xyz/categories/Linux%E5%86%85%E6%A0%B8/"/>
     
     
-      <category term="操作系统" scheme="http://wanqbin.xyz/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
-    
       <category term="内存管理机制" scheme="http://wanqbin.xyz/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6/"/>
     
       <category term="虚拟地址" scheme="http://wanqbin.xyz/tags/%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80/"/>
     
       <category term="虚拟内存" scheme="http://wanqbin.xyz/tags/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/"/>
+    
+      <category term="操作系统" scheme="http://wanqbin.xyz/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
     
   </entry>
   

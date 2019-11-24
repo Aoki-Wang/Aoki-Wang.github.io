@@ -1,0 +1,1614 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+      
+    
+    
+      
+    
+  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+  <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-flash.min.css" rel="stylesheet">
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+      app_id: "81e314d5"
+    });
+  daovoice('update');
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="https://fonts.loli.net/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="排序,插入排序,直接插入排序,链表插入排序,希尔排序,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、排序的基本概念&amp;emsp;&amp;emsp;排序是将一个无序的数据元素集合整理成按关键码递增（或递减）排列的有规律有序集合的过程。关键码是所定义的数据元素类型中的一个域。  关键码要排序的对象集合可能有多个域，关键码是当前排序时进行比较以确定各个对象位置的域。 在对象集合中，不同的对象其关键码值一定不相同的关键码称为主关键码;不同的对象其关键码值有可能相同的关键码称为次关键码。  排序算法的稳定性&amp;">
+<meta name="keywords" content="排序,插入排序,直接插入排序,链表插入排序,希尔排序">
+<meta property="og:type" content="article">
+<meta property="og:title" content="插入排序及其实现">
+<meta property="og:url" content="http://wanqbin.xyz/2019/插入排序及其实现/index.html">
+<meta property="og:site_name" content="Aoki&#39;s Blog">
+<meta property="og:description" content="一、排序的基本概念&amp;emsp;&amp;emsp;排序是将一个无序的数据元素集合整理成按关键码递增（或递减）排列的有规律有序集合的过程。关键码是所定义的数据元素类型中的一个域。  关键码要排序的对象集合可能有多个域，关键码是当前排序时进行比较以确定各个对象位置的域。 在对象集合中，不同的对象其关键码值一定不相同的关键码称为主关键码;不同的对象其关键码值有可能相同的关键码称为次关键码。  排序算法的稳定性&amp;">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://wanqbin.xyz/2019/插入排序及其实现/%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/2019/插入排序及其实现/%E9%93%BE%E8%A1%A8%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/2019/插入排序及其实现/increment=4.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/2019/插入排序及其实现/increment=3.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/2019/插入排序及其实现/increment=1.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/2019/插入排序及其实现/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C1.PNG">
+<meta property="og:updated_time" content="2019-08-01T11:23:06.438Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="插入排序及其实现">
+<meta name="twitter:description" content="一、排序的基本概念&amp;emsp;&amp;emsp;排序是将一个无序的数据元素集合整理成按关键码递增（或递减）排列的有规律有序集合的过程。关键码是所定义的数据元素类型中的一个域。  关键码要排序的对象集合可能有多个域，关键码是当前排序时进行比较以确定各个对象位置的域。 在对象集合中，不同的对象其关键码值一定不相同的关键码称为主关键码;不同的对象其关键码值有可能相同的关键码称为次关键码。  排序算法的稳定性&amp;">
+<meta name="twitter:image" content="http://wanqbin.xyz/2019/插入排序及其实现/%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C.PNG">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":18,"b2t":true,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://wanqbin.xyz/2019/插入排序及其实现/">
+
+
+
+
+
+
+  <title>插入排序及其实现 | Aoki's Blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?2fc5164c1572845ef380a7474dbcddf8";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Aoki's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">“惟将终夜长开眼，报答平生未展眉”</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://wanqbin.xyz/2019/插入排序及其实现/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Aoki">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aoki's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">插入排序及其实现</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-01T11:19:00+08:00">
+                2019-08-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/插入排序及其实现/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/插入排序及其实现/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/插入排序及其实现/" class="leancloud_visitors" data-flag-title="插入排序及其实现">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 阅读数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3.3k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一、排序的基本概念"><a href="#一、排序的基本概念" class="headerlink" title="一、排序的基本概念"></a>一、排序的基本概念</h2><p>&emsp;&emsp;<code>排序</code>是将一个无序的数据元素集合整理成按<code>关键码</code>递增（或递减）排列的有规律有序集合的过程。关键码是所定义的数据元素类型中的一个域。</p>
+<ol>
+<li><h4 id="关键码"><a href="#关键码" class="headerlink" title="关键码"></a>关键码</h4><p>要排序的对象集合可能有多个域，关键码是当前排序时进行比较以确定各个对象位置的域。</p>
+<p>在对象集合中，不同的对象其关键码值一定不相同的关键码称为<code>主关键码</code>;不同的对象其关键码值有可能相同的关键码称为<code>次关键码</code>。</p>
+</li>
+<li><h4 id="排序算法的稳定性"><a href="#排序算法的稳定性" class="headerlink" title="排序算法的稳定性"></a>排序算法的稳定性</h4><p>&emsp;&emsp;任何排序算法在使用主关键码进行排序时，其排序结果是相同的。当排序算法使用次关键码进行排序时，其排序结果可能相同，也可能不同。</p>
+<p>&emsp;&emsp;对于有n个对象集合中的次关键码<code>K[i](i=0,1,2……，n-1)</code>，若<code>K[i]</code>等于<code>K[j](j=0,1,2……，n-1,j!=i)</code>,其在排序之前，对象<code>R[i]</code>排在对象<code>R[j]</code>之前，如果在排序之后对象<code>R[i]</code>仍在对象<code>R[j]</code>的前面的排序算法称为<code>稳定的排序算法</code>。否则称为<code>不稳定的排序算法</code>。</p>
+<p>&emsp;&emsp;显然，对于一组给定的对象集合，所有稳定的排序算法的排序结果都是相同的，不稳定的排序算法的排序结果有可能相同，也有可能不同。稳定的排序算法通常是应用问题所希望的，因此，排序算法的稳定性是衡量排序算法好坏的一个重要标准。</p>
+</li>
+<li><h4 id="排序算法的时间复杂度"><a href="#排序算法的时间复杂度" class="headerlink" title="排序算法的时间复杂度"></a>排序算法的时间复杂度</h4><p>&emsp;&emsp;和所有算法一样，时间复杂度是衡量排序算法好坏的一个重要标准。排序算法的时间复杂度主要表现在算法中对象关键码的比较和对象的移动上。对于有n个对象的集合的排序问题，因为从该集合中找出一个最大（或最小）对象一定要遍历该集合，其时间复杂度为O(n),而进一步将n个对象均排列整齐的最理想情况可对应成完全二叉树结果，其时间复杂度为<code>O(nlgn)</code>,因此排序算法最好的时间复杂度为<code>O(nlgn)</code></p>
+</li>
+<li><h4 id="排序算法的空间复杂度"><a href="#排序算法的空间复杂度" class="headerlink" title="排序算法的空间复杂度"></a>排序算法的空间复杂度</h4><p>&emsp;&emsp;和所有算法一样，空间复杂度是衡量排序算法好坏的一个重要标准。排序算法的空间复杂度也就是算法中使用的辅助存储单元的多少。当排序算法中使用的存储单元与排序对象的个数n无关时，其空间复杂度为O(1),因此排序算法最好的空间复杂度为O(1)。空间复杂度为O(1)的排序算法也称为原地排序算法。原地排序算法就是在原来存放对象的数组空间中重新按关键码大小排放对象集合。</p>
+</li>
+</ol>
+<h2 id="二、插入排序"><a href="#二、插入排序" class="headerlink" title="二、插入排序"></a>二、插入排序</h2><p>&emsp;&emsp;插入排序是一种由初始空集开始，不断地把新的对象插入到数组合适位置的排序方法，常用的插入排序法有直接插入排序、链表插入排序、希尔排序。</p>
+<ol>
+<li><h3 id="直接插入排序"><a href="#直接插入排序" class="headerlink" title="直接插入排序"></a>直接插入排序</h3><ul>
+<li><p>直接插入排序的基本思想是：顺序地把待排序的对象按其关键码值的大小插入到已排序对象集合的适当位置。</p>
+</li>
+<li><p>假设待排序的对象为<code>R[0]、R[1]、R[2]、……、R[n-1]</code>,开始排序时对象集合<code>R[0]</code>因只有一个对象，所以已排好序。</p>
+</li>
+<li><p>第一次循环准备将对象<code>R[1]</code>插入到已排好序的对象集合<code>R[0]</code>中，这只需要比较<code>K[0]</code>和<code>K[1]</code>，若<code>K[0]&lt;=K[1]</code>，则已排好序，否则将<code>R[1]</code>插入到<code>R[0]</code>之前，这样，对象集合<code>R[0],R[1]</code>已排好序。</p>
+</li>
+<li><p>第二次循环准备将<code>R[2]</code>插入到已排好序的对象集合<code>R[0],R[1]</code>中，这需要先比较<code>K[2]</code>和<code>K[1]</code>以确定是否需要把<code>R[2]</code>插入到<code>R[1]</code>之前，然后比较<code>K[2]</code>和<code>K[0]</code>以确定是否需要把<code>R[2]</code>插入到<code>R[0]</code>之前。</p>
+</li>
+<li><p>这样的循环过程一直进行到<code>R[n-1]</code>插入完为止。这时对象集合<code>R[0]、R[1]、R[2]、……、R[n-1]</code>就全部排好序了。</p>
+</li>
+</ul>
+<h4 id="1）直接插入排序的实现"><a href="#1）直接插入排序的实现" class="headerlink" title="1）直接插入排序的实现"></a>1）直接插入排序的实现</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">InsertSort</span>(<span class="title">T</span> <span class="title">a</span>[], <span class="title">int</span> <span class="title">n</span>)</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> i, j;</span><br><span class="line">	T temp;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n - <span class="number">1</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		temp = a[i + <span class="number">1</span>];</span><br><span class="line">		j = i;</span><br><span class="line">		<span class="keyword">while</span> (j &gt; <span class="number">-1</span> &amp;&amp; temp &lt; a[j])</span><br><span class="line">		&#123;</span><br><span class="line">			a[j + <span class="number">1</span>] = a[j];</span><br><span class="line">			j--;</span><br><span class="line">		&#125;</span><br><span class="line">		a[j + <span class="number">1</span>] = temp;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<h4 id="2）测试函数"><a href="#2）测试函数" class="headerlink" title="2）测试函数"></a>2）测试函数</h4>   <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> sort[] = &#123; <span class="number">15</span>,<span class="number">22</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">56</span>,<span class="number">89</span>,<span class="number">14</span> &#125;;</span><br><span class="line">   	<span class="keyword">int</span> n = <span class="keyword">sizeof</span>(sort) / <span class="keyword">sizeof</span>(sort[<span class="number">0</span>])<span class="number">-1</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"原数组为："</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; sort[i] &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	InsertSort(sort, n);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"排序结果为："</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; sort[i] &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="3）执行结果"><a href="#3）执行结果" class="headerlink" title="3）执行结果"></a>3）执行结果</h4><p>   <img src="/2019/插入排序及其实现/%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C.PNG" alt="直接插入排序执行结果"></p>
+<h4 id="4）时空复杂度分析"><a href="#4）时空复杂度分析" class="headerlink" title="4）时空复杂度分析"></a>4）时空复杂度分析</h4><ul>
+<li><p>直接插入排序算法的时间复杂度分析可分为最好和最坏两种情况考虑：</p>
+<ul>
+<li><p>最好的情况是原始对象集合已全部排好序。此时while循环的循环次数均为0。这样在每次排序过程中关键码的比较次数为1，对象的移动次数为2，因此整个排序过程中关键码的比较次数为n-1，对象的移动次数为2(n-1)，所以最好情况的时间复杂度为O(n)</p>
+</li>
+<li><p>最坏的情况是原始对象集合逆序排列。这种情况下第<code>i</code>次排序时算法中的while循环的循环次数均为<code>i</code>。这样在整个排序过程中关键码的比较次数和对象移动次数可计算如下：</p>
+<p>​        比较次数=$\sum^{ n-1}_{i=1}{(i+1)}$=$\frac {(n-1)(n+2)}{2}$</p>
+<p>​        移动次数=$\sum_{i=1}^{n-1}{i+2}$=$\frac{(n-1)(n+4)}{2}$</p>
+<p>因此，最坏情况下其时间复杂度为O($n^2$)。</p>
+</li>
+</ul>
+</li>
+<li><p>空间复杂度</p>
+<ul>
+<li>直接插入排序算法的空间复杂度为O(1)</li>
+</ul>
+</li>
+<li><p>直接插入排序算法是一种稳定的排序算法</p>
+<h4 id="5）源码地址"><a href="#5）源码地址" class="headerlink" title="5）源码地址"></a>5）源码地址</h4><p>​            <a href="https://github.com/Aoki-Wang/CheckStation/tree/master/Data%20Structure/Insert%20Sort/Direct%20Insert%20Sort" target="_blank" rel="noopener">直接插入排序实现源码</a></p>
+</li>
+</ul>
+<ol start="2">
+<li><h3 id="链表插入排序"><a href="#链表插入排序" class="headerlink" title="链表插入排序"></a>链表插入排序</h3><p>&emsp;&emsp;链表插入排序的最终排序结果将把对象集合按关键码大小依次链接地存储在一个链表中。这时链表中每个结点的结构除数据域外要增加一个指向结点类型的指针域。</p>
+<ul>
+<li>链表插入排序的思想是：初始时链表为空，第一个对象<code>R[0]</code>直接插入到链表中。第二个对象<code>R[1]</code>插入到链表中的位置由<code>K[0]</code>和<code>K[1]</code>比较确定：若K[1]<code>&lt;</code>K[0]<code>，则把</code>R[1]<code>插入到</code>R[0]<code>前；否则把R[1]插入到R[0]</code>后.</li>
+<li>第三个对象<code>R[2]</code>插入到链表中的位置由K[2]<code>和</code>K[1]<code>、K[0]</code>比较确定。若<code>K[2]&lt;K[0]</code>,则把<code>K[2]</code>插入到<code>K[0]</code>前。若<code>K[2]&gt;K[0]</code>，应比较<code>K[2]、K[1]</code>；</li>
+<li>若<code>K[2]&lt;K[1]</code>，则把<code>R[2]</code>插入到<code>R[0]</code>后，<code>R[1]</code>前，若<code>K[2]&gt;K[1]</code>，则把<code>R[2]</code>插入到<code>R[1]</code>后。</li>
+<li>这样的插入过程进行到<code>R[n-1]</code>插入完成后，则原始对象集合按关键码大小依次链接在一个链表中。</li>
+</ul>
+<h4 id="1）链表插入排序的实现"><a href="#1）链表插入排序的实现" class="headerlink" title="1）链表插入排序的实现"></a>1）链表插入排序的实现</h4><h5 id="链表中结点的数据类型定义："><a href="#链表中结点的数据类型定义：" class="headerlink" title="链表中结点的数据类型定义："></a>链表中结点的数据类型定义：</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">struct</span> <span class="title">Node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	T data;<span class="comment">//数据域</span></span><br><span class="line">	Node* next;<span class="comment">//指针域</span></span><br><span class="line">	Node(Node* p = <span class="literal">NULL</span>) :next(p) &#123;&#125;<span class="comment">//用于构造头结点</span></span><br><span class="line">	Node(T item,Node*p=<span class="literal">NULL</span>):data(item),next(p)&#123;&#125;<span class="comment">//构造其他存放数据元素的结点</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<h5 id="链表插入排序的实现："><a href="#链表插入排序的实现：" class="headerlink" title="链表插入排序的实现："></a>链表插入排序的实现：</h5>   <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">LinkListInsertSort</span>(<span class="title">T</span> <span class="title">a</span>[], <span class="title">Node</span>&lt;T&gt;*&amp; <span class="title">list</span>, <span class="title">int</span> <span class="title">n</span>)</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	Node&lt;T&gt;* curr, * pre, * q;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		curr = <span class="built_in">list</span>-&gt;next;</span><br><span class="line">		pre = <span class="built_in">list</span>;</span><br><span class="line">		q = <span class="keyword">new</span> Node&lt;T&gt;(a[i]);</span><br><span class="line">		<span class="keyword">while</span> (curr != <span class="literal">NULL</span> &amp;&amp; curr-&gt;data &lt;= a[i])</span><br><span class="line">		&#123;</span><br><span class="line">			pre = curr;</span><br><span class="line">			curr = curr-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line">		q-&gt;next = pre-&gt;next;</span><br><span class="line">		pre-&gt;next = q;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2）测试函数-1"><a href="#2）测试函数-1" class="headerlink" title="2）测试函数"></a>2）测试函数</h4>   <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> arr[]= &#123; <span class="number">15</span>,<span class="number">22</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">56</span>,<span class="number">89</span>,<span class="number">14</span> &#125;;</span><br><span class="line">   	<span class="keyword">int</span> n = <span class="keyword">sizeof</span>(arr) / <span class="keyword">sizeof</span>(arr[<span class="number">0</span>])<span class="number">-1</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"原数组为："</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; arr[i] &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	Node&lt;<span class="keyword">int</span>&gt;* <span class="built_in">list</span> = <span class="keyword">new</span> Node&lt;<span class="keyword">int</span>&gt;;</span><br><span class="line">	LinkListInsertSort(arr, <span class="built_in">list</span>, n);</span><br><span class="line">	Display(<span class="built_in">list</span>);<span class="comment">//输出链表</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="3）执行结果-1"><a href="#3）执行结果-1" class="headerlink" title="3）执行结果"></a>3）执行结果</h4><p>   <img src="/2019/插入排序及其实现/%E9%93%BE%E8%A1%A8%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C.PNG" alt="链表插入排序执行结果"></p>
+<h4 id="4）时空复杂度分析-1"><a href="#4）时空复杂度分析-1" class="headerlink" title="4）时空复杂度分析"></a>4）时空复杂度分析</h4><ul>
+<li><p>最坏时间复杂度</p>
+<p>链表插入排序算法不需要移动数据对象，每插入一个对象时，最小关键码比较次数等于1，最大关键码比较次数等于链表中已排好序的对象的个数，即：</p>
+<p>​        最小比较次数=n-1​</p>
+<p>​        最大比较次数=$\sum^{n-1}_{i=1}{i}$=$\frac{n(n-1)}{2}$</p>
+<p>所以，链表插入排序算法最坏情况的时间复杂度为O($n^2$)。</p>
+</li>
+<li><p>空间复杂度</p>
+<p>链表插入排序算法另外需要n个结点存放排好序的数据对象，所以，链表插入排序算法的空间复杂度为O(n).</p>
+</li>
+<li><p>链表插入排序算法是一种稳定的排序算法。</p>
+<h4 id="5）源码地址-1"><a href="#5）源码地址-1" class="headerlink" title="5）源码地址"></a>5）源码地址</h4><p>​            <a href="https://github.com/Aoki-Wang/CheckStation/tree/master/Data%20Structure/Insert%20Sort/List%20Insert%20Sort" target="_blank" rel="noopener">链表插入排序实现源码</a></p>
+</li>
+</ul>
+<ol start="3">
+<li><h3 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h3><p>&emsp;&emsp;希尔排序又称作最小增量排序，希尔排序算法的思想是：不断把待排序的对象分成若干个小组，对同一小组内的对象用直接插入法进行排序，当完成了所有对象都分在一个小组内的排序之后，排序过程结束。</p>
+<p>&emsp;&emsp;希尔排序是在分组概念上的插入排序，即在不断缩小组的个数时把原各小组的对象插入到新组中的合适位置上。</p>
+<p>&emsp;&emsp;原始对象集合越接近有序，直接插入排序算法的时间效率越高，这也是希尔排序算法能够成立的基础。希尔排序算法把待排序对象分成若干小组，在小组内用直接插入排序算法排序，当把小的小组合并为一些大的小组时，其中的对象集合将会接近有序，从而使直接插入排序算法的时间效率很高。</p>
+<h4 id="1）希尔排序的实现"><a href="#1）希尔排序的实现" class="headerlink" title="1）希尔排序的实现"></a>1）希尔排序的实现</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">ShellSort</span>(<span class="title">T</span> <span class="title">arr</span>[], <span class="title">int</span> <span class="title">n</span>, <span class="title">int</span> <span class="title">increment</span>[], <span class="title">int</span> <span class="title">numOfIncrement</span>)</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	T temp;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> m = <span class="number">0</span>; m &lt; numOfIncrement; m++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; increment[m]; k++)</span><br><span class="line">		&#123;<span class="comment">//每个小组内按直接插入排序算法排序，区别只是每次不是增1，而是increment[m]</span></span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = k; i &lt; n - increment[m]; i = i + increment[m])</span><br><span class="line">			&#123;</span><br><span class="line">				temp = arr[i + increment[m]];</span><br><span class="line">				<span class="keyword">int</span> j = i;</span><br><span class="line">				<span class="keyword">while</span> (j &gt; <span class="number">-1</span> &amp;&amp; temp &lt;= arr[j])</span><br><span class="line">				&#123;</span><br><span class="line">					arr[j + increment[m]] = arr[j];</span><br><span class="line">					j = j - increment[m];</span><br><span class="line">				&#125;</span><br><span class="line">				arr[j + increment[m]] = temp;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2）希尔排序过程"><a href="#2）希尔排序过程" class="headerlink" title="2）希尔排序过程"></a>2）希尔排序过程</h4><p>当增量increment=4时：</p>
+<p><img src="/2019/插入排序及其实现/increment=4.PNG" alt="希尔排序过程1"></p>
+<p>当增量increment=3时：</p>
+<p><img src="/2019/插入排序及其实现/increment=3.PNG" alt="希尔排序过程2"></p>
+<p>当增量increment=1时：</p>
+<p><img src="/2019/插入排序及其实现/increment=1.PNG" alt="希尔排序过程3"></p>
+<h4 id="3）测试函数"><a href="#3）测试函数" class="headerlink" title="3）测试函数"></a>3）测试函数</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> arr[]= &#123; <span class="number">15</span>,<span class="number">22</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">56</span>,<span class="number">89</span>,<span class="number">14</span> &#125;;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"原数组为："</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">   	<span class="keyword">int</span> n = <span class="keyword">sizeof</span>(arr) / <span class="keyword">sizeof</span>(arr[<span class="number">0</span>])<span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; arr[i] &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">int</span> increment[] = &#123; <span class="number">4</span>,<span class="number">3</span>,<span class="number">1</span> &#125;;</span><br><span class="line">	<span class="keyword">int</span> numOfIncrement = <span class="keyword">sizeof</span>(increment) / <span class="keyword">sizeof</span>(increment[<span class="number">0</span>]);</span><br><span class="line">	ShellSort(arr, n, increment, numOfIncrement);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"排序结果："</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; arr[i] &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<h4 id="4）执行结果"><a href="#4）执行结果" class="headerlink" title="4）执行结果"></a>4）执行结果</h4><p>   <img src="/2019/插入排序及其实现/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C1.PNG" alt="希尔排序执行结果"></p>
+<h4 id="5）时空复杂度"><a href="#5）时空复杂度" class="headerlink" title="5）时空复杂度"></a>5）时空复杂度</h4><ul>
+<li><p>时间复杂度：</p>
+<ul>
+<li>比较希尔排序和直接排序算法可见，直接插入排序算法是两重循环，希尔排序算法是四重循环，但分析希尔排序算法中四重循环的循环数值可以发现，四重循环每重的循环数值都很小，并且当增量递减、小组变大时，小组内的对象数值已经基本有序了，而我们知道，越接近有序的直接插入，排序算法的时间效率越高。因此，希尔排序算法的时间复杂度较直接插入排序算法的时间复杂度改善了很多。</li>
+<li>希尔排序算法的时间复杂度分析比较复杂，实际所需的时间取决于各次排序时增量的个数和增量的取值。研究证明，若增量的取值合理，希尔排序算法的时间复杂度约为O(n$({lgn})^2$)。</li>
+</ul>
+</li>
+<li><p>空间复杂度：</p>
+<p>希尔排序算法的空间复杂度为O(1)。由于希尔排序算法是按增量分组进行的排序，所以希尔排序是一种不稳定的排序算法。</p>
+<h4 id="5）源码地址-2"><a href="#5）源码地址-2" class="headerlink" title="5）源码地址"></a>5）源码地址</h4><p>​            <a href="https://github.com/Aoki-Wang/CheckStation/tree/master/Data%20Structure/Insert%20Sort/Shell%20Sort" target="_blank" rel="noopener">希尔排序实现源码</a></p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+  
+</div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/排序/" rel="tag"># 排序</a>
+          
+            <a href="/tags/插入排序/" rel="tag"># 插入排序</a>
+          
+            <a href="/tags/直接插入排序/" rel="tag"># 直接插入排序</a>
+          
+            <a href="/tags/链表插入排序/" rel="tag"># 链表插入排序</a>
+          
+            <a href="/tags/希尔排序/" rel="tag"># 希尔排序</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/叉搜索树及其实现/" rel="next" title="二叉搜索树及其实现">
+                <i class="fa fa-chevron-left"></i> 二叉搜索树及其实现
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/交换排序——冒泡快速和快速排序的实现/" rel="prev" title="交换排序——冒泡快速和快速排序的实现">
+                交换排序——冒泡快速和快速排序的实现 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+             <a href="/">
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Aoki">
+                </a>
+            
+              <p class="site-author-name" itemprop="name">Aoki</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+            <p>
+            <script type="text/javascript" rel="external nofollow" src="https://api.imjad.cn/hitokoto/?cat=&charset=utf-8&length=50&encode=js&fun=sync&source="></script><div id="hitokoto"><script>hitokoto()</script>
+            </div></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">111</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">216</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="https://github.com/Aoki-Wang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="mailto:aoki3352@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+        
+
+
+
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、排序的基本概念"><span class="nav-number">1.</span> <span class="nav-text">一、排序的基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#关键码"><span class="nav-number">1.0.1.</span> <span class="nav-text">关键码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#排序算法的稳定性"><span class="nav-number">1.0.2.</span> <span class="nav-text">排序算法的稳定性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#排序算法的时间复杂度"><span class="nav-number">1.0.3.</span> <span class="nav-text">排序算法的时间复杂度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#排序算法的空间复杂度"><span class="nav-number">1.0.4.</span> <span class="nav-text">排序算法的空间复杂度</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#二、插入排序"><span class="nav-number">2.</span> <span class="nav-text">二、插入排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#直接插入排序"><span class="nav-number">2.1.</span> <span class="nav-text">直接插入排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1）直接插入排序的实现"><span class="nav-number">2.1.1.</span> <span class="nav-text">1）直接插入排序的实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2）测试函数"><span class="nav-number">2.1.2.</span> <span class="nav-text">2）测试函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3）执行结果"><span class="nav-number">2.1.3.</span> <span class="nav-text">3）执行结果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4）时空复杂度分析"><span class="nav-number">2.1.4.</span> <span class="nav-text">4）时空复杂度分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5）源码地址"><span class="nav-number">2.1.5.</span> <span class="nav-text">5）源码地址</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#链表插入排序"><span class="nav-number">2.2.</span> <span class="nav-text">链表插入排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1）链表插入排序的实现"><span class="nav-number">2.2.1.</span> <span class="nav-text">1）链表插入排序的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#链表中结点的数据类型定义："><span class="nav-number">2.2.1.1.</span> <span class="nav-text">链表中结点的数据类型定义：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#链表插入排序的实现："><span class="nav-number">2.2.1.2.</span> <span class="nav-text">链表插入排序的实现：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2）测试函数-1"><span class="nav-number">2.2.2.</span> <span class="nav-text">2）测试函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3）执行结果-1"><span class="nav-number">2.2.3.</span> <span class="nav-text">3）执行结果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4）时空复杂度分析-1"><span class="nav-number">2.2.4.</span> <span class="nav-text">4）时空复杂度分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5）源码地址-1"><span class="nav-number">2.2.5.</span> <span class="nav-text">5）源码地址</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#希尔排序"><span class="nav-number">2.3.</span> <span class="nav-text">希尔排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1）希尔排序的实现"><span class="nav-number">2.3.1.</span> <span class="nav-text">1）希尔排序的实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2）希尔排序过程"><span class="nav-number">2.3.2.</span> <span class="nav-text">2）希尔排序过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3）测试函数"><span class="nav-number">2.3.3.</span> <span class="nav-text">3）测试函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4）执行结果"><span class="nav-number">2.3.4.</span> <span class="nav-text">4）执行结果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5）时空复杂度"><span class="nav-number">2.3.5.</span> <span class="nav-text">5）时空复杂度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5）源码地址-2"><span class="nav-number">2.3.6.</span> <span class="nav-text">5）源码地址</span></a></li></ol></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Aoki</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+<span id="timeDate">载入天数...</span>
+<span id="times">载入时分秒...</span>  
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("03/09/2019 13:14:21");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "已运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共227.4k字</span>
+</div>
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'FchdjiQuvA5nCoDFfF6er8UC-gzGzoHsz',
+        appKey: 'yuVPbmLhvyWyLCQYispfuF6u',
+        placeholder: 'ヾﾉ≧∀≦)o 来呀！吐槽一番吧',
+        avatar:'/uploads/avatar.jpg',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("UUtBnvfSSEb2jQwP7yhlINnx-gzGzoHsz", "glLG95JsT6Y88k3qFhIobQbv");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  <script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+
+
+
+</html>
+ <!-- 页面点击小红心 
+ <script type="text/javascript" src="/js/src/love.js"></script>
+-->
