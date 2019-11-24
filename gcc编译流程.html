@@ -144,16 +144,16 @@
 <meta property="og:site_name" content="Aoki&#39;s Blog">
 <meta property="og:description" content="一、gcc工作流程gcc编译流程如下：  gcc -E预处理、头文件展开、宏替换，生成hello.i gcc -S生成汇编代码，生成hello.s gcc -c将汇编文件编译成二进制文件，生成hello.o ld链接，生成可执行文件a.out   二、gcc相关参数 -L用来指明包含的库路径 -l指定库名(通常为libxx.so或者libxxx.a) -g用于gdb调试，不加此选项不能进行gdb调">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://wanqbin.xyz/2019/08/08/gcc编译流程/1.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/08/08/gcc编译流程/2.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/08/08/gcc编译流程/3.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/08/08/gcc编译流程/4.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/08/08/gcc编译流程/5.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/gcc编译流程.htm/1.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/gcc编译流程.htm/2.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/gcc编译流程.htm/3.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/gcc编译流程.htm/4.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/gcc编译流程.htm/5.PNG">
 <meta property="og:updated_time" content="2019-08-09T07:07:04.707Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="gcc编译流程">
 <meta name="twitter:description" content="一、gcc工作流程gcc编译流程如下：  gcc -E预处理、头文件展开、宏替换，生成hello.i gcc -S生成汇编代码，生成hello.s gcc -c将汇编文件编译成二进制文件，生成hello.o ld链接，生成可执行文件a.out   二、gcc相关参数 -L用来指明包含的库路径 -l指定库名(通常为libxx.so或者libxxx.a) -g用于gdb调试，不加此选项不能进行gdb调">
-<meta name="twitter:image" content="http://wanqbin.xyz/2019/08/08/gcc编译流程/1.PNG">
+<meta name="twitter:image" content="http://wanqbin.xyz/gcc编译流程.htm/1.PNG">
 
 
 
@@ -510,7 +510,7 @@
 <li><code>gcc -c</code>将汇编文件编译成二进制文件，生成<code>hello.o</code></li>
 <li><code>ld</code>链接，生成可执行文件<code>a.out</code></li>
 </ul>
-<p><img src="/2019/08/08/gcc编译流程/1.PNG" alt="gcc编译流程"></p>
+<p><img src="/gcc编译流程.htm/1.PNG" alt="gcc编译流程"></p>
 <h2 id="二、gcc相关参数"><a href="#二、gcc相关参数" class="headerlink" title="二、gcc相关参数"></a>二、gcc相关参数</h2><ul>
 <li><code>-L</code>用来指明包含的库路径</li>
 <li><code>-l</code>指定库名(通常为libxx.so或者libxxx.a)</li>
@@ -522,13 +522,13 @@
 <li><code>-o</code>用来指定编译后文件名</li>
 </ul>
 <p>在当前目录下，有如下图所示的<code>.cpp</code>文件。</p>
-<p><img src="/2019/08/08/gcc编译流程/2.PNG" alt="gcc编译流程"></p>
+<p><img src="/gcc编译流程.htm/2.PNG" alt="gcc编译流程"></p>
 <p>我们可以使用gcc的相关参数对这些文件进行编译。下图所示为各个<code>.cpp</code>文件的内容。</p>
-<p><img src="/2019/08/08/gcc编译流程/3.PNG" alt="gcc相关参数"></p>
+<p><img src="/gcc编译流程.htm/3.PNG" alt="gcc相关参数"></p>
 <p>我们可以看到在每一个<code>.cpp</code>文件中，都有一个头文件，在对这些<code>.cpp</code>文件进行编译时，我们需要知道该头文件的路径。</p>
-<p><img src="/2019/08/08/gcc编译流程/4.PNG" alt="头文件"></p>
+<p><img src="/gcc编译流程.htm/4.PNG" alt="头文件"></p>
 <p>下面，我们对这些<code>.cpp</code>文件进行编译执行，结果如下图。</p>
-<p><img src="/2019/08/08/gcc编译流程/5.PNG" alt="编译执行结果"></p>
+<p><img src="/gcc编译流程.htm/5.PNG" alt="编译执行结果"></p>
 
       
     </div>
@@ -674,7 +674,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -685,7 +685,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -696,7 +696,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">216</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -816,7 +816,7 @@ setInterval("createtime()",250);
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共226.2k字</span>
+  <span class="post-count">博客全站共227.4k字</span>
 </div>
 
 

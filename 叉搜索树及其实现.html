@@ -144,14 +144,14 @@
 <meta property="og:site_name" content="Aoki&#39;s Blog">
 <meta property="og:description" content="一、二叉搜索树概述&amp;emsp;&amp;emsp;一棵二叉搜索树(Binary Search Tree,BST)是以一棵二叉树来组织的。BST是满足下面条件的二叉树，该条件即二叉搜索树属性：  对于二叉搜索树的一个结点，设其值为K，则该结点左子树任意一个结点的值都小于K 该结点右子树中任意一个结点的值都大于或等于K。  &amp;emsp;二叉查找树的特点是，如果按照中序周游将各个结点打印出来，就会得到由小到大排">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://wanqbin.xyz/2019/07/31/叉搜索树及其实现/%E5%85%B7%E6%9C%89%E4%B8%80%E4%B8%AA%E5%84%BF%E5%AD%90%E7%9A%84%E7%BB%93%E7%82%B94%E5%88%A0%E9%99%A4%E5%89%8D%E5%90%8E%E7%9A%84%E6%83%85%E5%86%B5.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/07/31/叉搜索树及其实现/%E5%88%A0%E9%99%A4%E5%85%B7%E6%9C%89%E4%B8%A4%E4%B8%AA%E5%AD%A9%E5%AD%90%E7%9A%84%E7%BB%93%E7%82%B92%E5%89%8D%E5%90%8E%E7%9A%84%E6%83%85%E5%86%B5.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/07/31/叉搜索树及其实现/%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/叉搜索树及其实现.htm/%E5%85%B7%E6%9C%89%E4%B8%80%E4%B8%AA%E5%84%BF%E5%AD%90%E7%9A%84%E7%BB%93%E7%82%B94%E5%88%A0%E9%99%A4%E5%89%8D%E5%90%8E%E7%9A%84%E6%83%85%E5%86%B5.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/叉搜索树及其实现.htm/%E5%88%A0%E9%99%A4%E5%85%B7%E6%9C%89%E4%B8%A4%E4%B8%AA%E5%AD%A9%E5%AD%90%E7%9A%84%E7%BB%93%E7%82%B92%E5%89%8D%E5%90%8E%E7%9A%84%E6%83%85%E5%86%B5.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/叉搜索树及其实现.htm/%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C.PNG">
 <meta property="og:updated_time" content="2019-07-31T15:49:49.145Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="二叉搜索树及其实现">
 <meta name="twitter:description" content="一、二叉搜索树概述&amp;emsp;&amp;emsp;一棵二叉搜索树(Binary Search Tree,BST)是以一棵二叉树来组织的。BST是满足下面条件的二叉树，该条件即二叉搜索树属性：  对于二叉搜索树的一个结点，设其值为K，则该结点左子树任意一个结点的值都小于K 该结点右子树中任意一个结点的值都大于或等于K。  &amp;emsp;二叉查找树的特点是，如果按照中序周游将各个结点打印出来，就会得到由小到大排">
-<meta name="twitter:image" content="http://wanqbin.xyz/2019/07/31/叉搜索树及其实现/%E5%85%B7%E6%9C%89%E4%B8%80%E4%B8%AA%E5%84%BF%E5%AD%90%E7%9A%84%E7%BB%93%E7%82%B94%E5%88%A0%E9%99%A4%E5%89%8D%E5%90%8E%E7%9A%84%E6%83%85%E5%86%B5.PNG">
+<meta name="twitter:image" content="http://wanqbin.xyz/叉搜索树及其实现.htm/%E5%85%B7%E6%9C%89%E4%B8%80%E4%B8%AA%E5%84%BF%E5%AD%90%E7%9A%84%E7%BB%93%E7%82%B94%E5%88%A0%E9%99%A4%E5%89%8D%E5%90%8E%E7%9A%84%E6%83%85%E5%86%B5.PNG">
 
 
 
@@ -534,16 +534,16 @@
 <li>当要删除的对象为叶子结点时，可以直接删除该叶子结点。</li>
 <li>如果结点有一个孩子，则该结点可以在其父结点调整它的链以绕过该结点后被删除。图示如下：</li>
 </ul>
-<p><img src="/2019/07/31/叉搜索树及其实现/%E5%85%B7%E6%9C%89%E4%B8%80%E4%B8%AA%E5%84%BF%E5%AD%90%E7%9A%84%E7%BB%93%E7%82%B94%E5%88%A0%E9%99%A4%E5%89%8D%E5%90%8E%E7%9A%84%E6%83%85%E5%86%B5.PNG" alt="删除具有一个孩子的结点4前后的情况"></p>
+<p><img src="/叉搜索树及其实现.htm/%E5%85%B7%E6%9C%89%E4%B8%80%E4%B8%AA%E5%84%BF%E5%AD%90%E7%9A%84%E7%BB%93%E7%82%B94%E5%88%A0%E9%99%A4%E5%89%8D%E5%90%8E%E7%9A%84%E6%83%85%E5%86%B5.PNG" alt="删除具有一个孩子的结点4前后的情况"></p>
 <p>​    在该树中，我们删除了具有一个孩子的结点4。</p>
 <ul>
 <li>复杂的情况是，处理具有两个孩子的结点。一般的删除策略是用其右子树的最小数据代替该结点的数据并递归地删除该结点。因为右子树中的最小的结点不可能有左孩子，所以第二次<code>remove</code>就很容易了。图示如下：</li>
 </ul>
-<p><img src="/2019/07/31/叉搜索树及其实现/%E5%88%A0%E9%99%A4%E5%85%B7%E6%9C%89%E4%B8%A4%E4%B8%AA%E5%AD%A9%E5%AD%90%E7%9A%84%E7%BB%93%E7%82%B92%E5%89%8D%E5%90%8E%E7%9A%84%E6%83%85%E5%86%B5.PNG" alt="删除具有两个孩子的结点2前后的情况"></p>
+<p><img src="/叉搜索树及其实现.htm/%E5%88%A0%E9%99%A4%E5%85%B7%E6%9C%89%E4%B8%A4%E4%B8%AA%E5%AD%A9%E5%AD%90%E7%9A%84%E7%BB%93%E7%82%B92%E5%89%8D%E5%90%8E%E7%9A%84%E6%83%85%E5%86%B5.PNG" alt="删除具有两个孩子的结点2前后的情况"></p>
 <p>​    在该树中，我们删除了具有两个孩子的结点4，其中虚线连接的结点代表已经删除了。右边的图是删除后的结果。在删除后，它被右子树中最小的值，即3代替了。</p>
 <h2 id="三、主函数及执行结果"><a href="#三、主函数及执行结果" class="headerlink" title="三、主函数及执行结果"></a>三、主函数及执行结果</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">"BST.h"</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	BinarySearchTree&lt;<span class="keyword">int</span>&gt; BST;</span><br><span class="line">	BST.insert(<span class="number">20</span>);</span><br><span class="line">	BST.insert(<span class="number">18</span>);</span><br><span class="line">	BST.insert(<span class="number">5</span>);</span><br><span class="line">	BST.insert(<span class="number">10</span>);</span><br><span class="line">	BST.insert(<span class="number">25</span>);</span><br><span class="line">	BST.insert(<span class="number">4</span>);</span><br><span class="line">	BST.insert(<span class="number">21</span>);</span><br><span class="line">	BST.insert(<span class="number">18</span>);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"最大值："</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; BST.findMax() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"最小值："</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; BST.findMin() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">int</span> temp = <span class="number">18</span>;</span><br><span class="line">	<span class="keyword">if</span> (BST.contains(temp))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"BST中存在"</span> &lt;&lt;temp&lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"BST中不存在"</span>&lt;&lt;temp &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	BST.InOrder(Visit);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	BST.makeEmpty();</span><br><span class="line">	<span class="keyword">if</span> (BST.isEmpty())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"BST为空！"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"BST非空！"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	system(<span class="string">"pause"</span>);</span><br><span class="line">	<span class="keyword">return</span> EXIT_SUCCESS;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h4 id="执行结果："><a href="#执行结果：" class="headerlink" title="执行结果："></a>执行结果：</h4><p><img src="/2019/07/31/叉搜索树及其实现/%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C.PNG" alt="执行结果"></p>
+<h4 id="执行结果："><a href="#执行结果：" class="headerlink" title="执行结果："></a>执行结果：</h4><p><img src="/叉搜索树及其实现.htm/%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C.PNG" alt="执行结果"></p>
 <h2 id="四、源码地址"><a href="#四、源码地址" class="headerlink" title="四、源码地址"></a>四、源码地址</h2><p>​            <a href="https://github.com/Aoki-Wang/CheckStation/tree/master/Data%20Structure/Binary%20Search%20Tree" target="_blank" rel="noopener">二叉搜索树的实现源码</a></p>
 
       
@@ -690,7 +690,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -701,7 +701,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -712,7 +712,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">216</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -832,7 +832,7 @@ setInterval("createtime()",250);
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共226.2k字</span>
+  <span class="post-count">博客全站共227.4k字</span>
 </div>
 
 

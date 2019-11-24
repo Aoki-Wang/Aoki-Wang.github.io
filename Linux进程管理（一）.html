@@ -144,12 +144,12 @@
 <meta property="og:site_name" content="Aoki&#39;s Blog">
 <meta property="og:description" content="一、进程描述&amp;emsp;&amp;emsp;进程的定义：进程是可并发执行的程序在一个数据集合上的运行过程。进程具有动态性、并发性、独立性、异步性等基本特征。 &amp;emsp;&amp;emsp;为了使参与并发执行的每个程序（含数据）都能独立地运行，在操作系统中必须为之配置一个专门的数据结构，称为进程控制块（PCB）。系统利用PCB来描述进程的基本情况和活动过程，进而控制和管理进程。这样，由程序段、相关数据段和PCB三">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://wanqbin.xyz/2019/08/06/Linux进程管理（一）/Linux.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/Linux进程管理（一）.htm/Linux.PNG">
 <meta property="og:updated_time" content="2019-08-07T03:47:06.505Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux进程管理（一）">
 <meta name="twitter:description" content="一、进程描述&amp;emsp;&amp;emsp;进程的定义：进程是可并发执行的程序在一个数据集合上的运行过程。进程具有动态性、并发性、独立性、异步性等基本特征。 &amp;emsp;&amp;emsp;为了使参与并发执行的每个程序（含数据）都能独立地运行，在操作系统中必须为之配置一个专门的数据结构，称为进程控制块（PCB）。系统利用PCB来描述进程的基本情况和活动过程，进而控制和管理进程。这样，由程序段、相关数据段和PCB三">
-<meta name="twitter:image" content="http://wanqbin.xyz/2019/08/06/Linux进程管理（一）/Linux.PNG">
+<meta name="twitter:image" content="http://wanqbin.xyz/Linux进程管理（一）.htm/Linux.PNG">
 
 
 
@@ -527,7 +527,7 @@
 <p><code>EXIT_ZOMBIE</code>:进程已终止，它正等待其父进程收集关于它的一些统计信息。</p>
 <p><code>EXIT_DEAD</code>:最终状态，将进程从系统中删除时，它将会进入此状态，因为其父进程已经通过<code>wait4()</code>和<code>waitpid()</code>调用收集了所有统计信息。</p>
 <p><code>TASK_DEAD</code>：表示已经退出且不需要父进程回收的进程的状态。</p>
-<p><img src="/2019/08/06/Linux进程管理（一）/Linux.PNG" alt="Linux进程状态转换图"></p>
+<p><img src="/Linux进程管理（一）.htm/Linux.PNG" alt="Linux进程状态转换图"></p>
 </li>
 <li><p><code>atomic_t usage</code></p>
 <p>表示对该结构的引用次数，在进程退出时，只有当对该结构的引用次数为0时，才可以删除该结构。</p>
@@ -912,7 +912,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -923,7 +923,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -934,7 +934,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">216</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -1054,7 +1054,7 @@ setInterval("createtime()",250);
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共226.2k字</span>
+  <span class="post-count">博客全站共227.4k字</span>
 </div>
 
 

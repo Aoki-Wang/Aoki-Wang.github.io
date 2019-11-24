@@ -144,12 +144,12 @@
 <meta property="og:site_name" content="Aoki&#39;s Blog">
 <meta property="og:description" content="一、二叉树结点类定义1234567891011121314151617181920212223template&amp;lt;class T&amp;gt;class BinaryTree;template&amp;lt;class T&amp;gt;class BiTreeNode&amp;#123;	friend class BinaryTree&amp;lt;T&amp;gt;;public:	T data;//数据域	BiTreeNode()">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://wanqbin.xyz/2019/07/31/二叉树的实现/%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/二叉树的实现.htm/%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C.PNG">
 <meta property="og:updated_time" content="2019-08-01T01:36:46.795Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="二叉树的实现">
 <meta name="twitter:description" content="一、二叉树结点类定义1234567891011121314151617181920212223template&amp;lt;class T&amp;gt;class BinaryTree;template&amp;lt;class T&amp;gt;class BiTreeNode&amp;#123;	friend class BinaryTree&amp;lt;T&amp;gt;;public:	T data;//数据域	BiTreeNode()">
-<meta name="twitter:image" content="http://wanqbin.xyz/2019/07/31/二叉树的实现/%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C.PNG">
+<meta name="twitter:image" content="http://wanqbin.xyz/二叉树的实现.htm/%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C.PNG">
 
 
 
@@ -524,7 +524,7 @@
 <h2 id="四、主函数及执行结果"><a href="#四、主函数及执行结果" class="headerlink" title="四、主函数及执行结果"></a>四、主函数及执行结果</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	BinaryTree&lt;<span class="keyword">int</span>&gt;BiTree;</span><br><span class="line">	BiTree.InsertChild(<span class="number">15</span>);</span><br><span class="line">	BiTree.InsertChild(<span class="number">5</span>);</span><br><span class="line">	BiTree.InsertChild(<span class="number">6</span>);</span><br><span class="line">	BiTree.InsertChild(<span class="number">8</span>);</span><br><span class="line">	BiTree.InsertChild(<span class="number">20</span>);</span><br><span class="line">	BiTree.InsertChild(<span class="number">22</span>);</span><br><span class="line">	BiTree.InsertChild(<span class="number">16</span>);</span><br><span class="line">	BiTree.InsertChild(<span class="number">18</span>);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"前序："</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	BiTree.PreOrder(Visit);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="string">"中序:"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	BiTree.InOrder(Visit);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="string">"后序:"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	BiTree.PostOrder(Visit);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	BiTree.clear();</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"前序："</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	BiTree.PreOrder(Visit);</span><br><span class="line">	system(<span class="string">"pause"</span>);</span><br><span class="line">	<span class="keyword">return</span> EXIT_SUCCESS;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>执行结果：</p>
-<p><img src="/2019/07/31/二叉树的实现/%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C.PNG" alt="执行结果"></p>
+<p><img src="/二叉树的实现.htm/%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C.PNG" alt="执行结果"></p>
 <h2 id="五、源码地址"><a href="#五、源码地址" class="headerlink" title="五、源码地址"></a>五、源码地址</h2><p>​        <a href="https://github.com/Aoki-Wang/CheckStation/tree/master/Data%20Structure/BinaryTree" target="_blank" rel="noopener">二叉树的实现源码</a></p>
 
       
@@ -669,7 +669,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -680,7 +680,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -691,7 +691,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">216</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -811,7 +811,7 @@ setInterval("createtime()",250);
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共226.2k字</span>
+  <span class="post-count">博客全站共227.4k字</span>
 </div>
 
 

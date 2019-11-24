@@ -144,20 +144,20 @@
 <meta property="og:site_name" content="Aoki&#39;s Blog">
 <meta property="og:description" content="文件搜索命令：find 注意：搜索会占用大量服务器资源。  命令名称：find  命令所在路径：/bin/find  执行权限：所有用户  语法：find [搜索范围] [匹配条件]  执行权限： 所有用户  语法：find [文件搜索] [匹配条件]  功能描述：文件搜索   $find aokis -name cpp 在目录aokis中查找文件cpp  $find aokis -size +">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://wanqbin.xyz/2019/08/07/Linux文件搜索命令/1.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/08/07/Linux文件搜索命令/2.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/08/07/Linux文件搜索命令/4.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/08/07/Linux文件搜索命令/5.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/08/07/Linux文件搜索命令/6.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/08/07/Linux文件搜索命令/7.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/08/07/Linux文件搜索命令/8.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/08/07/Linux文件搜索命令/9.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/08/07/Linux文件搜索命令/10.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/Linux文件搜索命令.htm/1.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/Linux文件搜索命令.htm/2.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/Linux文件搜索命令.htm/4.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/Linux文件搜索命令.htm/5.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/Linux文件搜索命令.htm/6.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/Linux文件搜索命令.htm/7.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/Linux文件搜索命令.htm/8.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/Linux文件搜索命令.htm/9.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/Linux文件搜索命令.htm/10.PNG">
 <meta property="og:updated_time" content="2019-08-07T11:19:13.674Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux文件搜索命令">
 <meta name="twitter:description" content="文件搜索命令：find 注意：搜索会占用大量服务器资源。  命令名称：find  命令所在路径：/bin/find  执行权限：所有用户  语法：find [搜索范围] [匹配条件]  执行权限： 所有用户  语法：find [文件搜索] [匹配条件]  功能描述：文件搜索   $find aokis -name cpp 在目录aokis中查找文件cpp  $find aokis -size +">
-<meta name="twitter:image" content="http://wanqbin.xyz/2019/08/07/Linux文件搜索命令/1.PNG">
+<meta name="twitter:image" content="http://wanqbin.xyz/Linux文件搜索命令.htm/1.PNG">
 
 
 
@@ -528,22 +528,22 @@
 </ul>
 <p><code>$find aokis -name cpp</code></p>
 <p>在目录<code>aokis</code>中查找文件<code>cpp</code></p>
-<p><img src="/2019/08/07/Linux文件搜索命令/1.PNG" alt="文件搜索命令"></p>
+<p><img src="/Linux文件搜索命令.htm/1.PNG" alt="文件搜索命令"></p>
 <p><code>$find aokis -size +1024</code></p>
 <p>+n代表大于， -n代表小于， n 表示等于</p>
-<p><img src="/2019/08/07/Linux文件搜索命令/2.PNG" alt="文件搜索命令"></p>
+<p><img src="/Linux文件搜索命令.htm/2.PNG" alt="文件搜索命令"></p>
 <p><code>$find aokis -user aoki</code></p>
 <p>在目录<code>aokis</code>中查找所有者为<code>aoki</code>的文件</p>
 <p><code>-group</code>为根据所属组查找</p>
 <p><code>$find aokis -cmin -120</code></p>
 <p>在目录aokis下查找120分钟内修改过的文件和目录。</p>
-<p><img src="/2019/08/07/Linux文件搜索命令/4.PNG" alt="文件搜索命令"></p>
+<p><img src="/Linux文件搜索命令.htm/4.PNG" alt="文件搜索命令"></p>
 <p><code>-amin</code> 访问时间access</p>
 <p><code>-cmin</code> 文件属性change，改变文件属性的时间</p>
 <p><code>-mmin</code> 文件内modify,文件内容被改变</p>
 <p><code>find aokis -size +0 -a -size -1024</code></p>
 <p>在aokis目录下查找大于0，小于1024的文件</p>
-<p><img src="/2019/08/07/Linux文件搜索命令/5.PNG" alt="文件搜索命令"></p>
+<p><img src="/Linux文件搜索命令.htm/5.PNG" alt="文件搜索命令"></p>
 <p><code>-a</code>两个条件同时满足</p>
 <p><code>-o</code>两个条件满足任意一个即可。</p>
 <p><code>$find aokis -name aoki -exec cat {} \;</code></p>
@@ -554,7 +554,7 @@
 <li><code>-f</code>文件 <code>-d</code>目录  <code>-l</code>软链接文件</li>
 </ul>
 <p><code>-inum</code>根据i结点查找</p>
-<p><img src="/2019/08/07/Linux文件搜索命令/6.PNG" alt="文件搜索命令"></p>
+<p><img src="/Linux文件搜索命令.htm/6.PNG" alt="文件搜索命令"></p>
 </li>
 <li><p>文件搜索命令：<code>locate</code></p>
 <ul>
@@ -578,7 +578,7 @@
 </ul>
 </li>
 </ul>
-<p><img src="/2019/08/07/Linux文件搜索命令/7.PNG" alt="文件搜索命令"></p>
+<p><img src="/Linux文件搜索命令.htm/7.PNG" alt="文件搜索命令"></p>
 </li>
 <li><p>文件搜索命令：<code>which</code></p>
 <ul>
@@ -593,7 +593,7 @@
 <li><p>功能描述：搜索命令所在目录及别名信息</p>
 </li>
 </ul>
-<p><img src="/2019/08/07/Linux文件搜索命令/8.PNG" alt="文件搜索命令"></p>
+<p><img src="/Linux文件搜索命令.htm/8.PNG" alt="文件搜索命令"></p>
 </li>
 <li><p>文件搜索命令：<code>grep</code></p>
 <ul>
@@ -608,8 +608,8 @@
 <li><p>功能描述：在文件中搜寻字符串匹配的行并输出</p>
 <p>​                    -i  不区分大小写</p>
 <p>​                    -v  排除指定字串</p>
-<p><img src="/2019/08/07/Linux文件搜索命令/9.PNG" alt="文件搜索命令"></p>
-<p><img src="/2019/08/07/Linux文件搜索命令/10.PNG" alt="文件搜索命令"></p>
+<p><img src="/Linux文件搜索命令.htm/9.PNG" alt="文件搜索命令"></p>
+<p><img src="/Linux文件搜索命令.htm/10.PNG" alt="文件搜索命令"></p>
 </li>
 </ul>
 </li>
@@ -750,7 +750,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -761,7 +761,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -772,7 +772,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">216</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -876,7 +876,7 @@ setInterval("createtime()",250);
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共226.2k字</span>
+  <span class="post-count">博客全站共227.4k字</span>
 </div>
 
 

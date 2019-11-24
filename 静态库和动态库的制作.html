@@ -144,24 +144,24 @@
 <meta property="og:site_name" content="Aoki&#39;s Blog">
 <meta property="og:description" content="一、静态库和动态库 静态库&amp;emsp;&amp;emsp;静态库是指在我们的应用中，有一些公共代码是需要反复所使用的，就把这些代码编译为“库文件”；在连接步骤中，链接器将从库文件取得所需的代码，复制到生成的可执行文件中。 &amp;emsp;&amp;emsp;程序编译一般需要经过预处理、编译、汇编和链接几个步骤。静态库的特点是可执行文件中包含了库代码的一份完整拷贝。 &amp;emsp;&amp;emsp;优点：只需保证在开发者的计算">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://wanqbin.xyz/2019/08/08/静态库和动态库的制作/6.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/08/08/静态库和动态库的制作/7.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/08/08/静态库和动态库的制作/8.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/08/08/静态库和动态库的制作/9.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/08/08/静态库和动态库的制作/10.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/08/08/静态库和动态库的制作/11.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/08/08/静态库和动态库的制作/12.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/08/08/静态库和动态库的制作/13.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/08/08/静态库和动态库的制作/14.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/08/08/静态库和动态库的制作/15.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/08/08/静态库和动态库的制作/16.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/08/08/静态库和动态库的制作/17.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/08/08/静态库和动态库的制作/18.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/静态库和动态库的制作.htm/6.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/静态库和动态库的制作.htm/7.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/静态库和动态库的制作.htm/8.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/静态库和动态库的制作.htm/9.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/静态库和动态库的制作.htm/10.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/静态库和动态库的制作.htm/11.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/静态库和动态库的制作.htm/12.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/静态库和动态库的制作.htm/13.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/静态库和动态库的制作.htm/14.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/静态库和动态库的制作.htm/15.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/静态库和动态库的制作.htm/16.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/静态库和动态库的制作.htm/17.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/静态库和动态库的制作.htm/18.PNG">
 <meta property="og:updated_time" content="2019-08-09T08:39:49.908Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="静态库和动态库的制作">
 <meta name="twitter:description" content="一、静态库和动态库 静态库&amp;emsp;&amp;emsp;静态库是指在我们的应用中，有一些公共代码是需要反复所使用的，就把这些代码编译为“库文件”；在连接步骤中，链接器将从库文件取得所需的代码，复制到生成的可执行文件中。 &amp;emsp;&amp;emsp;程序编译一般需要经过预处理、编译、汇编和链接几个步骤。静态库的特点是可执行文件中包含了库代码的一份完整拷贝。 &amp;emsp;&amp;emsp;优点：只需保证在开发者的计算">
-<meta name="twitter:image" content="http://wanqbin.xyz/2019/08/08/静态库和动态库的制作/6.PNG">
+<meta name="twitter:image" content="http://wanqbin.xyz/静态库和动态库的制作.htm/6.PNG">
 
 
 
@@ -534,13 +534,13 @@
 <li>使用：编译时需要加静态库名 ，<code>-L</code>用来指明包含的库路径,<code>-l</code>指定库名(通常为libxx.so或者libxxx.a)</li>
 </ul>
 <p>首先我们将需要打包的文件编译为<code>.o</code>文件</p>
-<p><img src="/2019/08/08/静态库和动态库的制作/6.PNG" alt="静态库制作"></p>
+<p><img src="/静态库和动态库的制作.htm/6.PNG" alt="静态库制作"></p>
 <p>接下来，将所有需要打包的<code>.o</code>文件打包</p>
-<p><img src="/2019/08/08/静态库和动态库的制作/7.PNG" alt="静态库的制作"></p>
+<p><img src="/静态库和动态库的制作.htm/7.PNG" alt="静态库的制作"></p>
 <p>接下来，使用刚制作的静态库对<code>main.cpp</code>进行编译。在这之前，将制作的静态库移到<code>/lib</code>目录下。</p>
-<p><img src="/2019/08/08/静态库和动态库的制作/8.PNG" alt="静态库的制作"></p>
+<p><img src="/静态库和动态库的制作.htm/8.PNG" alt="静态库的制作"></p>
 <p>执行结果如下：</p>
-<p><img src="/2019/08/08/静态库和动态库的制作/9.PNG" alt="执行结果"></p>
+<p><img src="/静态库和动态库的制作.htm/9.PNG" alt="执行结果"></p>
 <h2 id="三、动态库的制作"><a href="#三、动态库的制作" class="headerlink" title="三、动态库的制作"></a>三、动态库的制作</h2><ul>
 <li>制作步骤：<ul>
 <li>编译与位置无关的代码，生成<code>.o</code>文件，关键参数<code>-fPIC</code></li>
@@ -550,15 +550,15 @@
 </li>
 </ul>
 <p>我们利用之前的<code>.cpp</code>文件来制作动态库，首先，将之前制作静态库时用到的文件全部删除。删除结果如下：</p>
-<p><img src="/2019/08/08/静态库和动态库的制作/10.PNG" alt="动态库的制作"></p>
+<p><img src="/静态库和动态库的制作.htm/10.PNG" alt="动态库的制作"></p>
 <p>下面我们编译与位置无关的代码，生成<code>.o</code>文件，结果如下。</p>
-<p><img src="/2019/08/08/静态库和动态库的制作/11.PNG" alt="动态库的制作"></p>
+<p><img src="/静态库和动态库的制作.htm/11.PNG" alt="动态库的制作"></p>
 <p>下面，我们使用动态库的参数<code>-shared</code>打包<code>.o</code>文件。</p>
-<p><img src="/2019/08/08/静态库和动态库的制作/12.PNG" alt="动态库的制作"></p>
+<p><img src="/静态库和动态库的制作.htm/12.PNG" alt="动态库的制作"></p>
 <p>接下来，要做的就是使用动态库。这里，我们先将生成的动态库移动到<code>/lib</code>下面。</p>
-<p><img src="/2019/08/08/静态库和动态库的制作/13.PNG" alt="动态库的制作"></p>
+<p><img src="/静态库和动态库的制作.htm/13.PNG" alt="动态库的制作"></p>
 <p>执行结果如下：</p>
-<p><img src="/2019/08/08/静态库和动态库的制作/14.PNG" alt="动态库的制作"></p>
+<p><img src="/静态库和动态库的制作.htm/14.PNG" alt="动态库的制作"></p>
 <p>我们可以看到，这里并没有执行成功。它没有像静态库一样直接打开可执行文件就可以运行。</p>
 <h2 id="四、解决不能加载动态库的问题"><a href="#四、解决不能加载动态库的问题" class="headerlink" title="四、解决不能加载动态库的问题"></a>四、解决不能加载动态库的问题</h2><p>对于动态库无法加载的问题，这里有三种解决办法</p>
 <ul>
@@ -567,14 +567,14 @@
 <li>配置<code>/etc/ld.so.conf</code>，增加动态库的绝对路径，然后执行<code>sudo ldconfig -v</code></li>
 </ul>
 <p>首先，我们使用 <code>pwd</code>命令查看动态库的路径。</p>
-<p><img src="/2019/08/08/静态库和动态库的制作/15.PNG" alt="动态库的制作"></p>
+<p><img src="/静态库和动态库的制作.htm/15.PNG" alt="动态库的制作"></p>
 <p>我们在<code>/etc/ld.so.conf</code>文件中添加该动态库的路径</p>
-<p><img src="/2019/08/08/静态库和动态库的制作/16.PNG" alt="动态库的制作"></p>
+<p><img src="/静态库和动态库的制作.htm/16.PNG" alt="动态库的制作"></p>
 <p>接下来执行<code>sudo ldconfig -v</code>命令，得到下面的结果</p>
-<p><img src="/2019/08/08/静态库和动态库的制作/17.PNG" alt="动态库的制作"></p>
+<p><img src="/静态库和动态库的制作.htm/17.PNG" alt="动态库的制作"></p>
 <p>在<code>sudo ldconfig -v</code>命令中，<code>-v</code>选项表示显示加载过程。</p>
 <p>通过<code>ldd</code>命令，我们可以看到该程序所需要的动态链接库。最后是运行结果。</p>
-<p><img src="/2019/08/08/静态库和动态库的制作/18.PNG" alt="执行结果"></p>
+<p><img src="/静态库和动态库的制作.htm/18.PNG" alt="执行结果"></p>
 
       
     </div>
@@ -720,7 +720,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -731,7 +731,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -742,7 +742,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">216</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -862,7 +862,7 @@ setInterval("createtime()",250);
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共226.2k字</span>
+  <span class="post-count">博客全站共227.4k字</span>
 </div>
 
 

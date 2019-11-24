@@ -144,13 +144,13 @@
 <meta property="og:site_name" content="Aoki&#39;s Blog">
 <meta property="og:description" content="stack     一、stack概述 &amp;emsp;stack是一种先进后出（First In Last Out，FILO)的数据结构，它只有一个出口。stack允许新增元素、移除元素、取得最顶端元素。但是除了最顶端外，没有任何其他方法可以存取其他元素，换言之，stack不允许有遍历行为。 二、stack没有迭代器 &amp;emsp;stack所有元素的进出都必须符合“先进后出”的条件，只有sta">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://wanqbin.xyz/2019/07/29/stack和queue/stest.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/07/29/stack和queue/qtest.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/stack和queue.htm/stest.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/stack和queue.htm/qtest.PNG">
 <meta property="og:updated_time" content="2019-07-30T02:49:45.692Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="stack和queue">
 <meta name="twitter:description" content="stack     一、stack概述 &amp;emsp;stack是一种先进后出（First In Last Out，FILO)的数据结构，它只有一个出口。stack允许新增元素、移除元素、取得最顶端元素。但是除了最顶端外，没有任何其他方法可以存取其他元素，换言之，stack不允许有遍历行为。 二、stack没有迭代器 &amp;emsp;stack所有元素的进出都必须符合“先进后出”的条件，只有sta">
-<meta name="twitter:image" content="http://wanqbin.xyz/2019/07/29/stack和queue/stest.PNG">
+<meta name="twitter:image" content="http://wanqbin.xyz/stack和queue.htm/stest.PNG">
 
 
 
@@ -520,7 +520,7 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">stest</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt;istack;</span><br><span class="line">	<span class="keyword">if</span> (istack.empty())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"stack为空!"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"stack的大小为："</span> &lt;&lt; istack.size() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		istack.push(i);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"stack的大小为："</span> &lt;&lt; istack.size() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"stack的栈顶元素为："</span> &lt;&lt; istack.top() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"弹出栈顶元素后:"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	istack.pop();</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"stack的大小为："</span> &lt;&lt; istack.size() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"stack的栈顶元素为："</span> &lt;&lt; istack.top() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>输出结果：</p>
-<p><img src="/2019/07/29/stack和queue/stest.PNG" alt="stack常用API"></p>
+<p><img src="/stack和queue.htm/stest.PNG" alt="stack常用API"></p>
 <h2><center>queue</center></h2>
 
 <p>一、queue概述</p>
@@ -540,7 +540,7 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">qtest</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt;iqueue;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		iqueue.push(i);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"队头为："</span> &lt;&lt; iqueue.front() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"队尾为："</span> &lt;&lt; iqueue.back() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"iqueue的大小为："</span> &lt;&lt; iqueue.size() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	iqueue.pop();</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"弹出队头后："</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"队头为："</span> &lt;&lt; iqueue.front() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"队尾为："</span> &lt;&lt; iqueue.back() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"iqueue的大小为："</span> &lt;&lt; iqueue.size() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>输出结果：</p>
-<p><img src="/2019/07/29/stack和queue/qtest.PNG" alt="queue常用API"></p>
+<p><img src="/stack和queue.htm/qtest.PNG" alt="queue常用API"></p>
 <p>四、源码地址</p>
 <p>​        <a href="https://github.com/Aoki-Wang/CheckStation/tree/master/STL/stack%20and%20queue" target="_blank" rel="noopener">stack and queue示例源码</a></p>
 
@@ -686,7 +686,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -697,7 +697,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -708,7 +708,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">216</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -830,7 +830,7 @@ setInterval("createtime()",250);
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共226.2k字</span>
+  <span class="post-count">博客全站共227.4k字</span>
 </div>
 
 

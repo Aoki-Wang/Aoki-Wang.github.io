@@ -144,18 +144,18 @@
 <meta property="og:site_name" content="Aoki&#39;s Blog">
 <meta property="og:description" content="一、继承&amp;emsp;继承是面向对象编程额基本概念之一。继承使我们能在已有类的基础上构造新类。这个新的类拥有或继承已有类的数据成员和成员函数，也可添加新的数据成员和成员函数，对已有的类进行扩充。这个已有的类就称为基类,而这个新类则称为派生类。 &amp;emsp;如果我们需要定义一个个人类和职工类，在不使用继承的情况下，代码重复会比较严重。这时，我们就需要用到继承。 &amp;emsp;下面定义一个基类网页，重复的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://wanqbin.xyz/2019/07/30/继承/test1.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/07/30/继承/test2.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/07/30/继承/test21.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/07/30/继承/test03.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/07/30/继承/test04.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/07/30/继承/test05.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/07/30/继承/test06.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/继承.htm/test1.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/继承.htm/test2.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/继承.htm/test21.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/继承.htm/test03.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/继承.htm/test04.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/继承.htm/test05.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/继承.htm/test06.PNG">
 <meta property="og:updated_time" content="2019-07-30T10:22:44.536Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="继承">
 <meta name="twitter:description" content="一、继承&amp;emsp;继承是面向对象编程额基本概念之一。继承使我们能在已有类的基础上构造新类。这个新的类拥有或继承已有类的数据成员和成员函数，也可添加新的数据成员和成员函数，对已有的类进行扩充。这个已有的类就称为基类,而这个新类则称为派生类。 &amp;emsp;如果我们需要定义一个个人类和职工类，在不使用继承的情况下，代码重复会比较严重。这时，我们就需要用到继承。 &amp;emsp;下面定义一个基类网页，重复的">
-<meta name="twitter:image" content="http://wanqbin.xyz/2019/07/30/继承/test1.PNG">
+<meta name="twitter:image" content="http://wanqbin.xyz/继承.htm/test1.PNG">
 
 
 
@@ -514,7 +514,7 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	News news;</span><br><span class="line">	news.header();</span><br><span class="line">	news.left();</span><br><span class="line">	news.footer();</span><br><span class="line">	news.content();</span><br><span class="line">	system(<span class="string">"pause"</span>);</span><br><span class="line">	<span class="keyword">return</span> EXIT_SUCCESS;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>执行结果：</p>
-<p><img src="/2019/07/30/继承/test1.PNG" alt="执行结果"></p>
+<p><img src="/继承.htm/test1.PNG" alt="执行结果"></p>
 <p>继承可以减少代码的重复部分，派生类可以继承基类的数据成员和成员函数。</p>
 <p>网页中有很多公共部分，导致实现的时候由很多重复的代码。在使用继承之后，基类为公共网页，具体的子类实现把不同的内容，较好地解决了代码的复用。</p>
 <h2 id="二、继承方式"><a href="#二、继承方式" class="headerlink" title="二、继承方式"></a>二、继承方式</h2><p>继承方式主要有：</p>
@@ -533,7 +533,7 @@
 
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//子类会继承父类的成员属性，成员函数</span></span><br><span class="line"><span class="comment">//但是子类不会继承父类的构造函数和析构函数</span></span><br><span class="line"><span class="comment">//只有父类自己知道如何构造和析构自己的属性，而子类不知道</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test02</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Base base;</span><br><span class="line">	Son son;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>执行结果：<br><img src="/2019/07/30/继承/test2.PNG" alt="执行"></p>
+<p>执行结果：<br><img src="/继承.htm/test2.PNG" alt="执行"></p>
 <ul>
 <li>子类在创建对象时，先调用父类的构造函数，然后再调用自身的构造函数</li>
 <li>析构顺序与构造顺序相反</li>
@@ -545,7 +545,7 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//子类会继承父类的成员属性，成员函数</span></span><br><span class="line"><span class="comment">//但是子类不会继承父类的构造函数和析构函数</span></span><br><span class="line"><span class="comment">//只有父类自己知道如何构造和析构自己的属性，而子类不知道</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test02</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Base base;</span><br><span class="line">	Son son;</span><br><span class="line">	<span class="function">Son <span class="title">son2</span><span class="params">(<span class="number">15</span>)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>执行结果：</p>
-<p><img src="/2019/07/30/继承/test21.PNG" alt="执行结果"></p>
+<p><img src="/继承.htm/test21.PNG" alt="执行结果"></p>
 <h2 id="四、继承中同名函数的处理"><a href="#四、继承中同名函数的处理" class="headerlink" title="四、继承中同名函数的处理"></a>四、继承中同名函数的处理</h2><ol>
 <li>如果子类和父类拥有同名的函数、属性，子类不会覆盖父类的成员</li>
 <li>如果子类与父类的成员函数名称相同，子类会把父类的所有同名版本都隐藏掉</li>
@@ -558,7 +558,7 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test03</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Son0 s1;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"子类中的属性："</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; s1.m_A &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"父类中的属性："</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; s1.Base0::m_A &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>执行结果：</p>
-<p><img src="/2019/07/30/继承/test03.PNG" alt="执行结果"></p>
+<p><img src="/继承.htm/test03.PNG" alt="执行结果"></p>
 <h2 id="五、继承中的静态成员处理"><a href="#五、继承中的静态成员处理" class="headerlink" title="五、继承中的静态成员处理"></a>五、继承中的静态成员处理</h2><ul>
 <li>如果基类定义了一个静态成员，则在整个继承体系中只存在该成员的唯一定义。不论从基类中派生出多少个派生类，对于每个静态成员来说都只存在唯一的实例。</li>
 <li>静态成员遵循通用的访问控制规则，如果基类中的成员是private的，则派生类无权访问它。假设某静态成员是可访问的，则我们既能通过基类使用它，也可以通过派生类使用它。</li>
@@ -568,9 +568,9 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test04</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"Father的静态成员值为："</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; Father::m_A &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"Son1继承的静态成员值为："</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; Son1::m_A &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	Son1::func();</span><br><span class="line">	Father::func();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>执行结果：</p>
-<p><img src="/2019/07/30/继承/test04.PNG" alt="执行结果"></p>
+<p><img src="/继承.htm/test04.PNG" alt="执行结果"></p>
 <h2 id="六、防止继承的发生"><a href="#六、防止继承的发生" class="headerlink" title="六、防止继承的发生"></a>六、防止继承的发生</h2><p>有时候我们会定义这样一种类，我们不希望其他类继承它，或者不想考虑它是否合适作为一个基类。为了实现这个目的，C++11新标准提供了一种防止继承发生的方法，即在类后跟一个关键字<code>final</code>。</p>
-<p><img src="/2019/07/30/继承/test05.PNG" alt="final关键字"></p>
+<p><img src="/继承.htm/test05.PNG" alt="final关键字"></p>
 <h2 id="七、菱形继承（钻石继承）的问题"><a href="#七、菱形继承（钻石继承）的问题" class="headerlink" title="七、菱形继承（钻石继承）的问题"></a>七、菱形继承（钻石继承）的问题</h2><p>&emsp;两个派生类继承同一个基类，而又有某个类同时继承了两个派生类，这种继承被称为菱形继承，或者钻石继承。</p>
 <p>这种继承带来的问题：</p>
 <ul>
@@ -586,7 +586,7 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test06</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	SheepTuo st;</span><br><span class="line">	st.Sheep::m_Age = <span class="number">10</span>;</span><br><span class="line">	st.Tuo::m_Age = <span class="number">20</span>;</span><br><span class="line">	st.m_Age = <span class="number">5</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"驼的年龄为"</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; st.Tuo::m_Age &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"羊的年龄为："</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; st.Sheep::m_Age &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"羊驼的年龄为："</span>;</span><br><span class="line">	<span class="comment">//可以直接访问，没有二义性的可能，只有一份数据</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; st.m_Age &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>执行结果：</p>
-<p><img src="/2019/07/30/继承/test06.PNG" alt="执行结果"></p>
+<p><img src="/继承.htm/test06.PNG" alt="执行结果"></p>
 <h2 id="八、源码地址"><a href="#八、源码地址" class="headerlink" title="八、源码地址"></a>八、源码地址</h2><p>​        <a href="https://github.com/Aoki-Wang/CheckStation/tree/master/C%2B%2B/Inheritance" target="_blank" rel="noopener">继承源码示例</a></p>
 
       
@@ -731,7 +731,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -742,7 +742,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -753,7 +753,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">216</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -873,7 +873,7 @@ setInterval("createtime()",250);
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共226.2k字</span>
+  <span class="post-count">博客全站共227.4k字</span>
 </div>
 
 
