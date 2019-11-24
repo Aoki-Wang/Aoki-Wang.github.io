@@ -500,14 +500,11 @@
         <p>&emsp;&emsp;由于模块和内核是在同样的地址空间运行的，因此模块编程在一定意义上说也就是内核编程。但是并不不是内核中所有的地方都可以使用模块，一般是在设备驱动程序、文件系统等地方使用模块，而对Linux内核来说极为重要的地方如进程管理和内存管理等是无法通过模块来实现的，必须通过直接对内核进行修改来完成的。</p>
 <h2 id="一、一个简单的内核模块程序"><a href="#一、一个简单的内核模块程序" class="headerlink" title="一、一个简单的内核模块程序"></a>一、一个简单的内核模块程序</h2><p>我们编写一个Hello World的内核模块。内核模块代码如下：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;linux/module.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;linux/kernel.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;linux/init.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> _<span class="function">init <span class="title">hello_init</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    printk(KERN_ALERT <span class="string">"Hello World2\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> _<span class="function"><span class="built_in">exit</span> <span class="title">hello_exit</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    printk(KERN_ALERT <span class="string">"Goodbye,world2\n"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">module_init(hello_init);</span><br><span class="line">module_exit(hello_init);</span><br><span class="line">MODULE_LICENSE(<span class="string">"GPL"</span>);</span><br><span class="line">MODULE_AUTHOR(<span class="string">"Author"</span>);</span><br></pre></td></tr></table></figure>
-
 <p>&emsp;&emsp;这是一个简单的内核模块，我们对其进行简单的介绍。<code>hello_init()</code>函数是模块的入口点，它通过<code>module_init()</code>函数例程注册到系统中，在模块装载时被调用。模块的初始化函数形式如下：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> _<span class="function">init <span class="title">my_init</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br></pre></td></tr></table></figure>
-
 <p>&emsp;&emsp;由于初始化函数通常并不会被外部函数直接调用，所以不必导出该函数，故它可以被标记为<code>static</code>又由于<code>init</code>函数在模块加载以后，就不会再使用了，因此，我们使用<code>_init</code>宏，这个宏表示在模块初始化完成后，丢弃函数，并释放其所占内存。</p>
 <p>&emsp;&emsp;<code>hello_exit()</code>函数是模块的出口函数，它由<code>module_exit()</code>函数例程注册到系统。在模块从内核卸载时，内核便会调用<code>hello_exit()</code>函数。退出函数可能会在返回前负责清理资源，以保证硬件处于一致状态。模块的退出函数形式如下：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> _<span class="function"><span class="built_in">exit</span> <span class="title">my_exit</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br></pre></td></tr></table></figure>
-
 <p>&emsp;&emsp;与初始化函数的原因一样，也可以标记该函数为<code>static</code>。使用<code>_exit</code>宏，如果上述文件被静态地编译到内核映像中，那么退出函数将不被包含，而且永远都不会被调用。</p>
 <p>&emsp;&emsp;<code>MODULE_LICENSE()</code>宏定义用于指定模块的版权。如果载入非GPL模块到系统内核，则会在内核中设置被污染标识，这个标识只起到记录信息的作用。不过如果开发者提交的bug报告中含有被污染的代码，那么报告的信用无疑会下降。另外非GPL模块不能使用标记为GPL-only的函数和变量。</p>
 <p>&emsp;&emsp;MODULE_AUTHOR()宏指定了代码作者，用于做信息记录。</p>
@@ -518,44 +515,34 @@
 <p>（1）确定内核模块代码的存放位置。由于模块是一个字符类型的驱动程序，那么需要把该模块放到目录<code>drivers/char</code>下，这里有两种选择，一种是直接将模块放到<code>char</code>目录下，另外一种是在<code>char</code>目录下先建立一个文件夹并命名为<code>mumodule</code>，然后将模块放到这个子目录下。这两种作法对最后所要完成的工作并没有任何影响，只是考虑到当驱动程序是由多个源代码文件组成的时候，如果直接将这些原文件都放在<code>char</code>目录下，会给维护工作带来一定的麻烦。</p>
 <p>（2）修改和创建makefile文件。这里先假设在第一步中<code>char</code>目录下建立一个文件夹<code>mymodule</code>，那么下面需要做的工作就是修改以及创建makefile文件，在<code>char</code>目录下的makefile文件中添加如下代码：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">obj-m +=mymodule/</span><br></pre></td></tr></table></figure>
-
 <p>&emsp;&emsp;在makefile中添加上述代码的主要作用就是告诉模块构件系统在编译模块的时候需要进入<code>mymodule</code>子目录中。</p>
 <p>&emsp;&emsp;接下来，需要在<code>mymodule</code>子目录下创建一个makefile文件，这个文件用来告诉模块构件系统如何编译该子目录下的模块，makefile文件的内容如下所示：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">obj-m += mymodule.o</span><br></pre></td></tr></table></figure>
-
 <p>&emsp;&emsp;如果要构件的模块是由多个原文件构成，如file1.c和file2.c，那么可以在<code>mymodule</code>目录下的makefile文件编写如下代码：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">obj-m :=mymodule.o</span><br><span class="line">mymodule-objs:=file1.o  file2.o</span><br></pre></td></tr></table></figure>
-
 <p>（3）重新编译修改后的内核代码。在Linux内核编译时，就会在<code>lib/modules/2.6.10/kernel/drivers/char</code>目录下,生成一个名称为<code>mymodule.ko</code>的文件。注意，在2.6内核中，生成的模块拓展名为<code>.ko</code>，而不是以前的<code>.o</code></p>
 <p>（4）安装内核模块。可以使用如下的命令将内核中所有编译好的模块安装到Linux系统内核中</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make modules_install</span><br></pre></td></tr></table></figure>
-
 <p>至此，内核模块的创建就完成了，用户可以在新的内核中使用自己定义的内核模块了。</p>
 </li>
 <li><h3 id="在内核源码外构建内核模块"><a href="#在内核源码外构建内核模块" class="headerlink" title="在内核源码外构建内核模块"></a>在内核源码外构建内核模块</h3><p>&emsp;&emsp;其实将模块放在内核源码外与放在内核源码树内的最大的区别在于构建过程，当用户把自己编写的模块放在内核源码树的外部时，在内核模块编译之前必须构建内核代码树。将内核模块放在内核源代码外的构建过程了如下所示。</p>
 <p>（1）还是假设已经编写好了一个模块文件<code>mymodule.c</code>，现在将该文件放在一个用户自己创建的文件夹中，在这里冷仍然需要创建自己的makefile文件，其形式如下：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">obj-m += mymodule.o</span><br></pre></td></tr></table></figure>
-
 <p>（2）执行make命令编译<code>.c</code>文件，其形式如下：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make -C /lib/modules/kernel-version/uild M=$ PWD</span><br></pre></td></tr></table></figure>
-
 <p>&emsp;&emsp;这个命令是改变文件的目录到用<code>-C</code>选项提供的目录下（就是内核源码目录）。它在那里会发现内核顶层makefile文件。<code>M=</code>选项使makefile在试图创建内核模块前，回到模块源代码所在目录。</p>
 <p>&emsp;&emsp;重复的输入前面的make命令是很麻烦的一件事，为此，我们可以编写内容如下的makefile文件，在每次编译内核模块时，只要输入make命令就可以了。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>如果已经定义了KERNELRELEASE，则说明是从内核构造系统调用的，因此</span><br><span class="line"><span class="meta">#</span>可以使用其内建语句</span><br><span class="line"><span class="meta">ifneq($</span>(KERNELRELEASE),)</span><br><span class="line">obj-m := hello.o</span><br><span class="line">else</span><br><span class="line">KERNELDIR ?= /lib/modules/$(shell uname -r)/build</span><br><span class="line">PWD := $(shell pwd)</span><br><span class="line">default:</span><br><span class="line"><span class="meta">$</span>(MAKE) -C $(kERNELDIR) M=$(PWD) modules</span><br><span class="line">endif</span><br></pre></td></tr></table></figure>
-
 <p>（3）最后一步就是把刚才编译好的内核模块<code>mymodule.ko</code>装载到系统中。在Linux中可以有两种方法来载入一个已经编译好的模块，一个是利用<code>insmod</code>，另外一个就是利用命令<code>modprobe</code>。</p>
 <p>&emsp;&emsp;使用<code>insmod</code>命令安装内核模板的命令格式如下：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">insmod mymodule.ko;</span><br></pre></td></tr></table></figure>
-
 <p><code>insmod</code>命令将模块的代码和数据装入内核，然后使用内核符号表解析模块中任何未解析的符号，将内核模块映像复制到内存区域，并通过内核符号表解析模块中的内核引用，最后调用模块的初始化函数。</p>
 <p>&emsp;&emsp;这里需要说明的是，<code>insmod</code>命令虽然很简单，但是其功能也同样有限，该命令的作用就是请求内核载入指定的模块，它不会进行任何依赖性分析和错误性检查。</p>
 <p>&emsp;&emsp;<code>modprobe</code>命令与<code>insmod</code>的功能很相似，也是用于将指定的模块装载到内核中，但是它比<code>insmod</code>命令要实用得多，这是因为该命令提供了模块依赖性分析，错误智能检查，错误报告以及许多其他功能和选项。</p>
 <p>&emsp;&emsp;这里以提供的模块依赖性为例来详细分析其优越性，当用<code>modprobe</code>命令来装载某个指定的模块的时候，它会考虑要装载的模块是否引用了一些当前内核中不存在的符号，也就是说该模块所引用的符号没有存放在当前的全局内核符号表中，在这种情况下，该命令会在当前模块搜索路径中查找定义了这些符号的模块，如果找到了这些模块，该命令会自动地将这些模块装载到内核中，而在这种情况下如果使用<code>insmod</code>命令来装载该模块，则会产生错误信息，即模块装载不成功，也就是说<code>modprobe</code>命令不但会加载指定的模块，而且还会自动加载任何它所依赖的有关模块。该命令的使用格式如下：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">modprobe -i mymodule</span><br></pre></td></tr></table></figure>
-
 <p>&emsp;&emsp;最后来看如何从内核中卸载已经装载的模块，同样有两个命令来完成该任务，一个就是<code>rmmod</code>命令，另一个就是<code>modprobe</code>命令，它们的使用格式如下：</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rmmod mymodule</span><br><span class="line">modprobe -r mymodule</span><br></pre></td></tr></table></figure>
-
 <p>&emsp;&emsp;这里需要说明的一点就是,<code>modprobe</code>与<code>rmmod</code>命令不同1，它不仅会卸载指定的模块，而且如果它发现需要卸载的这个模块所依赖的那些模块没有其他模块依赖于它们，那么该命令也会将这些模块一起从内核中卸载掉。</p>
 </li>
 </ol>
@@ -563,7 +550,6 @@
 <p>&emsp;&emsp;2.4内核下,<code>linux/module.h</code>中定义有宏<code>MODULE_PARM(var,type)</code>，用于向模块传递命令行参数。<code>var</code>为接收参数值的变量名，<code>type</code>为采取如下格式的字符串<code>[min[-max]]{b,h,i,l,s}</code>。其中<code>min</code>及<code>max</code>用于表示当参数为数组类型时，允许输入的数组元素的个数范围，<code>b</code>表示<code>byte</code>，<code>h</code>表示<code>short</code>，<code>i</code>表示<code>int</code>，<code>l</code>表示<code>long</code>，<code>s</code>表示<code>string</code>。</p>
 <p>&emsp;&emsp;2.6内核下，宏<code>MODULE_PARM(var,type)</code>不再被支持。在头文件<code>Linux/moduleparam.h</code>定义如下：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">module_param(name,type,perm)</span><br><span class="line">module_param_array(name,type,nump,perm)</span><br></pre></td></tr></table></figure>
-
 <p>&emsp;&emsp;<code>type</code>类型可以是<code>byte,short,ushort,int,uint,long,ulong,charp,bool</code>或<code>invbool</code>，不再采用2.4内核中的字符串形式，而且在模块编译时会将此处声明的<code>type</code>与变量定义的类型进行比较，判断是否一致。</p>
 <p>&emsp;&emsp;<code>perm</code>表示此参数在<code>sysfs</code>文件系统中对应的文件节点的属性。2.6内核使用<code>sysfs</code>文件系统，这是一个奖励在内存中比<code>proc</code>更强大的文件系统。<code>sysfs</code>文件系统可以动态、实时、有组织层次地反应当前系统中的硬件，驱动等状态。当<code>perm</code>为0时，表示此参数在<code>sysfs</code>文件系统下对应的文件节点不存在。模块被加载后，在<code>sys/module</code>目录下1将出现以此模块名命名的目录。如果此模块存在<code>perm</code>不为0的命令行参数，在此模块的目录下将出现<code>paramters</code>目录，包含一系列以参数名命名的文件节点，这些文件的权限值等于<code>perm</code>，文件的内容为参数的值。</p>
 <p>&emsp;&emsp;<code>nump</code>为保存输入的数组元素个数的变量指针。当不需保存实际输入的数组元素个数时，可以设为NULL。</p>
@@ -571,7 +557,6 @@
 <p>&emsp;&emsp;导出的内核函数可以被其他模块调用，而未导出的诶恶化函数模块则无法被调用。模块代码的链接和调用规则相比核心内核映像中的代码而言，要更为严格。核心代码在内核中可以调用任意非静态接口，因为所有的核心源代码文件被链接成了同一个映像。当然，被导出的符号表所含的函数必然也是非静态的。</p>
 <p>&emsp;&emsp;导出的内核符号表被看做是导出的内核接口，甚至是内核API。导出符号相当简单，如下所示：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">EXPORT_SYMBOL(var);<span class="comment">/*导出变量var*/</span></span><br><span class="line">EXPORT_SYMBLO(func);<span class="comment">/*导出函数func*/</span></span><br></pre></td></tr></table></figure>
-
 
       
     </div>

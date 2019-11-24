@@ -145,7 +145,8 @@
 <meta property="og:description" content="一、Adapter模式  将一个类的接口转换成客户希望的另外一个接口。Adapter模式使原本由于接口不兼容而不能一起工作的类可以一起工作。 ​">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://wanqbin.xyz/2019/Adapter模式/Adapter1.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/Adapter模式/Adapter%E6%98%BE%E7%A4%BA%E6%96%B9%E6%B3%95.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/2019/Adapter模式/Adapter显示方法.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/2019/Adapter模式/Adapter%20Circle包装了xxCircle类.PNG">
 <meta property="og:updated_time" content="2019-11-24T15:00:45.498Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Adapter模式">
@@ -532,7 +533,7 @@
 <li>设置一个Shape对象的颜色</li>
 <li>擦除一个Shape对象</li>
 </ul>
-<p><img src="/2019/Adapter模式/Adapter%E6%98%BE%E7%A4%BA%E6%96%B9%E6%B3%95.PNG" alt="显示了方法的Point，Line，Square"></p>
+<p><img src="/2019/Adapter模式/Adapter显示方法.PNG" alt="显示了方法的Point，Line，Square"></p>
 <p>假设现在客户要求实现一个圆——一种新的Shape。为此，我创建了一个新的类——Circle类来实现，并从Shape类派生出Circle类，这样我仍然可以获得多态行为。</p>
 <p>那么，我必须为Circle类编写display,fill和undisplay方法。但是，我现在找到了一个现有的处理圆形的xxCircle类，但是这个类中的方法命名如下：</p>
 <ul>
@@ -553,27 +554,21 @@
 <li>Circle包含xxCircle</li>
 <li>Circle将发给自己的请求传送给xxCircle对象。</li>
 </ul>
-<p>![Adapter模式：Circle类包装了xxCircle类](Adapter Circle包装了xxCircle类.PNG)</p>
+<p><img src="/2019/Adapter模式/Adapter Circle包装了xxCircle类.PNG" alt="Adapter模式：Circle类包装了xxCircle类"></p>
 <p>当Circle对象实例化的时候，它必须实例化一个xxCircle对象。发给Circle对象的任何请求都将转给该xxCircle对象。如果能够总是如此，而且xxCircle对象具有Circle对象所需要的全部功能，Circle对象就可以通过让xxCircle做实际工作来实现自己的行为。</p>
 <p>实现Adapter模式：</p>
 <p>Shape.h</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Shape</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Shape(<span class="keyword">void</span>);</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="keyword">virtual</span> <span class="title">display</span><span class="params">()</span></span>= <span class="number">0</span>;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    ~Shape(<span class="keyword">void</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
 <p>Shape.cpp</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Shape::Shape(<span class="keyword">void</span>)</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Shape::~Shape(<span class="keyword">void</span>)</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p> <strong>Circle.h</strong> </p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"Shape.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"XX_Circle.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Circle</span> :</span> <span class="keyword">public</span> Shape</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Circle(XX_Circle *xxCircle);</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">display</span><span class="params">()</span></span>;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    ~Circle(<span class="keyword">void</span>);</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    XX_Circle *myXX_Circle;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
 <p>Circle.cpp</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"Circle.h"</span></span></span><br><span class="line"></span><br><span class="line">Circle::Circle(XX_Circle *xxCircle)</span><br><span class="line">&#123;</span><br><span class="line">    myXX_Circle = xxCircle;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Circle::~Circle(<span class="keyword">void</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">delete</span> myXX_Circle;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> Circle::display()</span><br><span class="line">&#123;</span><br><span class="line">    myXX_Circle-&gt;displayIt();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>XX_Circle.h</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">XX_Circle</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    XX_Circle(<span class="keyword">void</span>);</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">displayIt</span><span class="params">()</span></span>;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    ~XX_Circle(<span class="keyword">void</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
 <p> <strong>XX_Circle.cpp</strong> </p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"XX_Circle.h"</span></span></span><br><span class="line"></span><br><span class="line">XX_Circle::XX_Circle(<span class="keyword">void</span>)</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">XX_Circle::~XX_Circle(<span class="keyword">void</span>)</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>三、Adapter模式：关键特征</p>
 <ul>
 <li>意图：使控制范围之外的一个原有对象与某个接口匹配。</li>
@@ -584,6 +579,7 @@
 <li>实现：将原有类包含在另一个类中。让包含类与需要的接口匹配，调用被包容类的方法。</li>
 </ul>
 <p>四、Adapter模式与Facade模式</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -592,7 +588,8 @@
 <th>Adapter模式</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>是否存在既有的类？</td>
 <td>是</td>
 <td>是</td>
@@ -612,7 +609,9 @@
 <td>是</td>
 <td>否</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>从上表中，我们可以看到以下内容：</p>
 <ul>
 <li>在两个模式中，都存在既有的类</li>

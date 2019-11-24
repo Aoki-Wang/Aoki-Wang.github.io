@@ -502,7 +502,7 @@
         <h2 id="一、进程描述"><a href="#一、进程描述" class="headerlink" title="一、进程描述"></a>一、进程描述</h2><p>&emsp;&emsp;进程的定义：进程是可并发执行的程序在一个数据集合上的运行过程。进程具有动态性、并发性、独立性、异步性等基本特征。</p>
 <p>&emsp;&emsp;为了使参与并发执行的每个程序（含数据）都能独立地运行，在操作系统中必须为之配置一个专门的数据结构，称为进程控制块（PCB）。系统利用PCB来描述进程的基本情况和活动过程，进而控制和管理进程。这样，由程序段、相关数据段和PCB三部分便构成了进程实体。进程的程序段就是该进程所对应静态程序实体在进程地址空间中的映像，而数据段就是进程数据工作集合在进程地址空间中的映像。</p>
 <p>&emsp;&emsp;进程控制块是系统为了管理进程而设置的专门数据结构，用于记录进程的外部特征，描述进程的运动变化过程；它包含了有关进程的描述信息、控制信息以及资源信息，是进程动态特征的集中反映。因此，系统同利用PCB来控制和管理进程。PCB是系统感知进程存在的唯一标志，所以进程与PCB是一一对应的。也就是说，进程的创建以PCB的产生为标志，进程的消亡以PCB的删除为标志。</p>
-<h3 id="1-Linux进程描述符"><a href="#1-Linux进程描述符" class="headerlink" title="1.Linux进程描述符"></a>1.Linux进程描述符</h3><p>&emsp;&emsp;在Linux中，PCB使用<code>task_struct</code>结构来描述，该结构定义在&lt;Linux/sched.h&gt;文件中，称为Linux进程描述符。该描述符结构<code>task_struct</code>存放在任务对内的双向链表<code>task_list</code>中，当有新的程序创建的时候，系统从内存中分配一个新的<code>task_struct</code>结构，并把它放到双向链表中，为了便于查找，系统用全局指针<code>current</code>指向当前运行进程的<code>task_struct</code>。</p>
+<h3 id="1-Linux进程描述符"><a href="#1-Linux进程描述符" class="headerlink" title="1.Linux进程描述符"></a>1.Linux进程描述符</h3><p>&emsp;&emsp;在Linux中，PCB使用<code>task_struct</code>结构来描述，该结构定义在<linux sched.h>文件中，称为Linux进程描述符。该描述符结构<code>task_struct</code>存放在任务对内的双向链表<code>task_list</code>中，当有新的程序创建的时候，系统从内存中分配一个新的<code>task_struct</code>结构，并把它放到双向链表中，为了便于查找，系统用全局指针<code>current</code>指向当前运行进程的<code>task_struct</code>。</linux></p>
 <p>&emsp;&emsp;进程描述符<code>task_struct</code>结构包括了许多字段，下面按照字段进程管理过程中的不同作用，分为以下几类来介绍其中的基本功能。</p>
 <ul>
 <li>进程的基本属性</li>
@@ -518,7 +518,6 @@
 <li><p><code>volatile long state</code></p>
 <p>用于保存进程的状态，在进程的生命期内，可以从该域获得自己的状态，在2.6中进程可以有以下几种状态：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> TASK_RUNNING 0</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> TASK_INTERRUPTIABLE 1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> TASK_UNINTERRUPTIBLE 2</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> TASK_STOPPED 4</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> TASK_TRACED 8</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EXIT_ZOMBIE 16</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EXIT_DEAD 32</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> TASK_DEAD 64</span></span><br></pre></td></tr></table></figure>
-
 <p><code>TASK_RUNNING</code>：进程当前正在运行，或者正在运行队列中等待调度</p>
 <p><code>TASK_INTERRUPTIABLE</code>：进程处于睡眠状态，正在等待某些事件发生。进程可以被信号中断。进程被显式唤醒或接收到信号之后，将转变为<code>TASK_RUNNING</code>状态。</p>
 <p><code>TASK_UNINTERRUPTIBLE</code>：进程状态类似<code>TASK_INTERRUPTIABLE</code>，只是它不会处理信号。中断处于这种状态的进程是不合适的，因为它可能正在完成某些重要的任务。当它所等待的事件发生时，进程将被唤醒。</p>
@@ -659,10 +658,10 @@
 <li><h3 id="进程链表"><a href="#进程链表" class="headerlink" title="进程链表"></a>进程链表</h3><p>Linux采用了双向链表将系统中的所有进程连接起来，该双向链表基于进程描述符中类型为<code>struct list_head</code>的成员变量<code>tasks</code>。</p>
 <p>Linux内核提供了宏定义<code>for_each_process()</code>用于遍历系统中的每一个进程，该宏定义在需要对系统中每一个进程进行操作时非常有用。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> for_each_process(p)\</span></span><br><span class="line">	<span class="keyword">for</span>(p=&amp;init_task;(p=next_task(p))!=&amp;init_task;)</span><br></pre></td></tr></table></figure>
-
 <p>其中，init_task是系统初始化过程中创建的第一个进程的进程描述符，宏定义next_task表示链表的下一个进程。</p>
 </li>
 </ol>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -670,7 +669,8 @@
 <th>说明</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>next_task(p)</td>
 <td>当前进程p的下一进程</td>
 </tr>
@@ -682,80 +682,60 @@
 <td>remove_task(p)</td>
 <td>从p的父进程孩子链表中删除该进程</td>
 </tr>
-</tbody></table>
-<ol start="2">
+</tbody>
+</table>
+</div>
+<ol>
 <li><h3 id="哈希链表"><a href="#哈希链表" class="headerlink" title="哈希链表"></a>哈希链表</h3><p>&emsp;&emsp;内核中使用一个进程描述符来表示一个进程，因此通过进程描述符的地址来访问一个进程再方便不过了。但是POSIX规范中规定，每一个进程要有进程号，而且POSIX规范中规定的系统调用<code>kill()</code>是基于进程号向其他进程发送信号的。这就需要一种机制来高效地完成从进程号到进程描述符地址的转换。Linux内核引入了哈希表来完成进程号到进程描述符<code>task_struct</code>结构的映射。</p>
 <p>&emsp;&emsp;根据进程类型的不同以及效率上的考虑，内核设置了<code>PIDTYPE_MAX</code>（默认值为3）个不同用途的哈希表，哈希表的类型使用枚举类型<code>pid_type</code>进行定义。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> pid_type</span><br><span class="line">&#123;</span><br><span class="line">	PIDTYPE_PID,</span><br><span class="line">	PIDTYPE_PGID,</span><br><span class="line">	PIDTYPE_SID,</span><br><span class="line">	PIDTYPE_MAX</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
 <p>&emsp;&emsp;其中，PIDTYPE_PID代表了进程号（Process ID）哈希表，系统中所有进程（包括线程）的进程号都在该哈希表中有相应的存储位置。PIDTYPE_PGID代表了进程组号（Process）哈希表。PIDTYPE_SID代表了会话号（Session ID）哈希表。</p>
 <p>&emsp;&emsp;为了查找哈希表，需要知道进程号（pid）与哈希表中位置之间的映射函数——哈希函数，定义如下：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> pid_hashfn(nr,ns)</span></span><br><span class="line">	Hash_long((<span class="keyword">unsigned</span> <span class="keyword">long</span>)nr+(<span class="keyword">unsigned</span> <span class="keyword">long</span>)ns,pidhash_shift)</span><br></pre></td></tr></table></figure>
-
 <p>&emsp;&emsp;其中nr表示进程的pid，ns表示进程的pid命名空间结构<code>pid_namespace</code>,<code>pidhash_shift</code>表示哈希表的大小（1&lt;&lt;pidhash_shift).</p>
 <p>&emsp;&emsp;Linux把通过哈希函数计算得到的哈希值作为数组pid_Hash的下标，并且把哈希值相同的进程组成哈希链表，我们称该链表为哈希链表的主链表。链表中的每个哈希结点（hlist_node结构）表示进程的pid。</p>
 <h4 id="1-相关的数据结构"><a href="#1-相关的数据结构" class="headerlink" title="(1)相关的数据结构"></a>(1)相关的数据结构</h4><p>&emsp;&emsp;随着在Linux内核2.6.24中引入了pid命名空间，结构pid被分割成结构pid和结构upid，其定义如下：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">upid</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> nr;<span class="comment">/*pid值*/</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">pid_namespace</span> *<span class="title">ns</span>;</span><span class="comment">/*所在的命名空间*/</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">hlist_node</span> <span class="title">pid_chain</span>;</span><span class="comment">/*哈希链表节点*/</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">pid</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">atomic_t</span> count;<span class="comment">/*引用计数*/</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">hlist_head</span> <span class="title">tasks</span>[<span class="title">PIDTYPE_MAX</span>];</span><span class="comment">/*保存所有使用此pid的进程*/</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">rcu_head</span> <span class="title">rcu</span>;</span><span class="comment">/*读写锁*/</span></span><br><span class="line">    <span class="keyword">int</span> level;<span class="comment">/*包含upid结构的个数*/</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">upid</span> <span class="title">numbers</span>[1];</span><span class="comment">/*包含的upid结构*/</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
 <p>&emsp;&emsp;在pid结构中，包含一个struct hlist_head类型的成员变量tasks，该变量把具有相同pid值的进程联系起来，如同一个进程组的进程拥有相同的进程组号pgid，此时可以将同一个进程组的进程通过该变量联系起来，我们称该链表尾哈希链表的从链表。</p>
 <p>&emsp;&emsp;在进程描述符<code>task_struct</code>中存在成员变量pids，定义如下所示：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">pid_link</span> <span class="title">pids</span>[<span class="title">PIDTYPE_MAX</span>];</span></span><br></pre></td></tr></table></figure>
-
 <p>该成员变量的数据类型<code>pid_link</code>的定义如下：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">pid_link</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">hlist_nnode</span> <span class="title">node</span>;</span><span class="comment">/*从哈希表节点*/</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">pid</span> *<span class="title">pid</span>;</span><span class="comment">/*进程对应的pid结构*/</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
 <p>该结构是表示进程描述符<code>task_struct</code>与结构<code>pid</code>之间的映射关系。使用这个变量可以根据pid结构找出对应的描述符。</p>
 </li>
 </ol>
 <h4 id="2-哈希表相关的操作"><a href="#2-哈希表相关的操作" class="headerlink" title="(2)哈希表相关的操作"></a>(2)哈希表相关的操作</h4><ul>
 <li><p><code>find_pid()</code>函数根据nr的值，利用哈希函数计算其哈希值，从哈希表pid_Hash中找出哈希链表头节点，然后遍历整个链表，找出哈希值为nr的pid结构。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">struct pid* <span class="title">find_pidd</span><span class="params">(<span class="keyword">int</span> nr)</span></span>;<span class="comment">/*nr表示进程的pid值*/</span></span><br></pre></td></tr></table></figure>
-
-
-
 </li>
 </ul>
 <ul>
 <li><p><code>pid_task()</code>函数根据pid返回其对应的进程描述符地址</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">struct task_struct *fastcall <span class="title">pid</span><span class="params">(struct pid* pid,<span class="keyword">enum</span> pid_type type)</span></span>;<span class="comment">/*参数type表示pid的类型*/</span></span><br></pre></td></tr></table></figure>
-
-
-
 </li>
 </ul>
 <ul>
 <li><p><code>transfer_pid()</code>函数使用新的继承描述符new替换旧的进程描述符</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> fastcall <span class="title">transfer_pid</span><span class="params">(struct task_struct *old,struct task_struct *<span class="keyword">new</span> ,<span class="keyword">enum</span> pid_type type)</span></span>;</span><br></pre></td></tr></table></figure>
-
-
-
 </li>
 </ul>
 <ul>
 <li><p><code>attach_pid()</code>函数建立进程描述符task与结构pid之间的映射关系，并将pid添加到相应的哈希链表的开头。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> fastcall <span class="title">attach_pid</span><span class="params">(struct task_struct *task,<span class="keyword">enum</span> pid_type,struct pid* pid)</span></span>;</span><br></pre></td></tr></table></figure>
-
-
-
 </li>
 </ul>
 <ul>
 <li><p>当进程被销毁时需要将进程在哈希表中的映射关系解除，这一过程通过函数<code>detach_pid()</code>完成。该函数首先解除进程描述符与哈希链表的映射关系，然后检查pid结构中是否还包含别的进程，如果不是，则释放pid结构。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> fastcall <span class="title">detach_pid</span><span class="params">(struct task_struct *task,<span class="keyword">enum</span> pid_type type)</span></span>;</span><br></pre></td></tr></table></figure>
-
-
-
 </li>
 </ul>
-<ol start="3">
+<ol>
 <li><h3 id="等待队列"><a href="#等待队列" class="headerlink" title="等待队列"></a>等待队列</h3><p>&emsp;&emsp;当进程等待一个外部事件发生时，就把它从运行队列中删除并放到等待队列上。</p>
 <p>&emsp;&emsp;在Linux内核中，使用<code>wait_queue_t</code>结构的双向链表来表示一个等待队列。在每个等待队列链表中，以<code>wait_queue_head_t</code>结构表示等待队列的表头，<code>wait_queue_t</code>表示等待队列中的每一个节点，它记录了等待进程所需要的所有信息。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> _<span class="title">wait_queue_head</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">spinlock_t</span> lock;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">list_head</span> <span class="title">task_list</span>;</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _ <span class="title">wait_queue_head</span> <span class="title">wait_queue_head_t</span>;</span></span><br></pre></td></tr></table></figure>
-
 <p><code>lock</code>用于保护该等待队列中数据的一致性。</p>
 <p><code>task_list</code>表示睡眠在该等待队列上的所有进程构成的链表的表头</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> _ <span class="title">wait_queue</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> flags;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> WQ_FLAG_EXCLUSIVE 0X01</span></span><br><span class="line">    <span class="keyword">void</span> *<span class="keyword">private</span>;</span><br><span class="line">    <span class="keyword">wait_queue_func_t</span> func;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">list_head</span> <span class="title">task_list</span>;</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _ <span class="title">wait_queue</span> <span class="title">wait_queue_t</span>;</span></span><br></pre></td></tr></table></figure>
-
 <p>flags:它指示了该结点对应进程的环形方式，取值为<code>WQ_FLAG_EXCLUSIVE</code>或0；<code>WQ_FLAG_EXCLUSIVE</code>表示节点对应进程对临界区资源使用是排他性的，即进程是独占式进程。</p>
 <p>private:一个私有数据指针，通常保存了睡眠进程的进程描述符task_struct的地址</p>
 <p>func:存放函数的一个结构，这个函数用于唤醒等待队列上的进程。这个域的默认值为<code>default_wake_function()</code>函数，该函数负责将变量private指示的进程设置为可运行状态并插入到合适的运行队列中。</p>
@@ -763,7 +743,6 @@
 <li><h3 id="当前进程"><a href="#当前进程" class="headerlink" title="当前进程"></a>当前进程</h3><p>&emsp;&emsp;Linux关于进程管理的大部分代码都需要获得或设置当前进程的信息，因此，是否能快速、高效地找到当前进程的描述符task_struct对系统的性能有很大的影响。Linux内核2.2开始采用了宏定义<code>current</code>来获取当前进程的描述符。硬件体系结构把不同，该宏的定义也不同，它必须针对专门的硬件体系结构作处理。有的硬件体系结构可以拿出一个专门的寄存器来存放指向当前进程描述符task_struct的指针，而像x86这样的体系由于寄存器并不富余，就只能在当前内核栈的尾端创建<code>thread_info</code>结构，通过计算偏移间接地查找task_struct结构。</p>
 <p>&emsp;&emsp;在x86体系结构中，每个进程拥有一个内核栈，且通过寄存器<code>%esp</code>即可访问内核栈的元素。基于这种思想，内核首先将当前进程的地址以及需要快速访问的其他状态标记记录在数据结构<code>struct thread info</code>中，然后将该数据结构保存到内核栈空间中的最低地址位置。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">union</span> thread_union</span><br><span class="line">&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">thread_info</span> <span class="title">thread_info</span>;</span></span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="built_in">stack</span>[THREAD_SIZE/<span class="keyword">sizeof</span>(<span class="keyword">long</span>)];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
 <p>从该结构中可以看出，内核栈<code>stack</code>和数据结构<code>thread_info</code>共享同一块内存。</p>
 </li>
 </ol>
