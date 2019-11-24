@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://wanqbin.xyz/"/>
-  <updated>2019-11-24T09:09:07.771Z</updated>
+  <updated>2019-11-24T15:00:45.498Z</updated>
   <id>http://wanqbin.xyz/</id>
   
   <author>
@@ -15,6 +15,66 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Adapter模式</title>
+    <link href="http://wanqbin.xyz/2019/Adapter%E6%A8%A1%E5%BC%8F/"/>
+    <id>http://wanqbin.xyz/2019/Adapter模式/</id>
+    <published>2019-11-24T14:58:00.000Z</published>
+    <updated>2019-11-24T15:00:45.498Z</updated>
+    
+    <content type="html"><![CDATA[<p>一、Adapter模式</p><blockquote><p>将一个类的接口转换成客户希望的另外一个接口。Adapter模式使原本由于接口不兼容而不能一起工作的类可以一起工作。</p><p>​                                                                                                                                                                                            ——《设计模式》</p></blockquote><p>即：我们需要一种方式，为一个功能正确但接口不合的对象创建一个新的接口。</p><p>二、学习Adapter模式</p><p>假设客户提出的需求为：</p><ul><li>为都有“显示”(display)行为的点、线、正方形分别创建类；</li><li>客户对象不必知道自己到底拥有点、线还是正方形。他们只需要知道拥有这些形状中的一个。</li></ul><p>也就是说，我想要用一个更高层次的概念将这些具体形状都涵盖进入，这个高层概念可以称为“可显示的形状”。</p><p>也就是说，尽管系统中有点、线以及正方形，但是我希望客户对象认为只有形状。</p><ul><li>这样客户对象可以以相同的方式处理所有对象——无需关注它们的区别。</li><li>这样我未来还可以在客户对象不修改的情况下添加新的形状类型。</li></ul><p>这里将使用多态，也就是说，我的系统中将有许多不同的对象，但我希望对象的客户与它们交互的方式是通用的。</p><p>这里，客户对象只是简单地让点、线或正方形对象进行一些操作，比如“自我显示”或“自我擦除”。然后由每个点、线、正方形负责了解如何按自己的类型完成相应的行为。</p><p>为了实现这一点，我创建了一个Shape类，然后从它派生出表示点、线、正方形的类。如下图所示：</p><p><img src="/2019/Adapter模式/Adapter1.PNG" alt="Point,Line,Square继承自Shape"></p><p>首先，我必须指定Shape对象应提供的具体行为。为此，我在Shape类中为这些行为定义了接口，然后在每个派生类中都相应地实现了这些功能。</p><p>Shape类需要具备以下行为：</p><ul><li>设定一个Shape对象的位置</li><li>获取一个Shape对象的位置</li><li>显示一个Shape对象</li><li>填充一个Shape对象</li><li>设置一个Shape对象的颜色</li><li>擦除一个Shape对象</li></ul><p><img src="/2019/Adapter模式/Adapter%E6%98%BE%E7%A4%BA%E6%96%B9%E6%B3%95.PNG" alt="显示了方法的Point，Line，Square"></p><p>假设现在客户要求实现一个圆——一种新的Shape。为此，我创建了一个新的类——Circle类来实现，并从Shape类派生出Circle类，这样我仍然可以获得多态行为。</p><p>那么，我必须为Circle类编写display,fill和undisplay方法。但是，我现在找到了一个现有的处理圆形的xxCircle类，但是这个类中的方法命名如下：</p><ul><li>displayIt</li><li>fillIt</li><li>undisplayIt</li></ul><p>这里，我不能直接使用xxCircle类，因为我想保持Shape类的多态行为。这有两个原因：</p><ul><li>名称和参数列表不同</li><li>我无法派生它</li></ul><p>而xxCircle无法修改。</p><p>既然无法改变，那就想办法适配！</p><p>我可以创建一个新类，它就是派生自Shape类，因此实现了Shape的接口，但是又用不着重写xxCircle类中的圆形的实现代码。</p><ul><li>Circle类派生自Shape</li><li>Circle包含xxCircle</li><li>Circle将发给自己的请求传送给xxCircle对象。</li></ul><p>![Adapter模式：Circle类包装了xxCircle类](Adapter Circle包装了xxCircle类.PNG)</p><p>当Circle对象实例化的时候，它必须实例化一个xxCircle对象。发给Circle对象的任何请求都将转给该xxCircle对象。如果能够总是如此，而且xxCircle对象具有Circle对象所需要的全部功能，Circle对象就可以通过让xxCircle做实际工作来实现自己的行为。</p><p>实现Adapter模式：</p><p>Shape.h</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Shape</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Shape(<span class="keyword">void</span>);</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="keyword">virtual</span> <span class="title">display</span><span class="params">()</span></span>= <span class="number">0</span>;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    ~Shape(<span class="keyword">void</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>Shape.cpp</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Shape::Shape(<span class="keyword">void</span>)</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Shape::~Shape(<span class="keyword">void</span>)</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p> <strong>Circle.h</strong> </p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"Shape.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"XX_Circle.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Circle</span> :</span> <span class="keyword">public</span> Shape</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Circle(XX_Circle *xxCircle);</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">display</span><span class="params">()</span></span>;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    ~Circle(<span class="keyword">void</span>);</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    XX_Circle *myXX_Circle;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>Circle.cpp</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"Circle.h"</span></span></span><br><span class="line"></span><br><span class="line">Circle::Circle(XX_Circle *xxCircle)</span><br><span class="line">&#123;</span><br><span class="line">    myXX_Circle = xxCircle;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Circle::~Circle(<span class="keyword">void</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">delete</span> myXX_Circle;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> Circle::display()</span><br><span class="line">&#123;</span><br><span class="line">    myXX_Circle-&gt;displayIt();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>XX_Circle.h</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">XX_Circle</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    XX_Circle(<span class="keyword">void</span>);</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">displayIt</span><span class="params">()</span></span>;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    ~XX_Circle(<span class="keyword">void</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p> <strong>XX_Circle.cpp</strong> </p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"XX_Circle.h"</span></span></span><br><span class="line"></span><br><span class="line">XX_Circle::XX_Circle(<span class="keyword">void</span>)</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">XX_Circle::~XX_Circle(<span class="keyword">void</span>)</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>三、Adapter模式：关键特征</p><ul><li>意图：使控制范围之外的一个原有对象与某个接口匹配。</li><li>问题：系统的数据和行为都正确，但接口不符。通常用于必须从抽象类派生时。</li><li>解决方案：Adapter模式提供了具有所需接口的包装类。</li><li>参与者与协作者：Adapter改变了Adaptee的接口，使Adaptee与Adapter的基类Target匹配。这样Client就可以使用Adaptee了，好像它是Target类型的。</li><li>效果：Adapter模式使原有对象能够适应新的类结构，不受其接口的限制。</li><li>实现：将原有类包含在另一个类中。让包含类与需要的接口匹配，调用被包容类的方法。</li></ul><p>四、Adapter模式与Facade模式</p><table><thead><tr><th></th><th>Facade模式</th><th>Adapter模式</th></tr></thead><tbody><tr><td>是否存在既有的类？</td><td>是</td><td>是</td></tr><tr><td>是否必须按某个接口设计？</td><td>否</td><td>是</td></tr><tr><td>对象需要多态行为吗？</td><td>否</td><td>可能</td></tr><tr><td>需要更简单的接口吗？</td><td>是</td><td>否</td></tr></tbody></table><p>从上表中，我们可以看到以下内容：</p><ul><li>在两个模式中，都存在既有的类</li><li>但是在Facade模式中，我无须按某个接口进行设计；而在Adapter模式中，则必须按某个特定的接口设计</li><li>在Facade模式中，我不需要多态行为，而Adapter模式中，多态行为可能是需要的</li><li>Facade模式中的动机是简化接口。而在Adapter模式中，尽管也是越简单越好，但是设计必须遵循一个已有的接口，不能简化任何东西，即使可能存在更简单的接口。</li></ul><p>结论：Facade模式简化了接口，而Adapter模式则将一个已有的接口转换成另一个接口。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;一、Adapter模式&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;将一个类的接口转换成客户希望的另外一个接口。Adapter模式使原本由于接口不兼容而不能一起工作的类可以一起工作。&lt;/p&gt;
+&lt;p&gt;​                                       
+      
+    
+    </summary>
+    
+      <category term="设计模式" scheme="http://wanqbin.xyz/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+    
+      <category term="Adapter模式" scheme="http://wanqbin.xyz/tags/Adapter%E6%A8%A1%E5%BC%8F/"/>
+    
+      <category term="适配器模式" scheme="http://wanqbin.xyz/tags/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Facade模式</title>
+    <link href="http://wanqbin.xyz/2019/Facade%E6%A8%A1%E5%BC%8F/"/>
+    <id>http://wanqbin.xyz/2019/Facade模式/</id>
+    <published>2019-11-24T14:55:00.000Z</published>
+    <updated>2019-11-24T14:57:36.450Z</updated>
+    
+    <content type="html"><![CDATA[<p>一、Facade 模式</p><blockquote><p>为子系统中的一组接口提供一个统一接口。Facade模式定义了一个更高层的接口，使子系统更加容易使用。</p><p>​                                            </p><p>​                                                                                                                                                                                            ——《设计模式》</p></blockquote><p>即：我们需要用一种比原有方式更简单的办法与系统交互，或者说，我们需要以一种特殊的方式使用系统（例如以二维的方式使用一个三维绘图程序）。</p><p>二、Facade 模式：关键特征</p><ul><li><p>意图：希望简化原有系统的使用方式。需要定义自己的接口。</p></li><li><p>问题：只需要使用某个复杂系统的子集，或者，需要以一种特殊的方式与系统交互。</p></li><li><p>解决方案：Facade为原有系统的客户提供了一个新的接口。</p></li><li><p>参与者与协作者：为客户提供一个简单的接口，使系统更容易使用。（接口本身和各个子系统）</p></li><li><p>效果：Facade模式简化了对所需子系统的使用过程。但是，由于Facade并不完整，因此客户可能无法使用某些功能。</p></li><li><p>实现：</p><ul><li><p>注意点：</p><ul><li>降低客户-子系统之间的耦合度。用抽象类实现Facade而它的具体子类对应于不同的子系统实现，这可以进一步降低客户与子系统的耦合度。</li><li>公共子系统与私有子系统。一个子系统与一个类的相似之处是，它们都有接口，并且都封装了一些东西——类封装了状态和操作，而子系统封装了一些类。考虑一个类的公共和私有接口是有益的，我们也可以考虑子系统的公共和私有接口。<ul><li>子系统的公共接口包含所有的客户程序可以访问的类</li><li>私有接口仅用于对子系统进行扩充。</li><li>Facade类是公共接口的一部分，但它不是唯一的部分，子系统的其他部分通常也是公共的。</li></ul></li></ul></li><li><p>定义一个（或多个）具备所需接口的新类。</p></li><li><p>让新的类使用原有的系统。</p></li></ul></li></ul><p>三、Facade模式：实践</p><p><img src="/2019/Facade模式/Facade%E6%A8%A1%E5%BC%8F%E4%BD%BF%E7%94%A8%E5%89%8D.PNG" alt="Facade模式使用前"></p><p>假设Client对象必须处理Database，Model，Element对象。Client必须首先通过Database对象打开数据库，获取Model对象，然后再查询Model对象，获取Element对象，最后请求Element对象的信息。如果能够创建一个可供Client查询的Database Facade，那么，以上过程将容易得多。</p><p><img src="/2019/Facade模式/Facade%E6%A8%A1%E5%BC%8F.PNG" alt="Facade模式可以减少客户需要处理的对象数量"></p><p>Facade模式提出了一种通用方法：它为我提供了起点。这个模式的Facade部分实际上就是创建了一种新的接口供客户使用，来替代原有的接口。之所以能够这样做，是因为Client对象并不需要原系统提供的所有功能。</p><p>Facade模式还可以用来隐藏或者封装系统。Facade类能够将系统作为自己的私有成员包含进来。在此情况下，原系统将与Facade类联系起来，但Facade类的客户无需看到。</p><p>封装系统的原因如下：</p><ul><li>跟踪系统的使用情况——通过强制所有系统的访问都必须经过Facade，可以很容易地监视系统地使用情况。</li><li>改换系统——未来可能需要切换系统。通过将原系统作为Facade类地一个私有成员，可以最省力地切换到新的系统。</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;一、Facade 模式&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;为子系统中的一组接口提供一个统一接口。Facade模式定义了一个更高层的接口，使子系统更加容易使用。&lt;/p&gt;
+&lt;p&gt;​                                            &lt;/
+      
+    
+    </summary>
+    
+      <category term="设计模式" scheme="http://wanqbin.xyz/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+    
+      <category term="Facade模式" scheme="http://wanqbin.xyz/tags/Facade%E6%A8%A1%E5%BC%8F/"/>
+    
+      <category term="外观模式" scheme="http://wanqbin.xyz/tags/%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>UML和类图</title>
@@ -537,65 +597,6 @@
       <category term="操作系统" scheme="http://wanqbin.xyz/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
     
       <category term="进程" scheme="http://wanqbin.xyz/tags/%E8%BF%9B%E7%A8%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Git的基本操作</title>
-    <link href="http://wanqbin.xyz/2019/Git%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/"/>
-    <id>http://wanqbin.xyz/2019/Git的基本操作/</id>
-    <published>2019-11-18T16:48:00.000Z</published>
-    <updated>2019-11-18T16:53:22.208Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="第一阶段-初始化"><a href="#第一阶段-初始化" class="headerlink" title="第一阶段:初始化"></a>第一阶段:初始化</h2><p>想要让git对一个目录进行版本控制需要以下步骤：</p><ul><li><p>进入要管理的文件夹</p></li><li><p>执行初始化命令</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure></li><li><p>管理目录下的文件状态</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br><span class="line"><span class="meta">#</span> 注：新增的文件和修改过后的文件都是红色</span><br></pre></td></tr></table></figure></li><li><p>管理指定文件（红变绿）</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add 文件名</span><br><span class="line">git add . #添加当前文件夹下的全部文件</span><br></pre></td></tr></table></figure></li><li><p>个人信息配置：用户名，邮箱【一次即可】</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.email "Your Email"</span><br><span class="line">git config --global user.name "Your Name"</span><br></pre></td></tr></table></figure></li><li><p>生成版本</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m '描述信息'</span><br></pre></td></tr></table></figure></li><li><p>查看版本记录</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log</span><br></pre></td></tr></table></figure></li></ul><h2 id="第二阶段：扩展新功能"><a href="#第二阶段：扩展新功能" class="headerlink" title="第二阶段：扩展新功能"></a>第二阶段：扩展新功能</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commmit -m 'message'</span><br></pre></td></tr></table></figure><h2 id="第三阶段：回滚"><a href="#第三阶段：回滚" class="headerlink" title="第三阶段：回滚"></a>第三阶段：回滚</h2><ul><li><p>回滚至之前的版本</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git log</span><br><span class="line">git reset --hard 版本号</span><br></pre></td></tr></table></figure></li><li><p>回滚至之后的版本</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git reflog</span><br><span class="line">git reset --hard 版本号</span><br></pre></td></tr></table></figure></li></ul><h2 id="第四阶段：分支-amp-修改"><a href="#第四阶段：分支-amp-修改" class="headerlink" title="第四阶段：分支&amp;修改"></a>第四阶段：分支&amp;修改</h2><ul><li><p>分支</p><p>分支可以给使用者提供多个环境，意味着你可以把你的工作从开发主线上分离开来，以免影响开发主线</p></li><li><p>修改方案</p><p><img src="/2019/Git的基本操作/git%E5%88%86%E6%94%AF.PNG" alt="git分支"></p></li><li><p>查看分支</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure></li><li><p>创建分支</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch 分支名</span><br></pre></td></tr></table></figure></li><li><p>切换分支</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout 分支名</span><br></pre></td></tr></table></figure></li><li><p>分支合并（可能产生冲突）</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git merge 要合并的分支</span><br><span class="line"><span class="meta">#</span>注：切换分支再合并，</span><br></pre></td></tr></table></figure></li><li><p>删除分支</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -d 分支名称</span><br></pre></td></tr></table></figure></li></ul><h2 id="第五阶段：GitHub"><a href="#第五阶段：GitHub" class="headerlink" title="第五阶段：GitHub"></a>第五阶段：GitHub</h2><ul><li><p>在家里上传代码</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin 远程仓库地址   #给远程仓库起名字</span><br><span class="line">git push -u origin 分支  #推送代码</span><br></pre></td></tr></table></figure></li><li><p>到公司新电脑上第一次获取代码</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git clone #远程仓库地址</span><br><span class="line">git checkout 分支 #切换分支</span><br></pre></td></tr></table></figure></li><li><p>在公司进行开发</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git checkout dev  #切换到dev分支进行开发</span><br><span class="line">git merge master #把master分支合并到dev（仅一次）</span><br><span class="line"><span class="meta">#</span>修改代码</span><br><span class="line"><span class="meta">#</span>提交代码</span><br><span class="line">git add .</span><br><span class="line">git commit -m 'xxx'</span><br><span class="line">git push origin dev</span><br></pre></td></tr></table></figure></li><li><p>回家继续写代码</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>切换到dev分支进行开发</span><br><span class="line">git checkout dev</span><br><span class="line"><span class="meta">#</span>拉代码</span><br><span class="line">git pull origin dev</span><br><span class="line"><span class="meta">#</span>继续开发</span><br><span class="line"><span class="meta">#</span>提交代码</span><br><span class="line"></span><br><span class="line">git add .</span><br><span class="line">git commit -m 'xx'</span><br><span class="line">git push origin dev</span><br></pre></td></tr></table></figure></li><li><p>开发完毕，要上线</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>将dev分支合并到master，进行上线</span><br><span class="line">git checkout master</span><br><span class="line">git merge dev</span><br><span class="line">git push origin master</span><br><span class="line"><span class="meta">#</span>把dev分支也推送到远程</span><br><span class="line">git checkout dev</span><br><span class="line">git merge master</span><br><span class="line">git push origin dev</span><br></pre></td></tr></table></figure></li></ul>  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git pull origin dev</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>等同于下面的两行代码</span><br><span class="line">git fetch origin dev</span><br><span class="line">git merget origin/dev</span><br></pre></td></tr></table></figure><ul><li><p>保持代码提交整洁(变基）</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rebase 分支</span><br></pre></td></tr></table></figure></li><li><p>记录图形展示</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --graph --preey=format:"%h %s"</span><br></pre></td></tr></table></figure><h3 id="快速解决冲突"><a href="#快速解决冲突" class="headerlink" title="快速解决冲突"></a>快速解决冲突</h3></li></ul><ol><li><p>安装beyond compare</p></li><li><p>在git中配置</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git config --locla merge.tool bc3  #--local说明只在当前项目中有效</span><br><span class="line">git config --local mergetool.path '/usr/local/bin/bcomp'</span><br><span class="line">git config --local mergetool.keepBackup false</span><br></pre></td></tr></table></figure></li><li><p>应用beyond compare解决冲突</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git mergetool  #启动beyond compare</span><br></pre></td></tr></table></figure></li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;第一阶段-初始化&quot;&gt;&lt;a href=&quot;#第一阶段-初始化&quot; class=&quot;headerlink&quot; title=&quot;第一阶段:初始化&quot;&gt;&lt;/a&gt;第一阶段:初始化&lt;/h2&gt;&lt;p&gt;想要让git对一个目录进行版本控制需要以下步骤：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;进入要管理
-      
-    
-    </summary>
-    
-      <category term="Git" scheme="http://wanqbin.xyz/categories/Git/"/>
-    
-    
-      <category term="Git" scheme="http://wanqbin.xyz/tags/Git/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Linux内存管理机制——基本机制</title>
-    <link href="http://wanqbin.xyz/2019/Linux%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6%E2%80%94%E2%80%94%E5%9F%BA%E6%9C%AC%E6%9C%BA%E5%88%B6/"/>
-    <id>http://wanqbin.xyz/2019/Linux内存管理机制——基本机制/</id>
-    <published>2019-08-12T13:54:00.000Z</published>
-    <updated>2019-08-12T13:54:49.678Z</updated>
-    
-    <content type="html"><![CDATA[<p>&emsp;&emsp;内存管理是指应用程序通过软硬件协作来访问内存的内存子系统。它的主要职责为：在进程请求内存时，为其分配可用物理内存页面；在进程释放内存时，回收内存页面；负责跟踪系统中内存的使用状态。</p><p>&emsp;&emsp;最简单的内存管理方式是使运行的进程拥有对所有物理内存1的访问权。如果这样做，进程就必须包含对硬件进行操作的全部代码，必须能找到自己的物理内存地址，而且还必须负责将自身的数据载入内存。这种方式不但给程序开发人员造成了很重的负担，而且还要保证进程可以被加载到可用内存中去。这些苛刻的要求显然对日益复杂化的程序需求来说很不现实，所以要将内存管理这个棘手的任务交给操作系统完成。</p><p>&emsp;&emsp;现在操作系统要求能够使多个程序共享操作系统的资源，同时还要求内存对程序开发者是透明的。在此需求下虚拟内存便应运而生，它支持程序访问比系统物理可用内存大得多的内存空间，而其也使多个程序共享内存变得更容易、更方便。物理内存是在系统中由RAM芯片控制的可用内存，虚拟内存依靠透明地使用磁盘空间以允许程序使用比物理内存更多的内存空间，磁盘空间可作为物理内存的扩充。我们之所以称其为虚拟内存就是因为磁盘空间被当作内存一样使用。</p><p>&emsp;&emsp;使用虚拟内存时，程序数据被分割成可以在磁盘与内存空间来回移动的基本单元。这样程序被使用的部分就可以被置于内存中，以便获得更快的访问速度；而未被使用的部分则被临时存放在磁盘上，从而减轻了物理内存的压力。这些数据单元，或者说虚拟内存块被称为<code>页</code>。同样，物理内存也需要被划分成可容纳页的区，这些区被称为页面。当一个进程请求一个地址时，包含该地址的页将被调入内存中，所有对该页中数据的请求都会产生对页的访问。如果页中没有任何地址被事先访问过，那么该页就尚未被载入内存。当某个地址第一次访问该页时便会产生一个缺页，因为这时内存中并没有该页，因此必须从磁盘请求。当物理页面已全部被占用时，内核必须选择一个页面，然后将其内容写回到磁盘，从而用程序刚刚请求到的页内容来填充它。</p><p>&emsp;&emsp;当一个程序从内存页面中存取数据时，会使用地址来指出需要访问的内存位置。该地址被称作<code>虚拟地址</code>,它们组成了进程的虚拟地址空间。每个进程都有自己独立的虚拟地址空间，这样做的好处是可防止非法读取或写覆盖1其他进程的数据。虚拟内存允许进程“使用”超过可用物理内存的内存空间，于是操作可以给予每个进程自己独立的虚拟线性地址空间。</p><p>&emsp;&emsp;虚拟地址空间的大小取决于体系结构的字长，如果一个处理器的寄存器可容纳32位数据，那么该处理器支持的进程虚拟地址空间大小就是$2^{32}$字节。虚拟内存不仅扩大了可寻址的内存范围，而且也使得物理内存的大小限制对用户空间的开发者透明，比如开发者不需要管理内存中的任何空格键。以32位的系统为例，其虚拟空间的范围为0~4GB，如果系统有2GB的物理内存，那么它的物理内存地址范围为0-2GB。而程序可以有4GB之大，但是只有被装入可用内存中的程序才能运行，因此整个程序将被存放在磁盘上，系统只把所需要运行的程序页载入到内存。</p><p>&emsp;&emsp;这种页从内存到磁盘之间调入调出的机制称为分页机制，分页机制包括程序虚拟地址到物理内存地址的转换。</p><p>&emsp;&emsp;内存管理在操作系统中负责维护虚拟地址和物理地址之间的关系，并且实现分页机制。对内存管理子系统来说，页时内存的基本单元，内存单元MMU是完成实际地址转换工作的硬件部件，内核提供了页表以及相关的地址，MMU在执行地址转换时访问这些地址。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;&amp;emsp;&amp;emsp;内存管理是指应用程序通过软硬件协作来访问内存的内存子系统。它的主要职责为：在进程请求内存时，为其分配可用物理内存页面；在进程释放内存时，回收内存页面；负责跟踪系统中内存的使用状态。&lt;/p&gt;
-&lt;p&gt;&amp;emsp;&amp;emsp;最简单的内存管理方式是使运行的
-      
-    
-    </summary>
-    
-      <category term="Linux内核" scheme="http://wanqbin.xyz/categories/Linux%E5%86%85%E6%A0%B8/"/>
-    
-    
-      <category term="内存管理机制" scheme="http://wanqbin.xyz/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6/"/>
-    
-      <category term="虚拟地址" scheme="http://wanqbin.xyz/tags/%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80/"/>
-    
-      <category term="虚拟内存" scheme="http://wanqbin.xyz/tags/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/"/>
-    
-      <category term="操作系统" scheme="http://wanqbin.xyz/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
     
   </entry>
   
