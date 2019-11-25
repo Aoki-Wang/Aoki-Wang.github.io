@@ -508,16 +508,19 @@
 <li><p><code>rcu_read_lock()</code></p>
 <p>&emsp;&emsp;该操作函数由读者任务调用，表明读者任务以只读方式进入了RCU临界区，开始对RCU临界资源进行访问。代码如下所示：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rcu_read_lock()\</span></span><br><span class="line">	<span class="keyword">do</span>&#123;\</span><br><span class="line">	preempt_disable();\</span><br><span class="line">	_acquire(RCU);\</span><br><span class="line">	rcu_read_acquire();\</span><br><span class="line">	&#125;<span class="keyword">while</span>(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
 <p>其中，<code>_acquire()</code>函数和<code>rcu_read_acquire()</code>函数都是编译器上的选择信息，<code>preempt_disable()</code>禁止内核抢占，即RCU同步机制中获取读锁只禁止当前处理器上的内核抢占，不需要获得任何形式的锁。读者任务进入RCU临界区后，不能进入睡眠状态。</p>
 </li>
 <li><p><code>rcu_read_unlock()</code></p>
 <p>&emsp;&emsp;该操作函数由读者任务调用，表明读者完成了对临界资源的访问，离开了RCU临界区。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rcu_read_unlock()\</span></span><br><span class="line">	<span class="keyword">do</span>(\</span><br><span class="line">	rcu_read_release();\</span><br><span class="line">	_release(RCU);\</span><br><span class="line">	preempt_enable();\</span><br><span class="line">	)<span class="keyword">while</span>(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
 <p>该函数与<code>rcu_read_lock()</code>函数类似，主要调用<code>preempt_enable()</code>函数使能当前处理器的内核抢占。</p>
 </li>
 <li><p><code>rcu_dereference()</code></p>
 <p>&emsp;&emsp;该函数由读者任务调用，用于获取指向RCU临界资源的指针，因此RCU机制限制所有的临界资源都应该以指针方式进行间接访问。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rcu_dereference(&#123;\</span></span><br><span class="line">	typeof(p) __p1=ACCESS_ONCE(p);\</span><br><span class="line">	smp_read_barrier_depends();\</span><br><span class="line">	(__p1);\</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
 <p>该宏定义实现的功能看似多余，实则不然。这里通过为指针p创建一个新的复制件<code>__p1</code>，使读者任务在通过复制<code>__p1</code>访问RCU资源的同时，不妨碍写者对原有指针变量p的修改。</p>
 </li>
 <li><p><code>rcu_assign_pointer()</code></p>
@@ -531,6 +534,9 @@
 <li><p><code>call_rcu()</code></p>
 <p>&emsp;&emsp;该函数由写者任务调用，在写者任务完成移除工作之后，调用该函数向系统注册一个资源“回收”处理函数，在所有读者任务不再引用旧版本数据之后，内核调用该处理函数完成旧版本临界资源的回收工作。与<code>synchronize_rcu()</code>函数相比，该函数不会阻塞，可用于中断上下文中。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> fastcall <span class="title">call_rcu</span><span class="params">(struct rcu_head *head,<span class="keyword">void</span>(*func)(struct rcu_head *rcu))</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> flags;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">rcu_data</span> *<span class="title">rdp</span>;</span></span><br><span class="line">    </span><br><span class="line">    head-&gt;func=func;</span><br><span class="line">    head-&gt;next=<span class="literal">NULL</span>;</span><br><span class="line">    local_irq_save(flags);</span><br><span class="line">    rdp=&amp;_get_cpu_var(rcu_data);</span><br><span class="line">    *rdp-&gt;nxtail=head;</span><br><span class="line">    rdp-&gt;nxttail=&amp;head-&gt;next;</span><br><span class="line">    <span class="keyword">if</span>(unlikely(++rdp-&gt;qlen&gt;qhimark))</span><br><span class="line">    &#123;</span><br><span class="line">        rdp-&gt;blimit=INT_MAX;</span><br><span class="line">        force_quiescent_state(rdp,&amp;rcu_ctrlblk);</span><br><span class="line">    &#125;</span><br><span class="line">    local_irq_restore(flags);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
 </li>
 </ol>
 

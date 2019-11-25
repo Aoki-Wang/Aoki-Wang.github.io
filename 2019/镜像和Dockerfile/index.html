@@ -509,6 +509,7 @@
 </ul>
 <h2 id="二、本地镜像的管理"><a href="#二、本地镜像的管理" class="headerlink" title="二、本地镜像的管理"></a>二、本地镜像的管理</h2><ol>
 <li><h3 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker images</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>REPOSITORY：仓库名称</li>
 <li>TAG：用于区分同一仓库中的不同镜像。如果未指定，默认为latest</li>
@@ -520,20 +521,25 @@
 <li><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker search 镜像名   #在Docker Hub上搜索符合要求的镜像</span><br><span class="line">docker pull 镜像名 #拉取镜像</span><br></pre></td></tr></table></figure>
 </li>
 <li><h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rmi 镜像名/镜像ID</span><br></pre></td></tr></table></figure>
+
 <p>删除本地所有镜像：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm $(docker ps -a -q)</span><br></pre></td></tr></table></figure>
+
 <p>其中，<code>docker ps -a -q</code>命令用来列出所有容器的ID。</p>
 </li>
 </ol>
 <h2 id="三、创建本地镜像"><a href="#三、创建本地镜像" class="headerlink" title="三、创建本地镜像"></a>三、创建本地镜像</h2><ol>
 <li><h3 id="使用commit命令创建本地镜像"><a href="#使用commit命令创建本地镜像" class="headerlink" title="使用commit命令创建本地镜像"></a>使用<code>commit</code>命令创建本地镜像</h3><p>使用镜像创建并运行一个镜像，实际上是在父镜像的基础上构建一个可读写的文件层级。我们在容器中所做的修改，都发生在这个层级上。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker run -i -t centos    #在centos镜像上创建运行一个容器</span><br><span class="line"><span class="meta">#</span>在该容器中安装软件</span><br><span class="line">exit #退出该容器</span><br></pre></td></tr></table></figure>
+
 <p>在这里，需要注意的是，要保存当前创建的容器的ID。在退出容器后，执行下面的命令：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker commit -m="Message" --author="Aoki" 容器ID aoki/centos:v1</span><br></pre></td></tr></table></figure>
+
 <p><code>-m</code>参数是描述本次创建的镜像的信息，<code>--author</code>参数用来指定作者信息，<code>aoki</code>表示仓库名，这里需要注意的是，在命名的过程中，有一定的标准，比如不能使用大写字母，<code>centos</code>表示镜像名，<code>v1</code>标识镜像TAG名。</p>
 </li>
 <li><h3 id="使用Dockerfile创建镜像"><a href="#使用Dockerfile创建镜像" class="headerlink" title="使用Dockerfile创建镜像"></a>使用Dockerfile创建镜像</h3><p>使用Dockerfile创建镜像是是将所有的配置信息都写入到了一个文件中，然后使用<code>docker build</code>命令来创建一个镜像。这种方法可以使镜像的创建变得透明和独立化，并且创建过程可以被重复执行。Dockerfile文件以行为单位，行首为Dockerfile命令，命令都是大写形式，其后紧跟的是命令的参数。</p>
 <figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#version: 1.0.1</span></span><br><span class="line"><span class="comment">#指定父镜像</span></span><br><span class="line"><span class="keyword">FROM</span> ubuntu:latest</span><br><span class="line"></span><br><span class="line"><span class="keyword">MAINTAINER</span> Aoki <span class="string">"aoki3352@163.com"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#设置root用户为后续命令的执行者</span></span><br><span class="line"><span class="keyword">USER</span> root</span><br><span class="line"></span><br><span class="line"><span class="comment">#执行操作</span></span><br><span class="line"><span class="keyword">RUN</span> apt-get update</span><br><span class="line"><span class="keyword">RUN</span> apt-get install -t nginx</span><br><span class="line"></span><br><span class="line"><span class="comment">#使用&amp;&amp;拼接命令</span></span><br><span class="line"><span class="keyword">RUN</span> touch test.txt &amp;&amp; echo "abc" &gt; abc.txt</span><br><span class="line"></span><br><span class="line"><span class="comment">#对外暴露接口</span></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">80</span> <span class="number">8080</span> <span class="number">1038</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#添加文件</span></span><br><span class="line"><span class="keyword">ADD</span> /webapp /opt/webapp  #添加当前文件夹中的/webapp文件到 /opt/webapp目录下</span><br><span class="line"></span><br><span class="line"><span class="comment">#添加网络文件</span></span><br><span class="line"><span class="keyword">ADD</span> https://www.baidu.com/img/xxxx.png /opt #添加网络文件到/opt目录下</span><br><span class="line"></span><br><span class="line"><span class="comment">#设置环境变量</span></span><br><span class="line"><span class="keyword">ENV</span> WEBAPP_PORT=<span class="number">9090</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#设置工作目录</span></span><br><span class="line"><span class="keyword">WORKDIR</span> /opt</span><br><span class="line"></span><br><span class="line"><span class="comment">#设置启动命令</span></span><br><span class="line"><span class="keyword">ENTRYPOINT</span> ["ls"]</span><br><span class="line"></span><br><span class="line"><span class="comment">#设置启动参数</span></span><br><span class="line"><span class="keyword">CMD</span> ["-a","-l"]</span><br><span class="line"></span><br><span class="line"><span class="comment">#设置卷</span></span><br><span class="line"><span class="keyword">VOLUME</span> ["/data","/var/www"]</span><br><span class="line"></span><br><span class="line"><span class="comment">#设置子镜像的触发操作</span></span><br><span class="line"><span class="keyword">ONBUILD</span> <span class="keyword">ADD</span> . /app/src</span><br><span class="line"><span class="keyword">ONBUILD</span> <span class="keyword">RUN</span> echo "on build excuted" &gt;&gt; onbuild.txt</span><br></pre></td></tr></table></figure>
+
 <p>下面的各个命令的含义：</p>
 <ul>
 <li><code>FROM</code>：指定待扩展的父镜像。除了注释之外，在文件开头必须是一个<code>FROM</code>指令，接下来的指令便在这个父级镜像的环境中运行，直到遇到下一个<code>FROM</code>指令。</li>
@@ -554,6 +560,7 @@
 <li><code>ONBUILD</code>：触发器指令。构建镜像的时候，Docker的镜像构建器会将所有的<code>ONBUILD</code>指令指定的命令保存到镜像的元数据中，这些命令在当前镜像的构建过程中并不会执行。只有新的镜像使用<code>FROM</code>指令指定该镜像为父镜像时，便会触发执行。</li>
 </ul>
 <h3 id="docker-build命令创建构建镜像："><a href="#docker-build命令创建构建镜像：" class="headerlink" title="docker build命令创建构建镜像："></a><code>docker build</code>命令创建构建镜像：</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t aoki/xxx:v1 .</span><br></pre></td></tr></table></figure>
+
 <p><code>-t</code>参数用来指定镜像的命名空间，仓库名和TAG。</p>
 <p>命令最后的<code>.</code>表示Dockerfile文件所在的相对路径，这里是指当前路径。</p>
 </li>

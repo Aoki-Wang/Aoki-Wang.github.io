@@ -517,12 +517,14 @@
 <p>容器创建后，会返回容器的ID。</p>
 <p>要想让创建的容器立马进入运行态，可以使用<code>docker run</code>命令，该命令相当于下面的两条命令：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker create</span><br><span class="line">docker start</span><br></pre></td></tr></table></figure>
+
 <p>使用<code>docker run</code>命令可以创建两种类型的容器——后台型容器和交互型容器。</p>
 <ul>
 <li>交互型容器：运行在前台，通常会指定有交互的控制台，可以给容器输入，也可以得到容器的输出。创建该容器的终端被关闭，在容器内部使用<code>exit</code>命令或者调用了<code>docker stop</code>、<code>docker kill</code>命令后，容器会变成停止状态。</li>
 <li>后台型容器：运行在后台，创建启动之后就与终端无关。即便终端关闭了，该后台容器也依然存在，只有调用<code>docker stop</code>或<code>docker kill</code>命令时才能够使容器变成停止状态。</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -i -t --name=inspect_shell ubuntu /bin/bash</span><br></pre></td></tr></table></figure>
+
 <p>其中，<code>-i</code>用于打开容器的标准输入(STDIN),<code>-t</code>告诉Docker为容器建立一个命令行终端。</p>
 <p><code>--name</code>为容器指定一个名字，是一个可选项。如果没有这个选项，Docker会为容器创建一个随机名字</p>
 <p><code>ubuntu</code>是镜像名，<code>/bin/bash</code>代表告诉Docker要在容器里面执行命令<code>/bin/bash</code>。</p>
@@ -530,6 +532,7 @@
 </li>
 <li><h3 id="查看容器"><a href="#查看容器" class="headerlink" title="查看容器"></a>查看容器</h3><p>查看正在运行的容器：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure>
+
 <p>CONTAINER ID：唯一标识容器的ID</p>
 <p>IMAGE：创建容器时使用的镜像</p>
 <p>COMMAND：容器最后运行的命令</p>
@@ -539,6 +542,7 @@
 <p>NAMES：容器名。和容器ID一样都可以唯一标识一个容器。</p>
 <p>查看所有的容器：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps -a</span><br></pre></td></tr></table></figure>
+
 <p>列出所有容器，包括运行的和停止的容器。</p>
 </li>
 <li><h3 id="启动容器"><a href="#启动容器" class="headerlink" title="启动容器"></a>启动容器</h3><p>通过<code>docker create</code>命令创建的容器会进入到停止状态，想要运行该容器，可以执行以下命令：</p>
@@ -549,33 +553,44 @@
 </li>
 <li><h3 id="删除容器"><a href="#删除容器" class="headerlink" title="删除容器"></a>删除容器</h3><p>执行命令：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm 容器名</span><br></pre></td></tr></table></figure>
+
 <p>注意：不可以删除一个运行中的容器，必须先用<code>docker stop</code>或<code>docker kill</code>命令停止它才能删除。当然，也可以使用<code>-f</code>选项强制删除。</p>
 <p>删除所有容器：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm 'docker ps -a -q'</span><br></pre></td></tr></table></figure>
+
 <p><code>-a</code>标志列出所有容器，<code>-q</code>标志只列出容器的ID，不包括容器的其他信息。然后将这个列表传给<code>docker rm</code>命令，依次删除容器。</p>
 </li>
 </ol>
 <h2 id="四、容器内信息获取与命令执行"><a href="#四、容器内信息获取与命令执行" class="headerlink" title="四、容器内信息获取与命令执行"></a>四、容器内信息获取与命令执行</h2><ol>
 <li><h3 id="依附容器"><a href="#依附容器" class="headerlink" title="依附容器"></a>依附容器</h3><p>依附操作<code>attach</code>通常用于由<code>docker start</code>或者<code>docker restart</code>启动的交互型容器中。由于<code>docker start</code>启动的交互型容器并没有具体终端可以依附，而容器本身是可以接收用户交互的，这时就需要通过<code>attach</code>命令来将终端依附到容器上。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker attach 容器ID</span><br></pre></td></tr></table></figure>
+
+
+
 </li>
 </ol>
-<ol>
+<ol start="2">
 <li><h3 id="查看容器日志"><a href="#查看容器日志" class="headerlink" title="查看容器日志"></a>查看容器日志</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker logs -f 容器名 </span><br><span class="line">docker logs -f --tails=5 容器名   #控制logs输出的日志行数，只输出最后五行</span><br></pre></td></tr></table></figure>
+
+
+
 </li>
 </ol>
-<ol>
+<ol start="3">
 <li><h3 id="查看容器进程"><a href="#查看容器进程" class="headerlink" title="查看容器进程"></a>查看容器进程</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker top 容器名</span><br></pre></td></tr></table></figure>
 </li>
 <li><h3 id="查看容器信息"><a href="#查看容器信息" class="headerlink" title="查看容器信息"></a>查看容器信息</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker inspect 容器名</span><br></pre></td></tr></table></figure>
+
 <p>用来查看容器的配置环境，包括容器名，环境变量，运行命令，主机配置，网络配置和数据卷配置等。使用<code>-f</code>或者<code>--format</code>命令格式化标志，可以查看指定部分的信息。</p>
 </li>
 <li><h3 id="容器的导入与导出"><a href="#容器的导入与导出" class="headerlink" title="容器的导入与导出"></a>容器的导入与导出</h3><p>Docker的导入和导出分别由<code>import</code>命令和<code>export</code>命令完成。</p>
 <p>使用<code>docker export</code>命令导出容器：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker export 容器名 &gt; my_container.tar</span><br></pre></td></tr></table></figure>
+
 <p><code>docker export</code>命令会把容器的文件系统以tar包的格式导出到标准输出。我们将其定位到目标文件<code>name.tar</code>。将容器保存到本地文件也算是持久化方式的一种。将容器保存到本次之后，我们就可以通过网络等方法将tar包分享给他人。</p>
 <p>使用<code>docker import</code>命令导入一个本地的tar包作为镜像：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat my_container.tar | docker import - imported:container</span><br></pre></td></tr></table></figure>
+
 <p><code>docker import</code>会把打包的容器导入为一个镜像。</p>
 <p><code>import</code>表示从标准输入读取容器内容，我们把<code>name.tar</code>的内容传给标准输入，res和tag代表生成的镜像和标记。</p>
 </li>
