@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Bridge模式【一】]]></title>
+    <url>%2F2019%2FBridge%E6%A8%A1%E5%BC%8F%E3%80%90%E4%B8%80%E3%80%91%2F</url>
+    <content type="text"><![CDATA[一、Bridge模式 将抽象部分与它的实现部分分离，使它们都可以独立地变化。 ​ ——《设计模式》 解耦（decouple）：是指让各种事物互相独立地行事，或者至少明确地声明之间地关系。 抽象（abstraction)：是指不同事物之间概念上地联系方式。 一直以为实现就是实际构建抽象的方式。令我不解的是，怎样才能将抽象与其实现的具体方式分离开呢？ 其实我的迷惑主要是因为误解了实现的含义。这里实现指的是抽象类及其派生类用来实现自己的对象（而不是抽象类的派生类，这些派生类被称为具体类）。 二、案例研究假设我接受了一个任务：编写一个程序，使用两个绘图程序之一绘制矩形。我被告知，实例化矩形的时候，它会知道应该使用绘图程序1（DP1)还是绘图程序2（DP2）。 其中矩形是用两对点来定义的。 绘图程序的区别： DP1 DP2 用于画线 draw_a_line(x1,x2,y1,y2) drawline(x1,x2,y1,y2) 用于画圆 draw_a_circle(x,y,r) drawcircle(x,y,r) 分析师做出规定，绘制矩形的代码并不需要操心自己应该使用那种绘制程序。我想到，因为矩形在实例化的时候会知道使用哪个绘图程序，所以可以有两种不同的矩形对象：一种使用DP1，一种使用DP2。每种矩形对象都有一个绘制方法。 通过引入一个抽象类Rectangle，我可以利用这样一个事实，不同Rectangle之间唯一的差异在于如何实现drawLine方法，V1Rectangle类是通过一个DP1对象的引用，使用该DP1对象的draw_a_line方法实现的。V2Rectangle类是通过一个DP2对象的引用，使用该DP2对象的drawline方法实现的。无论这样，通过实例化正确的Rectangle，我不必再操心这种差异。 Rectangle.h 12345678910111213#pragma onceclass Rectangle&#123;public: Rectangle(double, double, double, double); virtual void drawLine(double, double, double, double)=0; void draw();public: ~Rectangle(void);private: double _x1, _x2, _y1, _y2;&#125;; Rectangle.cpp 123456789101112131415161718#include "Rectangle.h"Rectangle::Rectangle(double x1, double y1, double x2, double y2) &#123; _x1= x1; _y1= y1; _x2= x2; _y2= y2;&#125;Rectangle::~Rectangle(void)&#123;&#125;void Rectangle::draw()&#123; drawLine( _x1, _y1, _x2, _y1); drawLine( _x2, _y1, _x2, _y2); drawLine( _x2, _y2, _x1, _y2); drawLine( _x1, _y2, _x1, _y1);&#125; V1Rectangle.h 1234567891011#pragma once#include "Rectangle.h"class V1Rectangle : public Rectangle&#123;public: V1Rectangle(double, double, double, double); void drawLine( double, double, double, double);public: ~V1Rectangle(void);&#125;; V1Rectangle.cpp 123456789101112131415#include "V1Rectangle.h"#include "DP1.h"V1Rectangle::V1Rectangle(double x1, double y1, double x2, double y2) : Rectangle(x1, y1, x2, y2)&#123;&#125;V1Rectangle::~V1Rectangle(void)&#123;&#125;void V1Rectangle::drawLine( double x1, double y1, double x2, double y2)&#123; DP1::draw_a_line( x1, y1, x2, y2);&#125; V2Rectangle.h 1234567891011#pragma once#include "Rectangle.h"class V2Rectangle : public Rectangle&#123;public: V2Rectangle(double, double, double, double); void drawLine( double, double, double, double);public: ~V2Rectangle(void);&#125;; V2Rectangle.cpp 123456789101112131415#include "V2Rectangle.h"#include "DP2.h"V2Rectangle::V2Rectangle(double x1, double y1, double x2, double y2) : Rectangle(x1, y1, x2, y2)&#123;&#125;V2Rectangle::~V2Rectangle(void)&#123;&#125;void V2Rectangle::drawLine( double x1, double y1, double x2, double y2)&#123; DP2::drawline( x1, y1, x2, y2);&#125; DP1.h 1234567891011#pragma onceclass DP1&#123;public: DP1(void); static void draw_a_line( double, double, double, double); static void draw_a_circle( double, double, double);public: ~DP1(void);&#125;; DP1.cpp 123456789101112131415161718#include "DP1.h"DP1::DP1(void)&#123;&#125;DP1::~DP1(void)&#123;&#125;void DP1::draw_a_line( double x1, double y1, double x2, double y2)&#123; // draw the line&#125;void DP1::draw_a_circle( double x, double y, double r)&#123; // draw the circle&#125; DP2.h 1234567891011#pragma onceclass DP2&#123;public: DP2(void); static void drawline( double, double, double, double); static void drawcircle( double, double, double);public: ~DP2(void);&#125;; DP2.cpp 123456789101112131415161718#include "DP2.h"DP2::DP2(void)&#123;&#125;DP2::~DP2(void)&#123;&#125;void DP2::drawline( double x1, double x2, double y1, double y2)&#123; // draw the line&#125;void DP2::drawcircle( double x, double y, double r)&#123; // draw the circle&#125; 现在，假设在代码完成之后。需求发生了变化。我现在需要支持另一种形状——这次是圆形，但是需求还是要求集合对象无需知道Rectangle和Circle的差异。 我想到可以在类层次中增加一层，就可以在已经使用的方法之上进行扩展了。我需要增加一个名为Shape的新类，并从中派生Rectangle类和Circle类。这样，Client对象可以只引用Shape对象，而不必考虑说给的是哪种形状。 例如，我可以从上面的设计开始，然后对每一种Shape类，都用各自的绘图程序实现，为Rectangle类派生一个DP1版本和一个DP2版本，为Circle类也派生一个DP1版本和一个DP2版本。最终的设计如下： 实现Rectangle类的方法与实现Circle类的方式相同，但是，这一次实现draw方法使用的是drawCircle方法，而不是drawLine方法。 Shape.h 12345678910#pragma onceclass Shape&#123;public: Shape(void); virtual void draw()= 0;public: ~Shape(void);&#125;; Shape.cpp 123456789#include "Shape.h"Shape::Shape(void)&#123;&#125;Shape::~Shape(void)&#123;&#125; Circle.h 12345678910111213141516#pragma once#include "Shape.h"class Circle : public Shape&#123;public: Circle(double, double, double); virtual void draw(); virtual void drawCircle(double, double, double)=0;public: ~Circle(void);protected: double _x, _y, _r;&#125;; Circle.cpp 1234567891011121314151617#include "Circle.h"Circle::Circle(double x, double y, double r)&#123; _x= x; _y= y; _r= r;&#125;Circle::~Circle(void)&#123;&#125;void Circle::draw ()&#123; drawCircle( _x, _y, _r);&#125; Rectangle.h 1234567891011121314#pragma once#include "Shape.h"class Rectangle : public Shape&#123;public: Rectangle(double, double, double, double); virtual void drawLine(double, double, double, double)=0; void draw();public: ~Rectangle(void);private: double _x1, _x2, _y1, _y2;&#125;; Rectangle.cpp 123456789101112131415161718#include "Rectangle.h"Rectangle::Rectangle(double x1, double y1, double x2, double y2) &#123; _x1= x1; _y1= y1; _x2= x2; _y2= y2;&#125;Rectangle::~Rectangle(void)&#123;&#125;void Rectangle::draw()&#123; drawLine( _x1, _y1, _x2, _y1); drawLine( _x2, _y1, _x2, _y2); drawLine( _x2, _y2, _x1, _y2); drawLine( _x1, _y2, _x1, _y1);&#125; V1Circle.h 1234567891011#pragma once#include "Circle.h"class V1Circle : public Circle&#123;public: V1Circle(double, double, double); void drawCircle( double, double, double);public: ~V1Circle(void);&#125;; V1Circle.cpp 123456789101112131415#include "V1Circle.h"#include "DP1.h"V1Circle::V1Circle(double x, double y, double r) : Circle( x, y, r)&#123;&#125;V1Circle::~V1Circle(void)&#123;&#125;void V1Circle::drawCircle ( double x, double y, double r)&#123; DP1::draw_a_circle( x, y, r);&#125; V1Rectangle.h 1234567891011#pragma once#include "Rectangle.h"class V1Rectangle : public Rectangle&#123;public: V1Rectangle(double, double, double, double); void drawLine( double, double, double, double);public: ~V1Rectangle(void);&#125;; V1Rectangle.cpp 123456789101112131415#include "V1Rectangle.h"#include "DP1.h"V1Rectangle::V1Rectangle(double x1, double y1, double x2, double y2) : Rectangle(x1, y1, x2, y2)&#123;&#125;V1Rectangle::~V1Rectangle(void)&#123;&#125;void V1Rectangle::drawLine( double x1, double y1, double x2, double y2)&#123; DP1::draw_a_line( x1, y1, x2, y2);&#125; V2Circle.h 1234567891011#pragma once#include "Circle.h"class V2Circle : public Circle&#123;public: V2Circle(double, double, double); void drawCircle( double, double, double);public: ~V2Circle(void);&#125;; V2Circle.cpp 1234567891011121314#include "V2Circle.h"#include "DP2.h"V2Circle::V2Circle(double x, double y, double r) : Circle( x, y, r)&#123;&#125;V2Circle::~V2Circle(void)&#123;&#125;void V2Circle::drawCircle ( double x, double y, double r)&#123; DP2::drawcircle( x, y, r);&#125; V2Rectangle.h 1234567891011#pragma once#include "Rectangle.h"class V2Rectangle : public Rectangle&#123;public: V2Rectangle(double, double, double, double); void drawLine( double, double, double, double);public: ~V2Rectangle(void);&#125;; V2Rectangle.cpp 123456789101112131415#include "V2Rectangle.h"#include "DP2.h"V2Rectangle::V2Rectangle(double x1, double y1, double x2, double y2) : Rectangle(x1, y1, x2, y2)&#123;&#125;V2Rectangle::~V2Rectangle(void)&#123;&#125;void V2Rectangle::drawLine( double x1, double y1, double x2, double y2)&#123; DP2::drawline( x1, y1, x2, y2);&#125; DP1.h 1234567891011#pragma onceclass DP1&#123;public: DP1(void); static void draw_a_line( double, double, double, double); static void draw_a_circle( double, double, double);public: ~DP1(void);&#125;; DP1.cpp 123456789101112131415161718#include "DP1.h"DP1::DP1(void)&#123;&#125;DP1::~DP1(void)&#123;&#125;void DP1::draw_a_line( double x1, double y1, double x2, double y2)&#123; // draw the line&#125;void DP1::draw_a_circle( double x, double y, double r)&#123; // draw the circle&#125; DP2.h 1234567891011#pragma onceclass DP2&#123;public: DP2(void); static void drawline( double, double, double, double); static void drawcircle( double, double, double);public: ~DP2(void);&#125;; DP2.cpp 123456789101112131415161718#include "DP2.h"DP2::DP2(void)&#123;&#125;DP2::~DP2(void)&#123;&#125;void DP2::drawline( double x1, double x2, double y1, double y2)&#123; // draw the line&#125;void DP2::drawcircle( double x, double y, double r)&#123; // draw the circle&#125; 虽然类图中似乎有很多对象，但实际上，只需要处理三个对象： 使用矩形的Client对象 V1Rectangle对象 绘图程序DP1对象 但是，这个办法带来了新的问题。准确地说，这个办法存在“组合爆炸”问题。 对于类图中V1Rectangle这一行的类，表示的是Shape的4个具体类型。 如果我另外还有一个绘图程序，也就是说实现上又有一种新的变化，会怎么样呢？将会有6种不同类型的Shape（具体类型） 如果我还有另一类型的Shape，也就是说另一种概念上的变化，会怎么样呢？将会有9中不同类型的Shape（3个概念上的Shape，3个绘图程序） 于是，类爆炸性增长的问题出现了，因为这个解决方案中抽象（Shape）与其实现（绘图程序）是紧耦合的。每种形状都必须知道自己用的是哪种绘图程序。需要有一种方式将抽象上的变化和实际上的变化分开，从而使类的数量仅仅是线性的增加。 这正是Bridge模式的意图：将抽象与实现解耦，使它们都可以独立地变化。 问问自己这个设计还有什么毛病？ 看上去是否存在冗余？ 是高内聚还是低内聚？ 是紧耦合还是松耦合？ “为每种变化使用不同的特化”（继承）到“将变化转移到使用或拥有这种变化的对象中”（组合）]]></content>
+      <categories>
+        <category>设计模式</category>
+      </categories>
+      <tags>
+        <tag>Bridge模式</tag>
+        <tag>桥接模式</tag>
+        <tag>对象结构型模式</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Strategy模式]]></title>
+    <url>%2F2019%2FStrategy%E6%A8%A1%E5%BC%8F%2F</url>
+    <content type="text"><![CDATA[一、Strategy模式 定义一系列的算法，把它们一个个封装起来，并且使他们可相互替换。Strategy模式使算法可独立于使用它的客户而变化。 ​ ——《设计模式》 Strategy模式以下列几条原则为基础： 对象都具有职责 这些职责不同的具体实现使通过多态的使用完成的 概念上相同的算法具有多个不同的实现，需要进行管理 将问题域中的各个行为互相分离开来——也就是说，将它们解耦，使一个好的设计。这使我们可以修改负责某一行为的类，不会对其他类产生不良影响。 二、电子商务系统案例研究我们考虑这样一个国际电子商务订单处理系统。这个系统必须能够处理许多不同国家的订单。 最初的需求在这个系统的总架构中有一个控制器对象，用于处理销售请求。它能够确认何时有人在请求销售订单，并将请求转发给SalesOrder对象进行订单处理。 SalesOrder对象的功能包括： 允许客户通过GUI填写订单 处理税额的计算 处理订单，打印销售收据 处理新的需求如果此时我收到了一个新需求，需要修改处理税额的办法。如果我必须处理国外的订单税额。我至少需要添加新的税额计算规则。 候选方案： 复制和粘贴 使用switch或if语句，用一个变量指定各种情况 使用函数指针或委托（让另一个代表每一种情况） 继承（让派生类用新的方式处理） 将整个功能委托给新的对象。 这里如果使用switch或if等条件语句，分支的流向将会变得模糊。 C++中的函数指针和C#中的委托都可以用来将代码隐藏在精巧、紧凑、内聚的函数之中，但是，函数指针和委托无法维持每个对象的状态，因此其使用也是受限的。 继承经常被人误用，这使它的名声不佳。其实继承本身并没有什么问题。 当面向对象设计成为主流时，“重用”曾经被吹捧为它的主要优点之一。为了实现“重用”，我们总是强调应该找到已有的东西，用派生类的形式对其进行小幅修改。 在我们的这个例子中，可以试图重用现有的SalesOrder对象。我可以将新缴税规则看成新种类的销售订单，只是缴税规则不同。例如，对于加拿大的订单，可以从SalesOrder派生名为CanadianSalesOrder的新类，改写缴税规则。如下所示： 采用这种方法的苦难指出在于，它这次能奏效，但是无法次次奏效。比如，如果要处理德国的订单，或者应对其他方面发生的变化（比如日期格式，语言和运费规则），我们构建的继承层次将无法轻松地应对。诸如此类地反复特化，要么会使代码变得无法理解，要么产生冗余。人们对面向对象设计进程有一种抱怨：特化技术最终总是会产生太深地继承层次。糟糕的是，继承层次太深，会导致程序难以理解（低内聚）、存在冗余、难以测试而且多个概念耦合在一起。无怪乎许多人认为面向对象有些言过其实——尤其是这一切都是因为遵循了通用的面向对象“重用”要求。 根据这种方法，应该这样做： 寻找变化，并将它封装在一个单独的类中 将这个类包含在另一个类中 在本例中，已经确定缴税规则是变化的。“将它封装”就意味着创建一个抽象类定义入股哦在概念上完成税额计算，然后为每种变化派生具体类。也就是说，可以创建一个CalcTax对象，为完成税额计算这一任务定义接口。然后可以由它派生所需的特定版本。 接下来，应该使用组合取代继承，。这意味着用不着再创建不同版本的销售订单（使用继承），可以用组合来包含变化。也就是说，只有一个SalesOrder类，让它包含处理变化的CalcTax类。如下所示： 实现Strategy模式： TaxController.h 1234567891011#include "CalcTax.h"class TaskController&#123;public: TaskController(void); void process(); CalcTax *getTaxRulesForCountry();public: ~TaskController(void);&#125;; TaxController.cpp 1234567891011121314151617181920212223242526272829303132333435include "TaskController.h"#include "SalesOrder.h"#include "CalcTax.h"#include "USTax.h"TaskController::TaskController(void)&#123;&#125;TaskController::~TaskController(void)&#123;&#125;void TaskController::process ()&#123; // this code is an emulation of a // processing task controller // . . . // figure out which country you are in CalcTax *myTax; myTax= getTaxRulesForCountry(); SalesOrder *mySO= new SalesOrder(); mySO-&gt;process( myTax);&#125;CalcTax *TaskController::getTaxRulesForCountry() &#123; // In real life, get the tax rules based on // country you are in. You may have the // logic here or you may have it in a // configuration file // Here, just return a USTax so this // will compile. return new USTax;&#125; SalesOrder.h 12345678910#include "CalcTax.h"class SalesOrder&#123;public: SalesOrder(void); void process (CalcTax *TaxToUse);public: ~SalesOrder(void);&#125;; SalesOrder.cpp 12345678910111213141516171819202122#include "SalesOrder.h"SalesOrder::SalesOrder(void)&#123;&#125;SalesOrder::~SalesOrder(void)&#123;&#125;void SalesOrder::process (CalcTax *taxToUse)&#123; long itemNumber= 0; double price= 0; // given the tax object to use // . . . // calculate tax double tax= taxToUse-&gt;taxAmount( itemNumber, price);&#125; CalcTax.h 12345678class CalcTax&#123;public: CalcTax(void); double virtual taxAmount( long, double)= 0;public: ~CalcTax(void);&#125;; CalcTax.cpp 123456789#include "CalcTax.h"CalcTax::CalcTax(void)&#123;&#125;CalcTax::~CalcTax(void)&#123;&#125; CanTax.h 1234567891011#include "calctax.h"class CanTax : public CalcTax&#123;public: CanTax(void); double taxAmount( long, double);public: ~CanTax(void);&#125;; CanTax.cpp 1234567891011121314151617#include "CanTax.h"CanTax::CanTax(void)&#123;&#125;CanTax::~CanTax(void)&#123;&#125;double CanTax::taxAmount (long itemSold, double price) &#123; // in real life, figure out tax according to // the rules in Canada and return it // here, return 0 so this will compile return 0.0;&#125; USTax.h 12345678910111213#pragma once#include "calctax.h"class USTax : public CalcTax&#123;public: USTax(void); double taxAmount( long, double);public: ~USTax(void);&#125;; USTax.cpp 1234567891011121314151617#include "USTax.h"USTax::USTax(void)&#123;&#125;USTax::~USTax(void)&#123;&#125;double USTax::taxAmount (long itemSold, double price) &#123; // in real life, figure out tax according to // the rules in the US and return it // here, return 0 so this will compile return 0.0;&#125; 这种方法的一个优点在于提高了内聚度。销售税有专门的类进行处理。还有一个优点是：在有新的缴税需求是，只需从CalcTax类派生一个新类予以实现即可。 最后，这种方法使职责的转移更加容易了。例如，在基于继承的方法中，必须由TaskController决定该使用哪个类型的SalesOrder对象。而在新结构中，SalesOrder对象的类型既可以由TaskController对象来决定，也可以由SalesOrder对象决定。为了由SalesOrder对象决定，需要有一个Configuration（配置）对象，使SalesOrder对象知道应该使用哪个税额计算对象，如下图所示： 这种方法也使用了继承，但是，它使用继承的方式与仅仅从SalesOrder派生CandianSalesOrder是不同的。在严格的继承方法中，是通过在SalesOrder继承来处理变化的，而在设计模式所指导的方法中，使用对象聚集（也就是说，SalesOrder中包含一个引用，指向处理变化的功能也就是税额计算的对象。）从SalesOrder（需要扩展的类）的就角度来看，是用组合代替了继承。至于被包含的类如何处理变化，SalesOrder并不关心。 “这种方法不就是将问题向下推了吗？” 首先，这种说法没错，但是这样能够简化更大，更复杂的程序。 其次，原设计在一个类层次（SalesOrder）中装入了许多独立的变量，而在新的方法中将这些变量都放在自己的类层次中，这样就能够独立地分别扩展它们。 最后，在新的方法中，系统的其他部分可以独立于SalesOrder使用或测试这些更小的操作。 总而言之，模式所提倡的方法伸缩性更强，这是原来直接使用继承的方法所不具备的。 这种方法使业务规则能够独立于自己的SalesOrder对象而发生改变。请注意对于目前和未来可能出现的任何情况，这种方法都行之有效。这种”将算法封装在一个抽象类（CalcTax）中，而且在某一时刻能够互换地使用其中之一“的方法，本质上就是Strategy模式。 三、Strategy模式：关键特征 意图：可以根据所处上下文，使用不同的业务规则或算法。 问题：对所需算法的选择取决于发出请求的客户或者要处理的数据。如果只有一些不会变化的算法，就不需要Strategy模式。 解决方案：将对算法的选择和实现分离。允许根据上下文进行选择。 参与者与协作者： Strategy指定了如何使用不同的算法。 各ConcreteStrategy实现了这些不同的算法。 Context通过类型为Strategy的引用使用具体的ConcreteStrategy。Strategy与Context相互作用以实现所选的算法。Conetext将来自Client的请求转发给Strategy。 效果： Strategy模式定义了一系列的算法。 可以不使用switch语句或者条件语句。 必须以相同的方式调用所有的算法（它们必须拥有相同的接口）。各ConcreteStrategy与Conetxt之间的相互作用可能需要在Context中加入获取状态的方法。 实现：让使用算法的类（Context）包含一个抽象类（Strategy），该抽象类有一个抽象方法指定如何调用算法。每个派生类按需要实现算法。 注意：在原型Strategy模式中，选择所用具体实现的职责由Client对象承担，并转给Strategy模式的Context对象。 ​ 四、使用Strategy模式&emsp;&emsp;从技术角度而言，Strategy模式就是用来封装算法的。但是在实践中，它可以用来封装几乎任何类型的规则。 &emsp;&emsp;Strategy模式要求所封装的算法（业务规则）应处在使用它们的类（Context）之外。这意味着Strategy模式所需信息必须要么传递给它们，要么以某种形式获得。 &emsp;&emsp;Strategy模式还简化了单元测试，因为每个算法都有自己的类，可以通过自己的接口单独测试。如果算法不像Strategy模式中那样移出来，Context和Strategy之间的耦合将使测试非常苦难。例如，在实例化Context对象之前可能还有一些前提条件。或者，Context可能通过保护数据成员提供Strategy所需信息。如果同时存在几个不同系列的算法，测试能够进一步简化。这是因为使用Strategy模式，开发人员不需要操心与Context耦合所带来的各种相互作用。也就是说，我们应该能够独立地测试每个算法，而无需担心可能地所有组合情况。]]></content>
+      <categories>
+        <category>设计模式</category>
+      </categories>
+      <tags>
+        <tag>Strategy模式</tag>
+        <tag>策略模式</tag>
+        <tag>对象行为型模式</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Adapter模式]]></title>
     <url>%2F2019%2FAdapter%E6%A8%A1%E5%BC%8F%2F</url>
     <content type="text"><![CDATA[一、Adapter模式 将一个类的接口转换成客户希望的另外一个接口。Adapter模式使原本由于接口不兼容而不能一起工作的类可以一起工作。 ​ ——《设计模式》 即：我们需要一种方式，为一个功能正确但接口不合的对象创建一个新的接口。 二、学习Adapter模式 假设客户提出的需求为： 为都有“显示”(display)行为的点、线、正方形分别创建类； 客户对象不必知道自己到底拥有点、线还是正方形。他们只需要知道拥有这些形状中的一个。 也就是说，我想要用一个更高层次的概念将这些具体形状都涵盖进入，这个高层概念可以称为“可显示的形状”。 也就是说，尽管系统中有点、线以及正方形，但是我希望客户对象认为只有形状。 这样客户对象可以以相同的方式处理所有对象——无需关注它们的区别。 这样我未来还可以在客户对象不修改的情况下添加新的形状类型。 这里将使用多态，也就是说，我的系统中将有许多不同的对象，但我希望对象的客户与它们交互的方式是通用的。 这里，客户对象只是简单地让点、线或正方形对象进行一些操作，比如“自我显示”或“自我擦除”。然后由每个点、线、正方形负责了解如何按自己的类型完成相应的行为。 为了实现这一点，我创建了一个Shape类，然后从它派生出表示点、线、正方形的类。如下图所示： 首先，我必须指定Shape对象应提供的具体行为。为此，我在Shape类中为这些行为定义了接口，然后在每个派生类中都相应地实现了这些功能。 Shape类需要具备以下行为： 设定一个Shape对象的位置 获取一个Shape对象的位置 显示一个Shape对象 填充一个Shape对象 设置一个Shape对象的颜色 擦除一个Shape对象 假设现在客户要求实现一个圆——一种新的Shape。为此，我创建了一个新的类——Circle类来实现，并从Shape类派生出Circle类，这样我仍然可以获得多态行为。 那么，我必须为Circle类编写display,fill和undisplay方法。但是，我现在找到了一个现有的处理圆形的xxCircle类，但是这个类中的方法命名如下： displayIt fillIt undisplayIt 这里，我不能直接使用xxCircle类，因为我想保持Shape类的多态行为。这有两个原因： 名称和参数列表不同 我无法派生它 而xxCircle无法修改。 既然无法改变，那就想办法适配！ 我可以创建一个新类，它就是派生自Shape类，因此实现了Shape的接口，但是又用不着重写xxCircle类中的圆形的实现代码。 Circle类派生自Shape Circle包含xxCircle Circle将发给自己的请求传送给xxCircle对象。 ![Adapter模式：Circle类包装了xxCircle类](Adapter Circle包装了xxCircle类.PNG) 当Circle对象实例化的时候，它必须实例化一个xxCircle对象。发给Circle对象的任何请求都将转给该xxCircle对象。如果能够总是如此，而且xxCircle对象具有Circle对象所需要的全部功能，Circle对象就可以通过让xxCircle做实际工作来实现自己的行为。 实现Adapter模式： Shape.h 12345678class Shape&#123;public: Shape(void); void virtual display()= 0;public: ~Shape(void);&#125;; Shape.cpp 1234567Shape::Shape(void)&#123;&#125;Shape::~Shape(void)&#123;&#125; Circle.h 12345678910111213#include "Shape.h"#include "XX_Circle.h"class Circle : public Shape&#123;public: Circle(XX_Circle *xxCircle); void display();public: ~Circle(void);private: XX_Circle *myXX_Circle;&#125;; Circle.cpp 12345678910111213141516#include "Circle.h"Circle::Circle(XX_Circle *xxCircle)&#123; myXX_Circle = xxCircle;&#125;Circle::~Circle(void)&#123; delete myXX_Circle;&#125;void Circle::display()&#123; myXX_Circle-&gt;displayIt();&#125; XX_Circle.h 12345678class XX_Circle&#123;public: XX_Circle(void); void displayIt();public: ~XX_Circle(void);&#125;; XX_Circle.cpp 123456789#include "XX_Circle.h"XX_Circle::XX_Circle(void)&#123;&#125;XX_Circle::~XX_Circle(void)&#123;&#125; 三、Adapter模式：关键特征 意图：使控制范围之外的一个原有对象与某个接口匹配。 问题：系统的数据和行为都正确，但接口不符。通常用于必须从抽象类派生时。 解决方案：Adapter模式提供了具有所需接口的包装类。 参与者与协作者：Adapter改变了Adaptee的接口，使Adaptee与Adapter的基类Target匹配。这样Client就可以使用Adaptee了，好像它是Target类型的。 效果：Adapter模式使原有对象能够适应新的类结构，不受其接口的限制。 实现：将原有类包含在另一个类中。让包含类与需要的接口匹配，调用被包容类的方法。 四、Adapter模式与Facade模式 Facade模式 Adapter模式 是否存在既有的类？ 是 是 是否必须按某个接口设计？ 否 是 对象需要多态行为吗？ 否 可能 需要更简单的接口吗？ 是 否 从上表中，我们可以看到以下内容： 在两个模式中，都存在既有的类 但是在Facade模式中，我无须按某个接口进行设计；而在Adapter模式中，则必须按某个特定的接口设计 在Facade模式中，我不需要多态行为，而Adapter模式中，多态行为可能是需要的 Facade模式中的动机是简化接口。而在Adapter模式中，尽管也是越简单越好，但是设计必须遵循一个已有的接口，不能简化任何东西，即使可能存在更简单的接口。 结论：Facade模式简化了接口，而Adapter模式则将一个已有的接口转换成另一个接口。]]></content>
@@ -10,6 +36,7 @@
       <tags>
         <tag>Adapter模式</tag>
         <tag>适配器模式</tag>
+        <tag>类对象结构型模式</tag>
       </tags>
   </entry>
   <entry>
@@ -22,6 +49,7 @@
       <tags>
         <tag>Facade模式</tag>
         <tag>外观模式</tag>
+        <tag>对象结构型模式</tag>
       </tags>
   </entry>
   <entry>
@@ -263,10 +291,10 @@
         <category>Linux内核</category>
       </categories>
       <tags>
-        <tag>操作系统</tag>
         <tag>内存管理机制</tag>
         <tag>虚拟地址</tag>
         <tag>虚拟内存</tag>
+        <tag>操作系统</tag>
       </tags>
   </entry>
   <entry>
@@ -350,8 +378,8 @@
         <category>Linux内核</category>
       </categories>
       <tags>
-        <tag>Linux内核</tag>
         <tag>操作系统</tag>
+        <tag>Linux内核</tag>
         <tag>Linux内核同步</tag>
         <tag>读写自旋锁</tag>
       </tags>
@@ -364,10 +392,10 @@
         <category>Linux内核</category>
       </categories>
       <tags>
+        <tag>操作系统</tag>
         <tag>Linux内核</tag>
         <tag>自旋锁</tag>
         <tag>普通自旋锁</tag>
-        <tag>操作系统</tag>
         <tag>内核同步</tag>
       </tags>
   </entry>
@@ -379,8 +407,8 @@
         <category>Linux内核</category>
       </categories>
       <tags>
-        <tag>Linux内核</tag>
         <tag>操作系统</tag>
+        <tag>Linux内核</tag>
         <tag>原子操作</tag>
         <tag>原子整数操作</tag>
         <tag>原子位操作</tag>
@@ -475,8 +503,8 @@
         <category>Linux内核</category>
       </categories>
       <tags>
-        <tag>Linux内核</tag>
         <tag>操作系统</tag>
+        <tag>Linux内核</tag>
         <tag>Linux系统调用</tag>
         <tag>Linux添加系统调用</tag>
       </tags>
@@ -503,8 +531,8 @@
         <category>Linux内核</category>
       </categories>
       <tags>
-        <tag>Linux内核</tag>
         <tag>操作系统</tag>
+        <tag>Linux内核</tag>
         <tag>系统调用</tag>
       </tags>
   </entry>
@@ -556,8 +584,8 @@
         <category>Linux内核</category>
       </categories>
       <tags>
-        <tag>Linux内核</tag>
         <tag>操作系统</tag>
+        <tag>Linux内核</tag>
         <tag>进程调度</tag>
         <tag>模块化调度</tag>
         <tag>组调度</tag>

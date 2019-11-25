@@ -2,23 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://wanqbin.xyz/about/index.html</loc>
+    <loc>http://wanqbin.xyz/2019/Facade%E6%A8%A1%E5%BC%8F/</loc>
     
-    <lastmod>2019-11-25T05:14:20.719Z</lastmod>
+    <lastmod>2019-11-25T11:16:07.293Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://wanqbin.xyz/2019/Adapter%E6%A8%A1%E5%BC%8F/</loc>
     
-    <lastmod>2019-11-24T15:00:45.498Z</lastmod>
+    <lastmod>2019-11-25T11:15:46.033Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://wanqbin.xyz/2019/Facade%E6%A8%A1%E5%BC%8F/</loc>
+    <loc>http://wanqbin.xyz/2019/Bridge%E6%A8%A1%E5%BC%8F%E3%80%90%E4%B8%80%E3%80%91/</loc>
     
-    <lastmod>2019-11-24T14:57:36.450Z</lastmod>
+    <lastmod>2019-11-25T11:15:19.519Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://wanqbin.xyz/2019/Strategy%E6%A8%A1%E5%BC%8F/</loc>
+    
+    <lastmod>2019-11-25T11:09:59.672Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://wanqbin.xyz/about/index.html</loc>
+    
+    <lastmod>2019-11-25T05:14:20.719Z</lastmod>
     
   </url>
   
