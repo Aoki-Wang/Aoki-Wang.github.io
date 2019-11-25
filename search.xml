@@ -263,10 +263,10 @@
         <category>Linux内核</category>
       </categories>
       <tags>
+        <tag>操作系统</tag>
         <tag>内存管理机制</tag>
         <tag>虚拟地址</tag>
         <tag>虚拟内存</tag>
-        <tag>操作系统</tag>
       </tags>
   </entry>
   <entry>
@@ -350,8 +350,8 @@
         <category>Linux内核</category>
       </categories>
       <tags>
-        <tag>操作系统</tag>
         <tag>Linux内核</tag>
+        <tag>操作系统</tag>
         <tag>Linux内核同步</tag>
         <tag>读写自旋锁</tag>
       </tags>
@@ -364,10 +364,10 @@
         <category>Linux内核</category>
       </categories>
       <tags>
-        <tag>操作系统</tag>
         <tag>Linux内核</tag>
         <tag>自旋锁</tag>
         <tag>普通自旋锁</tag>
+        <tag>操作系统</tag>
         <tag>内核同步</tag>
       </tags>
   </entry>
@@ -379,8 +379,8 @@
         <category>Linux内核</category>
       </categories>
       <tags>
-        <tag>操作系统</tag>
         <tag>Linux内核</tag>
+        <tag>操作系统</tag>
         <tag>原子操作</tag>
         <tag>原子整数操作</tag>
         <tag>原子位操作</tag>
@@ -475,8 +475,8 @@
         <category>Linux内核</category>
       </categories>
       <tags>
-        <tag>操作系统</tag>
         <tag>Linux内核</tag>
+        <tag>操作系统</tag>
         <tag>Linux系统调用</tag>
         <tag>Linux添加系统调用</tag>
       </tags>
@@ -503,8 +503,8 @@
         <category>Linux内核</category>
       </categories>
       <tags>
-        <tag>操作系统</tag>
         <tag>Linux内核</tag>
+        <tag>操作系统</tag>
         <tag>系统调用</tag>
       </tags>
   </entry>
@@ -556,8 +556,8 @@
         <category>Linux内核</category>
       </categories>
       <tags>
-        <tag>操作系统</tag>
         <tag>Linux内核</tag>
+        <tag>操作系统</tag>
         <tag>进程调度</tag>
         <tag>模块化调度</tag>
         <tag>组调度</tag>
