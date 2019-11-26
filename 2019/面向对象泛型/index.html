@@ -136,18 +136,18 @@
 
 
 
-<meta name="description" content="面向对象泛型以对象概念为中心，一切都集中在对象之上，编写代码时是围绕对象而非函数进行组织的。 使用对象的优点在于，可以定义自己负责自己的事物。对象天生就知道自己的类型。对象中的数据能够告诉它自己的转台如何，而对象中的代码能够使它正确工作。    对象 责任    Student 知道自己所在的教室;知道自己下堂课的教室；从一个教室到下一个教室   Instructor 告诉学生到下堂课的教室去">
+<meta name="description" content="面向对象泛型以对象概念为中心，一切都集中在对象之上，编写代码时是围绕对象而非函数进行组织的。 使用对象的优点在于，可以定义自己负责自己的事物。对象天生就知道自己的类型。对象中的数据能够告诉它自己的转台如何，而对象中的代码能够使它正确工作。     对象 责任     Student 知道自己所在的教室;知道自己下堂课的教室；从一个教室到下一个教室   Instructor 告诉学生到下堂课的教室去">
 <meta name="keywords" content="面向对象泛型">
 <meta property="og:type" content="article">
 <meta property="og:title" content="面向对象泛型">
 <meta property="og:url" content="http://wanqbin.xyz/2019/面向对象泛型/index.html">
 <meta property="og:site_name" content="Aoki&#39;s Blog">
-<meta property="og:description" content="面向对象泛型以对象概念为中心，一切都集中在对象之上，编写代码时是围绕对象而非函数进行组织的。 使用对象的优点在于，可以定义自己负责自己的事物。对象天生就知道自己的类型。对象中的数据能够告诉它自己的转台如何，而对象中的代码能够使它正确工作。    对象 责任    Student 知道自己所在的教室;知道自己下堂课的教室；从一个教室到下一个教室   Instructor 告诉学生到下堂课的教室去">
+<meta property="og:description" content="面向对象泛型以对象概念为中心，一切都集中在对象之上，编写代码时是围绕对象而非函数进行组织的。 使用对象的优点在于，可以定义自己负责自己的事物。对象天生就知道自己的类型。对象中的数据能够告诉它自己的转台如何，而对象中的代码能够使它正确工作。     对象 责任     Student 知道自己所在的教室;知道自己下堂课的教室；从一个教室到下一个教室   Instructor 告诉学生到下堂课的教室去">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-11-23T09:45:27.753Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面向对象泛型">
-<meta name="twitter:description" content="面向对象泛型以对象概念为中心，一切都集中在对象之上，编写代码时是围绕对象而非函数进行组织的。 使用对象的优点在于，可以定义自己负责自己的事物。对象天生就知道自己的类型。对象中的数据能够告诉它自己的转台如何，而对象中的代码能够使它正确工作。    对象 责任    Student 知道自己所在的教室;知道自己下堂课的教室；从一个教室到下一个教室   Instructor 告诉学生到下堂课的教室去">
+<meta name="twitter:description" content="面向对象泛型以对象概念为中心，一切都集中在对象之上，编写代码时是围绕对象而非函数进行组织的。 使用对象的优点在于，可以定义自己负责自己的事物。对象天生就知道自己的类型。对象中的数据能够告诉它自己的转台如何，而对象中的代码能够使它正确工作。     对象 责任     Student 知道自己所在的教室;知道自己下堂课的教室；从一个教室到下一个教室   Instructor 告诉学生到下堂课的教室去">
 
 
 
@@ -499,6 +499,7 @@
       
         <p>面向对象泛型以对象概念为中心，一切都集中在对象之上，编写代码时是围绕对象而非函数进行组织的。</p>
 <p>使用对象的优点在于，可以定义自己负责自己的事物。对象天生就知道自己的类型。对象中的数据能够告诉它自己的转台如何，而对象中的代码能够使它正确工作。</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -506,7 +507,8 @@
 <th>责任</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>Student</td>
 <td>知道自己所在的教室;知道自己下堂课的教室；从一个教室到下一个教室</td>
 </tr>
@@ -522,7 +524,9 @@
 <td>Direction giver</td>
 <td>对于给定的两个教室，指出从一个教室到另一个教室的路线</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>在这种情况下，对象是通过寻找在问题领域中的实体而被发现的。然后再通过查看这些实体需要做些什么，为每个对象确定责任。这与通过在需求中寻找名词发现对象和通过寻找动词发现方法的技术是一致的。</p>
 <p>理解对象的最佳方式，是将其看成“具有责任的东西”。</p>
 <p>有一条好的设计规则：对象应该自己负责自己，而且应该清楚地定义责任。</p>
@@ -534,6 +538,7 @@
 </ul>
 <p>因为对象具有责任并且自己负责自己，所以必须有方法告诉对象要做什么。对象含有说明自己状态的数据，还有实现必要功能的方法。对象的很多方法都将标识为可被其他对象调用。这些方法的集合就称为对象的公共接口。</p>
 <p>面向对象的相关术语：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -541,7 +546,8 @@
 <th>描述</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>抽象类（abstract class）</td>
 <td>定义了一组相关类的行为。</td>
 </tr>
@@ -581,7 +587,9 @@
 <td>多态(polymorphism)</td>
 <td>能够用一种方式引用一个类的不同派生类，但获得的行为对应于所引用的派生类。</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 
       
     </div>
@@ -714,7 +722,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">116</span>
+                  <span class="site-state-item-count">117</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -736,7 +744,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">227</span>
+                  <span class="site-state-item-count">229</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -840,7 +848,7 @@ setInterval("createtime()",250);
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共237k字</span>
+  <span class="post-count">博客全站共240.7k字</span>
 </div>
 
 

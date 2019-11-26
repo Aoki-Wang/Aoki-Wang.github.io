@@ -136,23 +136,24 @@
 
 
 
-<meta name="description" content="复合类型是指基于其他类型定义的类型。C++有几种复合类型，下面主要是引用和指针。   定义复合类型的变量复杂很多，通用的描述为：一条声明语句由一个基本数据类型和紧随其后的一个声明符列表组成。每个声明符命名了一个变量并指定该变量为与基本数据类型有关的某种类型。     引用  C++11中新增加了一种引用，为右值引用，主要用于内置类。这里，我们使用引用时，指的是左值引用。   引用为对象起了另外一个">
+<meta name="description" content="复合类型是指基于其他类型定义的类型。C++有几种复合类型，下面主要是引用和指针。定义复合类型的变量复杂很多，通用的描述为：一条声明语句由一个基本数据类型和紧随其后的一个声明符列表组成。每个声明符命名了一个变量并指定该变量为与基本数据类型有关的某种类型。     引用  C++11中新增加了一种引用，为右值引用，主要用于内置类。这里，我们使用引用时，指的是左值引用。引用为对象起了另外一个名字，引用类">
 <meta name="keywords" content="引用,指针,复合类型">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++复合类型">
 <meta property="og:url" content="http://wanqbin.xyz/2019/C-复合类型/index.html">
 <meta property="og:site_name" content="Aoki&#39;s Blog">
-<meta property="og:description" content="复合类型是指基于其他类型定义的类型。C++有几种复合类型，下面主要是引用和指针。   定义复合类型的变量复杂很多，通用的描述为：一条声明语句由一个基本数据类型和紧随其后的一个声明符列表组成。每个声明符命名了一个变量并指定该变量为与基本数据类型有关的某种类型。     引用  C++11中新增加了一种引用，为右值引用，主要用于内置类。这里，我们使用引用时，指的是左值引用。   引用为对象起了另外一个">
+<meta property="og:description" content="复合类型是指基于其他类型定义的类型。C++有几种复合类型，下面主要是引用和指针。定义复合类型的变量复杂很多，通用的描述为：一条声明语句由一个基本数据类型和紧随其后的一个声明符列表组成。每个声明符命名了一个变量并指定该变量为与基本数据类型有关的某种类型。     引用  C++11中新增加了一种引用，为右值引用，主要用于内置类。这里，我们使用引用时，指的是左值引用。引用为对象起了另外一个名字，引用类">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.imgur.com/VPKK9Rk.png">
 <meta property="og:image" content="https://i.imgur.com/yxB0y8I.png">
 <meta property="og:image" content="https://i.imgur.com/Rp1QNpE.png">
+<meta property="og:image" content="https://i.imgur.com/lno4Q9r.png">
 <meta property="og:image" content="https://i.imgur.com/VW47tJO.png">
 <meta property="og:image" content="https://i.imgur.com/UaoQ4BV.png">
 <meta property="og:updated_time" content="2019-06-11T10:40:07.439Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++复合类型">
-<meta name="twitter:description" content="复合类型是指基于其他类型定义的类型。C++有几种复合类型，下面主要是引用和指针。   定义复合类型的变量复杂很多，通用的描述为：一条声明语句由一个基本数据类型和紧随其后的一个声明符列表组成。每个声明符命名了一个变量并指定该变量为与基本数据类型有关的某种类型。     引用  C++11中新增加了一种引用，为右值引用，主要用于内置类。这里，我们使用引用时，指的是左值引用。   引用为对象起了另外一个">
+<meta name="twitter:description" content="复合类型是指基于其他类型定义的类型。C++有几种复合类型，下面主要是引用和指针。定义复合类型的变量复杂很多，通用的描述为：一条声明语句由一个基本数据类型和紧随其后的一个声明符列表组成。每个声明符命名了一个变量并指定该变量为与基本数据类型有关的某种类型。     引用  C++11中新增加了一种引用，为右值引用，主要用于内置类。这里，我们使用引用时，指的是左值引用。引用为对象起了另外一个名字，引用类">
 <meta name="twitter:image" content="https://i.imgur.com/VPKK9Rk.png">
 
 
@@ -503,19 +504,13 @@
       
 
       
-        <p>复合类型是指基于其他类型定义的类型。C++有几种复合类型，下面主要是<code>引用</code>和<code>指针</code>。  
-定义复合类型的变量复杂很多，通用的描述为：一条声明语句由一个<code>基本数据类型</code>和紧随其后的一个<code>声明符</code>列表组成。每个声明符命名了一个变量并指定该变量为与基本数据类型有关的某种类型。  </p>
+        <p>复合类型是指基于其他类型定义的类型。C++有几种复合类型，下面主要是<code>引用</code>和<code>指针</code>。<br>定义复合类型的变量复杂很多，通用的描述为：一条声明语句由一个<code>基本数据类型</code>和紧随其后的一个<code>声明符</code>列表组成。每个声明符命名了一个变量并指定该变量为与基本数据类型有关的某种类型。  </p>
 <hr>
 <blockquote>
 <h1 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h1></blockquote>
 <hr>
-<p>C++11中新增加了一种引用，为<code>右值引用</code>，主要用于内置类。这里，我们使用<code>引用</code>时，指的是<code>左值引用</code>。  
-引用为对象起了另外一个名字，引用类型引用另外一种类型。通过将声明符写成<code>&amp;d</code>的形式来定义引用类型，其中d是声明的变量名。<br>引用即别名，并非对象，它只是为一个已经存在的对象所起的另外一个名字。<br>下面是引用的一个例子。  </p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> vale = <span class="number">1024</span>;</span><br><span class="line">	<span class="keyword">int</span> &amp;vale00 = vale; <span class="comment">//注意：引用必须进行初始化</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"vale的值为："</span> &lt;&lt; vale &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"vale00的值为："</span> &lt;&lt; vale00 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"vale00是vale的引用。"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://i.imgur.com/VPKK9Rk.png" alt><br><br><br>定义了一个引用之后，对其进行的所有操作都是在与之绑定的对象上进行的。<br>为引用赋值，实际上是把值赋给了与引用绑定的对象。获取引用的值，实际上是获取到了与之绑定的对象的值。同理，以引用作为初始值，实际上是以引用绑定的对象作为初始值。  </p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">string</span> name = <span class="string">"青木"</span>;</span><br><span class="line">	<span class="built_in">string</span> &amp;name_ = name;</span><br><span class="line">	<span class="built_in">string</span> name0 = <span class="string">"Aoki"</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"大家好，我的名字是"</span> &lt;&lt; name_ &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"大家好，我是"</span> &lt;&lt; name0 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	name0 = name_;<span class="comment">//为引用赋值</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"大家好，我现在是"</span> &lt;&lt; name0 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<p>C++11中新增加了一种引用，为<code>右值引用</code>，主要用于内置类。这里，我们使用<code>引用</code>时，指的是<code>左值引用</code>。<br>引用为对象起了另外一个名字，引用类型引用另外一种类型。通过将声明符写成<code>&amp;d</code>的形式来定义引用类型，其中d是声明的变量名。<br>引用即别名，并非对象，它只是为一个已经存在的对象所起的另外一个名字。<br>下面是引用的一个例子。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> vale = <span class="number">1024</span>;</span><br><span class="line">	<span class="keyword">int</span> &amp;vale00 = vale; <span class="comment">//注意：引用必须进行初始化</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"vale的值为："</span> &lt;&lt; vale &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"vale00的值为："</span> &lt;&lt; vale00 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"vale00是vale的引用。"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://i.imgur.com/VPKK9Rk.png" alt><br><br><br>定义了一个引用之后，对其进行的所有操作都是在与之绑定的对象上进行的。<br>为引用赋值，实际上是把值赋给了与引用绑定的对象。获取引用的值，实际上是获取到了与之绑定的对象的值。同理，以引用作为初始值，实际上是以引用绑定的对象作为初始值。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">string</span> name = <span class="string">"青木"</span>;</span><br><span class="line">	<span class="built_in">string</span> &amp;name_ = name;</span><br><span class="line">	<span class="built_in">string</span> name0 = <span class="string">"Aoki"</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"大家好，我的名字是"</span> &lt;&lt; name_ &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"大家好，我是"</span> &lt;&lt; name0 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	name0 = name_;<span class="comment">//为引用赋值</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"大家好，我现在是"</span> &lt;&lt; name0 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>输出结果为：<br><img src="https://i.imgur.com/yxB0y8I.png" alt><br><br></p>
 <hr>
 <blockquote>
@@ -524,14 +519,11 @@
 <p><code>指针</code>是指向另外一种类型的复合类型。与引用类似，指针也实现了对其他对象的间接访问，但是指针与引用也有很多不同点，如下：  </p>
 <ul>
 <li>指针本身就是个对象，允许对指针赋值和拷贝，在指针的生命周期内，它可以先后指向几个不同的对象  </li>
-<li>指针无须在定义时赋初值。和其他内置类型一样，在块作用域内定义的指针如果没有定义，也将拥有一个不确定的值。  <br>
->## 获取对象的地址
-
+<li>指针无须在定义时赋初值。和其他内置类型一样，在块作用域内定义的指针如果没有定义，也将拥有一个不确定的值。<br><br><blockquote>
+<h2 id="获取对象的地址"><a href="#获取对象的地址" class="headerlink" title="获取对象的地址"></a>获取对象的地址</h2></blockquote>
 </li>
 </ul>
-<p>指针存放某个对象的地址，要向获取该地址，就要使用<code>取地址符</code>（&amp;）。<br>在声明语句中，指针的类型实际上被用于它所指向的对象的类型，所以二者必须匹配。如果指针指向了一个其他类型的对象，对该对象的操作将会发生错误。  </p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">string</span> name = <span class="string">"青木"</span>;</span><br><span class="line">	<span class="built_in">string</span>* name_=&amp;name;<span class="comment">//name_存放变量name的地址，或者说name_是指向变量name的指针</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"大家好，我的名字是"</span> &lt;&lt; name &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"name的地址为:"</span> &lt;&lt; name_ &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"大家好，我的名字是"</span> &lt;&lt; name_ &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<p>指针存放某个对象的地址，要向获取该地址，就要使用<code>取地址符</code>（&amp;）。<br>在声明语句中，指针的类型实际上被用于它所指向的对象的类型，所以二者必须匹配。如果指针指向了一个其他类型的对象，对该对象的操作将会发生错误。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">string</span> name = <span class="string">"青木"</span>;</span><br><span class="line">	<span class="built_in">string</span>* name_=&amp;name;<span class="comment">//name_存放变量name的地址，或者说name_是指向变量name的指针</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"大家好，我的名字是"</span> &lt;&lt; name &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"name的地址为:"</span> &lt;&lt; name_ &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"大家好，我的名字是"</span> &lt;&lt; name_ &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>输出结果为：<br><img src="https://i.imgur.com/Rp1QNpE.png" alt><br><br><br><br></p>
 <blockquote>
 <h2 id="指针值"><a href="#指针值" class="headerlink" title="指针值"></a>指针值</h2></blockquote>
@@ -543,24 +535,18 @@
 <li>无效指针，就是上述状态之外的其他值。</li>
 </ol>
 <p>对于无效指针，试图拷贝或以其他方式访问无效指针的值都将引发错误。  </p>
-<br>
->## 利用指针访问对象
-
+<p><br></p>
+<blockquote>
+<h2 id="利用指针访问对象"><a href="#利用指针访问对象" class="headerlink" title="利用指针访问对象"></a>利用指针访问对象</h2></blockquote>
 <p>如果一个指针指向了一个对象，则允许使用<code>解引用符</code>（*）来访问该对象。<br>对指针解引用会得到所指的对象，因此如果给解引用的结果赋值，实际上也就是给指针所指的内容赋值。  </p>
 <blockquote>
 <p>注意：解引用操作仅适用于那些确实指向了某个对象的有效指针。  </p>
 </blockquote>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">string</span> name = <span class="string">"青木"</span>;</span><br><span class="line">	<span class="built_in">string</span> name0 = <span class="string">"Aoki"</span>;</span><br><span class="line">	<span class="built_in">string</span>* name_=&amp;name;<span class="comment">//name_存放变量name的地址，或者说name_是指向变量name的指针</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"大家好，我的名字是"</span> &lt;&lt; name &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"name的地址为:"</span> &lt;&lt; name_ &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"大家好，我的名字是"</span> &lt;&lt; *name_ &lt;&lt; <span class="built_in">endl</span>;<span class="comment">//指针解引用，获取对象的值</span></span><br><span class="line">	*name_ = name0;<span class="comment">//经由指针为name赋值</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"大家好，我的名字是"</span> &lt;&lt; name &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"大家好，我的名字是"</span> &lt;&lt; *name_ &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<br>
-![](https://i.imgur.com/lno4Q9r.png)
-<br>
-
+<p><br><br><img src="https://i.imgur.com/lno4Q9r.png" alt><br><br></p>
 <blockquote>
 <h2 id="空指针"><a href="#空指针" class="headerlink" title="空指针"></a>空指针</h2></blockquote>
-<p>空指针不指向任何对象，在试图使用一个指针之前，代码可以首先检查它是否为空。<br>生成空指针的方法：  </p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>* p1=<span class="literal">nullptr</span>;<span class="comment">//等价于int* ptr=0</span></span><br><span class="line"><span class="keyword">int</span>* p2=<span class="number">0</span>;<span class="comment">//直接将p2初始化为字面常量0</span></span><br></pre></td></tr></table></figure>
-
+<p>空指针不指向任何对象，在试图使用一个指针之前，代码可以首先检查它是否为空。<br>生成空指针的方法：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>* p1=<span class="literal">nullptr</span>;<span class="comment">//等价于int* ptr=0</span></span><br><span class="line"><span class="keyword">int</span>* p2=<span class="number">0</span>;<span class="comment">//直接将p2初始化为字面常量0</span></span><br></pre></td></tr></table></figure></p>
 <p>得到空指针最直接的办法是使用字面值nullptr来初始化指针。nullptr是一种特殊的指针，它可以被转换成任意其他指针类型。<br><br><br><br></p>
 <blockquote>
 <h2 id="赋值和指针"><a href="#赋值和指针" class="headerlink" title="赋值和指针"></a>赋值和指针</h2></blockquote>
@@ -574,25 +560,20 @@
 <li>都指向同一个对象的下一个地址</li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">string</span> name = <span class="string">"青木"</span>;</span><br><span class="line">	<span class="built_in">string</span>* name_=&amp;name;<span class="comment">//name_存放变量name的地址，或者说name_是指向变量name的指针</span></span><br><span class="line">	<span class="keyword">int</span>* a = <span class="literal">nullptr</span>;</span><br><span class="line">	<span class="keyword">if</span> (name_&amp;&amp;a) <span class="comment">//与运算，一真一假为假</span></span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"大家好，我是指向"</span> &lt;&lt; name &lt;&lt; <span class="string">"的指针，我不为空"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"大家好，我是空指针a，我的地址是"</span> &lt;&lt; &amp;a &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>输出结果如下：<br><img src="https://i.imgur.com/VW47tJO.png" alt></p>
 <p><br><br><br>最后是void*指针。</p>
 <blockquote>
 <h2 id="void-指针"><a href="#void-指针" class="headerlink" title="void* 指针"></a>void* 指针</h2></blockquote>
-<p>void* 指针是一种特殊的指针类型，可用于存放任意对象的指针，一个void<em>指针存放着一个地址。<br>利用void</em>指针可以做的事有：  </p>
+<p>void<em> 指针是一种特殊的指针类型，可用于存放任意对象的指针，一个void</em>指针存放着一个地址。<br>利用void*指针可以做的事有：  </p>
 <ul>
 <li>拿它和别的指针比较</li>
 <li>作为函数的输入和输出</li>
 <li>赋值给另外一个void*指针</li>
 </ul>
-<p>但是我们不能直接操作void* 指针，因为它的类型未知。以void*的视角来看内存空间也仅仅是内存空间，没办法访问内存空间中所存的对象。  </p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span>  a = <span class="number">10</span>;</span><br><span class="line">	<span class="keyword">int</span>* name_=&amp;a;<span class="comment">//name_存放变量a的地址，或者说name_是指向变量a的指针</span></span><br><span class="line">	<span class="keyword">void</span>* names;</span><br><span class="line">	names = name_;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"name_指向的值为："</span> &lt;&lt; *name_ &lt;&lt;<span class="string">",地址为："</span>&lt;&lt;name_&lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"names地址为："</span> &lt;&lt; names &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<p>但是我们不能直接操作void<em> 指针，因为它的类型未知。以void</em>的视角来看内存空间也仅仅是内存空间，没办法访问内存空间中所存的对象。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span>  a = <span class="number">10</span>;</span><br><span class="line">	<span class="keyword">int</span>* name_=&amp;a;<span class="comment">//name_存放变量a的地址，或者说name_是指向变量a的指针</span></span><br><span class="line">	<span class="keyword">void</span>* names;</span><br><span class="line">	names = name_;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"name_指向的值为："</span> &lt;&lt; *name_ &lt;&lt;<span class="string">",地址为："</span>&lt;&lt;name_&lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"names地址为："</span> &lt;&lt; names &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>输出结果：<br><img src="https://i.imgur.com/UaoQ4BV.png" alt></p>
-<br>
-<br><br><br>
-对于void* 指针，我还有许多不解的地方，在网上搜索之后发现了一个比较详细解释void* 指针的博文——[void及void指针含义的深刻解析](https://blog.csdn.net/geekcome/article/details/6249151?reload)
-<br><br><br><br><br>
+<p><br><br><br><br><br><br>对于void<em> 指针，我还有许多不解的地方，在网上搜索之后发现了一个比较详细解释void</em> 指针的博文——<a href="https://blog.csdn.net/geekcome/article/details/6249151?reload" target="_blank" rel="noopener">void及void指针含义的深刻解析</a><br><br><br><br><br><br></p>
+
       
     </div>
     
@@ -737,7 +718,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">116</span>
+                  <span class="site-state-item-count">117</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -759,7 +740,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">227</span>
+                  <span class="site-state-item-count">229</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -813,7 +794,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引用"><span class="nav-number">1.</span> <span class="nav-text">引用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#引用-1"><span class="nav-number">2.</span> <span class="nav-text">引用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#指针值"><span class="nav-number">2.1.</span> <span class="nav-text">指针值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#空指针"><span class="nav-number">2.2.</span> <span class="nav-text">空指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#赋值和指针"><span class="nav-number">2.3.</span> <span class="nav-text">赋值和指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他指针操作"><span class="nav-number">2.4.</span> <span class="nav-text">其他指针操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#void-指针"><span class="nav-number">2.5.</span> <span class="nav-text">void* 指针</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引用"><span class="nav-number">1.</span> <span class="nav-text">引用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#引用-1"><span class="nav-number">2.</span> <span class="nav-text">引用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#获取对象的地址"><span class="nav-number">2.1.</span> <span class="nav-text">获取对象的地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指针值"><span class="nav-number">2.2.</span> <span class="nav-text">指针值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#利用指针访问对象"><span class="nav-number">2.3.</span> <span class="nav-text">利用指针访问对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#空指针"><span class="nav-number">2.4.</span> <span class="nav-text">空指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#赋值和指针"><span class="nav-number">2.5.</span> <span class="nav-text">赋值和指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他指针操作"><span class="nav-number">2.6.</span> <span class="nav-text">其他指针操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#void-指针"><span class="nav-number">2.7.</span> <span class="nav-text">void* 指针</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -879,7 +860,7 @@ setInterval("createtime()",250);
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共237k字</span>
+  <span class="post-count">博客全站共240.7k字</span>
 </div>
 
 

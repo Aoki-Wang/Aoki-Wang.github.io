@@ -125,7 +125,7 @@
 
 
 
-  <meta name="keywords" content="操作系统,Linux内核,自旋锁,普通自旋锁,内核同步,">
+  <meta name="keywords" content="Linux内核,自旋锁,普通自旋锁,操作系统,内核同步,">
 
 
 
@@ -137,7 +137,7 @@
 
 
 <meta name="description" content="&amp;emsp;&amp;emsp;在Linux中还提供了一种称为“加锁”的机制来避免竞争条件的出现。之所以引入锁机制是因为在真正的Linux内核编程过程中简单的原子操作时不能满足系统需要的，例如当一个临界区跨越了多个函数的时候，这时原子操作就显得无能为力了。 &amp;emsp;&amp;emsp;首先我们来看自旋锁（spin lock），在前面我们将Linux中提供的锁机制做了一个比喻，我们将临界区比作放在一个房间内的资">
-<meta name="keywords" content="操作系统,Linux内核,自旋锁,普通自旋锁,内核同步">
+<meta name="keywords" content="Linux内核,自旋锁,普通自旋锁,操作系统,内核同步">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux内核同步机制分析——普通自旋锁">
 <meta property="og:url" content="http://wanqbin.xyz/2019/Linux内核同步机制——普通自旋锁/index.html">
@@ -507,13 +507,12 @@
 <p>&emsp;&emsp;总体来说，一个自旋锁是一个互斥实体，只能被一个执行路径拥有，它有且只有两个状态：加锁、解锁。通常由一个整数变量的取值来表示。如果内核代码需要访问和修改一个自旋锁变量保护的资源，该内核代码就需要去获得相应的自旋锁，如果获取成功，则进入临界区，对临界资源进行操作；如果没有成功获得，则内核代码就反复检查这个锁的状态，直到获得这个自旋锁。</p>
 <p>&emsp;&emsp;自旋锁变量的数据类型由数据结构<code>spinlock_t</code>表示，该是数据结构定义在<code>include/linx/spinloc_types.h</code>中，结构如下所示：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    	<span class="keyword">raw_spinlock_t</span> raw_lock;</span><br><span class="line">    <span class="meta">#<span class="meta-keyword">if</span> defined(CONFIG_PREEMPT)&amp;&amp;defined(CONFID_SMP)</span></span><br><span class="line">    	<span class="keyword">unsigned</span> <span class="keyword">int</span> break_lock;</span><br><span class="line">    <span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="meta">#<span class="meta-keyword">ifdef</span> CONFIG_DEBUG_SPINLOCK</span></span><br><span class="line">    	<span class="keyword">unsigned</span> ing magic,owner_cpu;</span><br><span class="line">    	<span class="keyword">void</span> *owner;</span><br><span class="line">    <span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="meta">#<span class="meta-keyword">ifdef</span> CONFIG_DEBUG_LOCK_ALLOC</span></span><br><span class="line">    	<span class="class"><span class="keyword">struct</span> <span class="title">lockdep_map</span> <span class="title">dep_map</span>;</span></span><br><span class="line">    <span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">&#125;<span class="keyword">spinlock_t</span>;</span><br></pre></td></tr></table></figure>
-
 <p><code>raw_Lock</code>：该成员变量是自旋锁数据类型的核心，具体的锁定过程与该成员变量密切相关，该成员变量的类型<code>raw_spinlock_t</code>与内核选项<code>CONFIG_SMP</code>有关。</p>
 <p><code>break_lock</code>：该无符号整型成员变量同时依赖于内核选项<code>CONFIG_PREEMPT</code>和<code>CONFIG_SMP</code>。在同时选中了这两个选项的情况下，该成员变量用于指示当前自旋锁是否被多个内核代码同时竞争、访问。</p>
 <p>&emsp;&emsp;内核在<code>include/linux/spin_lock.h</code>中提供了一系列关于自旋锁的操作函数接口，而在<code>spin_lock.h</code>文件所引用的头文件中，有如下代码：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> CONFIG_SMP</span></span><br><span class="line">	<span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;asm/spinlock.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span> </span></span><br><span class="line">	<span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;linux/spinlock_up.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
-
 <p>&emsp;&emsp;从上述代码可以看出，关于自旋锁操作函数接口的具体实现方式和完成的工作依赖于内核选项<code>CONFIG_SMP</code>。关于自旋锁的操作函数如下表所示：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -521,7 +520,8 @@
 <th>描述</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>spin_lock_init(lock)</td>
 <td>声明一个个自旋锁lock，将其初始化成未锁定状态</td>
 </tr>
@@ -561,50 +561,41 @@
 <td>spin_unlock_irqrestore(lock,flags)</td>
 <td>释放持有的自旋锁lock，并让本地中断恢复到以前的状态</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <ol>
 <li><h3 id="单处理器系统下自旋锁的实现"><a href="#单处理器系统下自旋锁的实现" class="headerlink" title="单处理器系统下自旋锁的实现"></a>单处理器系统下自旋锁的实现</h3><p>&emsp;从文件<code>spin_lock.h</code>所引用的头文件可以看出，在单处理器系统（也即是在没有定义内核选项<code>CONFIG_SMP</code>的情况下）中，自旋锁操作函数接口的实现定义在<code>include/linux/spinlock_up.h</code>中。</p>
 <p>&emsp;&emsp;<code>raw_spinlock_t</code>结构在单处理器系统下退化为一个空的结构体，其定义在<code>include/spin_lock_types_up.h</code>中，代码如下所示：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span> 	&#125; <span class="keyword">raw_spinlock_t</span>;</span><br></pre></td></tr></table></figure>
-
 <p>&emsp;&emsp;自旋锁的加锁函数<code>spin_lock()</code>是一个宏定义，该宏定义在<code>include/linux/spinlock.h</code>中，它不依赖于任何选项，定义如下：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> spin_lock(lock)    _spin_lock(lock)</span></span><br></pre></td></tr></table></figure>
-
 <p><code>_spin_lock(lock)</code>在没有定义内核选项<code>CONFIG_SMP</code>时，定义在<code>include/linux/spinlock_api_up.h</code>中，定义如下所示：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _spin_lock(lock)  _LOCK(lock)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _LOCK(lock)\</span></span><br><span class="line">	<span class="keyword">do</span>&#123;preempt_disable(); _acquire(lock);(<span class="keyword">void</span>)(lock);&#125;<span class="keyword">while</span>(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-
 <p>&emsp;&emsp;其中<code>preempt_disable()</code>函数用于禁止内核抢占，它与<code>preempt_enable()</code>函数配对使用。<code>_acquire(lock)</code>函数与<code>_release(lock)</code>配对使用，用做内核编译过程中静态检查自旋锁的加锁操作与释放操作是否成对匹配。<code>void(lock)</code>不做任何处理，只是为了引用一下变量<code>lock</code>，避免编译器对未使用变量的警告。</p>
 <p>&emsp;&emsp;通过对<code>_spin_lock()</code>函数的分析可知，在单处理器系统中，自旋锁的锁定过程并没有真正的加锁操作，只是用来禁止内核抢占。</p>
 <p>&emsp;&emsp;自旋锁的释放函数<code>spin_unlock()</code>是一个宏定义，在没有定义内核选项<code>CONFIG_SMP</code>时，该宏定义在<code>include/linux/spinlock.h</code>中，代码如下所示：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> spin_unlock(lock)	_spin_unlock(lock)</span></span><br></pre></td></tr></table></figure>
-
 <p><code>_spin_unlock()</code>宏定义在没有内核选项<code>CONFIG_SMP</code>时，定义在<code>include/linux/spinlock.h</code>中，代码如下所示：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _spin_unlock(lock) 	_UNLOCK(lock)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _UNLOCK(lock)\</span></span><br><span class="line">	<span class="keyword">do</span>(preempt_enable();  _release(lock); (<span class="keyword">void</span>)(lock);&#125; <span class="keyword">while</span>(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-
 <p>&emsp;&emsp;该宏定义的具体处理过程与加锁函数<code>_LOCK(lock)</code>宏定义非常相似。</p>
 </li>
 <li><h3 id="多处理器系统下自旋锁的实现"><a href="#多处理器系统下自旋锁的实现" class="headerlink" title="多处理器系统下自旋锁的实现"></a>多处理器系统下自旋锁的实现</h3><p>&emsp;&emsp;在定义了内核选项<code>CONFIG_SMP</code>的多处理器系统中，<code>raw_spinlock_t</code>结构定义在<code>include/asm-x86/spinlock_types.h</code>中，定义如下所示：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    	<span class="keyword">unsigned</span> <span class="keyword">int</span> slock;</span><br><span class="line">&#125;<span class="keyword">raw_spinlock_t</span>;</span><br></pre></td></tr></table></figure>
-
 <p>&emsp;&emsp;从其定义可以看出，<code>raw_spinlock_t</code>数据结构与原子变量数据结构的定义类似，都声明了一个内存佰利联，用于计数工作。当<code>slock</code>的值为1时，表示自旋锁处于非锁定状态；否则，表示处于锁定状态。</p>
 <p>&emsp;&emsp;虽然自旋锁的加锁函数<code>spin_lock()</code>和单处理器的加锁函数使用同一宏定义，但是实现该宏定义的实现函数<code>_spin_lock(lock)</code>却不相同。在多处理器系统中，<code>_spin_lock()</code>函数定义在<code>kernel/spinlock.c</code>中，定义如下所示：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> _lockfunc _spin_lock(<span class="keyword">spinlock_t</span> *lock)</span><br><span class="line">&#123;</span><br><span class="line">    	preempt_disable();</span><br><span class="line">   	         spin_acquire(&amp;lock-&gt;dep_map,<span class="number">0</span>,<span class="number">0</span>,_RET_IP_);</span><br><span class="line">    	LOCK_CONTENDED(lock,_raw_spin_trylock,_raw_spin_lock);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>第3行函数<code>preempt_disable()</code>表示禁止内核抢占。</p>
 <p>第4行函数<code>spin_acquire()</code>在定义内核选项<code>CONFIG_DEGBUG_LOCK_ALLOC</code>的情况下用于获得锁定自旋锁lock时的依赖信息，用于内核调试。如果没有这个内核选项，则该函数是一个空函数，什么也不做。</p>
 <p>第5行函数<code>LOCK_CONTENDED()</code>是一个关联函数，定义在<code>include/linux/lockdep.h</code>中，在没有定义内核选项<code>CONFIG_LOCK_STAT</code>的情况下，代码如下所示：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCK_CONTENDED(_lock,try,lock)\</span></span><br><span class="line">	lock(_lock)</span><br></pre></td></tr></table></figure>
-
 <p>&emsp;&emsp;从该函数定义可知，调用函数<code>LOCK_CONTENDED(lock,_raw_spin_trylock,_raw_spin_lock)</code>与直接调用<code>_raw_spin_lock(lock)</code>函数是等价的，宏定义<code>_raw_spin_lock()</code>完成具体的加锁过程。</p>
 <p><code>_raw_spin_lock(lock)</code>宏定义在<code>include/linux/spinlock.h</code>中，代码如下所示：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _raw_spin_lock(lock)	_raw_spin_lock(&amp;(Lock)-&gt;raw_lock)</span></span><br></pre></td></tr></table></figure>
-
 <p>&emsp;&emsp;该宏定义以自选项的计数<code>raw_lock</code>为参数，调用<code>_raw_spin_lock()</code>函数来完成自旋锁的实际加锁过程，<code>_raw_spin_lock()</code>函数的实现与体系结构有关。在x86体系结构下，函数定义在<code>include/asm-x86/spinlock_32.h</code>中，代码如下：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">inline</span> <span class="keyword">void</span> _raw_spin_lock(<span class="keyword">raw_spinlock_t</span> *lock)</span><br><span class="line">&#123;</span><br><span class="line">    	<span class="function"><span class="keyword">asm</span> <span class="title">volatile</span><span class="params">(<span class="string">"\n1:\t"</span></span></span></span><br><span class="line"><span class="function"><span class="params">                     LOCK_PREFIX<span class="string">";decb %0\n\t"</span></span></span></span><br><span class="line"><span class="function"><span class="params">                     <span class="string">"jns 3f\n"</span></span></span></span><br><span class="line"><span class="function"><span class="params">                     <span class="string">"2:\t"</span></span></span></span><br><span class="line"><span class="function"><span class="params">                     <span class="string">"rep:nop\n\t"</span></span></span></span><br><span class="line"><span class="function"><span class="params">                     <span class="string">"cmpb $0,%0\n\t"</span></span></span></span><br><span class="line"><span class="function"><span class="params">                     <span class="string">"jle 2b\n\t"</span></span></span></span><br><span class="line"><span class="function"><span class="params">                     <span class="string">"jmp 1b\n"</span></span></span></span><br><span class="line"><span class="function"><span class="params">                     <span class="string">"3:\n\t"</span></span></span></span><br><span class="line"><span class="function"><span class="params">                     :<span class="string">"+m"</span>(lock-&gt;slock)::<span class="string">"memory"</span>)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>第3~11行内嵌汇编代码展开后，对应的汇编代码如下所示：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1：LOCK_PREFIX;deb %0</span><br><span class="line">        jns 3f</span><br><span class="line">2：rep;nop</span><br><span class="line">       cmpb $0,%0</span><br><span class="line">       jle 2b</span><br><span class="line">       jmp 1b</span><br><span class="line"> 3:</span><br></pre></td></tr></table></figure>
-
 <p>第1行代码首先声明一个名称为1的标号，然后使用汇编指令<code>decb</code>对占位符<code>%0</code>进行减1操作。注意，这里使用了前缀<code>LOCK_PREFIX</code>，用于在SMP系统中保证<code>decb</code>汇编指令操作的原子性。</p>
 <p>第2行代码中的汇编指令<code>jns(jump if not sign)</code>判断第1行的操作是否导致了状态寄存器<code>EFLAGS</code>中的SF状态位，如果置位，说明在执行第1行指令时占位符<code>%0</code>对应变量的值小于等于0，即自旋锁已被其他内核代码锁定，此时顺序执行；否则跳转到名称为3的标号处，此时说明已经成功获得了自旋锁。</p>
 <p>第3~5行代码首先重新执行空指令<code>nop</code>，然后判断占位符<code>%0</code>的值时候小于等于0.在小于等于0的情况下，说明占位符<code>%0</code>对应的自旋锁处于锁定状态，此时跳回到名称为2的标号处继续顺序执行，否则，说明在上面的循环过程中，占位符<code>%0</code>对应的自旋锁被释放了，此时顺序执行到第6行处的跳转指令。</p>
@@ -613,16 +604,13 @@
 <p>&emsp;&emsp;从对<code>_raw_spin_lock()</code>函数代码1的分析可知，该函数实现了在SMP系统中对自旋锁<code>lock</code>的加锁操作。如果加锁成功，则直接返回，否则，进行重复的尝试直到加锁成功。</p>
 <p>&emsp;&emsp;自旋锁的加锁函数<code>spin_lock()</code>和单处理器的加锁函数使用同一个宏定义，但是实现该宏定义的实现函数<code>_spin_lock(lock)</code>却不相同。在多处理器系统中，<code>_spin_lock()</code>函数定义在<code>kernel/spinlock.c</code>中，定义如下所示：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> _lockfunc _spin_unlock(<span class="keyword">spinlock_t</span> *lock)</span><br><span class="line">&#123;</span><br><span class="line">    	spin_release(&amp;lock-&gt;dep_map,<span class="number">1</span>,_RET_IP_);</span><br><span class="line">    	_raw_spin_unlock(lock);</span><br><span class="line">    	preempt_enable();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>第3行中的函数<code>spin_release()</code>定义在内核选项<code>CONFIG_DEGBUG_LOCK_ALLOC</code>的情况下用于获得释放自旋锁lock时的依赖信息，主要用于内核的调试。如果没有这个内核选项，则该函数时一个空函数，什么也不做。</p>
 <p>第4行代码调用<code>_raw_spin_unlock()</code>函数完成自旋锁的释放。</p>
 <p>第5行代码调用<code>preempt_enable()</code>函数使内核能被抢占。</p>
 <p><code>_raw_spin_unlock()</code>是一个宏定义，其定义在<code>include/linux/spinlock.h</code>中，代码如下：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _raw_spin_unlock(lock)  	_raw_spin_unlock(&amp;(lock)-&gt;raw_lock)</span></span><br></pre></td></tr></table></figure>
-
 <p><code>_raw_spin_unlock()</code>函数完成释放自旋锁的具体工作，该函数的实现与体系结构有关，在x86体系结构下，该函数定义在<code>include/asm-x86/spinlock_32.h</code>中，代码如下所示：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">inline</span> <span class="keyword">void</span> _raw_spin_unlock(<span class="keyword">raw_spinlock_t</span> *lock)</span><br><span class="line">&#123;</span><br><span class="line">    	<span class="function"><span class="keyword">asm</span> <span class="title">volatile</span><span class="params">(<span class="string">"mov $1,%0"</span>:<span class="string">"=m"</span>(lock-&gt;slock)::<span class="string">"memory"</span>)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>&emsp;&emsp;这段内嵌汇编代码将<code>raw_spinlock_t</code>结构类型的变量<code>lock</code>的成员<code>slock</code>设置为1，表示自旋锁变为可用状态。</p>
 <p>&emsp;&emsp;从自旋锁的实现机制分析可知，自旋锁的工作原理如下：当系统是单处理器系统时，自旋锁的加锁、释放过程分别退化为禁止内核抢占、使能内核抢占。在SMP系统中，当锁定一个自旋锁时，需要首先禁止内核抢占，然后尝试锁定自旋锁，在锁定失败时，需要首先禁止内核抢占，然后尝试锁定自旋锁，在锁定失败时执行一个死循环等待自旋锁被释放；当释放一个自旋锁时，首先释放当前自旋锁，然后使能内核抢占。</p>
 </li>
@@ -654,13 +642,13 @@
       
         <div class="post-tags">
           
-            <a href="/tags/操作系统/" rel="tag"># 操作系统</a>
-          
             <a href="/tags/Linux内核/" rel="tag"># Linux内核</a>
           
             <a href="/tags/自旋锁/" rel="tag"># 自旋锁</a>
           
             <a href="/tags/普通自旋锁/" rel="tag"># 普通自旋锁</a>
+          
+            <a href="/tags/操作系统/" rel="tag"># 操作系统</a>
           
             <a href="/tags/内核同步/" rel="tag"># 内核同步</a>
           
@@ -776,7 +764,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">116</span>
+                  <span class="site-state-item-count">117</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -798,7 +786,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">227</span>
+                  <span class="site-state-item-count">229</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -918,7 +906,7 @@ setInterval("createtime()",250);
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共237k字</span>
+  <span class="post-count">博客全站共240.7k字</span>
 </div>
 
 

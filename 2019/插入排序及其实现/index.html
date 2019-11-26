@@ -144,17 +144,17 @@
 <meta property="og:site_name" content="Aoki&#39;s Blog">
 <meta property="og:description" content="一、排序的基本概念&amp;emsp;&amp;emsp;排序是将一个无序的数据元素集合整理成按关键码递增（或递减）排列的有规律有序集合的过程。关键码是所定义的数据元素类型中的一个域。  关键码要排序的对象集合可能有多个域，关键码是当前排序时进行比较以确定各个对象位置的域。 在对象集合中，不同的对象其关键码值一定不相同的关键码称为主关键码;不同的对象其关键码值有可能相同的关键码称为次关键码。  排序算法的稳定性&amp;">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://wanqbin.xyz/2019/插入排序及其实现/%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/插入排序及其实现/%E9%93%BE%E8%A1%A8%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/2019/插入排序及其实现/直接插入排序执行结果.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/2019/插入排序及其实现/链表插入排序执行结果.PNG">
 <meta property="og:image" content="http://wanqbin.xyz/2019/插入排序及其实现/increment=4.PNG">
 <meta property="og:image" content="http://wanqbin.xyz/2019/插入排序及其实现/increment=3.PNG">
 <meta property="og:image" content="http://wanqbin.xyz/2019/插入排序及其实现/increment=1.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/插入排序及其实现/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C1.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/2019/插入排序及其实现/希尔排序执行结果1.PNG">
 <meta property="og:updated_time" content="2019-08-01T11:23:06.438Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="插入排序及其实现">
 <meta name="twitter:description" content="一、排序的基本概念&amp;emsp;&amp;emsp;排序是将一个无序的数据元素集合整理成按关键码递增（或递减）排列的有规律有序集合的过程。关键码是所定义的数据元素类型中的一个域。  关键码要排序的对象集合可能有多个域，关键码是当前排序时进行比较以确定各个对象位置的域。 在对象集合中，不同的对象其关键码值一定不相同的关键码称为主关键码;不同的对象其关键码值有可能相同的关键码称为次关键码。  排序算法的稳定性&amp;">
-<meta name="twitter:image" content="http://wanqbin.xyz/2019/插入排序及其实现/%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C.PNG">
+<meta name="twitter:image" content="http://wanqbin.xyz/2019/插入排序及其实现/直接插入排序执行结果.PNG">
 
 
 
@@ -525,24 +525,15 @@
 </li>
 <li><p>假设待排序的对象为<code>R[0]、R[1]、R[2]、……、R[n-1]</code>,开始排序时对象集合<code>R[0]</code>因只有一个对象，所以已排好序。</p>
 </li>
-<li><p>第一次循环准备将对象<code>R[1]</code>插入到已排好序的对象集合<code>R[0]</code>中，这只需要比较<code>K[0]</code>和<code>K[1]</code>，若<code>K[0]&lt;=K[1]</code>，则已排好序，否则将<code>R[1]</code>插入到<code>R[0]</code>之前，这样，对象集合<code>R[0],R[1]</code>已排好序。</p>
-</li>
-<li><p>第二次循环准备将<code>R[2]</code>插入到已排好序的对象集合<code>R[0],R[1]</code>中，这需要先比较<code>K[2]</code>和<code>K[1]</code>以确定是否需要把<code>R[2]</code>插入到<code>R[1]</code>之前，然后比较<code>K[2]</code>和<code>K[0]</code>以确定是否需要把<code>R[2]</code>插入到<code>R[0]</code>之前。</p>
-</li>
-<li><p>这样的循环过程一直进行到<code>R[n-1]</code>插入完为止。这时对象集合<code>R[0]、R[1]、R[2]、……、R[n-1]</code>就全部排好序了。</p>
-</li>
+<li>第一次循环准备将对象<code>R[1]</code>插入到已排好序的对象集合<code>R[0]</code>中，这只需要比较<code>K[0]</code>和<code>K[1]</code>，若<code>K[0]&lt;=K[1]</code>，则已排好序，否则将<code>R[1]</code>插入到<code>R[0]</code>之前，这样，对象集合<code>R[0],R[1]</code>已排好序。</li>
+<li>第二次循环准备将<code>R[2]</code>插入到已排好序的对象集合<code>R[0],R[1]</code>中，这需要先比较<code>K[2]</code>和<code>K[1]</code>以确定是否需要把<code>R[2]</code>插入到<code>R[1]</code>之前，然后比较<code>K[2]</code>和<code>K[0]</code>以确定是否需要把<code>R[2]</code>插入到<code>R[0]</code>之前。</li>
+<li>这样的循环过程一直进行到<code>R[n-1]</code>插入完为止。这时对象集合<code>R[0]、R[1]、R[2]、……、R[n-1]</code>就全部排好序了。</li>
 </ul>
 <h4 id="1）直接插入排序的实现"><a href="#1）直接插入排序的实现" class="headerlink" title="1）直接插入排序的实现"></a>1）直接插入排序的实现</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">InsertSort</span>(<span class="title">T</span> <span class="title">a</span>[], <span class="title">int</span> <span class="title">n</span>)</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> i, j;</span><br><span class="line">	T temp;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n - <span class="number">1</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		temp = a[i + <span class="number">1</span>];</span><br><span class="line">		j = i;</span><br><span class="line">		<span class="keyword">while</span> (j &gt; <span class="number">-1</span> &amp;&amp; temp &lt; a[j])</span><br><span class="line">		&#123;</span><br><span class="line">			a[j + <span class="number">1</span>] = a[j];</span><br><span class="line">			j--;</span><br><span class="line">		&#125;</span><br><span class="line">		a[j + <span class="number">1</span>] = temp;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
 </li>
 </ol>
 <h4 id="2）测试函数"><a href="#2）测试函数" class="headerlink" title="2）测试函数"></a>2）测试函数</h4>   <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> sort[] = &#123; <span class="number">15</span>,<span class="number">22</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">56</span>,<span class="number">89</span>,<span class="number">14</span> &#125;;</span><br><span class="line">   	<span class="keyword">int</span> n = <span class="keyword">sizeof</span>(sort) / <span class="keyword">sizeof</span>(sort[<span class="number">0</span>])<span class="number">-1</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"原数组为："</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; sort[i] &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	InsertSort(sort, n);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"排序结果为："</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; sort[i] &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="3）执行结果"><a href="#3）执行结果" class="headerlink" title="3）执行结果"></a>3）执行结果</h4><p>   <img src="/2019/插入排序及其实现/%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C.PNG" alt="直接插入排序执行结果"></p>
+<h4 id="3）执行结果"><a href="#3）执行结果" class="headerlink" title="3）执行结果"></a>3）执行结果</h4><p>   <img src="/2019/插入排序及其实现/直接插入排序执行结果.PNG" alt="直接插入排序执行结果"></p>
 <h4 id="4）时空复杂度分析"><a href="#4）时空复杂度分析" class="headerlink" title="4）时空复杂度分析"></a>4）时空复杂度分析</h4><ul>
 <li><p>直接插入排序算法的时间复杂度分析可分为最好和最坏两种情况考虑：</p>
 <ul>
@@ -564,7 +555,7 @@
 <h4 id="5）源码地址"><a href="#5）源码地址" class="headerlink" title="5）源码地址"></a>5）源码地址</h4><p>​            <a href="https://github.com/Aoki-Wang/CheckStation/tree/master/Data%20Structure/Insert%20Sort/Direct%20Insert%20Sort" target="_blank" rel="noopener">直接插入排序实现源码</a></p>
 </li>
 </ul>
-<ol start="2">
+<ol>
 <li><h3 id="链表插入排序"><a href="#链表插入排序" class="headerlink" title="链表插入排序"></a>链表插入排序</h3><p>&emsp;&emsp;链表插入排序的最终排序结果将把对象集合按关键码大小依次链接地存储在一个链表中。这时链表中每个结点的结构除数据域外要增加一个指向结点类型的指针域。</p>
 <ul>
 <li>链表插入排序的思想是：初始时链表为空，第一个对象<code>R[0]</code>直接插入到链表中。第二个对象<code>R[1]</code>插入到链表中的位置由<code>K[0]</code>和<code>K[1]</code>比较确定：若K[1]<code>&lt;</code>K[0]<code>，则把</code>R[1]<code>插入到</code>R[0]<code>前；否则把R[1]插入到R[0]</code>后.</li>
@@ -573,20 +564,11 @@
 <li>这样的插入过程进行到<code>R[n-1]</code>插入完成后，则原始对象集合按关键码大小依次链接在一个链表中。</li>
 </ul>
 <h4 id="1）链表插入排序的实现"><a href="#1）链表插入排序的实现" class="headerlink" title="1）链表插入排序的实现"></a>1）链表插入排序的实现</h4><h5 id="链表中结点的数据类型定义："><a href="#链表中结点的数据类型定义：" class="headerlink" title="链表中结点的数据类型定义："></a>链表中结点的数据类型定义：</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">struct</span> <span class="title">Node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	T data;<span class="comment">//数据域</span></span><br><span class="line">	Node* next;<span class="comment">//指针域</span></span><br><span class="line">	Node(Node* p = <span class="literal">NULL</span>) :next(p) &#123;&#125;<span class="comment">//用于构造头结点</span></span><br><span class="line">	Node(T item,Node*p=<span class="literal">NULL</span>):data(item),next(p)&#123;&#125;<span class="comment">//构造其他存放数据元素的结点</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
 </li>
 </ol>
 <h5 id="链表插入排序的实现："><a href="#链表插入排序的实现：" class="headerlink" title="链表插入排序的实现："></a>链表插入排序的实现：</h5>   <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">LinkListInsertSort</span>(<span class="title">T</span> <span class="title">a</span>[], <span class="title">Node</span>&lt;T&gt;*&amp; <span class="title">list</span>, <span class="title">int</span> <span class="title">n</span>)</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	Node&lt;T&gt;* curr, * pre, * q;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		curr = <span class="built_in">list</span>-&gt;next;</span><br><span class="line">		pre = <span class="built_in">list</span>;</span><br><span class="line">		q = <span class="keyword">new</span> Node&lt;T&gt;(a[i]);</span><br><span class="line">		<span class="keyword">while</span> (curr != <span class="literal">NULL</span> &amp;&amp; curr-&gt;data &lt;= a[i])</span><br><span class="line">		&#123;</span><br><span class="line">			pre = curr;</span><br><span class="line">			curr = curr-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line">		q-&gt;next = pre-&gt;next;</span><br><span class="line">		pre-&gt;next = q;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
 <h4 id="2）测试函数-1"><a href="#2）测试函数-1" class="headerlink" title="2）测试函数"></a>2）测试函数</h4>   <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> arr[]= &#123; <span class="number">15</span>,<span class="number">22</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">56</span>,<span class="number">89</span>,<span class="number">14</span> &#125;;</span><br><span class="line">   	<span class="keyword">int</span> n = <span class="keyword">sizeof</span>(arr) / <span class="keyword">sizeof</span>(arr[<span class="number">0</span>])<span class="number">-1</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"原数组为："</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; arr[i] &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	Node&lt;<span class="keyword">int</span>&gt;* <span class="built_in">list</span> = <span class="keyword">new</span> Node&lt;<span class="keyword">int</span>&gt;;</span><br><span class="line">	LinkListInsertSort(arr, <span class="built_in">list</span>, n);</span><br><span class="line">	Display(<span class="built_in">list</span>);<span class="comment">//输出链表</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="3）执行结果-1"><a href="#3）执行结果-1" class="headerlink" title="3）执行结果"></a>3）执行结果</h4><p>   <img src="/2019/插入排序及其实现/%E9%93%BE%E8%A1%A8%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C.PNG" alt="链表插入排序执行结果"></p>
+<h4 id="3）执行结果-1"><a href="#3）执行结果-1" class="headerlink" title="3）执行结果"></a>3）执行结果</h4><p>   <img src="/2019/插入排序及其实现/链表插入排序执行结果.PNG" alt="链表插入排序执行结果"></p>
 <h4 id="4）时空复杂度分析-1"><a href="#4）时空复杂度分析-1" class="headerlink" title="4）时空复杂度分析"></a>4）时空复杂度分析</h4><ul>
 <li><p>最坏时间复杂度</p>
 <p>链表插入排序算法不需要移动数据对象，每插入一个对象时，最小关键码比较次数等于1，最大关键码比较次数等于链表中已排好序的对象的个数，即：</p>
@@ -601,12 +583,11 @@
 <h4 id="5）源码地址-1"><a href="#5）源码地址-1" class="headerlink" title="5）源码地址"></a>5）源码地址</h4><p>​            <a href="https://github.com/Aoki-Wang/CheckStation/tree/master/Data%20Structure/Insert%20Sort/List%20Insert%20Sort" target="_blank" rel="noopener">链表插入排序实现源码</a></p>
 </li>
 </ul>
-<ol start="3">
+<ol>
 <li><h3 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h3><p>&emsp;&emsp;希尔排序又称作最小增量排序，希尔排序算法的思想是：不断把待排序的对象分成若干个小组，对同一小组内的对象用直接插入法进行排序，当完成了所有对象都分在一个小组内的排序之后，排序过程结束。</p>
 <p>&emsp;&emsp;希尔排序是在分组概念上的插入排序，即在不断缩小组的个数时把原各小组的对象插入到新组中的合适位置上。</p>
 <p>&emsp;&emsp;原始对象集合越接近有序，直接插入排序算法的时间效率越高，这也是希尔排序算法能够成立的基础。希尔排序算法把待排序对象分成若干小组，在小组内用直接插入排序算法排序，当把小的小组合并为一些大的小组时，其中的对象集合将会接近有序，从而使直接插入排序算法的时间效率很高。</p>
 <h4 id="1）希尔排序的实现"><a href="#1）希尔排序的实现" class="headerlink" title="1）希尔排序的实现"></a>1）希尔排序的实现</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">ShellSort</span>(<span class="title">T</span> <span class="title">arr</span>[], <span class="title">int</span> <span class="title">n</span>, <span class="title">int</span> <span class="title">increment</span>[], <span class="title">int</span> <span class="title">numOfIncrement</span>)</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	T temp;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> m = <span class="number">0</span>; m &lt; numOfIncrement; m++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; increment[m]; k++)</span><br><span class="line">		&#123;<span class="comment">//每个小组内按直接插入排序算法排序，区别只是每次不是增1，而是increment[m]</span></span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = k; i &lt; n - increment[m]; i = i + increment[m])</span><br><span class="line">			&#123;</span><br><span class="line">				temp = arr[i + increment[m]];</span><br><span class="line">				<span class="keyword">int</span> j = i;</span><br><span class="line">				<span class="keyword">while</span> (j &gt; <span class="number">-1</span> &amp;&amp; temp &lt;= arr[j])</span><br><span class="line">				&#123;</span><br><span class="line">					arr[j + increment[m]] = arr[j];</span><br><span class="line">					j = j - increment[m];</span><br><span class="line">				&#125;</span><br><span class="line">				arr[j + increment[m]] = temp;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <h4 id="2）希尔排序过程"><a href="#2）希尔排序过程" class="headerlink" title="2）希尔排序过程"></a>2）希尔排序过程</h4><p>当增量increment=4时：</p>
 <p><img src="/2019/插入排序及其实现/increment=4.PNG" alt="希尔排序过程1"></p>
 <p>当增量increment=3时：</p>
@@ -614,12 +595,9 @@
 <p>当增量increment=1时：</p>
 <p><img src="/2019/插入排序及其实现/increment=1.PNG" alt="希尔排序过程3"></p>
 <h4 id="3）测试函数"><a href="#3）测试函数" class="headerlink" title="3）测试函数"></a>3）测试函数</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> arr[]= &#123; <span class="number">15</span>,<span class="number">22</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">56</span>,<span class="number">89</span>,<span class="number">14</span> &#125;;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"原数组为："</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">   	<span class="keyword">int</span> n = <span class="keyword">sizeof</span>(arr) / <span class="keyword">sizeof</span>(arr[<span class="number">0</span>])<span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; arr[i] &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">int</span> increment[] = &#123; <span class="number">4</span>,<span class="number">3</span>,<span class="number">1</span> &#125;;</span><br><span class="line">	<span class="keyword">int</span> numOfIncrement = <span class="keyword">sizeof</span>(increment) / <span class="keyword">sizeof</span>(increment[<span class="number">0</span>]);</span><br><span class="line">	ShellSort(arr, n, increment, numOfIncrement);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"排序结果："</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; arr[i] &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
 </li>
 </ol>
-<h4 id="4）执行结果"><a href="#4）执行结果" class="headerlink" title="4）执行结果"></a>4）执行结果</h4><p>   <img src="/2019/插入排序及其实现/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C1.PNG" alt="希尔排序执行结果"></p>
+<h4 id="4）执行结果"><a href="#4）执行结果" class="headerlink" title="4）执行结果"></a>4）执行结果</h4><p>   <img src="/2019/插入排序及其实现/希尔排序执行结果1.PNG" alt="希尔排序执行结果"></p>
 <h4 id="5）时空复杂度"><a href="#5）时空复杂度" class="headerlink" title="5）时空复杂度"></a>5）时空复杂度</h4><ul>
 <li><p>时间复杂度：</p>
 <ul>
@@ -781,7 +759,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">116</span>
+                  <span class="site-state-item-count">117</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -803,7 +781,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">227</span>
+                  <span class="site-state-item-count">229</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -923,7 +901,7 @@ setInterval("createtime()",250);
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共237k字</span>
+  <span class="post-count">博客全站共240.7k字</span>
 </div>
 
 

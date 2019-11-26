@@ -503,10 +503,8 @@
 <p>&emsp;&emsp;Linux实时调度策略提供的实时调度是软实时调度。软实时的含义是：内核调度进程尽力使进程在它优先的限定时间到来前运行，但内核并不保证总能满足这些进程的要求。相反，硬实时系统保证在一定条件下，可以满足任何调度的要求。Linux对于实时任务的调度不做任何保证，虽然不能保证硬实时工作方式，但是Linux的实时调度算法经过简单的修改可以满足硬实时的要求。</p>
 <p>&emsp;&emsp;实时任务存放在实时运行队列中。由结构<code>rt-rq</code>表示。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">rt</span>-<span class="title">rq</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">rt_prio_array</span> <span class="title">active</span>;</span><span class="comment">/*实时任务的优先级数组*/</span></span><br><span class="line">	<span class="keyword">int</span> rt_load_balance_idx;<span class="comment">/*需要进行负载平衡的实时队列的下标*/</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">list_head</span> *<span class="title">rt_load_balance_head</span> *<span class="title">rt_load_balance_curr</span>;</span><span class="comment">/*需要进行负载平衡队列的链表头节点，需要负载平衡的下一个任务*/</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
 <p>&emsp;&emsp;在实时运行队列<code>rt_rq</code>中有一个实时优先队列数组，定义在<code>kernel/sched.c</code>中，由结构<code>rt_prio_array</code>表示。实时优先级数组使处理器中实时进程的每个优先级包含一个相应的队列，而这些队列包含了对应优先级上的可运行实时任务链表。优先级数组还有一个优先级位图，当需要查找当前系统内拥有最高优先级的可执行进程时，它可以帮助提高效率，<code>rt_prio_array</code>定义如下：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">re_prio_array</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    	DECLARE_BITMAP(bitmap,MAX_RT_PRIO+<span class="number">1</span>);<span class="comment">/*优先级位图*/</span></span><br><span class="line">    	<span class="class"><span class="keyword">struct</span> <span class="title">list_head</span> <span class="title">queue</span>[<span class="title">MAX_RT_PRIO</span>];</span><span class="comment">/*优先级队列*/</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
 <p>&emsp;&emsp;优先级位图的实际类型为<code>unsigned long</code>长整型数组，数组的大小通过<code>BITS_TO_LONGS(bits)</code>来确定，默认的<code>MAX_RT_PRIO</code>值为100，因此需要使用5个长整型的数来表示。长整型数组中的每一位代表一个优先级。一开始，所有的位都被设置为0，当某个任务的状态变为可执行状态时，位图中相应的优先级位被设置为1.</p>
 <p>&emsp;&emsp;比如一个优先级为2的实时任务变为可执行状态时，第2位就被置为1.这样，查找系统中最高的优先级就成了查找位图中第一个被设置的位。因为优先级格式是一个定值，所以查找时间恒定。此外，Linux对它支持的每个体系结构上都提供了对应的快速查找函数<code>sched_find_first_bit()</code>，以保证对位图的快速查找。</p>
 <p>&emsp;&emsp;每个优先级数组还包含了一个叫做<code>struct list_head</code>的队列，每个队列上都包含对应处理器上相应优先级的全部可运行任务。</p>
@@ -687,7 +685,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">116</span>
+                  <span class="site-state-item-count">117</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -709,7 +707,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">227</span>
+                  <span class="site-state-item-count">229</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -829,7 +827,7 @@ setInterval("createtime()",250);
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共237k字</span>
+  <span class="post-count">博客全站共240.7k字</span>
 </div>
 
 
