@@ -144,13 +144,13 @@
 <meta property="og:site_name" content="Aoki&#39;s Blog">
 <meta property="og:description" content="一、Facade 模式  为子系统中的一组接口提供一个统一接口。Facade模式定义了一个更高层的接口，使子系统更加容易使用。 ​                                             ​">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://wanqbin.xyz/2019/Facade模式/Facade模式使用前.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/Facade模式/Facade模式.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/2019/Facade模式/Facade%E6%A8%A1%E5%BC%8F%E4%BD%BF%E7%94%A8%E5%89%8D.PNG">
+<meta property="og:image" content="http://wanqbin.xyz/2019/Facade模式/Facade%E6%A8%A1%E5%BC%8F.PNG">
 <meta property="og:updated_time" content="2019-11-25T11:16:07.293Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Facade模式">
 <meta name="twitter:description" content="一、Facade 模式  为子系统中的一组接口提供一个统一接口。Facade模式定义了一个更高层的接口，使子系统更加容易使用。 ​                                             ​">
-<meta name="twitter:image" content="http://wanqbin.xyz/2019/Facade模式/Facade模式使用前.PNG">
+<meta name="twitter:image" content="http://wanqbin.xyz/2019/Facade模式/Facade%E6%A8%A1%E5%BC%8F%E4%BD%BF%E7%94%A8%E5%89%8D.PNG">
 
 
 
@@ -534,14 +534,15 @@
 </li>
 <li><p>定义一个（或多个）具备所需接口的新类。</p>
 </li>
-<li>让新的类使用原有的系统。</li>
+<li><p>让新的类使用原有的系统。</p>
+</li>
 </ul>
 </li>
 </ul>
 <p>三、Facade模式：实践</p>
-<p><img src="/2019/Facade模式/Facade模式使用前.PNG" alt="Facade模式使用前"></p>
+<p><img src="/2019/Facade模式/Facade%E6%A8%A1%E5%BC%8F%E4%BD%BF%E7%94%A8%E5%89%8D.PNG" alt="Facade模式使用前"></p>
 <p>假设Client对象必须处理Database，Model，Element对象。Client必须首先通过Database对象打开数据库，获取Model对象，然后再查询Model对象，获取Element对象，最后请求Element对象的信息。如果能够创建一个可供Client查询的Database Facade，那么，以上过程将容易得多。</p>
-<p><img src="/2019/Facade模式/Facade模式.PNG" alt="Facade模式可以减少客户需要处理的对象数量"></p>
+<p><img src="/2019/Facade模式/Facade%E6%A8%A1%E5%BC%8F.PNG" alt="Facade模式可以减少客户需要处理的对象数量"></p>
 <p>Facade模式提出了一种通用方法：它为我提供了起点。这个模式的Facade部分实际上就是创建了一种新的接口供客户使用，来替代原有的接口。之所以能够这样做，是因为Client对象并不需要原系统提供的所有功能。</p>
 <p>Facade模式还可以用来隐藏或者封装系统。Facade类能够将系统作为自己的私有成员包含进来。在此情况下，原系统将与Facade类联系起来，但Facade类的客户无需看到。</p>
 <p>封装系统的原因如下：</p>

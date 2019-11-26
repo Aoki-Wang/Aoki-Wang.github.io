@@ -125,7 +125,7 @@
 
 
 
-  <meta name="keywords" content="Linux内核,操作系统,系统调用,">
+  <meta name="keywords" content="操作系统,Linux内核,系统调用,">
 
 
 
@@ -136,18 +136,18 @@
 
 
 
-<meta name="description" content="&amp;emsp;&amp;emsp;Linux内核提供的一些系统调用主要用于管理和维护与进程调度相关的参数值，这些系统调用可以用来获取和设置进程的优先级、进程调度策略，以及进程与处理器的亲和力等。     系统调用 功能简介     nice() 用于设置普通进程的静态优先级，即设置进程的nice值   getprioprity() 返回20减去给定进程组中所有进程之中最低nice字段的值，即获得一组普通进程">
-<meta name="keywords" content="Linux内核,操作系统,系统调用">
+<meta name="description" content="&amp;emsp;&amp;emsp;Linux内核提供的一些系统调用主要用于管理和维护与进程调度相关的参数值，这些系统调用可以用来获取和设置进程的优先级、进程调度策略，以及进程与处理器的亲和力等。    系统调用 功能简介    nice() 用于设置普通进程的静态优先级，即设置进程的nice值   getprioprity() 返回20减去给定进程组中所有进程之中最低nice字段的值，即获得一组普通进程的最">
+<meta name="keywords" content="操作系统,Linux内核,系统调用">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux调度相关系统调用">
 <meta property="og:url" content="http://wanqbin.xyz/2019/Linux调度相关系统调用/index.html">
 <meta property="og:site_name" content="Aoki&#39;s Blog">
-<meta property="og:description" content="&amp;emsp;&amp;emsp;Linux内核提供的一些系统调用主要用于管理和维护与进程调度相关的参数值，这些系统调用可以用来获取和设置进程的优先级、进程调度策略，以及进程与处理器的亲和力等。     系统调用 功能简介     nice() 用于设置普通进程的静态优先级，即设置进程的nice值   getprioprity() 返回20减去给定进程组中所有进程之中最低nice字段的值，即获得一组普通进程">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;Linux内核提供的一些系统调用主要用于管理和维护与进程调度相关的参数值，这些系统调用可以用来获取和设置进程的优先级、进程调度策略，以及进程与处理器的亲和力等。    系统调用 功能简介    nice() 用于设置普通进程的静态优先级，即设置进程的nice值   getprioprity() 返回20减去给定进程组中所有进程之中最低nice字段的值，即获得一组普通进程的最">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-08-08T09:00:48.927Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux调度相关系统调用">
-<meta name="twitter:description" content="&amp;emsp;&amp;emsp;Linux内核提供的一些系统调用主要用于管理和维护与进程调度相关的参数值，这些系统调用可以用来获取和设置进程的优先级、进程调度策略，以及进程与处理器的亲和力等。     系统调用 功能简介     nice() 用于设置普通进程的静态优先级，即设置进程的nice值   getprioprity() 返回20减去给定进程组中所有进程之中最低nice字段的值，即获得一组普通进程">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;Linux内核提供的一些系统调用主要用于管理和维护与进程调度相关的参数值，这些系统调用可以用来获取和设置进程的优先级、进程调度策略，以及进程与处理器的亲和力等。    系统调用 功能简介    nice() 用于设置普通进程的静态优先级，即设置进程的nice值   getprioprity() 返回20减去给定进程组中所有进程之中最低nice字段的值，即获得一组普通进程的最">
 
 
 
@@ -498,7 +498,6 @@
 
       
         <p>&emsp;&emsp;Linux内核提供的一些系统调用主要用于管理和维护与进程调度相关的参数值，这些系统调用可以用来获取和设置进程的优先级、进程调度策略，以及进程与处理器的亲和力等。</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -506,8 +505,7 @@
 <th>功能简介</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>nice()</td>
 <td>用于设置普通进程的静态优先级，即设置进程的nice值</td>
 </tr>
@@ -559,9 +557,7 @@
 <td>sched_rr_get_interval()</td>
 <td>获得时间片轮转策略的时间片值</td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 <ol>
 <li><p><code>nice()</code>系统调用</p>
 <p>&emsp;&emsp;该函数用于设置普通进程的静态优先级，它可以将给定进程的静态优先级增加一个给定的量，这时我们应该注意，这个给定的量有两种情况，第一种是将给定的进程的静态优先级加上一个正值，其实这相当于降低进程的优先级，第二种是将给定的进程的静态优先级加上一个负值，其实这相当于提高进程的优先级。</p>
@@ -620,9 +616,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Linux内核/" rel="tag"># Linux内核</a>
-          
             <a href="/tags/操作系统/" rel="tag"># 操作系统</a>
+          
+            <a href="/tags/Linux内核/" rel="tag"># Linux内核</a>
           
             <a href="/tags/系统调用/" rel="tag"># 系统调用</a>
           

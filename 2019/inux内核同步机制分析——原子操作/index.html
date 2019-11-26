@@ -125,7 +125,7 @@
 
 
 
-  <meta name="keywords" content="Linux内核,操作系统,原子操作,原子整数操作,原子位操作,">
+  <meta name="keywords" content="操作系统,Linux内核,原子操作,原子整数操作,原子位操作,">
 
 
 
@@ -137,7 +137,7 @@
 
 
 <meta name="description" content="&amp;emsp;&amp;emsp;原子操作是Linux中提供的一种实现同步的方法。所谓原子操作就是指某一操作在执行过程中是不可以被打断的，它要么全部执行完毕，要么就一点也不执行。原子原本指的是不可分割的微粒，所以原子操作也就是不可分割的指令。也就是说原子操作是绝对不会出现该操作执行了一半，内核又去执行其他操作了的情况。 &amp;emsp;&amp;emsp;内核提供了两组原子操作接口：一组是针对整数的原子操作，另一组是针">
-<meta name="keywords" content="Linux内核,操作系统,原子操作,原子整数操作,原子位操作">
+<meta name="keywords" content="操作系统,Linux内核,原子操作,原子整数操作,原子位操作">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux内核同步机制分析——原子操作">
 <meta property="og:url" content="http://wanqbin.xyz/2019/inux内核同步机制分析——原子操作/index.html">
@@ -502,6 +502,7 @@
 <h2 id="一、原子整数操作"><a href="#一、原子整数操作" class="headerlink" title="一、原子整数操作"></a>一、原子整数操作</h2><p>&emsp;&emsp;原子整数操作需要硬件的支持，因此它是与体系结构有关的，x86提供给用户的接口和原子类型都定义在<code>include/asm-x86/atomic.h</code>文件中，使用宏来实现。</p>
 <p>&emsp;&emsp;原子整数操作主要用于实现资源计数，很多引用计数都是通过原子操作实现的。原子结构类型定义如下：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span><span class="keyword">int</span> counter;&#125; <span class="keyword">atomic_t</span>;</span><br></pre></td></tr></table></figure>
+
 <p>&emsp;&emsp;原子整数操作，顾名思义，这是一组针对整数进行的操作，但是，该操作有几点需要特别注意的地方</p>
 <ul>
 <li>在Linux中的原子整数操作只能对<code>atomic_t</code>类型的数据进行操作，而不能对在C语言中用到的整数类型<code>int</code>进行操作</li>
@@ -512,7 +513,6 @@
 <p>（2）使用<code>atomic_t</code>类型确保了编译器不会对定义的该类型的数据进行访问，这也就是保证了原子操作最终接收到一个正确的内存地址而不是一个别名，该别名也保存了相同的值。</p>
 <p>（3）重新定义了一个数据类型<code>atomic_t</code>，可以屏蔽到在不同体系结构上实现原子操作的差异。</p>
 <p>&emsp;&emsp;其次，是第二个特别的地方的原因，主要是在<code>SPARC</code>体系结构上，原子操作的实现不同于其他体系结构，该体系结构上32位<code>int</code>型的低8位中设置了一个锁，这主要是由于<code>SPARC</code>体系结构对原子操作缺乏指令级的支持，所以只能利用锁来避免对原子类型数据的并发访问。</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -520,8 +520,7 @@
 <th>描述</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>ATOMIC_INIT(i)</td>
 <td>用于初始化一个原子变量的值为i，并1返回这个atomic_t结构</td>
 </tr>
@@ -573,12 +572,9 @@
 <td>atomic_sub_return(int i,atomic_t *v</td>
 <td>将原子变量v的值减i，并返回运算后原子变量的值</td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 <h2 id="二、原子位操作"><a href="#二、原子位操作" class="headerlink" title="二、原子位操作"></a>二、原子位操作</h2><p>&emsp;&emsp;原子位操作，就是针对数据的每一位进行操作，当然它的实现也是与体系结构相关的。其定义在<code>include/x86/bitops_32.h</code>中。</p>
 <p>&emsp;&emsp;在这里需要注意的是原子位操作与原子整数操作不同，它不需要定义一个与该操作相对应的数据结构，因为原值位操作只是针对普通的指针进行操作的，我们可以对任何指针指向的数据进行原子位操作。Linux内核1提供了一系列原值位操作的函数。</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -586,8 +582,7 @@
 <th>描述</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>set_bit(int nr,volatile unsigned long *addr)</td>
 <td>原子地设置add所指对象的第nr位</td>
 </tr>
@@ -615,11 +610,10 @@
 <td>test_bit(nr,addr)</td>
 <td>原子地返回addr所指对象的第nr位</td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 <p>&emsp;&emsp;下面通过说明一个典型的操作函数<code>set_bit(int nr,volatile unsigned long *addr)</code>来分析原子位操作的具体处理过程。该函数以原子方式设置在addr所指对应的第nr位，即保证操作过程不会被打断。代码如下：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">set_bit</span><span class="params">(<span class="keyword">int</span> nr,<span class="keyword">volatile</span> <span class="keyword">unsigned</span> <span class="keyword">long</span> *addr)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    	_asm__volatile_(LOCK_PREFIX</span><br><span class="line">                       <span class="string">"btsl%1,%0</span></span><br><span class="line"><span class="string">                        :"</span>+m<span class="string">"(ADDR)</span></span><br><span class="line"><span class="string">                        :"</span>Ir(nr));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>第4行声明了内嵌汇编所使用的汇编指令<code>btsl</code>，用于设置占位符1%对应操作数的第%1位，然后将结果保存到占位符%0对应的变量；这里的占位符%0、%1分别对应变量<code>addr</code>和<code>nr</code>。</p>
 <p>第5行代码声明了内嵌汇编所使用的输出变量列表。这里声明的输出变量为内存地址指针<code>addr</code>，其限定符<code>+m</code>说明该变量是一个读写类型的内存变量，即该变量既是输入变量，也是输出变量。</p>
 <p>第6行代码声明了内嵌汇编所使用的输入变量列表。这里声明的输入变量是：代表位移的参数<code>nr</code>，其限定符<code>Ir</code>表示该变量是一个0~31的立即数，且要求编译器将该变量与处理器的某个寄存器相关联。</p>
@@ -651,9 +645,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Linux内核/" rel="tag"># Linux内核</a>
-          
             <a href="/tags/操作系统/" rel="tag"># 操作系统</a>
+          
+            <a href="/tags/Linux内核/" rel="tag"># Linux内核</a>
           
             <a href="/tags/原子操作/" rel="tag"># 原子操作</a>
           

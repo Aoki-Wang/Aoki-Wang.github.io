@@ -136,18 +136,18 @@
 
 
 
-<meta name="description" content="一、环境概述 节点信息      IP 角色 服务器名     192.168.43.60 Master Matser   192.168.43.61 Node Node1   192.168.43.62 Node Node2   192.168.43.63 Node Node3      服务器配置信息Master：虚拟机CentOS7 Node：虚拟机CentOS7    节点分布：利用局域网">
+<meta name="description" content="一、环境概述 节点信息     IP 角色 服务器名    192.168.43.60 Master Matser   192.168.43.61 Node Node1   192.168.43.62 Node Node2   192.168.43.63 Node Node3    服务器配置信息Master：虚拟机CentOS7 Node：虚拟机CentOS7    节点分布：利用局域网中的四台">
 <meta name="keywords" content="k8s,分布式集群">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Kubernetes集群部署">
 <meta property="og:url" content="http://wanqbin.xyz/2019/Kubernetes集群部署/index.html">
 <meta property="og:site_name" content="Aoki&#39;s Blog">
-<meta property="og:description" content="一、环境概述 节点信息      IP 角色 服务器名     192.168.43.60 Master Matser   192.168.43.61 Node Node1   192.168.43.62 Node Node2   192.168.43.63 Node Node3      服务器配置信息Master：虚拟机CentOS7 Node：虚拟机CentOS7    节点分布：利用局域网">
+<meta property="og:description" content="一、环境概述 节点信息     IP 角色 服务器名    192.168.43.60 Master Matser   192.168.43.61 Node Node1   192.168.43.62 Node Node2   192.168.43.63 Node Node3    服务器配置信息Master：虚拟机CentOS7 Node：虚拟机CentOS7    节点分布：利用局域网中的四台">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-11-19T14:08:22.267Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kubernetes集群部署">
-<meta name="twitter:description" content="一、环境概述 节点信息      IP 角色 服务器名     192.168.43.60 Master Matser   192.168.43.61 Node Node1   192.168.43.62 Node Node2   192.168.43.63 Node Node3      服务器配置信息Master：虚拟机CentOS7 Node：虚拟机CentOS7    节点分布：利用局域网">
+<meta name="twitter:description" content="一、环境概述 节点信息     IP 角色 服务器名    192.168.43.60 Master Matser   192.168.43.61 Node Node1   192.168.43.62 Node Node2   192.168.43.63 Node Node3    服务器配置信息Master：虚拟机CentOS7 Node：虚拟机CentOS7    节点分布：利用局域网中的四台">
 
 
 
@@ -500,7 +500,6 @@
         <h2 id="一、环境概述"><a href="#一、环境概述" class="headerlink" title="一、环境概述"></a>一、环境概述</h2><ul>
 <li><h3 id="节点信息"><a href="#节点信息" class="headerlink" title="节点信息"></a>节点信息</h3></li>
 </ul>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -509,8 +508,7 @@
 <th>服务器名</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>192.168.43.60</td>
 <td>Master</td>
 <td>Matser</td>
@@ -530,9 +528,7 @@
 <td>Node</td>
 <td>Node3</td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 <ul>
 <li><h3 id="服务器配置信息"><a href="#服务器配置信息" class="headerlink" title="服务器配置信息"></a>服务器配置信息</h3><p>Master：虚拟机CentOS7</p>
 <p>Node：虚拟机CentOS7</p>
@@ -556,21 +552,29 @@
 </li>
 </ol>
    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">192.168.43.60 Master</span><br><span class="line">192.168.43.61 Node1</span><br><span class="line">192.168.43.61 Node2</span><br><span class="line">192.168.43.61 Node3</span><br></pre></td></tr></table></figure>
-<ol>
+
+<ol start="3">
 <li><h3 id="时间同步"><a href="#时间同步" class="headerlink" title="时间同步"></a>时间同步</h3><p>执行下列命令：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ntpdate cn.pool.ntp.org</span><br></pre></td></tr></table></figure>
+
 <p>若提示ntpdate未安装，执行命令：<code>yum install ntpdate</code></p>
 </li>
 <li><h3 id="关闭防火墙-开启特定端口策略"><a href="#关闭防火墙-开启特定端口策略" class="headerlink" title="关闭防火墙/开启特定端口策略"></a>关闭防火墙/开启特定端口策略</h3><p>在各个节点上执行如下命令：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl disable firewalld</span><br><span class="line">systemctl stop firewalld</span><br></pre></td></tr></table></figure>
+
+
+
 </li>
 </ol>
-<ol>
+<ol start="5">
 <li><h3 id="禁用SELinux，让容器可以读取主机文件系统"><a href="#禁用SELinux，让容器可以读取主机文件系统" class="headerlink" title="禁用SELinux，让容器可以读取主机文件系统"></a>禁用SELinux，让容器可以读取主机文件系统</h3><p>在各个节点上执行如下命令：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setenforce 0</span><br></pre></td></tr></table></figure>
+
+
+
 </li>
 </ol>
-<ol>
+<ol start="6">
 <li><h3 id="配置yum源"><a href="#配置yum源" class="headerlink" title="配置yum源"></a>配置yum源</h3><p>在各个服务器上执行命令： <code>*vi /etc/yum.repos.d/kubernetes.repo*</code></p>
 <p>插入如下内容：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[kubernetes]</span><br><span class="line">name=Kubernetes Repository</span><br><span class="line">baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=0</span><br></pre></td></tr></table></figure>
@@ -579,6 +583,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes</span><br></pre></td></tr></table></figure>
 </li>
 <li><h3 id="安装docker-ce"><a href="#安装docker-ce" class="headerlink" title="安装docker-ce"></a>安装docker-ce</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install docker-ce</span><br></pre></td></tr></table></figure>
+
 <p>若报类似于nothing的错误，执行命令：<code>yum update</code></p>
 <p>然后执行<code>yum search docker-ce</code></p>
 <p>之后根据查找结果安装docker-ce</p>
@@ -588,73 +593,97 @@
 </li>
 <li><h3 id="检测docker服务和kubelet服务"><a href="#检测docker服务和kubelet服务" class="headerlink" title="检测docker服务和kubelet服务"></a>检测docker服务和kubelet服务</h3><p>执行下列命令：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl status docker</span><br><span class="line">systemctl status kubelet</span><br></pre></td></tr></table></figure>
+
 <p>执行结果显示绿色字样的<code>running</code>即为正常状态。</p>
 </li>
 <li><h3 id="通过kubeadm获取初始化配置文件"><a href="#通过kubeadm获取初始化配置文件" class="headerlink" title="通过kubeadm获取初始化配置文件"></a>通过kubeadm获取初始化配置文件</h3><p>执行命令：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubeadm config print init-defaults &gt; init.default.yaml</span><br><span class="line">cp init.default.yaml init-config.yaml</span><br><span class="line">vi init-config.yaml</span><br></pre></td></tr></table></figure>
+
 <p>修改内容如下：</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">kubeadm.k8s.io/v1beta2</span></span><br><span class="line"><span class="attr">bootstrapTokens:</span></span><br><span class="line"><span class="attr">- groups:</span></span><br><span class="line"><span class="attr">  - system:</span><span class="attr">bootstrappers:kubeadm:default-node-token</span></span><br><span class="line"><span class="attr">  token:</span> <span class="string">lo7fj7.j16rob4ic6mbgs5q</span></span><br><span class="line"><span class="attr">  ttl:</span> <span class="number">24</span><span class="string">h0m0s</span></span><br><span class="line"><span class="attr">  usages:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">signing</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">authentication</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">InitConfiguration</span></span><br><span class="line"><span class="attr">localAPIEndpoint:</span></span><br><span class="line"><span class="attr">  advertiseAddress:</span> <span class="number">192.168</span><span class="number">.43</span><span class="number">.60</span>   <span class="comment">#master IP</span></span><br><span class="line"><span class="attr">  bindPort:</span> <span class="number">6443</span></span><br><span class="line"><span class="attr">nodeRegistration:</span></span><br><span class="line"><span class="attr">  criSocket:</span> <span class="string">/var/run/dockershim.sock</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">master</span></span><br><span class="line"><span class="attr">  taints:</span></span><br><span class="line"><span class="attr">  - effect:</span> <span class="string">NoSchedule</span></span><br><span class="line"><span class="attr">    key:</span> <span class="string">node-role.kubernetes.io/master</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiServer:</span></span><br><span class="line"><span class="attr">  timeoutForControlPlane:</span> <span class="number">4</span><span class="string">m0s</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">kubeadm.k8s.io/v1beta2</span></span><br><span class="line"><span class="attr">certificatesDir:</span> <span class="string">/etc/kubernetes/pki</span></span><br><span class="line"><span class="attr">clusterName:</span> <span class="string">kubernetes</span></span><br><span class="line"><span class="attr">controllerManager:</span> <span class="string">&#123;&#125;</span></span><br><span class="line"><span class="attr">dns:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">CoreDNS</span></span><br><span class="line"><span class="attr">etcd:</span></span><br><span class="line"><span class="attr">  local:</span></span><br><span class="line"><span class="attr">    dataDir:</span> <span class="string">/var/lib/etcd</span></span><br><span class="line"><span class="attr">imageRepository:</span> <span class="string">registry.aliyuncs.com/google_containers</span>  <span class="comment">#镜像源，国内</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ClusterConfiguration</span></span><br><span class="line"><span class="attr">kubernetesVersion:</span> <span class="string">v1.16.0</span></span><br><span class="line"><span class="attr">networking:</span></span><br><span class="line"><span class="attr">  dnsDomain:</span> <span class="string">cluster.local</span></span><br><span class="line"><span class="attr">  podSubnet:</span> <span class="string">"192.168.0.0/16"</span></span><br><span class="line"><span class="attr">  serviceSubnet:</span> <span class="number">10.96</span><span class="number">.0</span><span class="number">.0</span><span class="string">/12</span></span><br><span class="line"><span class="attr">scheduler:</span> <span class="string">&#123;&#125;</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><h3 id="修改docker镜像源"><a href="#修改docker镜像源" class="headerlink" title="修改docker镜像源"></a>修改docker镜像源</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"> &quot;registry-mirrors&quot;:[&quot;https://e384u25y.mirror.aliyuncs.com&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>上面的镜像源是阿里云加速链接，可以注册阿里云账号，然后在镜像服务中找到专属的加速链接</p>
 </li>
 <li><h3 id="下载镜像文件"><a href="#下载镜像文件" class="headerlink" title="下载镜像文件"></a>下载镜像文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubeadm config images pull --config=init-config.yaml</span><br></pre></td></tr></table></figure>
+
+
+
 </li>
 </ol>
-<ol>
+<ol start="14">
 <li><h3 id="使用kubeadm-init命令安装Master"><a href="#使用kubeadm-init命令安装Master" class="headerlink" title="使用kubeadm init命令安装Master"></a>使用<code>kubeadm init</code>命令安装Master</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubeadm init --config=init-config.yaml</span><br></pre></td></tr></table></figure>
+
 <p>在安装的过程中可能会出现比较多的问题。</p>
 <ul>
 <li>如果是镜像源的问题，可以重新启动docker服务，加载修改的镜像源，命令如下：</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl restart docker</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li><p>如果是提示<code>hostname &quot;master&quot; could not be reached</code>之类的问题，可以修改<code>/etc/hosts</code>文件，见第2步。</p>
 <p>若提示如下问题：</p>
 </li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">running with swap on is not supported. Please disable swap</span><br></pre></td></tr></table></figure>
+
 <p>执行命令：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*swapoff -a*</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li><p>若提示如下问题：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ERROR FileContent--proc-sys-net-bridge-bridge-nf-call-iptables]: /proc/sys/net/bridge/bridge-nf-call-iptables contents are not set to 1</span><br></pre></td></tr></table></figure>
+
 <p>执行命令：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo 1 &gt; /proc/sys/net/ipv4/ip_forward</span><br></pre></td></tr></table></figure>
+
 </li>
 </ul>
 <p>安装成功后会出现如下提示：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Your Kubernetes control-plane has initialized successfully!</span><br></pre></td></tr></table></figure>
+
 <p>在最下面的提示信息中也会出现token，这用于节点加入集群，不过这个token只有24小时的有效期。我们也可以使用其他命令生成永久的token。</p>
 </li>
 <li><h3 id="准备配置文件，以便系统重启时，自动启动集群"><a href="#准备配置文件，以便系统重启时，自动启动集群" class="headerlink" title="准备配置文件，以便系统重启时，自动启动集群"></a>准备配置文件，以便系统重启时，自动启动集群</h3><p>执行命令：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p $HOME/.kube</span><br><span class="line">cp -i /etc/kubernetes/admin.conf $HOME/.kube/config</span><br><span class="line">chown $(id -u):$(id -g) $HOME/.kube/config</span><br></pre></td></tr></table></figure>
+
+
+
 </li>
 </ol>
-<ol>
+<ol start="16">
 <li><h3 id="验证安装是否成功"><a href="#验证安装是否成功" class="headerlink" title="验证安装是否成功"></a>验证安装是否成功</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@Master ~]# kubectl get -n kube-system configmap</span><br><span class="line">NAME                                 DATA   AGE</span><br><span class="line">coredns                              1      10d</span><br><span class="line">extension-apiserver-authentication   6      10d</span><br><span class="line">kube-proxy                           2      10d</span><br><span class="line">kubeadm-config                       2      10d</span><br><span class="line">kubelet-config-1.16                  1      10d</span><br></pre></td></tr></table></figure>
+
 <p>至此，master节点安装完毕。下面安装node节点。</p>
 </li>
 <li><h3 id="安装节点"><a href="#安装节点" class="headerlink" title="安装节点"></a>安装节点</h3><p>在各个节点上重复步骤1~10。</p>
 </li>
 <li><h3 id="通过kubeadm获取join配置文件"><a href="#通过kubeadm获取join配置文件" class="headerlink" title="通过kubeadm获取join配置文件"></a>通过kubeadm获取join配置文件</h3><p>执行命令如下：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kubeadm config print join-defaults &gt; join-config.yaml</span><br><span class="line">vim join-config.yaml</span><br></pre></td></tr></table></figure>
+
 <p>然后修改内容如下：</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">kubeadm.k8s.io/v1beta2</span></span><br><span class="line"><span class="attr">caCertPath:</span> <span class="string">/etc/kubernetes/pki/ca.crt</span></span><br><span class="line"><span class="attr">discovery:</span></span><br><span class="line"><span class="attr">  bootstrapToken:</span></span><br><span class="line"><span class="attr">    apiServerEndpoint:</span> <span class="number">192.168</span><span class="number">.43</span><span class="number">.60</span><span class="string">:6443</span>  <span class="comment">#这地方是master节点的IP</span></span><br><span class="line"><span class="attr">    token:</span> <span class="string">lo7fj7.j16rob4ic6mbgs5q</span>   <span class="comment">#这地方是token，一般是初始化的toke，和master节点中的init文件中的token相同</span></span><br><span class="line"><span class="attr">    unsafeSkipCAVerification:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">  timeout:</span> <span class="number">5</span><span class="string">m0s</span></span><br><span class="line"><span class="attr">  tlsBootstrapToken:</span> <span class="string">lo7fj7.j16rob4ic6mbgs5q</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">JoinConfiguration</span></span><br><span class="line"><span class="attr">nodeRegistration:</span></span><br><span class="line"><span class="attr">  criSocket:</span> <span class="string">/var/run/dockershim.sock</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">node1</span>   <span class="comment">#节点名，每个节点的名字必须不同</span></span><br><span class="line"><span class="attr">  taints:</span> <span class="literal">null</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><h3 id="运行kubeadm-join命令加入集群"><a href="#运行kubeadm-join命令加入集群" class="headerlink" title="运行kubeadm join命令加入集群"></a>运行<code>kubeadm join</code>命令加入集群</h3><p>执行命令：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubeadm join --config=join-config.yaml</span><br></pre></td></tr></table></figure>
+
+
+
 </li>
 </ol>
-<ol>
+<ol start="20">
 <li><h3 id="查看已加入节点"><a href="#查看已加入节点" class="headerlink" title="查看已加入节点"></a>查看已加入节点</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@Master ~]# kubectl get node</span><br><span class="line">NAME     STATUS     ROLES    AGE     VERSION</span><br><span class="line">master   NotReady   master   10d     v1.16.2   </span><br><span class="line">node1    NotReady   &lt;none&gt;   7d12h   v1.16.2</span><br><span class="line">node2    NotReady   &lt;none&gt;   7d12h   v1.16.2</span><br><span class="line">node3    NotReady   &lt;none&gt;   7d12h   v1.16.2</span><br></pre></td></tr></table></figure>
+
 <p>在节点加入成功后，执行命令的结果如上。这里notready是因为没有安装网络插件。网络插件比较多，比如weave，Flannel等。这里安装weave。</p>
 </li>
 <li><h3 id="安装网络插件"><a href="#安装网络插件" class="headerlink" title="安装网络插件"></a>安装网络插件</h3><p>执行命令：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"</span><br></pre></td></tr></table></figure>
+
 <p>这里可能会因为科学上网的问题而出现ErrImage或者ImagePullback等问题。我的也出现了这个问题，后来不知道什么原因，突然就安装上了。</p>
 </li>
 <li><h3 id="验证Kubernetes集群是否安装完成"><a href="#验证Kubernetes集群是否安装完成" class="headerlink" title="验证Kubernetes集群是否安装完成"></a>验证Kubernetes集群是否安装完成</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">kube-system            coredns-58cc8c89f4-8rxzx                     1/1     Running            13         7d12h</span><br><span class="line">kube-system            coredns-58cc8c89f4-cdwm7                     1/1     Running            15         7d12h</span><br><span class="line">kube-system            etcd-master                                  1/1     Running            26         10d</span><br><span class="line">kube-system            kube-apiserver-master                        1/1     Running            265        10d</span><br><span class="line">kube-system            kube-controller-manager-master               1/1     Running            108        10d</span><br><span class="line">kube-system            kube-proxy-bhdzd                             1/1     Running            9          7d1h</span><br><span class="line">kube-system            kube-proxy-dj4qt                             1/1     Running            14         7d1h</span><br><span class="line">kube-system            kube-scheduler-master                        1/1     Running            96         10d</span><br><span class="line">kube-system            weave-net-6nd4h                              2/2     Running            44         7d12h</span><br><span class="line">kube-system            weave-net-9tzjk                              2/2     Running            41         7d19h</span><br></pre></td></tr></table></figure>
+
 <p>这里，Kubernetes集群就可以搭建完毕了。</p>
 </li>
 </ol>

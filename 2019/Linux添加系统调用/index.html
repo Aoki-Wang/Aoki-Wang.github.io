@@ -125,7 +125,7 @@
 
 
 
-  <meta name="keywords" content="Linux内核,操作系统,Linux系统调用,Linux添加系统调用,">
+  <meta name="keywords" content="操作系统,Linux内核,Linux系统调用,Linux添加系统调用,">
 
 
 
@@ -137,7 +137,7 @@
 
 
 <meta name="description" content="&amp;emsp;&amp;emsp;在Linux中为系统添加一个系统调用并不是很难的事情，首先需要编写自己的系统调用，然后再把编写好的系统调用注册进内核使它成为一个正式的系统调用即可。系统调用函数可以静态添加，也可以动态添加，静态方式就是把系统掉用那个直接加入到内核中，这需要重新编译内核；动态方式是以模块的方式添加系统调用，这种方式下，不需要重新编译内核。  编写系统调用函数&amp;emsp;&amp;emsp;编写自己的">
-<meta name="keywords" content="Linux内核,操作系统,Linux系统调用,Linux添加系统调用">
+<meta name="keywords" content="操作系统,Linux内核,Linux系统调用,Linux添加系统调用">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux添加系统调用">
 <meta property="og:url" content="http://wanqbin.xyz/2019/Linux添加系统调用/index.html">
@@ -513,6 +513,7 @@
 </li>
 <li><h3 id="从用户空间使用系统调用"><a href="#从用户空间使用系统调用" class="headerlink" title="从用户空间使用系统调用"></a>从用户空间使用系统调用</h3><p>&emsp;&emsp;通常，系统调用靠C库的支持，用户程序通过包含标准头文件并和C库链接，就可以使用系统调用了。但是如果仅仅写出系统调用，glibc库恐怕并提供支持。在2.6.20之后，出于安全的考虑，Linux删除了<code>_syscalln</code>的一组宏，这样就只有使用内核为用户程序提供的另外一个函数<code>syscall</code>。该函数的形式如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">syscall(_NR_mysyscall,arg1,arg2……）;</span><br></pre></td></tr></table></figure>
+
 </li>
 </ol>
 
@@ -542,9 +543,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Linux内核/" rel="tag"># Linux内核</a>
-          
             <a href="/tags/操作系统/" rel="tag"># 操作系统</a>
+          
+            <a href="/tags/Linux内核/" rel="tag"># Linux内核</a>
           
             <a href="/tags/Linux系统调用/" rel="tag"># Linux系统调用</a>
           
