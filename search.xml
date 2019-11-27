@@ -1,6 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Shell中的for循环和while循环]]></title>
+    <url>%2F2019%2FShell%E4%B8%AD%E7%9A%84for%E5%BE%AA%E7%8E%AF%E5%92%8Cwhile%E5%BE%AA%E7%8E%AF%2F</url>
+    <content type="text"><![CDATA[一、for循环1.基本语法：1234For 变量 in 字符串 do 语句1 done 2.示例1：for1.sh123456789#! /bin/bash#author by Aokifor i in `seq 1 15` #反引号，识别为命令do echo -e "\033[32mThe number is $i\033[0m"done 3.示例2：for-sum.sh1234567891011121314#! /bin/bash#author by Aokij=0for((i=1;i&lt;=100;i++))do j=`expr $i + $j`doneecho $j~ 查看脚本执行过程： sh -x for-sum.sh 4.示例3：create-manylogs.sh12345678910111213#! /bin/bash#author by Aokifor((i=100;i&lt;=102;i++))do FILE=$i.log if [ ! -f $FILE ];then touch /root/shell/test1/$FILE else continue; fidone 5.示例4： tar-logs.sh——找到相关log，然后批量打包12345678#! /bin/bash#author by Aokifor i in `find /root/shell/test1 -name "*.log"`do tar -cvzf $i.tar.gz $idone 6.示例5：transfer-files.sh——批量传输文件12345678#! /bin/bash#author by Aokifor i in `seq $1 $2`do scp -r /root/shell/transferFiles root@192.168.43.$i:/tmp/done 二、while循环1.示例1：while1.sh12345678910#! /bin/bash#author by Aokii=0while [[ $i -lt 10 ]]do echo "The number is $i" ((i++))done 2.read命令： 3.示例2：while2.sh123456789#! /bin/bash#author by Aokiwhile read linedo echo $linedone &lt;/etc/hosts 4.示例3：while3.sh12345678910#! /bin/bash#author by Aokiwhile read linedo IP=`echo $line |awk '&#123;print $2&#125;'` #取第二列 echo -e "\033[32mscp -r /tmp/test.txt root@$IP:/tmp \033[0m"done &lt; IPList.txt IPList.txt 1231 192.168.43.51 /tmp/ /root/shell/2 192.168.43.61 /tmp/ /root/shell/3 192.168.43.62 /tmp/ /root/shell/]]></content>
+      <categories>
+        <category>Shell</category>
+      </categories>
+      <tags>
+        <tag>shell</tag>
+        <tag>for循环</tag>
+        <tag>while循环</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Shell及其基本语法【一】]]></title>
+    <url>%2F2019%2Fshell%E5%8F%8A%E5%85%B6%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95%E3%80%90%E4%B8%80%E3%80%91%2F</url>
+    <content type="text"><![CDATA[一、Shell是什么？Shell是操作系统的最外层，Shell可以合并变成语言以控制进程和文件，以及启动和控制其他程序，shell通过更难过提示您输入，向操作系统解释该输入，然后处理来自操作系统的任何结果输出来管理您与操作系统之间的交互。简单来说，Shell就是一个用户跟操作系统之间的一个命令解释器。 Shell是用户与Linux操作系统之间沟通的桥梁。用户可以输入命令执行，又可以利用Shell脚本变成去运行。 二、Shell编程之变量Shell是非类型的解释性语言。Shell给一个变量赋值，实际上即使定义了变量，在Linux支持的所有shell中，都可以用复制符号（=）为变量赋值。 Shell变量可分为两类：局部变量和环境变量。 局部变量只在创建它们的shell脚本中使用。 环境变量则可以在创建它们的shell及其派生出来的任意子进程中使用。 有些变量是用户创建的，其他的则是专用shell变量。 first_shell.sh 1234567# !/bin/bash#Filename :first_shell.sh#auto echo hello world#by author Aokiecho "Hello world" $0 当前程序的名称 $n 当前程序的第n个参数，n=1,2,3…… $* 当前程序的所有参数（不包括程序本身） $# 当前程序的参数个数（不包括程序本身） $? 命令或程序执行完后的状态，一般返回0表示执行成功 UID 当前用户的UID $PWD 当前所在的目录 var.sh 1234567891011121314151617181920212223#!/bin/bash#define path varibles#by author Aoki#A=123name=Aoki#echo " This is my First shell var $A"echo "My name is $name"echo $UIDecho $PWDecho "#################################"echo $0echo $1echo "######################################"echo "The \$1 is $1"echo "The \$2 is $2"echo "The \$? is $?" #判断上一条命令是否正确 0代表正确echo "The \$* is $*" #输出所有参数echo "The \$# is $#" #输出参数的数量 三、if语句if 、for、 while、 case等条件流程控制语句。 逻辑运算符解析： -f 判断文件是否存在 eg: if [ -f filename ] -d 判断目录是否存在 eg: if [ -d dir ] -eq 等于 应用于：整型比较 -ne 不等于 应用于：整型比较 -lt 小于 应用于：整型比较 -gt 大于 应用于：整型比较 -le 小于或等于 应用于：整型比较 -ge 大于或等于 应用于：整型比较 -a 双方都成立（and） 逻辑表达式 –a 逻辑表达式 -o 单方成立（or） 逻辑表达式 –o 逻辑表达式 -z 空字符串 If条件判断语句 123456789 If (表达式) #if (Variable in Array)语句1else语句2fi 1/bin/bash -n 文件名 #测试该脚本有没有报错 if.sh 12345678910111213141516#!/bin/bash#auto if test#by author AokiNUM1=100NUM2=200if(($NUM1 &gt; $NUM2));then echo "This $NUM1 greate $NUM2 "else echo "This $NUM1 little $NUM2"fi iftest1.sh 1234567891011121314#!/bin/bash#auto if test1#by author AokiDIR=/root/20000if [ ! -d $DIR ];then #判断当前目录是否存在 mkdir -p $DIR echo "$DIR create successfully"else echo "$DIR is exist"fi iftest2.sh 1234567891011121314#!/bin/bash#auto test file whether exist#by author AokiFILES=/root/test.txtif [ ! -f $FILES ];then #判断当前文件是否存在 echo "ok"&gt;&gt;$FILESelse cat $FILESfi iftest3.sh 123456789101112131415161718#!/bin/bash#by author Aokiscores=$1if [ -z $scores ];then echo "Usage:&#123;$0 60 | 80.&#125;" exitfiif [[ $scores -gt 80 ]]; then echo "really Good"elif [[ $scores -gt 70 ]]; then echo "good"elif [[ $scores -gt 60 ]]; then echo "pass"fi 四、使用if条件语句编写MySQL备份脚本auto_backup_mysql.sh 123456789101112131415161718192021222324252627282930313233343536#!/bin/bash#auto backup mysql db#by author Aoki#define backup pathBACK_DIR=/data/backup/`data+%Y%m%d` #反引号解析为命令MYSQLDB=discuzMYSQLUSR=backupMYSQLPW=123456MYSQLCMD=/usr/bin/mysqldump#判断是否root用户登录if [ $UID -ne 0 ];then echo "Must to use root for exec shell" exitfiif [ ! -d $BACK_DIR ];then mkdir -p $BACK_DIR echo "$BACK_DIR created successfully"else echo "This $BACK_DIR is exist"fi#mysql 备份命令$MYSQLCMD -u$MYSQLUSR -p$MYSQLPW -d MYSQLDB &gt; $BACK_DIR/$MYSQLDB.sqlif [ $? -eq 0];then echo "The mysql backup $MYSQLDB successfully"else echo "The mysql backup $MYSQLDB failed"fi]]></content>
+      <categories>
+        <category>Shell脚本</category>
+      </categories>
+      <tags>
+        <tag>shell</tag>
+        <tag>MySQL备份脚本</tag>
+        <tag>shell变量</tag>
+        <tag>if语句</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[AbstractFactory模式]]></title>
     <url>%2F2019%2FAbstractFactory%E6%A8%A1%E5%BC%8F%2F</url>
     <content type="text"><![CDATA[一、Abstract Factory模式 为创建一组相关或相互依赖的对象提供一个接口，而且无需指定它们的具体类。 ​ ​ ——《设计模式》 有时候，几个对象需要以一种协调的方式实例化。例如，在处理用户界面时，系统可能需要在一个操作系统上用一组对象，在另一个操作系统上用另一组对象。Abstract Factory模式能够确保系统总是根据情况获得正确的对象。 二、Abstract Factory模式：示例研究假设有这样一项任务：设计一个计算机系统，显示并打印取自数据库的几何形状。用来显示和打印形状的分辨率取决于当前运行系统的计算机：CPU的速度和可用内存。系统必须留意自己对计算机的要求。 这里的难点在于，系统必须控制使用哪些驱动程序：低配置机器使用低分辨率驱动程序，高配置机器使用高分辨率驱动程序，如下所示： 驱动程序 在低配置机器上 在高配置机器上 显示 LRDD低分辨率显示驱动程序 HRDD高分辨率显示驱动程序 打印 LRPD低分辨率打印驱动程序 HRPD高分辨率打印驱动程序 这个例子中，两组驱动程序是互斥的，但通常实际情况并不是这样的。有时候不同组的驱动程序会包含来自同一个类的对象。比如，一台中级配置的机器可能使用低分辨率的显示驱动程序（LRDD）和高分辨率打印驱动程序(HRPD) 使用哪一组取决于问题域：对于给定的情形，需要使用哪组对象？在这个例子中，共同的概念主要是对象对系统提出的要求。 低分辨率组——LRDD和LRPD，这些驱动程序对系统提出的要求较低。 高分辨率组——HRDD和HRPD，这些驱动程序对系统提出的要求较高。 方案一：使用switch语句选择驱动程序 ApControl.h 1234567891011class ApControl&#123;public: ApControl(void); void doDraw(); void doPrint();public: ~ApControl(void);private: Resolution myResolution;&#125;; ApControl.cpp 123456789101112131415161718192021222324252627282930313233343536#include "ApControl.h"ApControl::ApControl(void)&#123; // Set myResolution based on configuration&#125;ApControl::~ApControl(void)&#123;&#125;void ApControl::void doDraw()&#123; switch (myResolution) &#123; case LOW: // use lrdd break; case HIGH: // use hrdd break; &#125;&#125;void ApControl::doPrint()&#123; switch (myResolution) &#123; case LOW: // use lrpd break; case HIGH: // use hrpd break; &#125;&#125; 虽然这样能够达到目的，但是有问题。确定使用哪个驱动程序的规则与驱动程序实际使用混杂在一起，因此耦合度和内聚性上都存在问题。 紧耦合——如果要修改分辨率的规则，就必须在两处修改代码，而这两处的其他方面毫无关系。 低内聚——doDraw方法和doPrint方法的任务毫不相关；它们都必须创建形状，并且操心应该使用哪个驱动程序。 紧耦合和低内聚也许眼下并不是问题，但是，它们通常会增加维护成本。 switch语句可能说明需要抽象 switch语句本身常常说明问题： 需要多态行为 存在职责错放。 应该考虑用一种更通用的解决方案，比如抽象代替switch语句，或者将职责赋予其他对象。 另一种方案是使用继承。可以用两个不同的ApControl类：一个使用低分辨率驱动程序，另一个使用高分辨率驱动程序。它们都将从同一个抽象类派生，因此可以在抽象类中维护公共代码。 虽然这个简单的例子里使用继承也可以完成任务，但继承的缺点非常多。 组合爆炸——对于每个组和未来可能使用的每个新组，都必须创建一个新的具体类（即ApControl的一个新版本）。例如，如果需要中级配置的应用程序（使用LRPD和HRDD），就需要增加一个新类处理这一情况。如果需要一个应用程序处理HRPD和LRDD，又需要一个类。 含义不清——所生成的类对于说明意图毫无帮助。我已经将每个类根据特定情况进行了特化。如果希望自己的带啊吗维护起来比较容易，就需要尽可能清晰地说明其意图。这样就不必再耗费大量时间重新了解某段代码地用途。 需要使用聚集——这个方案违反了“优先使用对象聚集而不是类继承”地原则。没有遵循这一规则说明在发生其他变化时，这些类会在类层次中进一步降级。 在这个例子中，LRDD和HRDD都是显示驱动程序，LRPD和HRPD都是打印驱动程序。所以抽象概念应该是显示驱动程序和打印驱动程序。下图可以概念性地表示这一点，之所以说是概念性的，是因为LRDD和HRDD并不是从同一个抽象类派生出来的。现在，我不用操心LRDD和HRDD派生自不同的抽象类，因为i我知道可以使用Adapter模式对这些驱动程序进行适配，使它们看起来属于一个抽象类。 这样定义对象，ApControl对象不用switch语句就可以使用DisplayDriver对象和PrintDriver对象了。ApControl类的可理解性大大提高了，因为它自己用不着再考虑驱动程序的具体类型，也就是说，ApControl对象可以不考虑驱动程序的分辨率，使用DisplayDriver对象和PrintDriver对象。ApControl使用驱动程序很可能又可以实现Bridge模式。 还有一个问题：如何创建合适的对象呢？ 可以让ApControl类负责，但这样未来会有维护问题。如果要处理一组新的对象，就必须修改ApControl类。相反，如果用一个“工厂”对象负责实例化所需要的对象，即使出现新的对象组也没有问题了。 下面，我将用一个工厂对象（ResFactory类型，也称分辨率工厂）来控制驱动程序组的创建。ApControl对象将使用另外一个对象——工厂对象获得适合当前计算机的显示驱动程序和打印驱动程序。 工厂是有一定职责的，而且是内聚的， 从ApControl的角度来看，事情现在简单多了。ApControl让ResFactory来负责跟踪应该使用哪些驱动程序。虽然我们仍然需要为ResFactory来编写选择代码，但是问题已经根据职责分解了。ApControl的职责是是了解如何使用合适的对象。ResFactory的职责是决定哪些对象合适。可以使用不同的工厂对象，也可以只使用一个。无论如何，现在的情况都优于前面的方案。 这同时还加强了内聚性：ResFactory所做的就是创建合适的驱动程序；ApControl只负责使用这些驱动程序。 避免在ResFactory类使用switch语句的办法有几种。不适用switch语句可以在未来进行修改时，不影响原有的工厂对象。可以通过定义一个表示“工厂”概念的抽象类，将变化封装在一个类中。对于ResFactory而言，有两种不同的行为： 给我应该使用的显示驱动程序 给我应该使用的打印驱动程序 ResFactory对象可以从两个具体类中的一个实例化，而具体类都从一个定义了公共方法的抽象类派生。 下面是Abstract Factory模式的3个关键的概念步骤： 策略 设计中的体现 找到变化并封装之 使用哪个驱动程序对象的选择是变化的，所以，将它封装在ResFactory类中 优先使用对象聚集，而不是类继承 将变化放在一个独立的对象——ResFactory对象中，ApControl对象使用ResFactory对象，而不是拥有两种不同的ApControl对象。 针对接口编程而不是实现设计 ApControl知道怎样请求ResFactory实例化驱动程序对象，但它不知道ResFactory对象如何实际实例化。 下面来完成这个解决方案，让ApControl对象与合适的工厂对象（LowResFact对象或HighResFact对象）通信，如下图所示。请注意，ResFactory是抽象的，这种对ResFactory实现细节的隐藏，正是这个模式的运作原理。因此，这个模式被称为Abstract Factory（抽象工厂）。 ApControl对象将得到一个LowResFacrt对象或一个HIghResFact对象。需要时ApControl对象向这个工厂请求对象合适的驱动程序。工厂对象实例化自己了解的某个驱动对象程序。ApControl对象不需要操心返回的驱动程序时低分辨率还是高分辨率，因为ApControl对象使用它们的方式是相同的。 ApControl.h 123456789101112131415161718#pragma once#include "DisplayDriver.h"#include "PrintDriver.h"#include "ResFactory.h"class ApControl&#123;public: ApControl(void); void doPrint(void); void doDraw(void);public: ~ApControl(void);private: ResFactory *myResFactory; DisplayDriver *myDisplayDriver; PrintDriver *myPrintDriver;&#125;; ApControl.cpp 123456789101112131415161718192021222324#include "ApControl.h"ApControl::ApControl(void)&#123; ResFactory *myResFactory= ResFactory::getFactory(); myDisplayDriver= myResFactory-&gt;getDispDrvr(); myPrintDriver= myResFactory-&gt;getPrtDrvr();&#125;ApControl::~ApControl(void)&#123;&#125;void ApControl::doDraw(void)&#123;// . . . myDisplayDriver-&gt;draw();&#125;void ApControl::doPrint(void)&#123;// . . . myPrintDriver-&gt;print();&#125; ResFactory.h 1234567891011121314#pragma once#include "DisplayDriver.h"#include "PrintDriver.h"class ResFactory&#123;public: ResFactory(void); virtual DisplayDriver* getDispDrvr(void)=0; virtual PrintDriver* getPrtDrvr(void)=0; static ResFactory* getFactory(void);public: ~ResFactory(void);&#125;; ResFactory.cpp 1234567891011121314151617181920#include "ResFactory.h"#include "HighResFactory.h"#include "LowResFactory.h"ResFactory::ResFactory(void)&#123;&#125;ResFactory::~ResFactory(void)&#123;&#125;ResFactory* ResFactory::getFactory (void)&#123; // Logic to decide which resolution to use // If are to use High Resolution return new HighResFactory; // if are to use Low Resolution return new LowResFactory;&#125; HighResFact.h 1234567891011121314#pragma once#include "resfactory.h"#include "HRDD.h"#include "HRPD.h"class HighResFact : public ResFactory&#123;public: HighResFact(void); DisplayDriver* getDispDrvr(void); PrintDriver* getPrtDrvr(void);public: ~HighResFact(void);&#125;; HighResFact.cpp 123456789101112131415161718#include "HighResFact.h"HighResFact::HighResFact(void)&#123;&#125;HighResFact::~HighResFact(void)&#123;&#125;DisplayDriver* HighResFact::getDispDrvr(void)&#123; return new HRDD;&#125;PrintDriver* HighResFact::getPrtDrvr(void)&#123; return new HRPD;&#125; LowResFact.h 1234567891011121314#pragma once#include "resfactory.h"#include "LRDD.h"#include "LRPD.h"class LowResFact : public ResFactory&#123;public: LowResFact(void); DisplayDriver* getDispDrvr(void); PrintDriver* getPrtDrvr(void);public: ~LowResFact(void);&#125;; LowResFact.cpp 12345678910111213141516171819#include "LowResFact.h"LowResFact::LowResFact(void)&#123;&#125;LowResFact::~LowResFact(void)&#123;&#125;DisplayDriver* LowResFact::getDispDrvr(void)&#123; return new LRDD;&#125;PrintDriver* LowResFact::getPrtDrvr(void)&#123; return new LRPD;&#125; DisplayDriver.h 12345678910#pragma onceclass DisplayDriver&#123;public: DisplayDriver(void); virtual void draw(void)=0;public: ~DisplayDriver(void);&#125;; DisplayDriver.cpp 123456789#include "DisplayDriver.h"DisplayDriver::DisplayDriver(void)&#123;&#125;DisplayDriver::~DisplayDriver(void)&#123;&#125; HRDD.h 1234567891011#pragma once#include "displaydriver.h"class HRDD : public DisplayDriver&#123;public: HRDD(void); void draw(void);public: ~HRDD(void);&#125;; HRDD.cpp 1234567891011121314#include "HRDD.h"HRDD::HRDD(void)&#123;&#125;HRDD::~HRDD(void)&#123;&#125;void HRDD::draw(void) &#123; // do high resolution draw&#125; LRDD.h 123456789101112#pragma once#include "displaydriver.h"class LRDD : public DisplayDriver&#123;public: LRDD(void); void draw(void);public: ~LRDD(void);&#125;; LRDD.cpp 1234567891011121314#include "LRDD.h"LRDD::LRDD(void)&#123;&#125;LRDD::~LRDD(void)&#123;&#125;void LRDD::draw(void)&#123; // do low resolution draw&#125; PrintDriver.h 12345678910#pragma onceclass PrintDriver&#123;public: PrintDriver(void); virtual void print(void)=0;public: ~PrintDriver(void);&#125;; PrintDriver.cpp 123456789#include "PrintDriver.h"PrintDriver::PrintDriver(void)&#123;&#125;PrintDriver::~PrintDriver(void)&#123;&#125; HRPD.h 1234567891011#pragma once#include "printdriver.h"class HRPD : public PrintDriver&#123;public: HRPD(void); void print(void);public: ~HRPD(void);&#125;; HRPD.cpp 1234567891011121314#include "HRPD.h"HRPD::HRPD(void)&#123;&#125;HRPD::~HRPD(void)&#123;&#125;void HRPD::print()&#123; // Do high resolution print&#125; LRPD.h 123456789101112#pragma once#include "printdriver.h"class LRPD : public PrintDriver&#123;public: LRPD(void); void print();public: ~LRPD(void);&#125;; LRPD.cpp 1234567891011121314#include "LRPD.h"LRPD::LRPD(void)&#123;&#125;LRPD::~LRPD(void)&#123;&#125;void LRPD::print()&#123; // do low resolution print&#125; 这里还忽略了一个问题：LRDD和HRDD可能不是派生自同一个抽象类。我们可以使用上图中的结构，但是需要使用Adapter模式对驱动程序进行适配。 这个设计的实现基于上与前面那个相同。唯一区别在于，现在工厂对象实例化的对象来自另外两个适配原驱动程序的类。这是一个重要的建模方法。用这种方法将概念上相似的对象当作同种对象处理，即使它们不是。这使Abstract Factory模式可以用于更多情况。 在这个模式中： 客户对象只知道向谁请求所需的对象和如何使用这些对象 Abstract Factory类通过为每个不同类型的对象定义一个方法，来指定实例化哪个对象，一般而言，对于每一种必须实例化的对象，Abstract Factory模式都有一个相应的方法 具体的工厂对象指定哪些对象要实例化 在刚才的例子中，通过为每一种可能情况设一个具体类，实现了Abstract Factory模式。这里有两种情况：低分辨率和高分辨率。实践中，情况的数量可能非常大，而且每增加一个新的变量都会组合级数地增长。 三、Abstract Factory模式：关键特征决定需要哪个工厂对象实际上与确定使用哪一组对象是相同的。 我可以使用Abstract Factory模式，不同应用程序都使用同一子系统。在这种情况下，工厂对象将传给子系统，告诉子系统将要使用哪些对象。此时，通常主系统知道子系统需要哪一组对象。在调用子系统之前，将实例化正确的工厂对象。 下图中，Client对象使用派生自两个不同服务类的对象（AbstractProductA和AbstractProductB）。这个设计非常简化，隐藏了实现细节，系统可隐藏性也更好。 Client对象不知道自己拥有的是服务对象的哪个特定具体实现，因为创建服务对象是工厂对象的职责 Client对象甚至不知道自己使用的是哪个特定工厂，因为它只知道自己有一个AbstractFactory对象。它可能有一个ConcreteFactory1对象或一个ConcreteFactory2对象，但它不知道到底是哪一个。 对Client对象隐藏（即封装）了”应该使用哪些服务对象”的选择，这样将来修改选择算法将更加容易，因为不会影响到Client对象。 Abstract Factory模式为我们提供了一种新的分解方式——根据职责分解。使用这种方法可以将问题分解成： 谁在使用我们的特定对象（ApControl） 谁来决定使用哪些特定对象（AbstractFactory） Abstract Factory模式关键特征： 意图：需要为特定的客户（或情况）提供对象组。 问题：需要实例化一组相关的对象 解决方案：协调对象组的创建。提供一种方式，将如何执行对象实例化的规则从使用这些对象的客户对象中提出出来。 参与者和协作者：AbstractFactory为如何创建对象组的每个对象组定义接口。一般每个组都由独立的ConcreteFactory进行创建。 效果：这个模式将“使用哪些对象”的规则与“如何使用这些对象”的逻辑分离开来。 实现：定义一个抽象类来指定创建哪些对象。然后为每个组实现一个具体类。可以用表或文件完成同样的任务。]]></content>
@@ -316,10 +343,10 @@
         <category>Linux内核</category>
       </categories>
       <tags>
+        <tag>操作系统</tag>
         <tag>内存管理机制</tag>
         <tag>虚拟地址</tag>
         <tag>虚拟内存</tag>
-        <tag>操作系统</tag>
       </tags>
   </entry>
   <entry>
@@ -403,9 +430,9 @@
         <category>Linux内核</category>
       </categories>
       <tags>
+        <tag>Linux内核</tag>
         <tag>操作系统</tag>
         <tag>Linux内核同步</tag>
-        <tag>Linux内核</tag>
         <tag>读写自旋锁</tag>
       </tags>
   </entry>
@@ -417,10 +444,10 @@
         <category>Linux内核</category>
       </categories>
       <tags>
-        <tag>操作系统</tag>
         <tag>Linux内核</tag>
         <tag>自旋锁</tag>
         <tag>普通自旋锁</tag>
+        <tag>操作系统</tag>
         <tag>内核同步</tag>
       </tags>
   </entry>
@@ -432,8 +459,8 @@
         <category>Linux内核</category>
       </categories>
       <tags>
-        <tag>操作系统</tag>
         <tag>Linux内核</tag>
+        <tag>操作系统</tag>
         <tag>原子操作</tag>
         <tag>原子整数操作</tag>
         <tag>原子位操作</tag>
@@ -485,8 +512,8 @@
         <category>LeetCode</category>
       </categories>
       <tags>
-        <tag>LeetCode</tag>
         <tag>移出链表元素</tag>
+        <tag>LeetCode</tag>
       </tags>
   </entry>
   <entry>
@@ -528,8 +555,8 @@
         <category>Linux内核</category>
       </categories>
       <tags>
-        <tag>操作系统</tag>
         <tag>Linux内核</tag>
+        <tag>操作系统</tag>
         <tag>Linux系统调用</tag>
         <tag>Linux添加系统调用</tag>
       </tags>
@@ -556,8 +583,8 @@
         <category>Linux内核</category>
       </categories>
       <tags>
-        <tag>操作系统</tag>
         <tag>Linux内核</tag>
+        <tag>操作系统</tag>
         <tag>系统调用</tag>
       </tags>
   </entry>
@@ -609,8 +636,8 @@
         <category>Linux内核</category>
       </categories>
       <tags>
-        <tag>操作系统</tag>
         <tag>Linux内核</tag>
+        <tag>操作系统</tag>
         <tag>进程调度</tag>
         <tag>模块化调度</tag>
         <tag>组调度</tag>
@@ -760,9 +787,9 @@
       </categories>
       <tags>
         <tag>STL</tag>
-        <tag>C++</tag>
         <tag>map容器</tag>
         <tag>multimap</tag>
+        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
@@ -773,11 +800,11 @@
         <category>STL</category>
       </categories>
       <tags>
+        <tag>C++</tag>
         <tag>set容器</tag>
         <tag>pair</tag>
         <tag>Multiset</tag>
         <tag>关联式容器</tag>
-        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
