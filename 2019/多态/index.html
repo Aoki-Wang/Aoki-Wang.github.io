@@ -140,26 +140,26 @@
 <meta name="keywords" content="C++,多态,虚函数">
 <meta property="og:type" content="article">
 <meta property="og:title" content="多态">
-<meta property="og:url" content="http://wanqbin.xyz/2019/多态/index.html">
+<meta property="og:url" content="https://wanqbin.xyz/2019/多态/index.html">
 <meta property="og:site_name" content="Aoki&#39;s Blog">
 <meta property="og:description" content="一、多态&amp;emsp;多态是面向对象程序设计语言中数据抽象和继承之外的第三个基本特征。 &amp;emsp;多态性(Polymorphism)提供接口与具体实现之间的另一层隔离，从而实现将“what”和“how”分离开来。多态性改善了代码的可读性和组织性，同时也使创建的程序具有可扩展性。项目不仅在最初创建时期可以扩展，而且当项目在需要有新功能时也能扩展。 &amp;emsp;C++支持编译时多态（静态多态）和运行时">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://wanqbin.xyz/2019/多态/%E9%9D%99%E6%80%81%E8%81%94%E7%BC%96.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/多态/%E5%8A%A8%E6%80%81%E8%81%94%E7%BC%96.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/多态/%E6%94%B9%E5%8F%98%E5%89%8D.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/多态/%E6%94%B9%E5%8F%98%E5%90%8E.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/多态/%E5%A4%9A%E6%80%81%5C%E5%AD%90%E7%B1%BB%E5%86%85%E9%83%A8%E7%BB%93%E6%9E%84.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/多态/%E6%8A%BD%E8%B1%A1%E5%9F%BA%E7%B1%BB%E5%92%8C%E7%BA%AF%E8%99%9A%E5%87%BD%E6%95%B0.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/多态/%E8%99%9A%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/多态/%E7%BA%AF%E8%99%9A%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/多态/%E6%8C%87%E5%90%91%E6%95%B0%E6%8D%AE%E6%88%90%E5%91%98%E7%9A%84%E6%8C%87%E9%92%88.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/多态/%E6%8C%87%E5%90%91%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E7%9A%84%E6%8C%87%E9%92%88.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/多态/%E6%8C%87%E5%90%91%E9%9D%99%E6%80%81%E6%88%90%E5%91%98%E7%9A%84%E6%8C%87%E9%92%88.PNG">
+<meta property="og:image" content="https://wanqbin.xyz/2019/多态/%E9%9D%99%E6%80%81%E8%81%94%E7%BC%96.PNG">
+<meta property="og:image" content="https://wanqbin.xyz/2019/多态/%E5%8A%A8%E6%80%81%E8%81%94%E7%BC%96.PNG">
+<meta property="og:image" content="https://wanqbin.xyz/2019/多态/%E6%94%B9%E5%8F%98%E5%89%8D.PNG">
+<meta property="og:image" content="https://wanqbin.xyz/2019/多态/%E6%94%B9%E5%8F%98%E5%90%8E.PNG">
+<meta property="og:image" content="https://wanqbin.xyz/2019/多态/%E5%A4%9A%E6%80%81%5C%E5%AD%90%E7%B1%BB%E5%86%85%E9%83%A8%E7%BB%93%E6%9E%84.PNG">
+<meta property="og:image" content="https://wanqbin.xyz/2019/多态/%E6%8A%BD%E8%B1%A1%E5%9F%BA%E7%B1%BB%E5%92%8C%E7%BA%AF%E8%99%9A%E5%87%BD%E6%95%B0.PNG">
+<meta property="og:image" content="https://wanqbin.xyz/2019/多态/%E8%99%9A%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0.PNG">
+<meta property="og:image" content="https://wanqbin.xyz/2019/多态/%E7%BA%AF%E8%99%9A%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0.PNG">
+<meta property="og:image" content="https://wanqbin.xyz/2019/多态/%E6%8C%87%E5%90%91%E6%95%B0%E6%8D%AE%E6%88%90%E5%91%98%E7%9A%84%E6%8C%87%E9%92%88.PNG">
+<meta property="og:image" content="https://wanqbin.xyz/2019/多态/%E6%8C%87%E5%90%91%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E7%9A%84%E6%8C%87%E9%92%88.PNG">
+<meta property="og:image" content="https://wanqbin.xyz/2019/多态/%E6%8C%87%E5%90%91%E9%9D%99%E6%80%81%E6%88%90%E5%91%98%E7%9A%84%E6%8C%87%E9%92%88.PNG">
 <meta property="og:updated_time" content="2019-07-31T06:56:19.899Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="多态">
 <meta name="twitter:description" content="一、多态&amp;emsp;多态是面向对象程序设计语言中数据抽象和继承之外的第三个基本特征。 &amp;emsp;多态性(Polymorphism)提供接口与具体实现之间的另一层隔离，从而实现将“what”和“how”分离开来。多态性改善了代码的可读性和组织性，同时也使创建的程序具有可扩展性。项目不仅在最初创建时期可以扩展，而且当项目在需要有新功能时也能扩展。 &amp;emsp;C++支持编译时多态（静态多态）和运行时">
-<meta name="twitter:image" content="http://wanqbin.xyz/2019/多态/%E9%9D%99%E6%80%81%E8%81%94%E7%BC%96.PNG">
+<meta name="twitter:image" content="https://wanqbin.xyz/2019/多态/%E9%9D%99%E6%80%81%E8%81%94%E7%BC%96.PNG">
 
 
 
@@ -189,7 +189,7 @@
 
 
 
-  <link rel="canonical" href="http://wanqbin.xyz/2019/多态/">
+  <link rel="canonical" href="https://wanqbin.xyz/2019/多态/">
 
 
 
@@ -375,7 +375,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://wanqbin.xyz/2019/多态/">
+    <link itemprop="mainEntityOfPage" href="https://wanqbin.xyz/2019/多态/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Aoki">

@@ -404,8 +404,8 @@
       </categories>
       <tags>
         <tag>操作系统</tag>
-        <tag>Linux内核</tag>
         <tag>Linux内核同步</tag>
+        <tag>Linux内核</tag>
         <tag>读写自旋锁</tag>
       </tags>
   </entry>
@@ -485,8 +485,8 @@
         <category>LeetCode</category>
       </categories>
       <tags>
-        <tag>移出链表元素</tag>
         <tag>LeetCode</tag>
+        <tag>移出链表元素</tag>
       </tags>
   </entry>
   <entry>
@@ -760,9 +760,9 @@
       </categories>
       <tags>
         <tag>STL</tag>
+        <tag>C++</tag>
         <tag>map容器</tag>
         <tag>multimap</tag>
-        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
@@ -773,11 +773,11 @@
         <category>STL</category>
       </categories>
       <tags>
-        <tag>C++</tag>
         <tag>set容器</tag>
         <tag>pair</tag>
         <tag>Multiset</tag>
         <tag>关联式容器</tag>
+        <tag>C++</tag>
       </tags>
   </entry>
   <entry>

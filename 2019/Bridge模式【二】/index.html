@@ -140,21 +140,21 @@
 <meta name="keywords" content="Bridge模式,桥接模式,对象结构型模式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Bridge模式【二】">
-<meta property="og:url" content="http://wanqbin.xyz/2019/Bridge模式【二】/index.html">
+<meta property="og:url" content="https://wanqbin.xyz/2019/Bridge模式【二】/index.html">
 <meta property="og:site_name" content="Aoki&#39;s Blog">
 <meta property="og:description" content="上篇：Bridge模式（一） 刚开始考虑这些问题的时候，我觉得目前的困难可能只是由于使用了错误的继承层次造成的。因此，我尝试选择下图所示的另一种层次。  我仍然用相同的四个类表示所有可能的组合，但是，因为先从不同的绘图程序派生不同的版本，所以DP1和DP2之间的冗余去掉了。 但是，糟糕的一点是，两种Rectangle和两种Circle之间的冗余却没办法去除，因为它们每一对都有相同的draw方法。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://wanqbin.xyz/2019/Bridge模式【二】/bridge%E5%8F%A6%E4%B8%80%E7%A7%8D%E5%AE%9E%E7%8E%B0.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/Bridge模式【二】/Bridge%E6%A8%A1%E5%BC%8F%EF%BC%9A%E4%BB%80%E4%B9%88%E5%9C%A8%E5%8F%91%E7%94%9F%E5%8F%98%E5%8C%96.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/Bridge模式【二】/Bridge%E6%A8%A1%E5%BC%8F%EF%BC%9A%E8%A1%A8%E7%A4%BA%E5%8F%98%E5%8C%96.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/Bridge模式【二】/Bridge%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%B0%86%E7%B1%BB%E8%81%94%E7%B3%BB%E8%B5%B7%E6%9D%A5.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/Bridge模式【二】/Bridge%E6%A8%A1%E5%BC%8F%EF%BC%9AShape%E6%8A%BD%E8%B1%A1%E4%B8%8EDrawing%E5%AE%9E%E7%8E%B0%E7%9A%84%E5%88%86%E7%A6%BB.PNG">
-<meta property="og:image" content="http://wanqbin.xyz/2019/Bridge模式【二】/Bridge%E6%A8%A1%E5%BC%8F%EF%BC%9A%E6%8A%BD%E8%B1%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0%E5%88%86%E7%A6%BB.PNG">
+<meta property="og:image" content="https://wanqbin.xyz/2019/Bridge模式【二】/bridge%E5%8F%A6%E4%B8%80%E7%A7%8D%E5%AE%9E%E7%8E%B0.PNG">
+<meta property="og:image" content="https://wanqbin.xyz/2019/Bridge模式【二】/Bridge%E6%A8%A1%E5%BC%8F%EF%BC%9A%E4%BB%80%E4%B9%88%E5%9C%A8%E5%8F%91%E7%94%9F%E5%8F%98%E5%8C%96.PNG">
+<meta property="og:image" content="https://wanqbin.xyz/2019/Bridge模式【二】/Bridge%E6%A8%A1%E5%BC%8F%EF%BC%9A%E8%A1%A8%E7%A4%BA%E5%8F%98%E5%8C%96.PNG">
+<meta property="og:image" content="https://wanqbin.xyz/2019/Bridge模式【二】/Bridge%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%B0%86%E7%B1%BB%E8%81%94%E7%B3%BB%E8%B5%B7%E6%9D%A5.PNG">
+<meta property="og:image" content="https://wanqbin.xyz/2019/Bridge模式【二】/Bridge%E6%A8%A1%E5%BC%8F%EF%BC%9AShape%E6%8A%BD%E8%B1%A1%E4%B8%8EDrawing%E5%AE%9E%E7%8E%B0%E7%9A%84%E5%88%86%E7%A6%BB.PNG">
+<meta property="og:image" content="https://wanqbin.xyz/2019/Bridge模式【二】/Bridge%E6%A8%A1%E5%BC%8F%EF%BC%9A%E6%8A%BD%E8%B1%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0%E5%88%86%E7%A6%BB.PNG">
 <meta property="og:updated_time" content="2019-11-25T13:12:03.274Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Bridge模式【二】">
 <meta name="twitter:description" content="上篇：Bridge模式（一） 刚开始考虑这些问题的时候，我觉得目前的困难可能只是由于使用了错误的继承层次造成的。因此，我尝试选择下图所示的另一种层次。  我仍然用相同的四个类表示所有可能的组合，但是，因为先从不同的绘图程序派生不同的版本，所以DP1和DP2之间的冗余去掉了。 但是，糟糕的一点是，两种Rectangle和两种Circle之间的冗余却没办法去除，因为它们每一对都有相同的draw方法。">
-<meta name="twitter:image" content="http://wanqbin.xyz/2019/Bridge模式【二】/bridge%E5%8F%A6%E4%B8%80%E7%A7%8D%E5%AE%9E%E7%8E%B0.PNG">
+<meta name="twitter:image" content="https://wanqbin.xyz/2019/Bridge模式【二】/bridge%E5%8F%A6%E4%B8%80%E7%A7%8D%E5%AE%9E%E7%8E%B0.PNG">
 
 
 
@@ -184,7 +184,7 @@
 
 
 
-  <link rel="canonical" href="http://wanqbin.xyz/2019/Bridge模式【二】/">
+  <link rel="canonical" href="https://wanqbin.xyz/2019/Bridge模式【二】/">
 
 
 
@@ -370,7 +370,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://wanqbin.xyz/2019/Bridge模式【二】/">
+    <link itemprop="mainEntityOfPage" href="https://wanqbin.xyz/2019/Bridge模式【二】/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Aoki">
