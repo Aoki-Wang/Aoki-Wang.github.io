@@ -1,0 +1,1642 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+      
+    
+    
+      
+    
+  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+  <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-flash.min.css" rel="stylesheet">
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+      app_id: "81e314d5"
+    });
+  daovoice('update');
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="https://fonts.loli.net/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Shell运算符,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="## 一、算数运算符1.Shell中常见的算数运算符号   算数运算符 意义    +、- 加、减   *、/、% 乘法、除法、取余   ** 幂   ++、– 增加，及减少   !、&amp;amp;&amp;amp;、|| 逻辑反、逻辑与、逻辑或   &amp;lt;、&amp;lt;=、&amp;gt;、&amp;gt;= 比较符号   ==、!=、= 比较符号   &amp;lt;&amp;lt;、&amp;gt;&amp;gt; 向左移位、向右移位   ~、|、&amp;a">
+<meta name="keywords" content="Shell运算符">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Shell变量的数值运算">
+<meta property="og:url" content="https://wanqbin.xyz/2019/hell变量的数值运算/index.html">
+<meta property="og:site_name" content="Aoki&#39;s Blog">
+<meta property="og:description" content="## 一、算数运算符1.Shell中常见的算数运算符号   算数运算符 意义    +、- 加、减   *、/、% 乘法、除法、取余   ** 幂   ++、– 增加，及减少   !、&amp;amp;&amp;amp;、|| 逻辑反、逻辑与、逻辑或   &amp;lt;、&amp;lt;=、&amp;gt;、&amp;gt;= 比较符号   ==、!=、= 比较符号   &amp;lt;&amp;lt;、&amp;gt;&amp;gt; 向左移位、向右移位   ~、|、&amp;a">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://wanqbin.xyz/2019/hell变量的数值运算/%E5%8F%8C%E5%B0%8F%E6%8B%AC%E5%8F%B7test.PNG">
+<meta property="og:image" content="https://wanqbin.xyz/2019/hell变量的数值运算/%E9%82%AE%E4%BB%B6%E6%8A%A5%E8%AD%A6.PNG">
+<meta property="og:image" content="https://wanqbin.xyz/2019/hell变量的数值运算/expr%E8%BF%90%E7%AE%97.PNG">
+<meta property="og:image" content="https://wanqbin.xyz/2019/hell变量的数值运算/expr%E4%BD%BF%E7%94%A8%E5%8F%8D%E6%8B%AC%E5%8F%B7%E8%AE%A1%E7%AE%97.PNG">
+<meta property="og:image" content="https://wanqbin.xyz/2019/hell变量的数值运算/%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E4%B8%BA%E6%95%B4%E6%95%B0.PNG">
+<meta property="og:image" content="https://wanqbin.xyz/2019/hell变量的数值运算/read%E8%AF%BB%E5%85%A5%E5%B9%B6%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E4%B8%BA%E6%95%B4%E6%95%B0.PNG">
+<meta property="og:image" content="https://wanqbin.xyz/2019/hell变量的数值运算/%E6%89%93%E5%8D%B0%E4%B8%80%E5%8F%A5%E8%AF%9D%E4%B8%AD%E5%AD%97%E7%AC%A6%E6%95%B0%E4%B8%8D%E5%A4%A7%E4%BA%8E4.PNG">
+<meta property="og:image" content="https://wanqbin.xyz/2019/hell变量的数值运算/bc.PNG">
+<meta property="og:image" content="https://wanqbin.xyz/2019/hell变量的数值运算/1%E5%88%B010%E7%9B%B8%E5%8A%A0.PNG">
+<meta property="og:image" content="https://wanqbin.xyz/2019/hell变量的数值运算/awk%E5%91%BD%E4%BB%A4.PNG">
+<meta property="og:updated_time" content="2019-11-29T06:46:52.053Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Shell变量的数值运算">
+<meta name="twitter:description" content="## 一、算数运算符1.Shell中常见的算数运算符号   算数运算符 意义    +、- 加、减   *、/、% 乘法、除法、取余   ** 幂   ++、– 增加，及减少   !、&amp;amp;&amp;amp;、|| 逻辑反、逻辑与、逻辑或   &amp;lt;、&amp;lt;=、&amp;gt;、&amp;gt;= 比较符号   ==、!=、= 比较符号   &amp;lt;&amp;lt;、&amp;gt;&amp;gt; 向左移位、向右移位   ~、|、&amp;a">
+<meta name="twitter:image" content="https://wanqbin.xyz/2019/hell变量的数值运算/%E5%8F%8C%E5%B0%8F%E6%8B%AC%E5%8F%B7test.PNG">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":18,"b2t":true,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://wanqbin.xyz/2019/hell变量的数值运算/">
+
+
+
+
+
+
+  <title>Shell变量的数值运算 | Aoki's Blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?2fc5164c1572845ef380a7474dbcddf8";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Aoki's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">“惟将终夜长开眼，报答平生未展眉”</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wanqbin.xyz/2019/hell变量的数值运算/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Aoki">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aoki's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Shell变量的数值运算</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-29T13:58:00+08:00">
+                2019-11-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Shell脚本/" itemprop="url" rel="index">
+                    <span itemprop="name">Shell脚本</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/hell变量的数值运算/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/hell变量的数值运算/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/hell变量的数值运算/" class="leancloud_visitors" data-flag-title="Shell变量的数值运算">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 阅读数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.3k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <pre><code>## 一、算数运算符</code></pre><h3 id="1-Shell中常见的算数运算符号"><a href="#1-Shell中常见的算数运算符号" class="headerlink" title="1.Shell中常见的算数运算符号"></a>1.Shell中常见的算数运算符号</h3><table>
+<thead>
+<tr>
+<th>算数运算符</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>+、-</td>
+<td>加、减</td>
+</tr>
+<tr>
+<td>*、/、%</td>
+<td>乘法、除法、取余</td>
+</tr>
+<tr>
+<td>**</td>
+<td>幂</td>
+</tr>
+<tr>
+<td>++、–</td>
+<td>增加，及减少</td>
+</tr>
+<tr>
+<td>!、&amp;&amp;、||</td>
+<td>逻辑反、逻辑与、逻辑或</td>
+</tr>
+<tr>
+<td>&lt;、&lt;=、&gt;、&gt;=</td>
+<td>比较符号</td>
+</tr>
+<tr>
+<td>==、!=、=</td>
+<td>比较符号</td>
+</tr>
+<tr>
+<td>&lt;&lt;、&gt;&gt;</td>
+<td>向左移位、向右移位</td>
+</tr>
+<tr>
+<td>~、|、&amp;、^</td>
+<td>按位取反、按位异或、按位与按位或</td>
+</tr>
+<tr>
+<td>=、+=、-=、*=、/=、%=</td>
+<td>赋值运算符</td>
+</tr>
+</tbody></table>
+<h3 id="2-Shell中常见的算数运算命令"><a href="#2-Shell中常见的算数运算命令" class="headerlink" title="2.Shell中常见的算数运算命令"></a>2.Shell中常见的算数运算命令</h3><table>
+<thead>
+<tr>
+<th>运算操作符与运算命令</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>(())</td>
+<td>用于整数运算的常用运算符，效率很高</td>
+</tr>
+<tr>
+<td>let</td>
+<td>用于整数运算，类似于(())</td>
+</tr>
+<tr>
+<td>expr</td>
+<td>可用于整数运算，但还有很多其他额外的功能</td>
+</tr>
+<tr>
+<td>bc</td>
+<td>Linux下的一个计算器程序（适合整数及小数运算）</td>
+</tr>
+<tr>
+<td>$[]</td>
+<td>用于整数运算</td>
+</tr>
+<tr>
+<td>awk</td>
+<td>awk既可以用于整数运算，也可以用于小数运算</td>
+</tr>
+<tr>
+<td>declare</td>
+<td>定义变量值和属性，-i参数可以用于定义整形变量，做运算</td>
+</tr>
+</tbody></table>
+<h2 id="二、”-”数值运算命令"><a href="#二、”-”数值运算命令" class="headerlink" title="二、”(())”数值运算命令"></a>二、”(())”数值运算命令</h2><p>“(())”的作用是进行数值运算与数值比较。</p>
+<table>
+<thead>
+<tr>
+<th>运算操作符与运算命令</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>((i=i+1))</td>
+<td>为运算后赋值，即将i+1的结果赋值给i</td>
+</tr>
+<tr>
+<td>i=$((i+1))</td>
+<td>表示将表达式运算后的结果赋值给i</td>
+</tr>
+<tr>
+<td>((8&gt;7&amp;&amp;5==5))</td>
+<td>进行比较操作，还可以加入逻辑与逻辑或，用于条件判断</td>
+</tr>
+<tr>
+<td>echo $(2+1)</td>
+<td>需要直接输出运算表达式的运算结果时，可以在”(())”的前面加$</td>
+</tr>
+</tbody></table>
+<p>test1.sh</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>! /bin/bash</span><br><span class="line"><span class="meta">#</span>Author: Created by Aoki</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">echo "$1+$2=$(($1+$2))"</span><br><span class="line"></span><br><span class="line">echo "$1-$2=$(($1-$2))"</span><br><span class="line"></span><br><span class="line">echo "$1*$2=$(($1*$2))"</span><br><span class="line"></span><br><span class="line">echo "$1/$2=$(($1/$2))"</span><br><span class="line"></span><br><span class="line">echo "$1**$2=$(($1**$2))"</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/hell变量的数值运算/%E5%8F%8C%E5%B0%8F%E6%8B%AC%E5%8F%B7test.PNG" alt="执行结果"></p>
+<h2 id="三、let运算命令"><a href="#三、let运算命令" class="headerlink" title="三、let运算命令"></a>三、let运算命令</h2><p>let运算命令的语法格式：</p>
+<p><code>let 赋值表达式</code></p>
+<p>let赋值表达式的功能等同于”((赋值表达式))”</p>
+<p>示例：监控web服务状态，如果访问量两次均失败，则报警。</p>
+<p>mail配置：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/mail.rc</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>在末尾添加如下内容：</span><br><span class="line">set from=xxxxxx@qq.com</span><br><span class="line">set smtp=smtp.qq.com</span><br><span class="line">set smtp-auth-user="xxxxxx@qq.com"</span><br><span class="line">set smtp-auth-password=xxxxxxxxxxxxxxx</span><br><span class="line">set smtp-auth=login</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>! /bin/bash</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>Author: Created by Aoki</span><br><span class="line"></span><br><span class="line">function checkUrl()&#123;</span><br><span class="line">timeout=5</span><br><span class="line">fails=0</span><br><span class="line">success=0</span><br><span class="line">while true </span><br><span class="line">do</span><br><span class="line">        wget --timeout=$timeout --tries=1 https://wanqbin.xyz -q -O /dev/null</span><br><span class="line">        if [ $? -ne 0 ];then</span><br><span class="line">                let fails=fails+1</span><br><span class="line">        else</span><br><span class="line">                let success+=1</span><br><span class="line">        fi</span><br><span class="line"></span><br><span class="line">        if [ $success -ge 1 ];then</span><br><span class="line">                echo "success"</span><br><span class="line">                exit 0</span><br><span class="line">        fi</span><br><span class="line"></span><br><span class="line">        if [ $fails -ge 2 ];then</span><br><span class="line">                Critical="sys is down."</span><br><span class="line">                echo $Critical|tee|mail -s "$Critical" aoki3352@163.com</span><br><span class="line">                exit 2</span><br><span class="line">        fi</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">done</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">checkUrl</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/hell变量的数值运算/%E9%82%AE%E4%BB%B6%E6%8A%A5%E8%AD%A6.PNG" alt="执行结果"></p>
+<h2 id="四、expr命令的用法"><a href="#四、expr命令的用法" class="headerlink" title="四、expr命令的用法"></a>四、expr命令的用法</h2><p>expr(evaluate(求值) expression(表达式))命令既可以用于整数运算，也可以用于相关字符串长度、匹配等的运算处理。</p>
+<p>在使用expr时，要注意：</p>
+<ul>
+<li>运算符及用于计算的数字左右都至少有一个空格，否则会报错</li>
+<li>使用称号时，必须使用反斜线屏蔽其特定含义，因为Shell可能会误解星号的含义。</li>
+</ul>
+<p><img src="/2019/hell变量的数值运算/expr%E8%BF%90%E7%AE%97.PNG" alt="示例"></p>
+<p>expr配合变量计算：</p>
+<p>expr在Shell中可配合变量进行计算，但需要用反引号将计算表达式括起来。</p>
+<p><img src="/2019/hell变量的数值运算/expr%E4%BD%BF%E7%94%A8%E5%8F%8D%E6%8B%AC%E5%8F%B7%E8%AE%A1%E7%AE%97.PNG" alt="expr使用反括号计算"></p>
+<p>示例：判断一个变量值或字符串是否为整数</p>
+<p>实现原理：</p>
+<p>利用expr做计算时变量或字符串必须是整数的规则，把一个变量或字符串和一个已知的整数（非0）相加，看命令返回的值是否为0.如果是0，就认为做加法的变量或字符串为整数，否则就不是整数。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>! /bin/bash</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>Author: Created by Aoki</span><br><span class="line"></span><br><span class="line">expr $1 + 1 &gt;/dev/null 2&gt;&amp;1</span><br><span class="line"></span><br><span class="line">[ $? -eq 0 ] &amp;&amp;echo int || echo chars #返回值为0，输出int，返回值不为0，否则输出chars</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/hell变量的数值运算/%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E4%B8%BA%E6%95%B4%E6%95%B0.PNG" alt="执行结果"></p>
+<p>标记：</p>
+<p>/dev/null ：代表空设备文件</p>
+<p>1 &gt; /dev/null 2&gt;&amp;1 语句含义：</p>
+<ul>
+<li>1 &gt; /dev/null ： 首先表示标准输出重定向到空设备文件，也就是不输出任何信息到终端，说白了就是不显示任何信息。</li>
+<li>2&gt;&amp;1 ：接着，标准错误输出重定向（等同于）标准输出，因为之前标准输出已经重定向到了空设备文件，所以标准错误输出也重定向到空设备文件。</li>
+</ul>
+<p>示例：通过read读入持续等待输入</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>! /bin/bash</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>Author:Created by Aoki</span><br><span class="line"></span><br><span class="line">while true</span><br><span class="line">do</span><br><span class="line">        read -p "Please input :" a</span><br><span class="line">        expr $a + 1 &gt;/dev/null 2&gt;&amp;1</span><br><span class="line">        [ $? -eq 0 ] &amp;&amp; echo int || echo chars</span><br><span class="line">done</span><br><span class="line">~</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/hell变量的数值运算/read%E8%AF%BB%E5%85%A5%E5%B9%B6%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E4%B8%BA%E6%95%B4%E6%95%B0.PNG" alt="执行结果"></p>
+<p>示例：打印一句话中字符数不大于4的单词</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>! /bin.bash</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>Author: Created by Aoki</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">for n in I am Aoki who comes from China</span><br><span class="line">do</span><br><span class="line">        if [ `expr length $n` -le 4 ];then</span><br><span class="line">                echo $n</span><br><span class="line">        fi</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/hell变量的数值运算/%E6%89%93%E5%8D%B0%E4%B8%80%E5%8F%A5%E8%AF%9D%E4%B8%AD%E5%AD%97%E7%AC%A6%E6%95%B0%E4%B8%8D%E5%A4%A7%E4%BA%8E4.PNG" alt="执行结果"></p>
+<h2 id="五、bc命令"><a href="#五、bc命令" class="headerlink" title="五、bc命令"></a>五、bc命令</h2><p><img src="/2019/hell变量的数值运算/bc.PNG" alt="bc命令"></p>
+<p>注：scale=3表示保留三位小数</p>
+<p>示例：通过一条命令计算输出1+2+3+4+……+10的表达式，并计算结果。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@aoki obShell]# seq -s "+" 10  #seq是生成数字序列，-s是指定数字序列之间的分隔符</span><br><span class="line">1+2+3+4+5+6+7+8+9+10</span><br><span class="line">[root@aoki obShell]# echo &#123;1..10&#125; |tr " " "+"    #&#123;1..10&#125;是生成以空格为间隔的数字序列，并交给tr将空格替换为+</span><br><span class="line">1+2+3+4+5+6+7+8+9+10</span><br><span class="line">[root@aoki obShell]#</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/hell变量的数值运算/1%E5%88%B010%E7%9B%B8%E5%8A%A0.PNG" alt="执行结果"></p>
+<h2 id="六、awk命令"><a href="#六、awk命令" class="headerlink" title="六、awk命令"></a>六、awk命令</h2><p>利用awk进行运算的效果也很好，适合小数和整数，特别是命令行计算，尤其是小数，运算很精确。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@aoki obShell]# echo &apos;7.777 3.444&apos; |awk &apos;&#123;print ($1-$2)&#125;&apos;      </span><br><span class="line">4.333</span><br><span class="line">[root@aoki obShell]# echo &apos;123.32 234 2&apos; |awk &apos;&#123;print (($1-$2)/$3)&#125;&apos;</span><br><span class="line">-55.34</span><br><span class="line">[root@aoki obShell]#</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/hell变量的数值运算/awk%E5%91%BD%E4%BB%A4.PNG" alt="执行结果"></p>
+<h2 id="七、-符号的运算"><a href="#七、-符号的运算" class="headerlink" title="七、$[]符号的运算"></a>七、$[]符号的运算</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@aoki obShell]# i=5</span><br><span class="line">[root@aoki obShell]# i=$[i+10]</span><br><span class="line">[root@aoki obShell]# echo $i</span><br><span class="line">15</span><br><span class="line">[root@aoki obShell]# echo $[15*2]</span><br><span class="line">30</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+  
+</div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Shell运算符/" rel="tag"># Shell运算符</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/Shell中的for循环和while循环/" rel="next" title="Shell中的for循环和while循环">
+                <i class="fa fa-chevron-left"></i> Shell中的for循环和while循环
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+             <a href="/">
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Aoki">
+                </a>
+            
+              <p class="site-author-name" itemprop="name">Aoki</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+            <p>
+            <script type="text/javascript" rel="external nofollow" src="https://api.imjad.cn/hitokoto/?cat=&charset=utf-8&length=50&encode=js&fun=sync&source="></script><div id="hitokoto"><script>hitokoto()</script>
+            </div></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">120</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">236</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="https://github.com/Aoki-Wang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="mailto:aoki3352@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+        
+
+
+
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Shell中常见的算数运算符号"><span class="nav-number">1.</span> <span class="nav-text">1.Shell中常见的算数运算符号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Shell中常见的算数运算命令"><span class="nav-number">2.</span> <span class="nav-text">2.Shell中常见的算数运算命令</span></a></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#二、”-”数值运算命令"><span class="nav-number"></span> <span class="nav-text">二、”(())”数值运算命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、let运算命令"><span class="nav-number"></span> <span class="nav-text">三、let运算命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、expr命令的用法"><span class="nav-number"></span> <span class="nav-text">四、expr命令的用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、bc命令"><span class="nav-number"></span> <span class="nav-text">五、bc命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、awk命令"><span class="nav-number"></span> <span class="nav-text">六、awk命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七、-符号的运算"><span class="nav-number"></span> <span class="nav-text">七、$[]符号的运算</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Aoki</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+<span id="timeDate">载入天数...</span>
+<span id="times">载入时分秒...</span>  
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("03/09/2019 13:14:21");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "已运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共243.3k字</span>
+</div>
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'FchdjiQuvA5nCoDFfF6er8UC-gzGzoHsz',
+        appKey: 'yuVPbmLhvyWyLCQYispfuF6u',
+        placeholder: 'ヾﾉ≧∀≦)o 来呀！吐槽一番吧',
+        avatar:'/uploads/avatar.jpg',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("UUtBnvfSSEb2jQwP7yhlINnx-gzGzoHsz", "glLG95JsT6Y88k3qFhIobQbv");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  <script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+
+
+
+</html>
+ <!-- 页面点击小红心 
+ <script type="text/javascript" src="/js/src/love.js"></script>
+-->

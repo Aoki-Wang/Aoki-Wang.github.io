@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Shell变量的数值运算]]></title>
+    <url>%2F2019%2Fhell%E5%8F%98%E9%87%8F%E7%9A%84%E6%95%B0%E5%80%BC%E8%BF%90%E7%AE%97%2F</url>
+    <content type="text"><![CDATA[## 一、算数运算符1.Shell中常见的算数运算符号 算数运算符 意义 +、- 加、减 *、/、% 乘法、除法、取余 ** 幂 ++、– 增加，及减少 !、&amp;&amp;、|| 逻辑反、逻辑与、逻辑或 &lt;、&lt;=、&gt;、&gt;= 比较符号 ==、!=、= 比较符号 &lt;&lt;、&gt;&gt; 向左移位、向右移位 ~、|、&amp;、^ 按位取反、按位异或、按位与按位或 =、+=、-=、*=、/=、%= 赋值运算符 2.Shell中常见的算数运算命令 运算操作符与运算命令 意义 (()) 用于整数运算的常用运算符，效率很高 let 用于整数运算，类似于(()) expr 可用于整数运算，但还有很多其他额外的功能 bc Linux下的一个计算器程序（适合整数及小数运算） $[] 用于整数运算 awk awk既可以用于整数运算，也可以用于小数运算 declare 定义变量值和属性，-i参数可以用于定义整形变量，做运算 二、”(())”数值运算命令“(())”的作用是进行数值运算与数值比较。 运算操作符与运算命令 意义 ((i=i+1)) 为运算后赋值，即将i+1的结果赋值给i i=$((i+1)) 表示将表达式运算后的结果赋值给i ((8&gt;7&amp;&amp;5==5)) 进行比较操作，还可以加入逻辑与逻辑或，用于条件判断 echo $(2+1) 需要直接输出运算表达式的运算结果时，可以在”(())”的前面加$ test1.sh 12345678910111213#! /bin/bash#Author: Created by Aokiecho "$1+$2=$(($1+$2))"echo "$1-$2=$(($1-$2))"echo "$1*$2=$(($1*$2))"echo "$1/$2=$(($1/$2))"echo "$1**$2=$(($1**$2))" 三、let运算命令let运算命令的语法格式： let 赋值表达式 let赋值表达式的功能等同于”((赋值表达式))” 示例：监控web服务状态，如果访问量两次均失败，则报警。 mail配置： 12345678vim /etc/mail.rc#在末尾添加如下内容：set from=xxxxxx@qq.comset smtp=smtp.qq.comset smtp-auth-user="xxxxxx@qq.com"set smtp-auth-password=xxxxxxxxxxxxxxxset smtp-auth=login 123456789101112131415161718192021222324252627282930313233#! /bin/bash#Author: Created by Aokifunction checkUrl()&#123;timeout=5fails=0success=0while true do wget --timeout=$timeout --tries=1 https://wanqbin.xyz -q -O /dev/null if [ $? -ne 0 ];then let fails=fails+1 else let success+=1 fi if [ $success -ge 1 ];then echo "success" exit 0 fi if [ $fails -ge 2 ];then Critical="sys is down." echo $Critical|tee|mail -s "$Critical" aoki3352@163.com exit 2 fidone&#125;checkUrl 四、expr命令的用法expr(evaluate(求值) expression(表达式))命令既可以用于整数运算，也可以用于相关字符串长度、匹配等的运算处理。 在使用expr时，要注意： 运算符及用于计算的数字左右都至少有一个空格，否则会报错 使用称号时，必须使用反斜线屏蔽其特定含义，因为Shell可能会误解星号的含义。 expr配合变量计算： expr在Shell中可配合变量进行计算，但需要用反引号将计算表达式括起来。 示例：判断一个变量值或字符串是否为整数 实现原理： 利用expr做计算时变量或字符串必须是整数的规则，把一个变量或字符串和一个已知的整数（非0）相加，看命令返回的值是否为0.如果是0，就认为做加法的变量或字符串为整数，否则就不是整数。 1234567#! /bin/bash#Author: Created by Aokiexpr $1 + 1 &gt;/dev/null 2&gt;&amp;1[ $? -eq 0 ] &amp;&amp;echo int || echo chars #返回值为0，输出int，返回值不为0，否则输出chars 标记： /dev/null ：代表空设备文件 1 &gt; /dev/null 2&gt;&amp;1 语句含义： 1 &gt; /dev/null ： 首先表示标准输出重定向到空设备文件，也就是不输出任何信息到终端，说白了就是不显示任何信息。 2&gt;&amp;1 ：接着，标准错误输出重定向（等同于）标准输出，因为之前标准输出已经重定向到了空设备文件，所以标准错误输出也重定向到空设备文件。 示例：通过read读入持续等待输入 1234567891011#! /bin/bash#Author:Created by Aokiwhile truedo read -p "Please input :" a expr $a + 1 &gt;/dev/null 2&gt;&amp;1 [ $? -eq 0 ] &amp;&amp; echo int || echo charsdone~ 示例：打印一句话中字符数不大于4的单词 1234567891011#! /bin.bash#Author: Created by Aokifor n in I am Aoki who comes from Chinado if [ `expr length $n` -le 4 ];then echo $n fidone 五、bc命令 注：scale=3表示保留三位小数 示例：通过一条命令计算输出1+2+3+4+……+10的表达式，并计算结果。 12345[root@aoki obShell]# seq -s "+" 10 #seq是生成数字序列，-s是指定数字序列之间的分隔符1+2+3+4+5+6+7+8+9+10[root@aoki obShell]# echo &#123;1..10&#125; |tr " " "+" #&#123;1..10&#125;是生成以空格为间隔的数字序列，并交给tr将空格替换为+1+2+3+4+5+6+7+8+9+10[root@aoki obShell]# 六、awk命令利用awk进行运算的效果也很好，适合小数和整数，特别是命令行计算，尤其是小数，运算很精确。 12345[root@aoki obShell]# echo &apos;7.777 3.444&apos; |awk &apos;&#123;print ($1-$2)&#125;&apos; 4.333[root@aoki obShell]# echo &apos;123.32 234 2&apos; |awk &apos;&#123;print (($1-$2)/$3)&#125;&apos;-55.34[root@aoki obShell]# 七、$[]符号的运算123456[root@aoki obShell]# i=5[root@aoki obShell]# i=$[i+10][root@aoki obShell]# echo $i15[root@aoki obShell]# echo $[15*2]30]]></content>
+      <categories>
+        <category>Shell脚本</category>
+      </categories>
+      <tags>
+        <tag>Shell运算符</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Shell中的for循环和while循环]]></title>
     <url>%2F2019%2FShell%E4%B8%AD%E7%9A%84for%E5%BE%AA%E7%8E%AF%E5%92%8Cwhile%E5%BE%AA%E7%8E%AF%2F</url>
     <content type="text"><![CDATA[一、for循环1.基本语法：1234For 变量 in 字符串 do 语句1 done 2.示例1：for1.sh123456789#! /bin/bash#author by Aokifor i in `seq 1 15` #反引号，识别为命令do echo -e "\033[32mThe number is $i\033[0m"done 3.示例2：for-sum.sh1234567891011121314#! /bin/bash#author by Aokij=0for((i=1;i&lt;=100;i++))do j=`expr $i + $j`doneecho $j~ 查看脚本执行过程： sh -x for-sum.sh 4.示例3：create-manylogs.sh12345678910111213#! /bin/bash#author by Aokifor((i=100;i&lt;=102;i++))do FILE=$i.log if [ ! -f $FILE ];then touch /root/shell/test1/$FILE else continue; fidone 5.示例4： tar-logs.sh——找到相关log，然后批量打包12345678#! /bin/bash#author by Aokifor i in `find /root/shell/test1 -name "*.log"`do tar -cvzf $i.tar.gz $idone 6.示例5：transfer-files.sh——批量传输文件12345678#! /bin/bash#author by Aokifor i in `seq $1 $2`do scp -r /root/shell/transferFiles root@192.168.43.$i:/tmp/done 二、while循环1.示例1：while1.sh12345678910#! /bin/bash#author by Aokii=0while [[ $i -lt 10 ]]do echo "The number is $i" ((i++))done 2.read命令： 3.示例2：while2.sh123456789#! /bin/bash#author by Aokiwhile read linedo echo $linedone &lt;/etc/hosts 4.示例3：while3.sh12345678910#! /bin/bash#author by Aokiwhile read linedo IP=`echo $line |awk '&#123;print $2&#125;'` #取第二列 echo -e "\033[32mscp -r /tmp/test.txt root@$IP:/tmp \033[0m"done &lt; IPList.txt IPList.txt 1231 192.168.43.51 /tmp/ /root/shell/2 192.168.43.61 /tmp/ /root/shell/3 192.168.43.62 /tmp/ /root/shell/]]></content>
@@ -343,10 +354,10 @@
         <category>Linux内核</category>
       </categories>
       <tags>
-        <tag>操作系统</tag>
         <tag>内存管理机制</tag>
         <tag>虚拟地址</tag>
         <tag>虚拟内存</tag>
+        <tag>操作系统</tag>
       </tags>
   </entry>
   <entry>
@@ -430,8 +441,8 @@
         <category>Linux内核</category>
       </categories>
       <tags>
-        <tag>Linux内核</tag>
         <tag>操作系统</tag>
+        <tag>Linux内核</tag>
         <tag>Linux内核同步</tag>
         <tag>读写自旋锁</tag>
       </tags>
@@ -444,10 +455,10 @@
         <category>Linux内核</category>
       </categories>
       <tags>
+        <tag>操作系统</tag>
         <tag>Linux内核</tag>
         <tag>自旋锁</tag>
         <tag>普通自旋锁</tag>
-        <tag>操作系统</tag>
         <tag>内核同步</tag>
       </tags>
   </entry>
@@ -459,8 +470,8 @@
         <category>Linux内核</category>
       </categories>
       <tags>
-        <tag>Linux内核</tag>
         <tag>操作系统</tag>
+        <tag>Linux内核</tag>
         <tag>原子操作</tag>
         <tag>原子整数操作</tag>
         <tag>原子位操作</tag>
@@ -555,8 +566,8 @@
         <category>Linux内核</category>
       </categories>
       <tags>
-        <tag>Linux内核</tag>
         <tag>操作系统</tag>
+        <tag>Linux内核</tag>
         <tag>Linux系统调用</tag>
         <tag>Linux添加系统调用</tag>
       </tags>
@@ -583,8 +594,8 @@
         <category>Linux内核</category>
       </categories>
       <tags>
-        <tag>Linux内核</tag>
         <tag>操作系统</tag>
+        <tag>Linux内核</tag>
         <tag>系统调用</tag>
       </tags>
   </entry>
@@ -636,8 +647,8 @@
         <category>Linux内核</category>
       </categories>
       <tags>
-        <tag>Linux内核</tag>
         <tag>操作系统</tag>
+        <tag>Linux内核</tag>
         <tag>进程调度</tag>
         <tag>模块化调度</tag>
         <tag>组调度</tag>
