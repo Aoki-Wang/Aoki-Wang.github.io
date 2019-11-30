@@ -1,6 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Shell脚本的for和select循环]]></title>
+    <url>%2F2019%2Fshell%E8%84%9A%E6%9C%AC%E7%9A%84for%E5%92%8Cselect%E5%BE%AA%E7%8E%AF%2F</url>
+    <content type="text"><![CDATA[一、for循环 for循环语句为变量取值型1234for 变量名 in 变量取值列表do 指令done for循环语句为C语言型for循环语句1234for ((exp1; exp2; exp3))do 指令done 说明： 如果希望程序持续运行，则多用while，包括守护进程 如果是有限次循环，则多用for 示例： 获取目录下所有文件名 12345678910#!/bin/bash #Author: Created by Aokicd /root/myShell/obShell/ for filename in `ls`do echo $filenamedone for循环批量修改文件扩展名 1234567891011#!/bin/bash#Author: Created by Aokicd /root/myShell/obShell/test/ for filename in `ls *.txt`do mv $filename `echo $filename|sed 's/test/modify/'`done 打印九九乘法表12345678910111213141516171819202122#!/bin/bash #Author: Created by AokiCOLOR='\033[47;30m'RES='\033[0m'for num1 in `seq 9`do for num2 in `seq 9` do if [ $num1 -ge $num2 ];then if ((($num1*num2)&gt;9));then echo -en "$&#123;COLOR&#125;$&#123;num1&#125;x$&#123;num2&#125;=$((num1*num2)) $RES " else echo -en "$&#123;COLOR&#125;$&#123;num1&#125;x$&#123;num2&#125;=$((num1*num2)) $RES " fi fi doneecho " "done 批量创建10个系统账号，并设置密码（密码是随机数，要求是字符和数字的混合）12345678910111213141516171819202122#!/bin/bash#Author: Created by Aoki. /etc/init.d/functions user="Aoki"passfile="/tmp/user.log"for num in `seq -w 10`do pass="`echo "test$RANDOM"|md5sum|cut -c3-11`" useradd $user$num &amp;&gt;/dev/null &amp;&amp;\ echo "$pass"|passwd --stdin $user$num &amp;&gt;/dev/null &amp;&amp;\ echo -e "user:$user$num\tpasswd:$pass"&gt;&gt;$passfile if [ $? -eq 0 ];then action "$user$num is ok." /bin/true else action "$user$num is fail." /bin/false fidone echo -e "\033[35m------------------------------------\033[0m"cat $passfile &amp;&amp; &gt;$passfile Linux系统产生随机数的6种方法 通过系统环境变量($RANDOM)实现1234[root@aoki obShell]# echo $RANDOM19399[root@aoki obShell]# echo $RANDOM11031 RANDOM的随机数访问是0~32767，因此，加密行不是很好可以通过在输出和的随机数后增加加密字符串的方式解决。 通过openssl产生随机数12345[root@aoki obShell]# openssl rand -base64 82Iyj6sBwXk4=[root@aoki obShell]# openssl rand -base64 80kPqCshGOuXlFVDsh0VS6Ugyd56u9W0rx2uvAmh/5KGveTjPMig7Zo0k53BHgMuJvnxEDk3zU3ifKOKAgD+tek0o9yYQ/3ckwtAgQdRez7gs= 通过时间(date)获得随机数12[root@aoki obShell]# date +%Y%s20191575123335 通过/dev/urandom配合chksum生成随机数1234[root@aoki obShell]# head /dev/urandom |cksum1624783990 3098[root@aoki obShell]# head /dev/urandom |cksum3074370908 2834 通过UUID生成随机数1234[root@aoki obShell]# cat /proc/sys/kernel/random/uuide46b5c56-d41b-4cf8-9582-07d924bd0eee[root@aoki obShell]# cat /proc/sys/kernel/random/uuidc1cf6394-fa0d-4935-a8ca-d34b7f341573 UUID码全称是通用唯一识别码，它是一个软件建构的标准。UUID的目的是让分布式系统中的所有元素都能有唯一的辨识信息，而不需要通过中央控制端奶做辨识信息的指定。 二、select循环语句&emsp;&emsp;select循环语句的主要作用可能就是创建菜单，在执行带select循环语句的脚本时，输出会按照数字顺序的列表显示一个菜单项，并显示提示符（默认是#？），同时等待用户输入数字进行选择。 语法结构1234select 变量名 [ in 菜单取值列表 ]do 指令done 在这种select循环语句的语法中，在执行脚本后，select关键字后面会有一个”变量名“，变量名依次获取in关键字后面的列表内容（以空格分隔），每次仅取一个，然后进入循环内，执行循环内的所有指令，当执行到done时结束返回，之后，”变量名“再继续取变量列表的下一个变量值，继续执行循环内的素有指令，当执行到done时结束返回，以此类推，直到取完最后一个变量列表里的值并进入循环执行到done结束为止。 案例123456789#!/bin/bash#Author: Created by Aokiecho "Please input your choice:"select var in Aoki Borgia do echo -e "\033[32m You selected $var \033[0m"done 三、break、continue、exit、return的区别和对比&emsp;&emsp;在上面的命令中，break、continue在条件语句及循环语句中用于控制程序的走向；而exit则用于终止所有语句并退出当前脚本，除此之外，exit还可以返回上一次程序或命令执行状态值给当前Shell；return类似exit，只不过return仅用于在函数内部返回函数执行的状态值。 命令 说明 break n 如果省略n，则表示跳出整个循环，n表示跳出循环的次数 continue n 如果省略n，则表示跳过本次循环，忽略本次循环的剩余代码，进入循环的下一次循环，n表示可退到第n层继续执行 exit n 退出当前shell程序，n为上一次程序执行的状态返回值。n可以省略，在下一个Shell里可通过$?接收exit的n值 return n 用于在函数里作为函数的返回值，以判断函数执行是否正确。在下一个Shell里可通过$?接收exit n的n值 12345678910111213141516171819202122232425262728#!/bin/bash#Author: Created by Aokiif [ $# -ne 1 ];then echo $"USAGE:$0 &#123;break|contine|exit|return&#125;" exitfifunction test()&#123; for ((i=0;i&lt;=5;i++)) do if [ $i -eq 3 ];then $*; fi echo $i done echo "This is a func"&#125;test $* #传参到函数func_ret=$? #接收函数的返回值if [ `echo $*|grep return|wc -l` -eq 1 ];then echo "return's exit status:$func_ret"fiecho "ok"]]></content>
+      <categories>
+        <category>Shell脚本</category>
+      </categories>
+      <tags>
+        <tag>Shell脚本for循环</tag>
+        <tag>Shell脚本select循环</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Shell数组]]></title>
+    <url>%2F2019%2Fshell%E6%95%B0%E7%BB%84%2F</url>
+    <content type="text"><![CDATA[一、Shell数组 Shell数组的定义 用小括号将变量值括起来赋值给数组变量，每个变量值之间要用空格进行分隔 1array=(value1 value2 value3 ……) 用小括号将变量值括起来，同时采用键值对的形式赋值 1array=&#123;[1]=one [2]=two [3]=three&#125; 通过分别定义数组变量的方法来定义 1array[0]=a;array[1]=b;array[2]=c 动态地定义数组变量，并使用命令的输出结果作为数组的内容 123array($(命令))或array(`命令`) Shell数组的打印及输出 打印数组元素123456789[root@aoki obShell]# array=(a b c)[root@aoki obShell]# echo $&#123;array[0]&#125;a[root@aoki obShell]# echo $&#123;array[1]&#125;b[root@aoki obShell]# echo $&#123;array[*]&#125; #输出数组的所有元素a b c[root@aoki obShell]# echo $&#123;array[@]&#125; #输出数组的所有元素a b c 打印数组元素的个数12345678[root@aoki obShell]# echo $&#123;array[*]&#125;a b c[root@aoki obShell]# echo $&#123;array[@]&#125;a b c[root@aoki obShell]# echo $&#123;#array[*]&#125;3[root@aoki obShell]# echo $&#123;#array[@]&#125;3 数组赋值12345678[root@aoki obShell]# echo $&#123;array[*]&#125;a b c[root@aoki obShell]# array[3]=d[root@aoki obShell]# echo $&#123;array[*]&#125;a b c d[root@aoki obShell]# array[0]=1[root@aoki obShell]# echo $&#123;array[*]&#125;1 b c d 数组的删除123456789[root@aoki obShell]# echo $&#123;array[*]&#125;1 b c d[root@aoki obShell]# unset array[1][root@aoki obShell]# echo $&#123;array[*]&#125;1 c d[root@aoki obShell]# unset array #删除整个数组[root@aoki obShell]# echo $&#123;array[*]&#125;[root@aoki obShell]# 数组内容的截取和替换12345678910[root@aoki obShell]# array=(1 2 3 4 5)[root@aoki obShell]# echo $&#123;array[*]&#125;1 2 3 4 5[root@aoki obShell]# echo $&#123;array[*]:1:3&#125; #截取1号元素到3号元素2 3 4[root@aoki obShell]# array=($(echo &#123;a..z&#125;)) #将变量的结果赋值给数组变量[root@aoki obShell]# echo $&#123;array[*]&#125;a b c d e f g h i j k l m n o p q r s t u v w x y z[root@aoki obShell]# echo $&#123;array[*]:3:10&#125; #截取3号元素到10号元素d e f g h i j k l m 替换数组的部分内容：12[root@aoki obShell]# echo $&#123;array[*]/a/100&#125; #将a替换为100，该操作不会改变原来数组的内容100 b c d e f g h i j k l m n o p q r s t u v w x y z 二、Shell数组示例 输出数组中的内容 方法112345678#!/bin/bash#Author: Created by Aokiarray=(1 2 3 4)for i in $&#123;array[*]&#125;do echo $idone 方法212345678910#!/bin/bash#Author: Created by Aokiarray=(1 2 3 4 5)for ((i=0;i&lt;$&#123;#array[*]&#125;;i++))do echo $&#123;array[i]&#125;done 方法31234567891011#!/bin/bash#Author: Created by Aokiarray=(1 2 3 4)i=0while (( i&lt;$&#123;#array[*]&#125; ))do echo $&#123;array[i]&#125; ((i++))done 打印下面这句话中字母数不大于6的单词1I am Aoki Today is a nice day It is wonderful 方法1：通过数组方法实现1234567891011121314151617181920#!/bin/bash#Author: Created by Aokiarr=(I am Aoki Today is a nice day It is wonderful)for ((i=0;i&lt;$&#123;#arr[*]&#125;;i++))do if [ $&#123;#arr[$i]&#125; -lt 6 ];then echo "$&#123;arr[$i]&#125;" fidoneecho -------------------------------------for word in $&#123;arr[*]&#125;do if [ `expr length $word` -lt 6 ];then echo $word fidone 方法2：使用for循环列举取值列表法12345678910111213#!/bin/bash#Author: Created by Aokichars="I am Aoki Today is a nice day It is wonderful"for word in $charsdo if [ `echo $word|wc -L` -lt 6 ];then echo $word fidone 方法3：通过awk循环实现12345#!/bin/bash#Author: Created by Aokichars="I am Aoki Today is a nice day It is Wonderful"echo $chars|awk '&#123;for(i=1;i&lt;=NF;i++) if(length($i)&lt;=6) print $i&#125;' 批量检查多个网站地址是否正常要求： 使用Shell数组的方法实现 每10秒进行一次全部检测，无法访问输出报警 待检测的地址如下： https://wanqbin.xyz https://www.wanqbin.xyz https://www.baidu.com 解题思路： 把URL定义成数组，形成函数 编写URL检查和脚本函数，传入数组的元素，即URL 组合整个案例，编写main函数，每隔10秒检查一次 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849#!/bin/bash#Author: Created by Aoki. /etc/init.d/functions check_count=0url_list=(https://wanqbin.xyzhttps://www.wanqbin.xyzhttps://www.baidu.com)function wait()&#123; echo -e "\033[31m 3秒后，执行检查URL操作.\033[0m" for ((i=0;i&lt;3;i++)) do echo -n "." ;sleep 1 done echo&#125;function check_Url()&#123; wait for ((i=0;i&lt;`echo $&#123;#url_list[*]&#125;`;i++)) do wget -o /dev/null -T 3 --tries=1 --spider $&#123;url_list[$i]&#125; &gt;/dev/null 2&gt;&amp;1 if [ $? -eq 0 ];then action "$&#123;url_list[$i]&#125;" /bin/true else action "$&#123;url_list[$i]&#125;" /bin/false fi done ((check_count++))&#125;function main()&#123; while true do check_Url echo -e "\033[35m--------------------check count:$&#123;check_count&#125;------------\033[0m" sleep 10 done &#125;main]]></content>
+      <categories>
+        <category>Shell脚本</category>
+      </categories>
+      <tags>
+        <tag>Shell数组</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Shell脚本的if条件语句]]></title>
+    <url>%2F2019%2FShell%E8%84%9A%E6%9C%AC%E7%9A%84if%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5%2F</url>
+    <content type="text"><![CDATA[一、if条件语句if条件语句的语法： 单分支结构123if &lt;条件表达式&gt;; then 指令fi 双分支结构12345if &lt;条件表达式&gt;; then 指令集else 指令集fi 多分支结构1234567if &lt;条件表达式&gt;; then 指令1elif &lt;条件表达式&gt;;then 指令2else 指令3fi 提示： 注意多分支elif的写法，每个elif都要带有then 最后结尾的else后面没有then if条件语句多种条件表达式语法 test条件表达式123if test 表达式; then 指令fi []条件表达式123if [ 字符串或算数表达式 ];then 指令fi [[]]条件表达式123if [[ 字符串表达式 ]]l;then 指令fi (())条件表达式123if (( 算数表达式 ));then 指令fi 命令表达式123if 命令;then 指令fi 示例：123456789101112131415#!/bin/bash#Author: Created by Aokiif [ -f /root/myShell/obShell/checkInt1.sh ];then echo "该文件存在"else echo "该文件不存在"fiif [ -d /root/myShell/obShell/test/ ] ;then echo "该目录存在"else echo "该目录不存在"fi 示例：利用Shell脚本判断系统剩余内存的大小，如果低于100MB，就邮件发送给系统管理员 设计思路： 获取当前系统剩余内存的值 配置邮件报警 判断取到的值是否小于100MB，如果小于100MB，就报警 实现shell脚本 实现过程： 获取内存大小： 12free -mfree -m| awk 'NR==3 &#123;print $NF&#125;' 发送测试邮件 编写脚本 1234567891011#!/bin/bash#Author: Created by AokiFREEMEM=`free -m|awk 'NR==3 &#123;print $NF&#125;'` #获取剩余内存CHARS="Current memory is $FREEMEM."if [ $FREEMEM -lt 1024 ];then echo $CHARS|tee /tmp/message.txt #屏幕输出，并写入文件 mail -s "`date +%F-%T` $CHARS" aoki3352@163.com &lt; /tmp/message.txtfi 示例：使用if条件语句比较两个整数的大小。使用传参的方法时，需要对传参个数及传入的参数是否为整数进行判断。 12345678910111213141516171819202122232425262728293031323334#!/bin/bash#Author: Created by AokiA=$1 B=$2#判断参数个数if [ $# -ne 2 ];then echo "USAGE:$0 arg1 arg2" exit 2fi#判断A是否为整数expr $A+1 &amp;&gt;/dev/null RETVAL1=$?expr $B+1 &amp;&gt;/dev/null RETVAL2=$?if [ $RETVAL1 -ne 0 -a $RETVAL2 -ne 0 ];then echo "Please input two int argments" exit 3fi#比较大小if [ $A -lt $B ];then echo "$A&lt;$B"elif [ $A -eq $B ];then echo "$A=$B"else echo "$A&gt;$B"fi 执行结果： 示例：判断字符串是否为数字的思路。 使用sed加正则表达式判断思路：删除一个字符串中的所有数字，看字符串的长度是否为0，如果不为0，则说明不是整数。 123456789[root@aoki obShell]# [ -n "`echo Aoki1234 |sed 's/[0-9]//g'`" ] &amp;&amp; echo char || echo intchar[root@aoki obShell]# [ -n "`echo 1234 |sed 's/[0-9]//g'`" ] &amp;&amp; echo char || echo int int[root@aoki obShell]# [ -z "`echo Aoki1234 |sed 's/[0-9]//g'`" ] &amp;&amp; echo int || echo charchar[root@aoki obShell]# [ -z "`echo 1234 |sed 's/[0-9]//g'`" ] &amp;&amp; echo int || echo char int[root@aoki obShell]# 变量的子串替换加正则表达式判断思路：如果num的长度不为0，并且把num中的非数字部分删除，然后再看结果是不是等于num本身，如果两者都成立，则num就是数字。 12345[root@aoki obShell]# [ -n "$num" -a "$num" = "$&#123;num//[^0-9]/&#125;" ] &amp;&amp; echo int || echo char int[root@aoki obShell]# num=Aoki123344[root@aoki obShell]# [ -n "$num" -a "$num" = "$&#123;num//[^0-9]/&#125;" ] &amp;&amp; echo int || echo charchar 示例：判断字符串长度是否为0的思路 使用字符串表达式-z和-n1234[root@aoki obShell]# [ -z "Aoki" ] &amp;&amp; echo 0 || echo 11[root@aoki obShell]# [ -n "Aoki" ] &amp;&amp; echo 1 || echo 01 使用变量子串判断123[root@aoki obShell]# char=Aoki[root@aoki obShell]# [ $&#123;#char&#125; -eq 0 ] &amp;&amp; echo 0 ||echo 11 使用expr length函数判断12[root@aoki obShell]# [ `expr length "Aoki" ` -eq 0 ] &amp;&amp; echo 0 || echo 11 使用wc的-L参数统计判断12[root@aoki obShell]# [ `echo Aoki |wc -L ` -eq 0 ] &amp;&amp; echo 0 || echo 11 使用awk length函数判断12[root@aoki obShell]# [ `echo Aoki|awk '&#123;print length&#125;'` -eq 0 ] &amp;&amp; echo 0 || echo 11]]></content>
+      <categories>
+        <category>Shell脚本</category>
+      </categories>
+      <tags>
+        <tag>Shell脚本if语句</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Shell函数]]></title>
+    <url>%2F2019%2Fshell%E5%87%BD%E6%95%B0%2F</url>
+    <content type="text"><![CDATA[一、Shell函数Shell函数语法：1234function 函数名()&#123; 指令 return n&#125; Shell函数的优势： 把相同的程序段定义成函数，可以减少整个程序的代码量，提升开发效率 增加程序的可读性，易读性，提升管理效率 Shell函数的执行： 执行不带参数的函数时，直接输入函数名即可。1函数名 说明： 执行Shell函数时，函数名前的function和函数后的小括号都不要带 函数的定义必须在要执行的程序前面定义或加载 Shell执行系统中各种程序的执行顺序为：系统别名 -&gt;函数-&gt;系统命令-&gt;可执行文件 函数执行时，会和它调用的脚本共用变量，也可以为函数设定局部变量及特殊位置参数 在Shell函数里面，return命令的功能与exit类似，return的作用是退出函数，而exit是退出脚本文件 return语句会返回一个退出值（即返回值）给调用函数的当前程序，而exit会返回一个退出值给执行程序的当前Shell 如果将函数存放在独立的文件中，被脚本加载使用时，需要使用source或”.”来加载 在函数内一般使用local定义局部变量，这些变量离开函数后就会消失 带参数的函数执行方法：1函数名 参数1 参数2 函数后接参数的说明： Shell的位置参数都可以作为函数的参数来使用 此时父脚本的参数临时地被函数参数所掩盖或隐藏 $0比较特殊，它仍然是父脚本地名称 当函数执行完成时，原来地命令行脚本地参数即可恢复 函数的参数变量是在函数体里面定义的 二、Shell函数示例 分离函数体和执行函数的脚本文件1234567#!/bin/bash#Author: Created by Aoki. /root/myShell/obShell/function1.sh source /root/myShell/obShell/function2.sh fc1h URL检测脚本将函数的传参转换成脚本文件命令行传参，判断指定的URL是否存在异常。 设计思路及实现： 实现脚本传参，检查Web URL是否正常 12345678910111213141516171819#!/bin/bash#Author: Created by Aoki#判断传参个数是否为1个if [ $# -ne 1 ];then echo $"USAGE: $0 url" exit 1fi#利用wget进行访问测试wget --spider -q -o /dev/null --tries=1 -T 5 $1if [ $? -eq 0 ];then echo "$1 is yes"else echo "$1 is no"fi 将上述检测功能写成函数，并将函数传参转换成脚本命令行传参，判断任意指定的URL是否存在异常 12345678910111213141516171819202122232425262728293031#!/bin/bash#Author: Created by Aoki. /etc/init.d/functions #引入系统函数库function usage()&#123; echo $"UASGE:$0 url" exit 1&#125;function checkUrl()&#123; wget --spider -q -o /dev/null --tries=1 -T 5 $1 if [ $? -eq 0 ];then action "$1 is yes." /bin/true #使用系统函数美化输出结果 else action "$1 is no." /bin/false fi&#125;function main()&#123; if [ $# -ne 1 ];then usage else checkUrl $1 fi&#125;main $* #将命令行接收到的所有参数作为函数参数传递给函数内部]]></content>
+      <categories>
+        <category>Shell脚本</category>
+      </categories>
+      <tags>
+        <tag>Shell函数</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Shell脚本的case条件语句]]></title>
+    <url>%2F2019%2Fshell%E8%84%9A%E6%9C%AC%E7%9A%84case%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5%2F</url>
+    <content type="text"><![CDATA[一、case条件语句case条件语句相当于多分支的if/elif/else条件语句，但是它比这些条件语句看起来更规范更工整。 在case语句中，程序会将case获取的变量的值与表达式部分的值1、值2、值3等逐个进行比较，如果获取的变量和某个值相匹配，就会执行值后面对应的指令，直到执行到双分号（;;）才停止，然后再跳出case语句主体，执行case语句后面的命令。 如果没有找到匹配变量的任何值，则执行*)后面的指令，直到遇到双分号或case结束，这部分相当于if多分支语句中最后的else语句部分。另外，case语句中表达式对应值的部分，还可以使用管道等更多功能来匹配。 case条件语句的语法12345678910case "变量" in 值1) 指令 ;; 值2) 指令 ;; *) 指令esac Linux中给字体加颜色的命令 在上面的命令中： echo -e可以识别转义字符，这里将识别特殊字符的函数，并输出 \E可以使用\033代替 ”[1”数字1代表加粗显示 31m表示红色字体，可以换成不同的数字，以代表不同的意思 “red”代表待设置的内容 “[0m”表示关闭所有属性，可以换成不同的数字，以代表不同的意思 \33[0m 表示关闭所有属性 \33 [1m 表示设置高亮度 \33 [4m 表示设置下划线 \33 [5m 表示设置闪烁 \33 [7m 表示反显 \33 [8m 表示消隐 \33[30m——\33[37m表示设置前景色 \33[40m——\33[47m表示设置背景色]]></content>
+      <categories>
+        <category>Shell脚本</category>
+      </categories>
+      <tags>
+        <tag>Shell脚本case语句</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Shell脚本的while循环和until循环]]></title>
+    <url>%2F2019%2Fshell%E8%84%9A%E6%9C%AC%E7%9A%84while%E5%BE%AA%E7%8E%AF%E5%92%8Cuntil%E5%BE%AA%E7%8E%AF%2F</url>
+    <content type="text"><![CDATA[一、while循环语句和until语句 while循环语句的基本语法：1234while &lt;条件表达式&gt;do 指令done while循环语句会对紧跟在while命令后的条件表达式进行判断，如果该条件表达式成立，则执行while循环体中的命令或语句，每一次执行到done时就会重新判断while表达式是否成立，直到条件表达式不成立时才会跳出while循环体。如果一开始条件表达式就不成立，那么程序就不会进入循环体。 until循环语句的语法为：1234until &lt;条件表达式&gt;do 指令done until循环语句的用法与while循环语句的用法类似，区别是until会在条件表达式不成立时，进入循环执行指令；条件表达式成立时，终止循环。 二、示例 输出1到10123456789#!/bin/bash#Author: Created by AokiA=1while [ $A -le 10 ]do echo $A A=$[A+1]done 12345678910#!/bin/bash#Author: Created by AokiA=1until [ $A -gt 10 ]do echo $A A=$[A+1]done 每隔两秒输出一次系统负载情况123456789#!/bin/bash #Author: Created by Aokiwhile truedo uptime sleep 2done 后台运行脚本，并输出系统负载到文件中123456789#!/bin/bash#Author: Created by Aokiwhile [ 1 ]do uptime &gt;&gt; /root/myShell/obShell/uptime.log usleep 2000000 #休息2秒done Shell脚本后台运行脚本运行的相关用法和说明 用法 说明 sh checkSysLoad1.sh &amp; 把脚本放在后台执行 ctrl+c 停止执行当前脚本或任务 ctrl+z 暂停执行当前脚本或任务 bg 把当前脚本或任务放到后台执行 fg 把当前脚本放到前台执行，如果有多个任务，可以使用fg加任务编号调出对应的脚本任务，如 fg 2 jobs 查看当前执行的脚本或任务 kill 关闭执行的脚本任务，即以kill %任务编号的形式关闭脚本，这个任务编号，可以通过jobs来获得 更多有关进程管理的Linux相关命令如下： kill、killall,、pkill：杀掉进程 ps：查看进程 pstree：查看进程树 top：显示进程 renice：改变优先权 nohup：用户退出系统之后继续工作 pgrep：查找匹配条件的进程 strace：跟踪一个进程的系统调用情况 ltreace：跟踪进程调用库函数的情况 使用while守护进程的方式监控网站，每隔10秒确定一次网站是否正常1234567891011121314151617181920#!/bin/bash#Author: Created by Aoki. /etc/init.d/functions if [ $# -ne 1 ];then echo $"USAGE:$0 url" exitfiwhile truedo if [ `curl -o /dev/null --connect-timeout 5 -s -w "%&#123;http_code&#125;" $1 |egrep -w "200|301|302"|wc -l` -ne 1 ];then #对传入的URL参数获取状态码，过滤200、301、302任意之一转为数字，如果不等于1，则表示状态i先联系不对 action "$1 is error." /bin/false else action "$1 is ok." /bin/true fi sleep 10 #休息10秒钟done]]></content>
+      <categories>
+        <category>Shell脚本</category>
+      </categories>
+      <tags>
+        <tag>Shell脚本while循环</tag>
+        <tag>Shell脚本until循环</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Shell脚本的条件测试]]></title>
     <url>%2F2019%2FShell%E8%84%9A%E6%9C%AC%E7%9A%84%E6%9D%A1%E4%BB%B6%E6%B5%8B%E8%AF%95%2F</url>
     <content type="text"><![CDATA[一、Shell脚本的条件测试通常，在bash的各种条件结构和流程控制结构中都要进行各种测试，然后根据测试结果执行不同的操作，有时也会与if等条件语句相结合，来完成测试判断，以减少程序运行的错误。 执行条件测试表达式后通常会返回“真”或“假”，就像执行命令后的返回值为0表示真，非0表示假一样。 在bash编程中，条件测试常用的语法如下： 条件测试语法 说明 语法1：test &lt;测试表达式&gt; 利用test命令进行条件测试表达式。test命令与&lt;测试表达式&gt;之间至少有一个空格 语法2：[&lt;测试表达式&gt;] 通过单中括号进行条件测试表达式的方法，和test命令的用法相同，边界和内容之间至少有一个空格。也是比较推荐的方法。 语法3：[[&lt;测试表达式&gt;]] 通过[[]]双中括号进行条件测试表达式的方法。[[]]的边界和内容之间至少有一个空格 语法4:((&lt;测试表达式&gt;)) 通过(())进行条件测试表达式。一般用于if语句里。(())两端不需要有空格 注意点： 语法1中的test命令和语法2中的[]是等价的。语法中的[[]]为扩展的test命令。语法4中的(())常用用于计算。 在[[]]中可以使用通配符等进行模式匹配，这是区别与其他几种语法格式的地方。 &amp;&amp;、||、&gt;、&lt;等操作符可以应用于[[]]中，不能应用于[]中，在[]中一般用-a、-o、-gt(用于整数）-lt(用于整数)代替上述操作符。 对于整数的关系运算，也可以i使用Shell的算数运算符(()) test条件测试的简单语法及其示例： test条件测试的语法格式为： test &lt;测试表达式&gt; 示例： 二、文件测试表达式常用的文件测试操作符如下： 常用文件测试操作符 说明 -d 文件 directory 文件存在且为目录则为真 -f 文件 file 文件存在且为普通文件则为真 -e 文件 exist 文件存在则为真 -r 文件 read 文件存在且可读为真 -s 文件 size 文件存在且文件大小不为0则为真 -w 文件 write 文件存在且可写则为真 -x 文件 executable 文件存在且可执行则为真 -L 文件 link 文件存在且为链接文件则为真 f1 -nt f2 nt代表newer than 文件f1比文件f2新则为真，根据文件的修改时间决定 f1 -ot f2 ot代表older than 文件f1比文件f2旧则为真，根据文件的修改时间决定 测试Shell变量示例： 三、字符串测试表达式字符串测试操作符的作用包括：比较两个字符串是否相同、测试字符串的插画高难度是否为零、字符串是否为NULL等。 字符串测试操作符 常用字符串测试操作符 说明 -n “字符串” 若字符串的长度不为0，则为真 -z “字符串” 若字符串的长度为0，则为真 “串1”=”串2” 若字符串1等于字符串2，则为真 “串1”!=”串2” 若字符串1不等于字符串2，则为真 提示： 对于字符串的测试，一定要将字符串加双引号后再进行比较。如 [ -n &quot;$myvar&quot; ],特别是使用[]的场景 比较符号的两端一定要有空格 “==”和”!=”可用于比较两个字符串是否相同 字符串变量测试： 四、整数二元比较操作符整数二元比较操作符使用参考： 在[]以及test中使用的比较符号 在(())和[[]]中使用的比较符号 说明 -eq == 或 = 相等 -ne != 不相等 -gt &gt; 大于 greater than -ge &gt;= 大于等于 greater equal -lt &lt; 小于 less than -le &lt;= 小于等于 less equal 说明： “=”和“!=”也可以在[]中做比较使用，但在[]中使用包含”&gt;”、”&lt;”的符号时，需要用反斜线转义，有时不转义虽然语法不会报错，但是结果可能会不对 也可以在[[]]中使用包含“-gt”和“-lt”的符号，但是不建议这样使用 比较符号两端也要有空格 示例1： 示例2： 五、逻辑操作符逻辑操作符如下： 在[]和test中使用的操作符 在[[]]和(())中使用的操作符 说明 -a &amp;&amp; and 两端都为真，则结果为真 -o || or 或 两端有一个为真，则结果为真 ! ! not 非 两端相反，则结果为真 提示： 逻辑操作符前后的表达式是否成立，一般用增加来表示 “!”的中文意思是反，即与一个逻辑值相反的逻辑值 -a 前后两个逻辑值都为真，综合返回值为真 -o 前后两个逻辑值只要有一个为真，返回值就为真。 连接包含 []、test或[[]]的表达式可用&amp;&amp;或||]]></content>
@@ -365,10 +433,10 @@
         <category>Linux内核</category>
       </categories>
       <tags>
+        <tag>操作系统</tag>
         <tag>内存管理机制</tag>
         <tag>虚拟地址</tag>
         <tag>虚拟内存</tag>
-        <tag>操作系统</tag>
       </tags>
   </entry>
   <entry>
@@ -452,8 +520,8 @@
         <category>Linux内核</category>
       </categories>
       <tags>
-        <tag>操作系统</tag>
         <tag>Linux内核</tag>
+        <tag>操作系统</tag>
         <tag>Linux内核同步</tag>
         <tag>读写自旋锁</tag>
       </tags>
@@ -466,10 +534,10 @@
         <category>Linux内核</category>
       </categories>
       <tags>
-        <tag>操作系统</tag>
         <tag>Linux内核</tag>
         <tag>自旋锁</tag>
         <tag>普通自旋锁</tag>
+        <tag>操作系统</tag>
         <tag>内核同步</tag>
       </tags>
   </entry>
@@ -481,8 +549,8 @@
         <category>Linux内核</category>
       </categories>
       <tags>
-        <tag>操作系统</tag>
         <tag>Linux内核</tag>
+        <tag>操作系统</tag>
         <tag>原子操作</tag>
         <tag>原子整数操作</tag>
         <tag>原子位操作</tag>
@@ -534,8 +602,8 @@
         <category>LeetCode</category>
       </categories>
       <tags>
-        <tag>移出链表元素</tag>
         <tag>LeetCode</tag>
+        <tag>移出链表元素</tag>
       </tags>
   </entry>
   <entry>
@@ -577,8 +645,8 @@
         <category>Linux内核</category>
       </categories>
       <tags>
-        <tag>操作系统</tag>
         <tag>Linux内核</tag>
+        <tag>操作系统</tag>
         <tag>Linux系统调用</tag>
         <tag>Linux添加系统调用</tag>
       </tags>
@@ -593,8 +661,8 @@
       <tags>
         <tag>操作系统</tag>
         <tag>Linux系统调用</tag>
-        <tag>系统调用</tag>
         <tag>C程序库</tag>
+        <tag>系统调用</tag>
       </tags>
   </entry>
   <entry>
@@ -605,8 +673,8 @@
         <category>Linux内核</category>
       </categories>
       <tags>
-        <tag>操作系统</tag>
         <tag>Linux内核</tag>
+        <tag>操作系统</tag>
         <tag>系统调用</tag>
       </tags>
   </entry>
@@ -658,8 +726,8 @@
         <category>Linux内核</category>
       </categories>
       <tags>
-        <tag>操作系统</tag>
         <tag>Linux内核</tag>
+        <tag>操作系统</tag>
         <tag>进程调度</tag>
         <tag>模块化调度</tag>
         <tag>组调度</tag>
