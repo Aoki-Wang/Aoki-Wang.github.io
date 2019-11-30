@@ -95,7 +95,7 @@
     <url>%2F2019%2FShell%E4%B8%AD%E7%9A%84for%E5%BE%AA%E7%8E%AF%E5%92%8Cwhile%E5%BE%AA%E7%8E%AF%2F</url>
     <content type="text"><![CDATA[一、for循环1.基本语法：1234For 变量 in 字符串 do 语句1 done 2.示例1：for1.sh123456789#! /bin/bash#author by Aokifor i in `seq 1 15` #反引号，识别为命令do echo -e "\033[32mThe number is $i\033[0m"done 3.示例2：for-sum.sh1234567891011121314#! /bin/bash#author by Aokij=0for((i=1;i&lt;=100;i++))do j=`expr $i + $j`doneecho $j~ 查看脚本执行过程： sh -x for-sum.sh 4.示例3：create-manylogs.sh12345678910111213#! /bin/bash#author by Aokifor((i=100;i&lt;=102;i++))do FILE=$i.log if [ ! -f $FILE ];then touch /root/shell/test1/$FILE else continue; fidone 5.示例4： tar-logs.sh——找到相关log，然后批量打包12345678#! /bin/bash#author by Aokifor i in `find /root/shell/test1 -name "*.log"`do tar -cvzf $i.tar.gz $idone 6.示例5：transfer-files.sh——批量传输文件12345678#! /bin/bash#author by Aokifor i in `seq $1 $2`do scp -r /root/shell/transferFiles root@192.168.43.$i:/tmp/done 二、while循环1.示例1：while1.sh12345678910#! /bin/bash#author by Aokii=0while [[ $i -lt 10 ]]do echo "The number is $i" ((i++))done 2.read命令： 3.示例2：while2.sh123456789#! /bin/bash#author by Aokiwhile read linedo echo $linedone &lt;/etc/hosts 4.示例3：while3.sh12345678910#! /bin/bash#author by Aokiwhile read linedo IP=`echo $line |awk '&#123;print $2&#125;'` #取第二列 echo -e "\033[32mscp -r /tmp/test.txt root@$IP:/tmp \033[0m"done &lt; IPList.txt IPList.txt 1231 192.168.43.51 /tmp/ /root/shell/2 192.168.43.61 /tmp/ /root/shell/3 192.168.43.62 /tmp/ /root/shell/]]></content>
       <categories>
-        <category>Shell</category>
+        <category>Shell脚本</category>
       </categories>
       <tags>
         <tag>shell</tag>
