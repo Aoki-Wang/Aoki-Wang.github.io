@@ -110,16 +110,12 @@
 <link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
 
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
 
 
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
 
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
 
 
 
@@ -237,7 +233,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle">“惟将终夜长开眼，报答平生未展眉”</p>
+        <h1 class="site-subtitle" itemprop="description">“惟将终夜长开眼，报答平生未展眉”</h1>
       
   </div>
 
@@ -388,7 +384,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Shell脚本的for和select循环</h1>
+          <h2 class="post-title" itemprop="name headline">Shell脚本的for和select循环</h2>
         
 
         <div class="post-meta">
@@ -523,21 +519,21 @@
 </li>
 <li><h3 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h3><ul>
 <li><p>获取目录下所有文件名</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/bash </span><br><span class="line"><span class="meta">#</span>Author: Created by Aoki</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cd /root/myShell/obShell/ </span><br><span class="line">for filename in `ls`</span><br><span class="line">do</span><br><span class="line">    echo $filename</span><br><span class="line"></span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash </span></span><br><span class="line"><span class="meta">#</span><span class="bash">Author: Created by Aoki</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cd /root/myShell/obShell/ </span><br><span class="line">for filename in `ls`</span><br><span class="line">do</span><br><span class="line">    echo $filename</span><br><span class="line"></span><br><span class="line">done</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2019/shell脚本的for和select循环/%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E6%96%87%E4%BB%B6%E5%90%8D.PNG" alt="执行结果"></p>
 </li>
 <li><p>for循环批量修改文件扩展名</p>
 <p><img src="/2019/shell脚本的for和select循环/%E6%89%B9%E9%87%8F%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6%E5%90%8D%E4%B9%8B%E5%89%8D.PNG" alt="批量修改文件名前"></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/bash</span><br><span class="line"><span class="meta">#</span>Author: Created by Aoki</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cd /root/myShell/obShell/test/ </span><br><span class="line"></span><br><span class="line">for filename in `ls *.txt`</span><br><span class="line">do</span><br><span class="line">    mv $filename  `echo $filename|sed 's/test/modify/'`</span><br><span class="line"></span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash">Author: Created by Aoki</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cd /root/myShell/obShell/test/ </span><br><span class="line"></span><br><span class="line">for filename in `ls *.txt`</span><br><span class="line">do</span><br><span class="line">    mv $filename  `echo $filename|sed 's/test/modify/'`</span><br><span class="line"></span><br><span class="line">done</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2019/shell脚本的for和select循环/%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6%E5%90%8D.PNG" alt="执行结果"></p>
 </li>
-<li><h3 id="打印九九乘法表"><a href="#打印九九乘法表" class="headerlink" title="打印九九乘法表"></a>打印九九乘法表</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/bash </span><br><span class="line"><span class="meta">#</span>Author: Created by Aoki</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">COLOR='\033[47;30m'</span><br><span class="line"></span><br><span class="line">RES='\033[0m'</span><br><span class="line"></span><br><span class="line">for num1 in `seq 9`</span><br><span class="line">do</span><br><span class="line">    for num2 in `seq 9`</span><br><span class="line">    do</span><br><span class="line">        if [ $num1 -ge $num2 ];then</span><br><span class="line">            if ((($num1*num2)&gt;9));then </span><br><span class="line">                echo -en "$&#123;COLOR&#125;$&#123;num1&#125;x$&#123;num2&#125;=$((num1*num2)) $RES "</span><br><span class="line">            else</span><br><span class="line">                echo -en "$&#123;COLOR&#125;$&#123;num1&#125;x$&#123;num2&#125;=$((num1*num2)) $RES  "</span><br><span class="line">            fi</span><br><span class="line">        fi</span><br><span class="line">    done</span><br><span class="line">echo " "</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<li><h3 id="打印九九乘法表"><a href="#打印九九乘法表" class="headerlink" title="打印九九乘法表"></a>打印九九乘法表</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash </span></span><br><span class="line"><span class="meta">#</span><span class="bash">Author: Created by Aoki</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">COLOR='\033[47;30m'</span><br><span class="line"></span><br><span class="line">RES='\033[0m'</span><br><span class="line"></span><br><span class="line">for num1 in `seq 9`</span><br><span class="line">do</span><br><span class="line">    for num2 in `seq 9`</span><br><span class="line">    do</span><br><span class="line">        if [ $num1 -ge $num2 ];then</span><br><span class="line">            if ((($num1*num2)&gt;9));then </span><br><span class="line">                echo -en "$&#123;COLOR&#125;$&#123;num1&#125;x$&#123;num2&#125;=$((num1*num2)) $RES "</span><br><span class="line">            else</span><br><span class="line">                echo -en "$&#123;COLOR&#125;$&#123;num1&#125;x$&#123;num2&#125;=$((num1*num2)) $RES  "</span><br><span class="line">            fi</span><br><span class="line">        fi</span><br><span class="line">    done</span><br><span class="line">echo " "</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2019/shell脚本的for和select循环/99%E4%B9%98%E6%B3%95%E8%A1%A8.PNG" alt="执行结果"></p>
 </li>
-<li><h3 id="批量创建10个系统账号，并设置密码（密码是随机数，要求是字符和数字的混合）"><a href="#批量创建10个系统账号，并设置密码（密码是随机数，要求是字符和数字的混合）" class="headerlink" title="批量创建10个系统账号，并设置密码（密码是随机数，要求是字符和数字的混合）"></a>批量创建10个系统账号，并设置密码（密码是随机数，要求是字符和数字的混合）</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/bash</span><br><span class="line"><span class="meta">#</span>Author: Created by Aoki</span><br><span class="line"></span><br><span class="line">. /etc/init.d/functions </span><br><span class="line"></span><br><span class="line">user="Aoki"</span><br><span class="line">passfile="/tmp/user.log"</span><br><span class="line"></span><br><span class="line">for num in `seq -w 10`</span><br><span class="line">do</span><br><span class="line">    pass="`echo "test$RANDOM"|md5sum|cut -c3-11`"</span><br><span class="line">    useradd $user$num &amp;&gt;/dev/null &amp;&amp;\</span><br><span class="line">    echo "$pass"|passwd --stdin $user$num &amp;&gt;/dev/null &amp;&amp;\</span><br><span class="line">    echo -e "user:$user$num\tpasswd:$pass"&gt;&gt;$passfile </span><br><span class="line">    if [ $? -eq 0 ];then</span><br><span class="line">        action "$user$num is ok." /bin/true </span><br><span class="line">    else</span><br><span class="line">        action "$user$num is fail." /bin/false</span><br><span class="line">    fi</span><br><span class="line">done </span><br><span class="line">echo -e "\033[35m------------------------------------\033[0m"</span><br><span class="line">cat $passfile &amp;&amp; &gt;$passfile</span><br></pre></td></tr></table></figure>
+<li><h3 id="批量创建10个系统账号，并设置密码（密码是随机数，要求是字符和数字的混合）"><a href="#批量创建10个系统账号，并设置密码（密码是随机数，要求是字符和数字的混合）" class="headerlink" title="批量创建10个系统账号，并设置密码（密码是随机数，要求是字符和数字的混合）"></a>批量创建10个系统账号，并设置密码（密码是随机数，要求是字符和数字的混合）</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash">Author: Created by Aoki</span></span><br><span class="line"></span><br><span class="line">. /etc/init.d/functions </span><br><span class="line"></span><br><span class="line">user="Aoki"</span><br><span class="line">passfile="/tmp/user.log"</span><br><span class="line"></span><br><span class="line">for num in `seq -w 10`</span><br><span class="line">do</span><br><span class="line">    pass="`echo "test$RANDOM"|md5sum|cut -c3-11`"</span><br><span class="line">    useradd $user$num &amp;&gt;/dev/null &amp;&amp;\</span><br><span class="line">    echo "$pass"|passwd --stdin $user$num &amp;&gt;/dev/null &amp;&amp;\</span><br><span class="line">    echo -e "user:$user$num\tpasswd:$pass"&gt;&gt;$passfile </span><br><span class="line">    if [ $? -eq 0 ];then</span><br><span class="line">        action "$user$num is ok." /bin/true </span><br><span class="line">    else</span><br><span class="line">        action "$user$num is fail." /bin/false</span><br><span class="line">    fi</span><br><span class="line">done </span><br><span class="line">echo -e "\033[35m------------------------------------\033[0m"</span><br><span class="line">cat $passfile &amp;&amp; &gt;$passfile</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2019/shell脚本的for和select循环/%E5%88%9B%E5%BB%BA10%E4%B8%AA%E7%94%A8%E6%88%B7.PNG" alt="执行结果"></p>
 </li>
@@ -567,7 +563,7 @@
 
 <p>在这种select循环语句的语法中，在执行脚本后，select关键字后面会有一个”变量名“，变量名依次获取in关键字后面的列表内容（以空格分隔），每次仅取一个，然后进入循环内，执行循环内的所有指令，当执行到done时结束返回，之后，”变量名“再继续取变量列表的下一个变量值，继续执行循环内的素有指令，当执行到done时结束返回，以此类推，直到取完最后一个变量列表里的值并进入循环执行到done结束为止。</p>
 </li>
-<li><h3 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/bash</span><br><span class="line"><span class="meta">#</span>Author: Created by Aoki</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">echo "Please input your choice:"</span><br><span class="line">select var in Aoki Borgia </span><br><span class="line">do</span><br><span class="line">    echo -e "\033[32m You selected $var \033[0m"</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<li><h3 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash">Author: Created by Aoki</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">echo "Please input your choice:"</span><br><span class="line">select var in Aoki Borgia </span><br><span class="line">do</span><br><span class="line">    echo -e "\033[32m You selected $var \033[0m"</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
 
 
 
@@ -599,7 +595,7 @@
 <td>用于在函数里作为函数的返回值，以判断函数执行是否正确。在下一个Shell里可通过$?接收exit n的n值</td>
 </tr>
 </tbody></table>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/bash</span><br><span class="line"><span class="meta">#</span>Author: Created by Aoki</span><br><span class="line"></span><br><span class="line">if [ $# -ne 1 ];then</span><br><span class="line">    echo $"USAGE:$0 &#123;break|contine|exit|return&#125;"</span><br><span class="line">    exit</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">function test()</span><br><span class="line">&#123;</span><br><span class="line">    for ((i=0;i&lt;=5;i++))</span><br><span class="line">    do </span><br><span class="line">        if [ $i -eq 3 ];then</span><br><span class="line">            $*;</span><br><span class="line">        fi</span><br><span class="line">        echo $i</span><br><span class="line">    done</span><br><span class="line">    echo "This is a func"</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test $*   #传参到函数</span><br><span class="line"></span><br><span class="line">func_ret=$?   #接收函数的返回值</span><br><span class="line"></span><br><span class="line">if [ `echo $*|grep return|wc -l` -eq 1 ];then</span><br><span class="line">    echo "return's exit status:$func_ret"</span><br><span class="line">fi</span><br><span class="line">echo "ok"</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash">Author: Created by Aoki</span></span><br><span class="line"></span><br><span class="line">if [ $# -ne 1 ];then</span><br><span class="line">    echo $"USAGE:$0 &#123;break|contine|exit|return&#125;"</span><br><span class="line">    exit</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">function test()</span><br><span class="line">&#123;</span><br><span class="line">    for ((i=0;i&lt;=5;i++))</span><br><span class="line">    do </span><br><span class="line">        if [ $i -eq 3 ];then</span><br><span class="line">            $*;</span><br><span class="line">        fi</span><br><span class="line">        echo $i</span><br><span class="line">    done</span><br><span class="line">    echo "This is a func"</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test $*   #传参到函数</span><br><span class="line"></span><br><span class="line">func_ret=$?   #接收函数的返回值</span><br><span class="line"></span><br><span class="line">if [ `echo $*|grep return|wc -l` -eq 1 ];then</span><br><span class="line">    echo "return's exit status:$func_ret"</span><br><span class="line">fi</span><br><span class="line">echo "ok"</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2019/shell脚本的for和select循环/break%E7%9B%B8%E5%85%B3%E8%AF%AD%E5%8F%A5.PNG" alt="执行结果"></p>
 
@@ -644,8 +640,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/shell数组/" rel="next" title="Shell数组">
-                <i class="fa fa-chevron-left"></i> Shell数组
+              <a href="/2019/Shell脚本的if条件语句/" rel="next" title="Shell脚本的if条件语句">
+                <i class="fa fa-chevron-left"></i> Shell脚本的if条件语句
               </a>
             
           </div>
@@ -653,6 +649,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/shell数组/" rel="prev" title="Shell数组">
+                Shell数组 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -741,7 +741,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">127</span>
+                  <span class="site-state-item-count">130</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -752,7 +752,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -763,7 +763,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">245</span>
+                  <span class="site-state-item-count">251</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -844,7 +844,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -883,7 +883,7 @@ setInterval("createtime()",250);
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共249.9k字</span>
+  <span class="post-count">博客全站共255.3k字</span>
 </div>
 
 
@@ -1073,7 +1073,7 @@ setInterval("createtime()",250);
         notify: false,
         appId: 'FchdjiQuvA5nCoDFfF6er8UC-gzGzoHsz',
         appKey: 'yuVPbmLhvyWyLCQYispfuF6u',
-        placeholder: 'ヾﾉ≧∀≦)o 来呀！吐槽一番吧',
+        placeholder: '',
         avatar:'/uploads/avatar.jpg',
         guest_info:guest,
         pageSize:'10' || 10,

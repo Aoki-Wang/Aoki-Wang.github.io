@@ -110,16 +110,12 @@
 <link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
 
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
 
 
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
 
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
 
 
 
@@ -233,7 +229,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle">“惟将终夜长开眼，报答平生未展眉”</p>
+        <h1 class="site-subtitle" itemprop="description">“惟将终夜长开眼，报答平生未展眉”</h1>
       
   </div>
 
@@ -384,7 +380,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Shell函数</h1>
+          <h2 class="post-title" itemprop="name headline">Shell函数</h2>
         
 
         <div class="post-meta">
@@ -536,7 +532,7 @@
 </li>
 </ol>
 <h2 id="二、Shell函数示例"><a href="#二、Shell函数示例" class="headerlink" title="二、Shell函数示例"></a>二、Shell函数示例</h2><ol>
-<li><h3 id="分离函数体和执行函数的脚本文件"><a href="#分离函数体和执行函数的脚本文件" class="headerlink" title="分离函数体和执行函数的脚本文件"></a>分离函数体和执行函数的脚本文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/bash</span><br><span class="line"><span class="meta">#</span>Author: Created by Aoki</span><br><span class="line"></span><br><span class="line">. /root/myShell/obShell/function1.sh </span><br><span class="line">source /root/myShell/obShell/function2.sh </span><br><span class="line">fc1</span><br><span class="line">h</span><br></pre></td></tr></table></figure>
+<li><h3 id="分离函数体和执行函数的脚本文件"><a href="#分离函数体和执行函数的脚本文件" class="headerlink" title="分离函数体和执行函数的脚本文件"></a>分离函数体和执行函数的脚本文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash">Author: Created by Aoki</span></span><br><span class="line"></span><br><span class="line">. /root/myShell/obShell/function1.sh </span><br><span class="line">source /root/myShell/obShell/function2.sh </span><br><span class="line">fc1</span><br><span class="line">h</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2019/shell函数/%E5%87%BD%E6%95%B0%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C1.PNG" alt="执行结果"></p>
 </li>
@@ -544,12 +540,12 @@
 <p>设计思路及实现：</p>
 <ul>
 <li><p>实现脚本传参，检查Web URL是否正常</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/bash</span><br><span class="line"><span class="meta">#</span>Author: Created by Aoki</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>判断传参个数是否为1个</span><br><span class="line"></span><br><span class="line">if [ $# -ne 1 ];then</span><br><span class="line">    echo $"USAGE: $0 url"</span><br><span class="line">    exit 1</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>利用wget进行访问测试</span><br><span class="line">wget --spider -q -o /dev/null --tries=1 -T 5 $1</span><br><span class="line"></span><br><span class="line">if [ $? -eq 0 ];then</span><br><span class="line">    echo "$1 is yes"</span><br><span class="line">else</span><br><span class="line">    echo "$1 is no"</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash">Author: Created by Aoki</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">判断传参个数是否为1个</span></span><br><span class="line"></span><br><span class="line">if [ $# -ne 1 ];then</span><br><span class="line">    echo $"USAGE: $0 url"</span><br><span class="line">    exit 1</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">利用wget进行访问测试</span></span><br><span class="line">wget --spider -q -o /dev/null --tries=1 -T 5 $1</span><br><span class="line"></span><br><span class="line">if [ $? -eq 0 ];then</span><br><span class="line">    echo "$1 is yes"</span><br><span class="line">else</span><br><span class="line">    echo "$1 is no"</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2019/shell函数/URL%E6%B5%8B%E8%AF%95%E8%84%9A%E6%9C%AC1.PNG" alt="执行结果"></p>
 </li>
 <li><p>将上述检测功能写成函数，并将函数传参转换成脚本命令行传参，判断任意指定的URL是否存在异常</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/bash</span><br><span class="line"><span class="meta">#</span>Author: Created by Aoki</span><br><span class="line"></span><br><span class="line">. /etc/init.d/functions  #引入系统函数库</span><br><span class="line"></span><br><span class="line">function usage()</span><br><span class="line">&#123;</span><br><span class="line">    echo $"UASGE:$0 url"</span><br><span class="line">    exit 1</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function checkUrl()</span><br><span class="line">&#123;</span><br><span class="line">    wget --spider -q -o /dev/null --tries=1 -T 5 $1</span><br><span class="line">    if [ $? -eq 0 ];then </span><br><span class="line">        action "$1 is yes." /bin/true   #使用系统函数美化输出结果</span><br><span class="line">    else</span><br><span class="line">        action "$1 is no." /bin/false </span><br><span class="line">    fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function main()</span><br><span class="line">&#123;</span><br><span class="line">    if [ $# -ne 1 ];then</span><br><span class="line">        usage</span><br><span class="line">    else</span><br><span class="line">        checkUrl $1</span><br><span class="line">    fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">main $*  #将命令行接收到的所有参数作为函数参数传递给函数内部</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash">Author: Created by Aoki</span></span><br><span class="line"></span><br><span class="line">. /etc/init.d/functions  #引入系统函数库</span><br><span class="line"></span><br><span class="line">function usage()</span><br><span class="line">&#123;</span><br><span class="line">    echo $"UASGE:$0 url"</span><br><span class="line">    exit 1</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function checkUrl()</span><br><span class="line">&#123;</span><br><span class="line">    wget --spider -q -o /dev/null --tries=1 -T 5 $1</span><br><span class="line">    if [ $? -eq 0 ];then </span><br><span class="line">        action "$1 is yes." /bin/true   #使用系统函数美化输出结果</span><br><span class="line">    else</span><br><span class="line">        action "$1 is no." /bin/false </span><br><span class="line">    fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function main()</span><br><span class="line">&#123;</span><br><span class="line">    if [ $# -ne 1 ];then</span><br><span class="line">        usage</span><br><span class="line">    else</span><br><span class="line">        checkUrl $1</span><br><span class="line">    fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">main $*  #将命令行接收到的所有参数作为函数参数传递给函数内部</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2019/shell函数/URL%E6%A3%80%E6%B5%8B%E8%84%9A%E6%9C%AC.PNG" alt="执行结果"></p>
 </li>
@@ -697,7 +693,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">127</span>
+                  <span class="site-state-item-count">130</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -708,7 +704,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -719,7 +715,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">245</span>
+                  <span class="site-state-item-count">251</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -800,7 +796,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -839,7 +835,7 @@ setInterval("createtime()",250);
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共249.9k字</span>
+  <span class="post-count">博客全站共255.3k字</span>
 </div>
 
 
@@ -1029,7 +1025,7 @@ setInterval("createtime()",250);
         notify: false,
         appId: 'FchdjiQuvA5nCoDFfF6er8UC-gzGzoHsz',
         appKey: 'yuVPbmLhvyWyLCQYispfuF6u',
-        placeholder: 'ヾﾉ≧∀≦)o 来呀！吐槽一番吧',
+        placeholder: '',
         avatar:'/uploads/avatar.jpg',
         guest_info:guest,
         pageSize:'10' || 10,

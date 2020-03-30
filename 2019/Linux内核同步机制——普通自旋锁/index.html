@@ -110,8 +110,6 @@
 <link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
 
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
 
@@ -119,13 +117,11 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
 
 
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
 
 
 
 
-
-  <meta name="keywords" content="Linux内核,自旋锁,普通自旋锁,操作系统,内核同步,">
+  <meta name="keywords" content="操作系统,Linux内核,自旋锁,普通自旋锁,内核同步,">
 
 
 
@@ -137,7 +133,7 @@
 
 
 <meta name="description" content="&amp;emsp;&amp;emsp;在Linux中还提供了一种称为“加锁”的机制来避免竞争条件的出现。之所以引入锁机制是因为在真正的Linux内核编程过程中简单的原子操作时不能满足系统需要的，例如当一个临界区跨越了多个函数的时候，这时原子操作就显得无能为力了。 &amp;emsp;&amp;emsp;首先我们来看自旋锁（spin lock），在前面我们将Linux中提供的锁机制做了一个比喻，我们将临界区比作放在一个房间内的资">
-<meta name="keywords" content="Linux内核,自旋锁,普通自旋锁,操作系统,内核同步">
+<meta name="keywords" content="操作系统,Linux内核,自旋锁,普通自旋锁,内核同步">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux内核同步机制分析——普通自旋锁">
 <meta property="og:url" content="https://wanqbin.xyz/2019/Linux内核同步机制——普通自旋锁/index.html">
@@ -229,7 +225,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle">“惟将终夜长开眼，报答平生未展眉”</p>
+        <h1 class="site-subtitle" itemprop="description">“惟将终夜长开眼，报答平生未展眉”</h1>
       
   </div>
 
@@ -380,7 +376,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Linux内核同步机制分析——普通自旋锁</h1>
+          <h2 class="post-title" itemprop="name headline">Linux内核同步机制分析——普通自旋锁</h2>
         
 
         <div class="post-meta">
@@ -654,13 +650,13 @@
       
         <div class="post-tags">
           
+            <a href="/tags/操作系统/" rel="tag"># 操作系统</a>
+          
             <a href="/tags/Linux内核/" rel="tag"># Linux内核</a>
           
             <a href="/tags/自旋锁/" rel="tag"># 自旋锁</a>
           
             <a href="/tags/普通自旋锁/" rel="tag"># 普通自旋锁</a>
-          
-            <a href="/tags/操作系统/" rel="tag"># 操作系统</a>
           
             <a href="/tags/内核同步/" rel="tag"># 内核同步</a>
           
@@ -776,7 +772,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">127</span>
+                  <span class="site-state-item-count">130</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -787,7 +783,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -798,7 +794,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">245</span>
+                  <span class="site-state-item-count">251</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -879,7 +875,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -918,7 +914,7 @@ setInterval("createtime()",250);
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共249.9k字</span>
+  <span class="post-count">博客全站共255.3k字</span>
 </div>
 
 
@@ -1108,7 +1104,7 @@ setInterval("createtime()",250);
         notify: false,
         appId: 'FchdjiQuvA5nCoDFfF6er8UC-gzGzoHsz',
         appKey: 'yuVPbmLhvyWyLCQYispfuF6u',
-        placeholder: 'ヾﾉ≧∀≦)o 来呀！吐槽一番吧',
+        placeholder: '',
         avatar:'/uploads/avatar.jpg',
         guest_info:guest,
         pageSize:'10' || 10,

@@ -1,15 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[Shell脚本的for和select循环]]></title>
-    <url>%2F2019%2Fshell%E8%84%9A%E6%9C%AC%E7%9A%84for%E5%92%8Cselect%E5%BE%AA%E7%8E%AF%2F</url>
-    <content type="text"><![CDATA[一、for循环 for循环语句为变量取值型1234for 变量名 in 变量取值列表do 指令done for循环语句为C语言型for循环语句1234for ((exp1; exp2; exp3))do 指令done 说明： 如果希望程序持续运行，则多用while，包括守护进程 如果是有限次循环，则多用for 示例： 获取目录下所有文件名 12345678910#!/bin/bash #Author: Created by Aokicd /root/myShell/obShell/ for filename in `ls`do echo $filenamedone for循环批量修改文件扩展名 1234567891011#!/bin/bash#Author: Created by Aokicd /root/myShell/obShell/test/ for filename in `ls *.txt`do mv $filename `echo $filename|sed 's/test/modify/'`done 打印九九乘法表12345678910111213141516171819202122#!/bin/bash #Author: Created by AokiCOLOR='\033[47;30m'RES='\033[0m'for num1 in `seq 9`do for num2 in `seq 9` do if [ $num1 -ge $num2 ];then if ((($num1*num2)&gt;9));then echo -en "$&#123;COLOR&#125;$&#123;num1&#125;x$&#123;num2&#125;=$((num1*num2)) $RES " else echo -en "$&#123;COLOR&#125;$&#123;num1&#125;x$&#123;num2&#125;=$((num1*num2)) $RES " fi fi doneecho " "done 批量创建10个系统账号，并设置密码（密码是随机数，要求是字符和数字的混合）12345678910111213141516171819202122#!/bin/bash#Author: Created by Aoki. /etc/init.d/functions user="Aoki"passfile="/tmp/user.log"for num in `seq -w 10`do pass="`echo "test$RANDOM"|md5sum|cut -c3-11`" useradd $user$num &amp;&gt;/dev/null &amp;&amp;\ echo "$pass"|passwd --stdin $user$num &amp;&gt;/dev/null &amp;&amp;\ echo -e "user:$user$num\tpasswd:$pass"&gt;&gt;$passfile if [ $? -eq 0 ];then action "$user$num is ok." /bin/true else action "$user$num is fail." /bin/false fidone echo -e "\033[35m------------------------------------\033[0m"cat $passfile &amp;&amp; &gt;$passfile Linux系统产生随机数的6种方法 通过系统环境变量($RANDOM)实现1234[root@aoki obShell]# echo $RANDOM19399[root@aoki obShell]# echo $RANDOM11031 RANDOM的随机数访问是0~32767，因此，加密行不是很好可以通过在输出和的随机数后增加加密字符串的方式解决。 通过openssl产生随机数12345[root@aoki obShell]# openssl rand -base64 82Iyj6sBwXk4=[root@aoki obShell]# openssl rand -base64 80kPqCshGOuXlFVDsh0VS6Ugyd56u9W0rx2uvAmh/5KGveTjPMig7Zo0k53BHgMuJvnxEDk3zU3ifKOKAgD+tek0o9yYQ/3ckwtAgQdRez7gs= 通过时间(date)获得随机数12[root@aoki obShell]# date +%Y%s20191575123335 通过/dev/urandom配合chksum生成随机数1234[root@aoki obShell]# head /dev/urandom |cksum1624783990 3098[root@aoki obShell]# head /dev/urandom |cksum3074370908 2834 通过UUID生成随机数1234[root@aoki obShell]# cat /proc/sys/kernel/random/uuide46b5c56-d41b-4cf8-9582-07d924bd0eee[root@aoki obShell]# cat /proc/sys/kernel/random/uuidc1cf6394-fa0d-4935-a8ca-d34b7f341573 UUID码全称是通用唯一识别码，它是一个软件建构的标准。UUID的目的是让分布式系统中的所有元素都能有唯一的辨识信息，而不需要通过中央控制端奶做辨识信息的指定。 二、select循环语句&emsp;&emsp;select循环语句的主要作用可能就是创建菜单，在执行带select循环语句的脚本时，输出会按照数字顺序的列表显示一个菜单项，并显示提示符（默认是#？），同时等待用户输入数字进行选择。 语法结构1234select 变量名 [ in 菜单取值列表 ]do 指令done 在这种select循环语句的语法中，在执行脚本后，select关键字后面会有一个”变量名“，变量名依次获取in关键字后面的列表内容（以空格分隔），每次仅取一个，然后进入循环内，执行循环内的所有指令，当执行到done时结束返回，之后，”变量名“再继续取变量列表的下一个变量值，继续执行循环内的素有指令，当执行到done时结束返回，以此类推，直到取完最后一个变量列表里的值并进入循环执行到done结束为止。 案例123456789#!/bin/bash#Author: Created by Aokiecho "Please input your choice:"select var in Aoki Borgia do echo -e "\033[32m You selected $var \033[0m"done 三、break、continue、exit、return的区别和对比&emsp;&emsp;在上面的命令中，break、continue在条件语句及循环语句中用于控制程序的走向；而exit则用于终止所有语句并退出当前脚本，除此之外，exit还可以返回上一次程序或命令执行状态值给当前Shell；return类似exit，只不过return仅用于在函数内部返回函数执行的状态值。 命令 说明 break n 如果省略n，则表示跳出整个循环，n表示跳出循环的次数 continue n 如果省略n，则表示跳过本次循环，忽略本次循环的剩余代码，进入循环的下一次循环，n表示可退到第n层继续执行 exit n 退出当前shell程序，n为上一次程序执行的状态返回值。n可以省略，在下一个Shell里可通过$?接收exit的n值 return n 用于在函数里作为函数的返回值，以判断函数执行是否正确。在下一个Shell里可通过$?接收exit n的n值 12345678910111213141516171819202122232425262728#!/bin/bash#Author: Created by Aokiif [ $# -ne 1 ];then echo $"USAGE:$0 &#123;break|contine|exit|return&#125;" exitfifunction test()&#123; for ((i=0;i&lt;=5;i++)) do if [ $i -eq 3 ];then $*; fi echo $i done echo "This is a func"&#125;test $* #传参到函数func_ret=$? #接收函数的返回值if [ `echo $*|grep return|wc -l` -eq 1 ];then echo "return's exit status:$func_ret"fiecho "ok"]]></content>
+    <title><![CDATA[Vue学习笔记（一）]]></title>
+    <url>%2F2020%2FVue%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[一、Vue是什么 Vue (读音 /vjuː/，类似于 view) 是一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。Vue 的核心库只关注视图层，不仅易于上手，还便于与第三方库或既有项目整合。另一方面，当与现代化的工具链以及各种支持类库结合使用时，Vue 也完全能够为复杂的单页应用提供驱动。 二、安装新建.html文件，然后通过如下方式引入Vue。 12&lt;!-- 开发环境版本，包含了有帮助的命令行警告 --&gt;&lt;script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"&gt;&lt;/script&gt; 或者： 12&lt;!-- 生产环境版本，优化了尺寸和速度 --&gt;&lt;script src="https://cdn.jsdelivr.net/npm/vue"&gt;&lt;/script&gt; 三、声明式渲染12345678910111213141516171819&lt;head&gt; &lt;meta charset="UTF-8"&gt; &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt; &lt;title&gt;Document&lt;/title&gt; &lt;script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"&gt;&lt;/script&gt;&lt;/head&gt;&lt;body&gt; &lt;div id="app"&gt; &#123;&#123;msg&#125;&#125; &lt;/div&gt; &lt;script&gt; var vm=new Vue(&#123; el:'#app', data:&#123; msg:'Hello Vue.js' &#125; &#125;) &lt;/script&gt;&lt;/body&gt; 当网络较慢，网页还在加载 Vue.js ，而导致 Vue 来不及渲染，这时页面就会显示出 Vue 源代码。我们可以使用 v-cloak 指令来解决这一问题。 v-cloak123456789101112&lt;div id="app"&gt; &#123;&#123;msg&#125;&#125; &lt;P v-cloak&gt;++&#123;&#123;msg&#125;&#125;&lt;/P&gt; &lt;/div&gt; &lt;script&gt; var vm=new Vue(&#123; el:'#app', data:&#123; msg:'Hello Vue.js' &#125; &#125;) &lt;/script&gt; v-html内容按普通 HTML 插入 ,不会作为 Vue 模板进行编译 1234567891011121314151617&lt;body&gt; &lt;div id="app"&gt; &#123;&#123;msg&#125;&#125; &lt;p v-cloak&gt;++&#123;&#123;msg&#125;&#125;&lt;/p&gt; &lt;p v-html="msg1"&gt;&lt;/p&gt; &lt;/div&gt; &lt;script&gt; var vm=new Vue(&#123; el:'#app', data:&#123; msg:'Hello Vue.js', msg1:'&lt;h1&gt;你好 Vue.js&lt;h1&gt;' &#125; &#125;) &lt;/script&gt;&lt;/body&gt; v-once通过使用 v-once 指令，你也能执行一次性地插值，当数据改变时，插值处的内容不会更新。但请留心这会影响到该节点上的其它数据绑定 四、指令v-bindv-bind 是Vue中提供用于响应式更新HTML属性的指令,可缩写为：:(冒号) 12345678910111213&lt;body&gt; &lt;div id="app"&gt; &lt;input type="button" :title="msg" value="button"&gt; &lt;/div&gt; &lt;script&gt; var vm=new Vue(&#123; el:'#app', data:&#123; msg:'My Title' &#125; &#125;) &lt;/script&gt;&lt;/body&gt; 在Vue Devtool中修改msg的值，结果如下： v-on用于监听DOM事件。 123456789101112131415161718&lt;body&gt; &lt;div id=&quot;app&quot;&gt; &lt;input type=&quot;button&quot; :title=&quot;msg&quot; value=&quot;button&quot;&gt; &lt;input type=&quot;button&quot; value=&quot;输出&quot; v-on:click=&quot;show&quot;&gt; &lt;/div&gt; &lt;script&gt; var vm=new Vue(&#123; el:&apos;#app&apos;, data:&#123; msg:&apos;My Title&apos; &#125;, methods: &#123; show:function()&#123; console.log(&apos;Hello Vue.js&apos;) &#125; &#125;, &#125;) &lt;/script&gt; 点击输出，控制台输出结果如下： v-on可缩写为@。 12345678910111213141516171819&lt;body&gt; &lt;div id="app"&gt; &lt;input type="button" :title="msg" value="button"&gt; &lt;input type="button" value="输出" v-on:click="show"&gt; &lt;input type="button" value="鼠标移动" @mouseover="show"&gt; &lt;/div&gt; &lt;script&gt; var vm=new Vue(&#123; el:'#app', data:&#123; msg:'My Title' &#125;, methods: &#123; show:function()&#123; console.log('Hello Vue.js') &#125; &#125;, &#125;) &lt;/script&gt; 当鼠标滑过”鼠标移动“按钮时，输出结果如下： v-modelv-bind 只能实现数据的单向绑定，从M自动绑定到V，无法实现数据的双向绑定。使用 v-model指令，可以实现表单元素和Model中数据据的双向数据绑定。 12345678910111213141516&lt;body&gt; &lt;div id="app"&gt; &lt;input type="text" v-model="msg"&gt; &lt;/div&gt; &lt;script&gt; var vm=new Vue(&#123; el:'#app', data:&#123; msg:'Aoki' &#125;, methods: &#123; &#125;, &#125;) &lt;/script&gt;&lt;/body&gt; v-if 和 v-show1234567891011121314151617&lt;body&gt; &lt;div id="app"&gt; &lt;input type="button" value="切换" @click="flag=!flag"&gt; &lt;p v-if="flag"&gt;v-if控制&lt;/p&gt; &lt;p v-show="flag"&gt;v-show控制&lt;/p&gt; &lt;/div&gt; &lt;script&gt; var vm=new Vue(&#123; el:'#app', data:&#123; flag:true &#125;, methods: &#123; &#125;, &#125;) &lt;/script&gt; v-if的特点是：每次都会删除或重新创建元素；v-show的特点是，仅仅将元素隐藏了起来（切换了元素样式，`display:none）。 v-if有较高的切换性能消耗，而v-show有较高的初始渲染消耗。 如果涉及到频繁的切换，最好使用v-show，而不要使用v-if。如果元素永远也不会显示出来，则使用v-if。 示例：文字滚动条1234567891011121314151617181920212223242526272829303132body&gt; &lt;div id="app"&gt; &lt;input type="button" value="run" @click="run"&gt; &lt;input type="button" value="stop" @click="stop"&gt; &lt;p&gt;&#123;&#123;msg&#125;&#125;&lt;/p&gt; &lt;/div&gt; &lt;script&gt; var vm = new Vue(&#123; el: '#app', data: &#123; msg: '惟将终夜长开眼，报答平生未展眉。', intervalId: null //定时器Id &#125;, methods: &#123; run: function () &#123; if (this.intervalId != null) return this.intervalId = setInterval(() =&gt; &#123; var start = this.msg.substring(0, 1) var end = this.msg.substring(1) this.msg = end + start &#125;, 500) &#125;, stop: function () &#123; //清除定时器 clearInterval(this.intervalId) this.intervalId = null &#125; &#125;, &#125;) &lt;/script&gt;&lt;/body&gt; 五、条件与循环普通数组123456789101112131415161718&lt;body&gt; &lt;div id="app"&gt; &lt;p&gt;&#123;&#123;list[0]&#125;&#125;&lt;/p&gt; &lt;p v-for="(item,i) in list"&gt;索引值：&#123;&#123;i&#125;&#125;——数据:&#123;&#123;item&#125;&#125;&lt;/p&gt; &lt;/div&gt; &lt;script&gt; var vm=new Vue(&#123; el:'#app', data:&#123; list:[1,2,3,4,5,6] &#125;, methods: &#123; &#125;, &#125;) &lt;/script&gt;&lt;/body&gt; 对象数组12345678910111213141516171819&lt;body&gt; &lt;div id="app"&gt; &lt;p v-for="(item,i) in list"&gt;编号：&#123;&#123;item.id&#125;&#125;——姓名：&#123;&#123;item.name&#125;&#125;&lt;/p&gt; &lt;/div&gt; &lt;script&gt; var vm=new Vue(&#123; el:'#app', data:&#123; list:[ &#123;id:1,name:'Aoki'&#125;, &#123;id:2,name:'Aoki Wang'&#125; ] &#125;, methods: &#123; &#125;, &#125;) &lt;/script&gt;&lt;/body&gt; v-for 的默认行为会尝试原地修改元素而不是移动它们。要强制其重新排序元素，你需要用特殊属性 key 来提供一个排序提示。 例如下面所示的例子： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849&lt;body&gt; &lt;div id="app"&gt; &lt;div&gt; &lt;label&gt;Id:&lt;/label&gt; &lt;input type="text" v-model="id"&gt; &lt;label&gt;Name:&lt;/label&gt; &lt;input type="text" v-model="name"&gt; &lt;input type="button" value="添加" @click="add"&gt; &lt;/div&gt; &lt;ul&gt; &lt;li v-for="(item,i) in list"&gt; &lt;input type="checkbox"&gt; &#123;&#123;item.name&#125;&#125; &lt;/li&gt; &lt;/ul&gt; &lt;/div&gt; &lt;script&gt; var vm = new Vue(&#123; el: '#app', data: &#123; id: '', name: '', list: [&#123; id: 1, name: '李白' &#125;, &#123; id: 2, name: '杜甫' &#125;, &#123; id: 3, name: '王维' &#125; ] &#125;, methods: &#123; add: function () &#123; this.list.unshift(&#123; id: this.id, name: this.name &#125;) this.id='' this.name='' &#125; &#125; &#125;) &lt;/script&gt;&lt;/body&gt; 使用属性key则可以解决这个问题： 12345&lt;ul&gt; &lt;li v-for="(item,i) in list" :key="item.id"&gt; &lt;input type="checkbox"&gt; &#123;&#123;item.name&#125;&#125; &lt;/li&gt; &lt;/ul&gt; 迭代数字12345678910111213141516&lt;body&gt; &lt;div id="app"&gt; &lt;p v-for="count in 10"&gt;这是第&#123;&#123;count&#125;&#125;次循环&lt;/p&gt; &lt;/div&gt; &lt;script&gt; var vm=new Vue(&#123; el:'#app', data:&#123; &#125;, methods: &#123; &#125;, &#125;) &lt;/script&gt;&lt;/body&gt;]]></content>
       <categories>
-        <category>Shell脚本</category>
+        <category>前端</category>
       </categories>
       <tags>
-        <tag>Shell脚本for循环</tag>
-        <tag>Shell脚本select循环</tag>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[oAuth2.0密码模式实现]]></title>
+    <url>%2F2020%2FoAuth2-0%E5%AF%86%E7%A0%81%E6%A8%A1%E5%BC%8F%E5%AE%9E%E7%8E%B0%2F</url>
+    <content type="text"><![CDATA[一、配置客户端及用户在oAuth2.0客户端凭证实现中实现的认证中心的基础上，配置密码模式的客户端和用户。在代码示例中，用户使用了TestUser。 12345678910111213141516171819202122232425262728293031323334353637public static IEnumerable&lt;Client&gt; GetClients() &#123; return new List&lt;Client&gt; &#123; new Client() &#123; ClientId=&quot;client&quot;, AllowedGrantTypes=GrantTypes.ClientCredentials,//设置模式。此处为客户端模式 ClientSecrets=&#123; new Secret(&quot;secret&quot;.Sha256()) &#125;, AllowedScopes=&#123;&quot;api&quot;&#125; //设置可以访问的resource &#125;, new Client() &#123; ClientId=&quot;pwdClient&quot;, AllowedGrantTypes=GrantTypes.ResourceOwnerPassword, //密码模式 ClientSecrets=&#123; new Secret(&quot;secret&quot;.Sha256()) &#125;, RequireClientSecret=false,// 设置请求时可以不使用ClientSecret AllowedScopes=&#123;&quot;api&quot;&#125; &#125; &#125;; &#125; public static List&lt;TestUser&gt; GetUsers() &#123; return new List&lt;TestUser&gt;&#123; new TestUser &#123; SubjectId=&quot;1&quot;, Username=&quot;Aoki&quot;, Password=&quot;123456&quot; &#125; &#125;; &#125; 需要注意的是，使用TestUser需要引入命名空间IdentityServer4.Test。 之后，在Startup中注册服务，代码如下： 123456789public void ConfigureServices(IServiceCollection services) &#123; services.AddIdentityServer() .AddDeveloperSigningCredential() .AddInMemoryApiResources(Config.GetResource()) .AddInMemoryClients(Config.GetClients()) .AddTestUsers(Config.GetUsers()); services.AddControllers(); //密码模式下添加用户 &#125; 然后运行项目IdentityServerCenter和ClientCredentialApi，使用Postman进行请求。IdentityServerCenter运行在5000端口，ClientCredentialApi运行在5001端口。 获取token 访问API 二、客户端Demo新建项目 1dotnet new console --name PwdClient 添加Nuget包 添加IdentityModel到项目中。 编写客户端代码 客户端代码如下： 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354using System;using System.Net.Http;using IdentityModel;using IdentityModel.Client;using Newtonsoft.Json.Linq;namespace PwdClient&#123; class Program &#123; static void Main(string[] args) &#123; var client = new HttpClient(); var disco = client.GetDiscoveryDocumentAsync(&quot;http://localhost:5000&quot;).Result; if (disco.IsError) &#123; Console.WriteLine(disco.Error); &#125; //获取token var tokenResponse=client.RequestPasswordTokenAsync(new PasswordTokenRequest &#123; Address=disco.TokenEndpoint, ClientId=&quot;pwdClient&quot;, ClientSecret=&quot;secret&quot;, UserName=&quot;Aoki&quot;, Password=&quot;123456&quot;, Scope=&quot;api&quot; &#125;).Result; if (tokenResponse.IsError) &#123; Console.WriteLine(tokenResponse.Error); &#125; else &#123; Console.WriteLine(tokenResponse.Json); &#125; //请求API var httpClient = new HttpClient(); httpClient.SetBearerToken(tokenResponse.AccessToken); var response = httpClient.GetAsync(&quot;http://localhost:5001/api/values&quot;).Result; if (!response.IsSuccessStatusCode) &#123; Console.WriteLine(response.StatusCode); &#125; else &#123; var content = response.Content.ReadAsStringAsync().Result; Console.WriteLine(JArray.Parse(content)); &#125; &#125; &#125;&#125; 运行项目 1dotnet run 在运行本项目之前，须先运行IdentityServerCenter和ClientCredentialApi，运行结果如下： 12345678910&#123; "access_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IkhHLVBIZEYxaThLNWdtT1ZMNlRqTWciLCJ0eXAiOiJhdCtqd3QifQ.eyJuYmYiOjE1ODQ5Nzg0OTEsImV4cCI6MTU4NDk4MjA5MSwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1MDAwIiwiYXVkIjoiYXBpIiwiY2xpZW50X2lkIjoicHdkQ2xpZW50Iiwic3ViIjoiMSIsImF1dGhfdGltZSI6MTU4NDk3ODQ5MSwiaWRwIjoibG9jYWwiLCJzY29wZSI6WyJhcGkiXSwiYW1yIjpbInB3ZCJdfQ.IOHXK-hFyLGnJzgK1kE1Djqn8AVvo2f861zDf3SLG427BzCh0B_qajm3_SuCMh8cF8aRkUkV694wYGIN42m1LkSyPGJnF3x1R9zGFqcP_m8cBLvy6fdvlGR4AXKHyS3EqUqILcB1VFsV_xe2ooxoP_i2IpQeowrpi_XrAWVz28TJAiqUPlQqaABHEGoh6qGwpr-6naeJe0_H0Nq8IVdvXIN7x6HsAPUhSQ6qpQCWDoXyT_direuS_4kL41BczHGsHYtTa3ZSYoyeGisKu0F783o9u91v3VIFjDtC3_UWxVaopcG_mnyOmf7Wkim3ZjWubJogSwd_AU1LA7_36INNxA", "expires_in": 3600, "token_type": "Bearer", "scope": "api"&#125;[ "value1", "value2"]]]></content>
+      <categories>
+        <category>oAuth</category>
+        <category>ASP.NET Core</category>
+      </categories>
+      <tags>
+        <tag>oAuth</tag>
+        <tag>IdentityServer4</tag>
+        <tag>ASP.NET Core3.1</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[oAuth2.0客户端凭证实现]]></title>
+    <url>%2F2020%2FUntitled%2F</url>
+    <content type="text"><![CDATA[一、什么是IdentityServer？ IdentityServer4是用于ASP.NET Core的OpenID Connect和OAuth 2.0框架。 官方文档 它在应用程序中启用以下功能： 身份验证即服务 所有应用程序（Web，本机，移动，服务）的集中式登录逻辑和工作流。IdentityServer是OpenID Connect 的官方认证实施。 单点登录/退出 多种应用程序类型的单点登录（注销）。 API的访问控制 为各种类型的客户端（例如，服务器到服务器，Web应用程序，SPA和本机/移动应用程序）的API发出访问令牌。 联合网关 支持外部身份提供程序，例如Azure Active Directory，Google，Facebook等。这使您的应用程序免受如何连接到这些外部提供程序的详细信息的影响。 二、认证中心的实现新建项目1dotnet new webapi --name IdentityServerCenter 添加Nuget包 选择IdentityServer4进行安装。安装完成之后执行dotnet restore。 添加Startup配置、首先，在Startup.cs中引用命名空间。 1using IdentityServer4; 注册服务： 123456public void ConfigureServices(IServiceCollection services) &#123; services.AddIdentityServer() .AddDeveloperSigningCredential(); services.AddControllers(); &#125; 使用服务： 12345678910public void Configure(IApplicationBuilder app, IWebHostEnvironment env) &#123; if (env.IsDevelopment()) &#123; app.UseDeveloperExceptionPage(); &#125; app.UseIdentityServer(); &#125; 配置项目的启动路径： 1234567public static IHostBuilder CreateHostBuilder(string[] args) =&gt; Host.CreateDefaultBuilder(args) .ConfigureWebHostDefaults(webBuilder =&gt; &#123; webBuilder.UseUrls(&quot;http://localhost:5000&quot;); webBuilder.UseStartup&lt;Startup&gt;(); &#125;); 添加Config.cs配置类创建Config.cs文件，添加Config配置类。 12345678910111213141516171819202122232425262728293031323334using System.Runtime.Intrinsics.Arm.Arm64;using System.Collections;using System.Collections.Generic;using IdentityServer4.Models;namespace IdentityServerCenter&#123; public class Config &#123; public static IEnumerable&lt;ApiResource&gt; GetResource() &#123; return new List&lt;ApiResource&gt; &#123; new ApiResource(&quot;api&quot;,&quot;myapi&quot;) &#125;; &#125; //客户端 public static IEnumerable&lt;Client&gt; GetClients() &#123; return new List&lt;Client&gt; &#123; new Client() &#123; ClientId=&quot;client&quot;, //客户端Id AllowedGrantTypes=GrantTypes.ClientCredentials,//设置模式。此处为客户端模式 ClientSecrets=&#123; new Secret(&quot;secret&quot;.Sha256()) //设置secret &#125;, AllowedScopes=&#123;&quot;api&quot;&#125; //设置可以访问的resource &#125; &#125;; &#125; &#125;&#125; 更改IdentityServer4配置在完成配置类之后，在Startup中对IdentityServer4进行配置，配置如下： 12345678public void ConfigureServices(IServiceCollection services) &#123; services.AddIdentityServer() .AddDeveloperSigningCredential() .AddInMemoryApiResources(Config.GetResource()) .AddInMemoryClients(Config.GetClients()); services.AddControllers(); &#125; 运行项目执行命令运行该项目： 1dotnet run 在浏览器中打开页面http://localhost:5000/.well-known/openid-configuration,可以看到基本的配置信息。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657&#123; "issuer": "http://localhost:5000", "jwks_uri": "http://localhost:5000/.well-known/openid-configuration/jwks", "authorization_endpoint": "http://localhost:5000/connect/authorize", "token_endpoint": "http://localhost:5000/connect/token", //获取token的地址 "userinfo_endpoint": "http://localhost:5000/connect/userinfo", "end_session_endpoint": "http://localhost:5000/connect/endsession", "check_session_iframe": "http://localhost:5000/connect/checksession", "revocation_endpoint": "http://localhost:5000/connect/revocation", "introspection_endpoint": "http://localhost:5000/connect/introspect", "device_authorization_endpoint": "http://localhost:5000/connect/deviceauthorization", "frontchannel_logout_supported": true, "frontchannel_logout_session_supported": true, "backchannel_logout_supported": true, "backchannel_logout_session_supported": true, "scopes_supported": [ "api", "offline_access" ], "claims_supported": [], "grant_types_supported": [ //支持的模式 "authorization_code", //授权码模式 "client_credentials", //客户端模式 "refresh_token", "implicit", //隐式 "urn:ietf:params:oauth:grant-type:device_code" ], "response_types_supported": [ "code", "token", "id_token", "id_token token", "code id_token", "code token", "code id_token token" ], "response_modes_supported": [ "form_post", "query", "fragment" ], "token_endpoint_auth_methods_supported": [ "client_secret_basic", "client_secret_post" ], "id_token_signing_alg_values_supported": [ "RS256" ], "subject_types_supported": [ "public" ], "code_challenge_methods_supported": [ //加密方式 "plain", "S256" ], "request_parameter_supported": true&#125; 三、客户端凭证API的实现创建项目1dotnet new webapi --name ClientCredentialApi 引入Nuget包在项目中添加IdentityServer4.AccessTokenValidation包。 添加完成后，执行命令dotnet restore。 配置IdentityServer4在Startup中对IdentityServer4进行配置，配置如下： 12345678910public void ConfigureServices(IServiceCollection services) &#123; services.AddAuthentication(&quot;Bearer&quot;) .AddIdentityServerAuthentication(options=&gt;&#123; options.Authority=&quot;http://localhost:5000&quot;; //认证地址 options.RequireHttpsMetadata=false; //是否要求https options.ApiName=&quot;api&quot;; //配置资源名字 &#125;); services.AddControllers(); &#125; 为避免端口冲突，最好是对项目运行路径进行配置。 1234567public static IHostBuilder CreateHostBuilder(string[] args) =&gt; Host.CreateDefaultBuilder(args) .ConfigureWebHostDefaults(webBuilder =&gt; &#123; webBuilder.UseUrls(&quot;http://localhost:5001&quot;); webBuilder.UseStartup&lt;Startup&gt;(); &#125;); 运行项目执行命令：dotnet run。 之后在浏览器中打开http://localhost:5001/api/values,可以看到状态码为401。表示Unauthorized，请求要求用户的身份认证。 接着，我们在postman中从http://localhost:5000获取token。获取token的地址如下： 1http://localhost:5000/connect/token 然后，使用获取到的token，来请求api，获取数据。我们要从http://localhost:5001/api/values来获取数据。 其中，Authorization中的值如下： 1Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IkhHLVBIZEYxaThLNWdtT1ZMNlRqTWciLCJ0eXAiOiJhdCtqd3QifQ.eyJuYmYiOjE1ODQ0NTQ5ODAsImV4cCI6MTU4NDQ1ODU4MCwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1MDAwIiwiYXVkIjoiYXBpIiwiY2xpZW50X2lkIjoiY2xpZW50Iiwic2NvcGUiOlsiYXBpIl19.Q2bSW-ac-ufiBSiWkQdY7eppzEmTUxp-FT0SHXi8r8Mav5O8zB1-VMRwFUKlt_iiNPKEf7fWLzmEN6AT01MnoRdBTNUken4fc_w1LZz4hvV_0x0m16ZWjk-DHiHyrr6PGWDBMRfrg-vmFObTcc0HD4j2Y3CMXSJ58AOGR1WwTfNnySITqbletA6yK9PNW856sWFvwDmAs-ulv5CVOkSbwpJHO9rP1-yvVwdK8O2kck7o35dn_D6oXRmRn3o8yQx2Q46CWxUS2tdjolUCJWIy-uM_I9SNt6aUJziK8syftfZcqnN6uLLJZQ6r2xpJK2MvWXl3gnobgiAxsl419fy_Vw 四、客户端Demo新建项目1dotnet new console --name ThirdPartyDemo 添加Nuget包将Nuget包IdentityModel添加到项目中。 编写客户端代码客户端代码如下： 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253using System.Timers;using System.Net.Http;using System;using System.Threading;using IdentityModel.Client;using Newtonsoft.Json.Linq;namespace ThirdPartyDemo&#123; class Program &#123; static void Main(string[] args) &#123; var client = new HttpClient(); var disco = client.GetDiscoveryDocumentAsync(&quot;http://localhost:5000&quot;).Result; if (disco.IsError) &#123; Console.WriteLine(disco.Error); &#125; //获取token var tokenResponse = client.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest &#123; Address = disco.TokenEndpoint, ClientId = &quot;client&quot;, ClientSecret = &quot;secret&quot;, Scope = &quot;api&quot; &#125;).Result; if (tokenResponse.IsError) &#123; Console.WriteLine(tokenResponse.Error); &#125; else &#123; Console.WriteLine(tokenResponse.Json); &#125; var httpClient = new HttpClient(); //设置token httpClient.SetBearerToken(tokenResponse.AccessToken); //获取数据 var response = httpClient.GetAsync(&quot;http://localhost:5001/api/values&quot;).Result; if (!response.IsSuccessStatusCode) &#123; Console.WriteLine(response.StatusCode); &#125; else &#123; var content = response.Content.ReadAsStringAsync().Result; Console.WriteLine(JArray.Parse(content)); &#125; &#125; &#125;&#125; 运行在运行本项目之前，必须先运行前两个项目。运行结果如下：]]></content>
+      <categories>
+        <category>oAuth</category>
+        <category>ASP.NET Core</category>
+      </categories>
+      <tags>
+        <tag>oAuth</tag>
+        <tag>ASP.NET Core 3.1</tag>
+        <tag>Client Credential</tag>
+        <tag>IdentityServer4</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[oAuth2.0的四种方式]]></title>
+    <url>%2F2020%2FoAuth2-0%E7%9A%84%E5%9B%9B%E7%A7%8D%E6%96%B9%E5%BC%8F%2F</url>
+    <content type="text"><![CDATA[转自阮一峰 一、oAuth是什么？oAuth2.0是一种授权机制，主要用来颁发令牌（token）。 OAuth 引入了一个授权层，用来分离两种不同的角色：客户端和资源所有者。……资源所有者同意以后，资源服务器可以向客户端颁发令牌。客户端通过令牌，去请求数据。 也就是说，oAuth的核心就是像第三方应用颁发令牌。 oAuth2.0规定了四种获得令牌的流程。下面是这四种授权方式。 授权码（authorization-code) 隐藏式（implicit） 密码式（password） 客户端凭证（client credentials) 注意，不管哪一种授权方式，第三方应用申请令牌之前，都必须先到系统备案，说明自己的身份，然后会拿到两个身份识别码：客户端 ID（client ID）和客户端密钥（client secret）。这是为了防止令牌被滥用，没有备案过的第三方应用，是不会拿到令牌的。 二、四种授权方式 授权码授权码（authorization-code)方式，是指第三方应用先申请一个授权码，然后再用该码获取令牌。 这种方式是最常用的流程，安全性也最高，它适用于那些有后端的 Web 应用。授权码通过前端传送，令牌则是储存在后端，而且所有与资源服务器的通信都在后端完成。这样的前后端分离，可以避免令牌泄漏。 第一步，A 网站提供一个链接，用户点击后就会跳转到 B 网站，授权用户数据给 A 网站使用。下面就是 A 网站跳转 B 网站的一个示意链接。 123456&gt; https://b.com/oauth/authorize?&gt; response_type=code&amp;&gt; client_id=CLIENT_ID&amp;&gt; redirect_uri=CALLBACK_URL&amp;&gt; scope=read&gt; 上面 URL 中，response_type参数表示要求返回授权码（code），client_id参数让 B 知道是谁在请求，redirect_uri参数是 B 接受或拒绝请求后的跳转网址，scope参数表示要求的授权范围（这里是只读）。 第二步，用户跳转后，B 网站会要求用户登录，然后询问是否同意给予 A 网站授权。用户表示同意，这时 B 网站就会跳回redirect_uri参数指定的网址。跳转时，会传回一个授权码，就像下面这样。 1https://a.com/callback?code=AUTHORIZATION_CODE 上面 URL 中，code参数就是授权码。 第三步，A 网站拿到授权码以后，就可以在后端，向 B 网站请求令牌。 123456https://b.com/oauth/token? client_id=CLIENT_ID&amp; client_secret=CLIENT_SECRET&amp; grant_type=authorization_code&amp; code=AUTHORIZATION_CODE&amp; redirect_uri=CALLBACK_URL 上面 URL 中，client_id参数和client_secret参数用来让 B 确认 A 的身份（client_secret参数是保密的，因此只能在后端发请求），grant_type参数的值是AUTHORIZATION_CODE，表示采用的授权方式是授权码，code参数是上一步拿到的授权码，redirect_uri参数是令牌颁发后的回调网址。 第四步，B 网站收到请求以后，就会颁发令牌。具体做法是向redirect_uri指定的网址，发送一段 JSON 数据。 123456789&#123; "access_token":"ACCESS_TOKEN", "token_type":"bearer", "expires_in":2592000, "refresh_token":"REFRESH_TOKEN", "scope":"read", "uid":100101, "info":&#123;...&#125;&#125; 上面 JSON 数据中，access_token字段就是令牌，A 网站在后端拿到了。 隐藏式有些 Web 应用是纯前端应用，没有后端。这时就不能用上面的方式了，必须将令牌储存在前端。RFC 6749 就规定了第二种方式，允许直接向前端颁发令牌。这种方式没有授权码这个中间步骤，所以称为（授权码）”隐藏式”（implicit）。 第一步，A 网站提供一个链接，要求用户跳转到 B 网站，授权用户数据给 A 网站使用。 12345https://b.com/oauth/authorize? response_type=token&amp; client_id=CLIENT_ID&amp; redirect_uri=CALLBACK_URL&amp; scope=read 上面 URL 中，response_type参数为token，表示要求直接返回令牌。 第二步，用户跳转到 B 网站，登录后同意给予 A 网站授权。这时，B 网站就会跳回redirect_uri参数指定的跳转网址，并且把令牌作为 URL 参数，传给 A 网站。 1https://a.com/callback#token=ACCESS_TOKEN 上面 URL 中，token参数就是令牌，A 网站因此直接在前端拿到令牌。 注意，令牌的位置是 URL 锚点（fragment），而不是查询字符串（querystring），这是因为 OAuth 2.0 允许跳转网址是 HTTP 协议，因此存在”中间人攻击”的风险，而浏览器跳转时，锚点不会发到服务器，就减少了泄漏令牌的风险。 这种方式把令牌直接传给前端，是很不安全的。因此，只能用于一些安全要求不高的场景，并且令牌的有效期必须非常短，通常就是会话期间（session）有效，浏览器关掉，令牌就失效了。 密码式如果你高度信任某个应用，RFC 6749 也允许用户把用户名和密码，直接告诉该应用。该应用就使用你的密码，申请令牌，这种方式称为”密码式”（password）。 第一步，A 网站要求用户提供 B 网站的用户名和密码。拿到以后，A 就直接向 B 请求令牌。 123456&gt; https://oauth.b.com/token?&gt; grant_type=password&amp;&gt; username=USERNAME&amp;&gt; password=PASSWORD&amp;&gt; client_id=CLIENT_ID&gt; 上面 URL 中，grant_type参数是授权方式，这里的password表示”密码式”，username和password是 B 的用户名和密码。 第二步，B 网站验证身份通过后，直接给出令牌。注意，这时不需要跳转，而是把令牌放在 JSON 数据里面，作为 HTTP 回应，A 因此拿到令牌。 这种方式需要用户给出自己的用户名/密码，显然风险很大，因此只适用于其他授权方式都无法采用的情况，而且必须是用户高度信任的应用。 客户端凭证最后一种方式是凭证式（client credentials），适用于没有前端的命令行应用，即在命令行下请求令牌。 第一步，A 应用在命令行向 B 发出请求。 12345&gt; https://oauth.b.com/token?&gt; grant_type=client_credentials&amp;&gt; client_id=CLIENT_ID&amp;&gt; client_secret=CLIENT_SECRET&gt; 上面 URL 中，grant_type参数等于client_credentials表示采用凭证式，client_id和client_secret用来让 B 确认 A 的身份。 第二步，B 网站验证通过以后，直接返回令牌。 这种方式给出的令牌，是针对第三方应用的，而不是针对用户的，即有可能多个用户共享同一个令牌。 令牌的使用A 网站拿到令牌以后，就可以向 B 网站的 API 请求数据了。 此时，每个发到 API 的请求，都必须带有令牌。具体做法是在请求的头信息，加上一个Authorization字段，令牌就放在这个字段里面。 123&gt; curl -H "Authorization: Bearer ACCESS_TOKEN" \&gt; "https://api.b.com"&gt; 上面命令中，ACCESS_TOKEN就是拿到的令牌。 更新令牌令牌的有效期到了，如果让用户重新走一遍上面的流程，再申请一个新的令牌，很可能体验不好，而且也没有必要。OAuth 2.0 允许用户自动更新令牌。 具体方法是，B 网站颁发令牌的时候，一次性颁发两个令牌，一个用于获取数据，另一个用于获取新的令牌（refresh token 字段）。令牌到期前，用户使用 refresh token 发一个请求，去更新令牌。 123456&gt; https://b.com/oauth/token?&gt; grant_type=refresh_token&amp;&gt; client_id=CLIENT_ID&amp;&gt; client_secret=CLIENT_SECRET&amp;&gt; refresh_token=REFRESH_TOKEN&gt; 上面 URL 中，grant_type参数为refresh_token表示要求更新令牌，client_id参数和client_secret参数用于确认身份，refresh_token参数就是用于更新令牌的令牌。 B 网站验证通过以后，就会颁发新的令牌。]]></content>
+      <categories>
+        <category>oAuth</category>
+      </categories>
+      <tags>
+        <tag>oAuth</tag>
       </tags>
   </entry>
   <entry>
@@ -21,6 +60,18 @@
       </categories>
       <tags>
         <tag>Shell数组</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Shell脚本的for和select循环]]></title>
+    <url>%2F2019%2Fshell%E8%84%9A%E6%9C%AC%E7%9A%84for%E5%92%8Cselect%E5%BE%AA%E7%8E%AF%2F</url>
+    <content type="text"><![CDATA[一、for循环 for循环语句为变量取值型1234for 变量名 in 变量取值列表do 指令done for循环语句为C语言型for循环语句1234for ((exp1; exp2; exp3))do 指令done 说明： 如果希望程序持续运行，则多用while，包括守护进程 如果是有限次循环，则多用for 示例： 获取目录下所有文件名 12345678910#!/bin/bash #Author: Created by Aokicd /root/myShell/obShell/ for filename in `ls`do echo $filenamedone for循环批量修改文件扩展名 1234567891011#!/bin/bash#Author: Created by Aokicd /root/myShell/obShell/test/ for filename in `ls *.txt`do mv $filename `echo $filename|sed 's/test/modify/'`done 打印九九乘法表12345678910111213141516171819202122#!/bin/bash #Author: Created by AokiCOLOR='\033[47;30m'RES='\033[0m'for num1 in `seq 9`do for num2 in `seq 9` do if [ $num1 -ge $num2 ];then if ((($num1*num2)&gt;9));then echo -en "$&#123;COLOR&#125;$&#123;num1&#125;x$&#123;num2&#125;=$((num1*num2)) $RES " else echo -en "$&#123;COLOR&#125;$&#123;num1&#125;x$&#123;num2&#125;=$((num1*num2)) $RES " fi fi doneecho " "done 批量创建10个系统账号，并设置密码（密码是随机数，要求是字符和数字的混合）12345678910111213141516171819202122#!/bin/bash#Author: Created by Aoki. /etc/init.d/functions user="Aoki"passfile="/tmp/user.log"for num in `seq -w 10`do pass="`echo "test$RANDOM"|md5sum|cut -c3-11`" useradd $user$num &amp;&gt;/dev/null &amp;&amp;\ echo "$pass"|passwd --stdin $user$num &amp;&gt;/dev/null &amp;&amp;\ echo -e "user:$user$num\tpasswd:$pass"&gt;&gt;$passfile if [ $? -eq 0 ];then action "$user$num is ok." /bin/true else action "$user$num is fail." /bin/false fidone echo -e "\033[35m------------------------------------\033[0m"cat $passfile &amp;&amp; &gt;$passfile Linux系统产生随机数的6种方法 通过系统环境变量($RANDOM)实现1234[root@aoki obShell]# echo $RANDOM19399[root@aoki obShell]# echo $RANDOM11031 RANDOM的随机数访问是0~32767，因此，加密行不是很好可以通过在输出和的随机数后增加加密字符串的方式解决。 通过openssl产生随机数12345[root@aoki obShell]# openssl rand -base64 82Iyj6sBwXk4=[root@aoki obShell]# openssl rand -base64 80kPqCshGOuXlFVDsh0VS6Ugyd56u9W0rx2uvAmh/5KGveTjPMig7Zo0k53BHgMuJvnxEDk3zU3ifKOKAgD+tek0o9yYQ/3ckwtAgQdRez7gs= 通过时间(date)获得随机数12[root@aoki obShell]# date +%Y%s20191575123335 通过/dev/urandom配合chksum生成随机数1234[root@aoki obShell]# head /dev/urandom |cksum1624783990 3098[root@aoki obShell]# head /dev/urandom |cksum3074370908 2834 通过UUID生成随机数1234[root@aoki obShell]# cat /proc/sys/kernel/random/uuide46b5c56-d41b-4cf8-9582-07d924bd0eee[root@aoki obShell]# cat /proc/sys/kernel/random/uuidc1cf6394-fa0d-4935-a8ca-d34b7f341573 UUID码全称是通用唯一识别码，它是一个软件建构的标准。UUID的目的是让分布式系统中的所有元素都能有唯一的辨识信息，而不需要通过中央控制端奶做辨识信息的指定。 二、select循环语句&emsp;&emsp;select循环语句的主要作用可能就是创建菜单，在执行带select循环语句的脚本时，输出会按照数字顺序的列表显示一个菜单项，并显示提示符（默认是#？），同时等待用户输入数字进行选择。 语法结构1234select 变量名 [ in 菜单取值列表 ]do 指令done 在这种select循环语句的语法中，在执行脚本后，select关键字后面会有一个”变量名“，变量名依次获取in关键字后面的列表内容（以空格分隔），每次仅取一个，然后进入循环内，执行循环内的所有指令，当执行到done时结束返回，之后，”变量名“再继续取变量列表的下一个变量值，继续执行循环内的素有指令，当执行到done时结束返回，以此类推，直到取完最后一个变量列表里的值并进入循环执行到done结束为止。 案例123456789#!/bin/bash#Author: Created by Aokiecho "Please input your choice:"select var in Aoki Borgia do echo -e "\033[32m You selected $var \033[0m"done 三、break、continue、exit、return的区别和对比&emsp;&emsp;在上面的命令中，break、continue在条件语句及循环语句中用于控制程序的走向；而exit则用于终止所有语句并退出当前脚本，除此之外，exit还可以返回上一次程序或命令执行状态值给当前Shell；return类似exit，只不过return仅用于在函数内部返回函数执行的状态值。 命令 说明 break n 如果省略n，则表示跳出整个循环，n表示跳出循环的次数 continue n 如果省略n，则表示跳过本次循环，忽略本次循环的剩余代码，进入循环的下一次循环，n表示可退到第n层继续执行 exit n 退出当前shell程序，n为上一次程序执行的状态返回值。n可以省略，在下一个Shell里可通过$?接收exit的n值 return n 用于在函数里作为函数的返回值，以判断函数执行是否正确。在下一个Shell里可通过$?接收exit n的n值 12345678910111213141516171819202122232425262728#!/bin/bash#Author: Created by Aokiif [ $# -ne 1 ];then echo $"USAGE:$0 &#123;break|contine|exit|return&#125;" exitfifunction test()&#123; for ((i=0;i&lt;=5;i++)) do if [ $i -eq 3 ];then $*; fi echo $i done echo "This is a func"&#125;test $* #传参到函数func_ret=$? #接收函数的返回值if [ `echo $*|grep return|wc -l` -eq 1 ];then echo "return's exit status:$func_ret"fiecho "ok"]]></content>
+      <categories>
+        <category>Shell脚本</category>
+      </categories>
+      <tags>
+        <tag>Shell脚本for循环</tag>
+        <tag>Shell脚本select循环</tag>
       </tags>
   </entry>
   <entry>
@@ -433,10 +484,10 @@
         <category>Linux内核</category>
       </categories>
       <tags>
-        <tag>操作系统</tag>
         <tag>内存管理机制</tag>
         <tag>虚拟地址</tag>
         <tag>虚拟内存</tag>
+        <tag>操作系统</tag>
       </tags>
   </entry>
   <entry>
@@ -520,9 +571,9 @@
         <category>Linux内核</category>
       </categories>
       <tags>
-        <tag>Linux内核</tag>
         <tag>操作系统</tag>
         <tag>Linux内核同步</tag>
+        <tag>Linux内核</tag>
         <tag>读写自旋锁</tag>
       </tags>
   </entry>
@@ -534,10 +585,10 @@
         <category>Linux内核</category>
       </categories>
       <tags>
+        <tag>操作系统</tag>
         <tag>Linux内核</tag>
         <tag>自旋锁</tag>
         <tag>普通自旋锁</tag>
-        <tag>操作系统</tag>
         <tag>内核同步</tag>
       </tags>
   </entry>
@@ -549,8 +600,8 @@
         <category>Linux内核</category>
       </categories>
       <tags>
-        <tag>Linux内核</tag>
         <tag>操作系统</tag>
+        <tag>Linux内核</tag>
         <tag>原子操作</tag>
         <tag>原子整数操作</tag>
         <tag>原子位操作</tag>
@@ -602,14 +653,9 @@
         <category>LeetCode</category>
       </categories>
       <tags>
-        <tag>LeetCode</tag>
         <tag>移出链表元素</tag>
+        <tag>LeetCode</tag>
       </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[gdb调试]]></title>
-    <url>%2F2019%2Fgdb%E8%B0%83%E8%AF%95%2F</url>
-    <content type="text"></content>
   </entry>
   <entry>
     <title><![CDATA[静态库和动态库的制作]]></title>
@@ -645,8 +691,8 @@
         <category>Linux内核</category>
       </categories>
       <tags>
-        <tag>Linux内核</tag>
         <tag>操作系统</tag>
+        <tag>Linux内核</tag>
         <tag>Linux系统调用</tag>
         <tag>Linux添加系统调用</tag>
       </tags>
@@ -673,8 +719,8 @@
         <category>Linux内核</category>
       </categories>
       <tags>
-        <tag>Linux内核</tag>
         <tag>操作系统</tag>
+        <tag>Linux内核</tag>
         <tag>系统调用</tag>
       </tags>
   </entry>
@@ -726,8 +772,8 @@
         <category>Linux内核</category>
       </categories>
       <tags>
-        <tag>Linux内核</tag>
         <tag>操作系统</tag>
+        <tag>Linux内核</tag>
         <tag>进程调度</tag>
         <tag>模块化调度</tag>
         <tag>组调度</tag>

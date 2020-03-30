@@ -110,16 +110,12 @@
 <link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
 
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
 
 
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
 
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
 
 
 
@@ -242,7 +238,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle">“惟将终夜长开眼，报答平生未展眉”</p>
+        <h1 class="site-subtitle" itemprop="description">“惟将终夜长开眼，报答平生未展眉”</h1>
       
   </div>
 
@@ -393,7 +389,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">ASP.NET Core MVC 视图与控制器传值</h1>
+          <h2 class="post-title" itemprop="name headline">ASP.NET Core MVC 视图与控制器传值</h2>
         
 
         <div class="post-meta">
@@ -525,7 +521,7 @@
 </li>
 </ol>
 <h2 id="二、JS传值"><a href="#二、JS传值" class="headerlink" title="二、JS传值"></a>二、JS传值</h2><ol>
-<li><h4 id="视图页面：GetJsValue-cshtml"><a href="#视图页面：GetJsValue-cshtml" class="headerlink" title="视图页面：GetJsValue.cshtml"></a>视图页面：GetJsValue.cshtml</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>GetFormValue<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"testdata"</span> <span class="attr">type</span>=<span class="string">"text"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"submitButton"</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"提交"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> &gt;</span></span><br><span class="line">    var button = document.getElementById('submitButton');</span><br><span class="line">    button.onclick = function () &#123;</span><br><span class="line">        var data = $('#testdata').val();</span><br><span class="line">        $.post("Home/GetJsValue", &#123; name: data &#125;, function () &#123;</span><br><span class="line">            alert("submit data success!");</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<li><h4 id="视图页面：GetJsValue-cshtml"><a href="#视图页面：GetJsValue-cshtml" class="headerlink" title="视图页面：GetJsValue.cshtml"></a>视图页面：GetJsValue.cshtml</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>GetFormValue<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"testdata"</span> <span class="attr">type</span>=<span class="string">"text"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"submitButton"</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"提交"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> &gt;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> button = <span class="built_in">document</span>.getElementById(<span class="string">'submitButton'</span>);</span></span><br><span class="line"><span class="javascript">    button.onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> data = $(<span class="string">'#testdata'</span>).val();</span></span><br><span class="line"><span class="javascript">        $.post(<span class="string">"Home/GetJsValue"</span>, &#123; <span class="attr">name</span>: data &#125;, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            alert(<span class="string">"submit data success!"</span>);</span></span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><h4 id="Action：GetJsValue"><a href="#Action：GetJsValue" class="headerlink" title="Action：GetJsValue"></a>Action：GetJsValue</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public IActionResult GetJsValue()</span><br><span class="line">       &#123;</span><br><span class="line">           return View();</span><br><span class="line">       &#125;</span><br><span class="line">       [HttpPost]</span><br><span class="line">       public IActionResult GetJsValue(string name)</span><br><span class="line">       &#123;</span><br><span class="line">           return View();</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
 </li>
@@ -535,7 +531,7 @@
 </li>
 </ol>
 <h2 id="三、Jquery-AJAX方法传值"><a href="#三、Jquery-AJAX方法传值" class="headerlink" title="三、Jquery AJAX方法传值"></a>三、Jquery AJAX方法传值</h2><ol>
-<li><h4 id="视图页面：GetJqueryValue-cshtml"><a href="#视图页面：GetJqueryValue-cshtml" class="headerlink" title="视图页面：GetJqueryValue.cshtml"></a>视图页面：GetJqueryValue.cshtml</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>GetJqueryValue<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"testdata"</span> <span class="attr">type</span>=<span class="string">"text"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"submitButton"</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"提交"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"~/js/jQuery.form.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"~/js/jquery-1.12.4.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line">    $("#submitButton").click(function () &#123;</span><br><span class="line">        var name = $("#testdata").val();</span><br><span class="line">        $.ajax(&#123;</span><br><span class="line">            type: 'post',</span><br><span class="line">            url:'/Home/GetJqueryValue',</span><br><span class="line">            data: &#123; "name": name &#125;,</span><br><span class="line">            success: function (data) &#123;</span><br><span class="line">                alert("submit success");</span><br><span class="line">            &#125;,</span><br><span class="line">            error: function (data) &#123;</span><br><span class="line">                alert("failed");</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;);</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<li><h4 id="视图页面：GetJqueryValue-cshtml"><a href="#视图页面：GetJqueryValue-cshtml" class="headerlink" title="视图页面：GetJqueryValue.cshtml"></a>视图页面：GetJqueryValue.cshtml</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>GetJqueryValue<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"testdata"</span> <span class="attr">type</span>=<span class="string">"text"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"submitButton"</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"提交"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"~/js/jQuery.form.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"~/js/jquery-1.12.4.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    $(<span class="string">"#submitButton"</span>).click(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> name = $(<span class="string">"#testdata"</span>).val();</span></span><br><span class="line"><span class="javascript">        $.ajax(&#123;</span></span><br><span class="line"><span class="javascript">            type: <span class="string">'post'</span>,</span></span><br><span class="line"><span class="javascript">            url:<span class="string">'/Home/GetJqueryValue'</span>,</span></span><br><span class="line"><span class="javascript">            data: &#123; <span class="string">"name"</span>: name &#125;,</span></span><br><span class="line"><span class="javascript">            success: <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">                alert(<span class="string">"submit success"</span>);</span></span><br><span class="line">            &#125;,</span><br><span class="line"><span class="javascript">            error: <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">                alert(<span class="string">"failed"</span>);</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;);</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>在使用jquery的ajax方法传递数据的时候，会出现<code>not defined</code>错误，网上查了一圈也没有解决，最后用上面的方式解决了。</p>
 </li>
@@ -729,7 +725,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">127</span>
+                  <span class="site-state-item-count">130</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -740,7 +736,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -751,7 +747,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">245</span>
+                  <span class="site-state-item-count">251</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -832,7 +828,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -871,7 +867,7 @@ setInterval("createtime()",250);
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共249.9k字</span>
+  <span class="post-count">博客全站共255.3k字</span>
 </div>
 
 
@@ -1061,7 +1057,7 @@ setInterval("createtime()",250);
         notify: false,
         appId: 'FchdjiQuvA5nCoDFfF6er8UC-gzGzoHsz',
         appKey: 'yuVPbmLhvyWyLCQYispfuF6u',
-        placeholder: 'ヾﾉ≧∀≦)o 来呀！吐槽一番吧',
+        placeholder: '',
         avatar:'/uploads/avatar.jpg',
         guest_info:guest,
         pageSize:'10' || 10,

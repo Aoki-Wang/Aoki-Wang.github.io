@@ -110,16 +110,12 @@
 <link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
 
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
 
 
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
 
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
 
 
 
@@ -229,7 +225,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle">“惟将终夜长开眼，报答平生未展眉”</p>
+        <h1 class="site-subtitle" itemprop="description">“惟将终夜长开眼，报答平生未展眉”</h1>
       
   </div>
 
@@ -380,7 +376,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">镜像和Dockerfile</h1>
+          <h2 class="post-title" itemprop="name headline">镜像和Dockerfile</h2>
         
 
         <div class="post-meta">
@@ -530,7 +526,7 @@
 </ol>
 <h2 id="三、创建本地镜像"><a href="#三、创建本地镜像" class="headerlink" title="三、创建本地镜像"></a>三、创建本地镜像</h2><ol>
 <li><h3 id="使用commit命令创建本地镜像"><a href="#使用commit命令创建本地镜像" class="headerlink" title="使用commit命令创建本地镜像"></a>使用<code>commit</code>命令创建本地镜像</h3><p>使用镜像创建并运行一个镜像，实际上是在父镜像的基础上构建一个可读写的文件层级。我们在容器中所做的修改，都发生在这个层级上。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker run -i -t centos    #在centos镜像上创建运行一个容器</span><br><span class="line"><span class="meta">#</span>在该容器中安装软件</span><br><span class="line">exit #退出该容器</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker run -i -t centos    #在centos镜像上创建运行一个容器</span><br><span class="line"><span class="meta">#</span><span class="bash">在该容器中安装软件</span></span><br><span class="line">exit #退出该容器</span><br></pre></td></tr></table></figure>
 
 <p>在这里，需要注意的是，要保存当前创建的容器的ID。在退出容器后，执行下面的命令：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker commit -m="Message" --author="Aoki" 容器ID aoki/centos:v1</span><br></pre></td></tr></table></figure>
@@ -538,7 +534,7 @@
 <p><code>-m</code>参数是描述本次创建的镜像的信息，<code>--author</code>参数用来指定作者信息，<code>aoki</code>表示仓库名，这里需要注意的是，在命名的过程中，有一定的标准，比如不能使用大写字母，<code>centos</code>表示镜像名，<code>v1</code>标识镜像TAG名。</p>
 </li>
 <li><h3 id="使用Dockerfile创建镜像"><a href="#使用Dockerfile创建镜像" class="headerlink" title="使用Dockerfile创建镜像"></a>使用Dockerfile创建镜像</h3><p>使用Dockerfile创建镜像是是将所有的配置信息都写入到了一个文件中，然后使用<code>docker build</code>命令来创建一个镜像。这种方法可以使镜像的创建变得透明和独立化，并且创建过程可以被重复执行。Dockerfile文件以行为单位，行首为Dockerfile命令，命令都是大写形式，其后紧跟的是命令的参数。</p>
-<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#version: 1.0.1</span></span><br><span class="line"><span class="comment">#指定父镜像</span></span><br><span class="line"><span class="keyword">FROM</span> ubuntu:latest</span><br><span class="line"></span><br><span class="line"><span class="keyword">MAINTAINER</span> Aoki <span class="string">"aoki3352@163.com"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#设置root用户为后续命令的执行者</span></span><br><span class="line"><span class="keyword">USER</span> root</span><br><span class="line"></span><br><span class="line"><span class="comment">#执行操作</span></span><br><span class="line"><span class="keyword">RUN</span> apt-get update</span><br><span class="line"><span class="keyword">RUN</span> apt-get install -t nginx</span><br><span class="line"></span><br><span class="line"><span class="comment">#使用&amp;&amp;拼接命令</span></span><br><span class="line"><span class="keyword">RUN</span> touch test.txt &amp;&amp; echo "abc" &gt; abc.txt</span><br><span class="line"></span><br><span class="line"><span class="comment">#对外暴露接口</span></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">80</span> <span class="number">8080</span> <span class="number">1038</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#添加文件</span></span><br><span class="line"><span class="keyword">ADD</span> /webapp /opt/webapp  #添加当前文件夹中的/webapp文件到 /opt/webapp目录下</span><br><span class="line"></span><br><span class="line"><span class="comment">#添加网络文件</span></span><br><span class="line"><span class="keyword">ADD</span> https://www.baidu.com/img/xxxx.png /opt #添加网络文件到/opt目录下</span><br><span class="line"></span><br><span class="line"><span class="comment">#设置环境变量</span></span><br><span class="line"><span class="keyword">ENV</span> WEBAPP_PORT=<span class="number">9090</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#设置工作目录</span></span><br><span class="line"><span class="keyword">WORKDIR</span> /opt</span><br><span class="line"></span><br><span class="line"><span class="comment">#设置启动命令</span></span><br><span class="line"><span class="keyword">ENTRYPOINT</span> ["ls"]</span><br><span class="line"></span><br><span class="line"><span class="comment">#设置启动参数</span></span><br><span class="line"><span class="keyword">CMD</span> ["-a","-l"]</span><br><span class="line"></span><br><span class="line"><span class="comment">#设置卷</span></span><br><span class="line"><span class="keyword">VOLUME</span> ["/data","/var/www"]</span><br><span class="line"></span><br><span class="line"><span class="comment">#设置子镜像的触发操作</span></span><br><span class="line"><span class="keyword">ONBUILD</span> <span class="keyword">ADD</span> . /app/src</span><br><span class="line"><span class="keyword">ONBUILD</span> <span class="keyword">RUN</span> echo "on build excuted" &gt;&gt; onbuild.txt</span><br></pre></td></tr></table></figure>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#version: 1.0.1</span></span><br><span class="line"><span class="comment">#指定父镜像</span></span><br><span class="line"><span class="keyword">FROM</span> ubuntu:latest</span><br><span class="line"></span><br><span class="line"><span class="keyword">MAINTAINER</span> Aoki <span class="string">"aoki3352@163.com"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#设置root用户为后续命令的执行者</span></span><br><span class="line"><span class="keyword">USER</span> root</span><br><span class="line"></span><br><span class="line"><span class="comment">#执行操作</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> apt-get update</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> apt-get install -t nginx</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#使用&amp;&amp;拼接命令</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> touch test.txt &amp;&amp; <span class="built_in">echo</span> <span class="string">"abc"</span> &gt; abc.txt</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#对外暴露接口</span></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">80</span> <span class="number">8080</span> <span class="number">1038</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#添加文件</span></span><br><span class="line"><span class="keyword">ADD</span><span class="bash"> /webapp /opt/webapp  <span class="comment">#添加当前文件夹中的/webapp文件到 /opt/webapp目录下</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">#添加网络文件</span></span><br><span class="line"><span class="keyword">ADD</span><span class="bash"> https://www.baidu.com/img/xxxx.png /opt <span class="comment">#添加网络文件到/opt目录下</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">#设置环境变量</span></span><br><span class="line"><span class="keyword">ENV</span> WEBAPP_PORT=<span class="number">9090</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#设置工作目录</span></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="bash"> /opt</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#设置启动命令</span></span><br><span class="line"><span class="keyword">ENTRYPOINT</span><span class="bash"> [<span class="string">"ls"</span>]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#设置启动参数</span></span><br><span class="line"><span class="keyword">CMD</span><span class="bash"> [<span class="string">"-a"</span>,<span class="string">"-l"</span>]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#设置卷</span></span><br><span class="line"><span class="keyword">VOLUME</span><span class="bash"> [<span class="string">"/data"</span>,<span class="string">"/var/www"</span>]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#设置子镜像的触发操作</span></span><br><span class="line"><span class="keyword">ONBUILD</span> <span class="keyword">ADD</span><span class="bash"> . /app/src</span></span><br><span class="line"><span class="keyword">ONBUILD</span> <span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"on build excuted"</span> &gt;&gt; onbuild.txt</span></span><br></pre></td></tr></table></figure>
 
 <p>下面的各个命令的含义：</p>
 <ul>
@@ -710,7 +706,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">127</span>
+                  <span class="site-state-item-count">130</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -721,7 +717,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -732,7 +728,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">245</span>
+                  <span class="site-state-item-count">251</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -813,7 +809,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -852,7 +848,7 @@ setInterval("createtime()",250);
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共249.9k字</span>
+  <span class="post-count">博客全站共255.3k字</span>
 </div>
 
 
@@ -1042,7 +1038,7 @@ setInterval("createtime()",250);
         notify: false,
         appId: 'FchdjiQuvA5nCoDFfF6er8UC-gzGzoHsz',
         appKey: 'yuVPbmLhvyWyLCQYispfuF6u',
-        placeholder: 'ヾﾉ≧∀≦)o 来呀！吐槽一番吧',
+        placeholder: '',
         avatar:'/uploads/avatar.jpg',
         guest_info:guest,
         pageSize:'10' || 10,
